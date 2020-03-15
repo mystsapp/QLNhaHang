@@ -16,16 +16,16 @@ namespace Data.Models
 
         [DisplayName("Nhân viên")]
         [MaxLength(20), Column(TypeName = "varchar(20)")]
-        public string MaNVId { get; set; }
+        public string MaNV { get; set; }
 
-        [ForeignKey("MaLoaiId")]
+        [ForeignKey("MaNV")]
         public virtual NhanVien NhanVien { get; set; }
         
         [DisplayName("Khách hàng")]
         [MaxLength(50), Column(TypeName = "varchar(50)")]
         public string MaKH { get; set; }
 
-        [ForeignKey("MaLoaiId")]
+        [ForeignKey("MaKH")]
         public virtual KhachHang KhachHang { get; set; }
         
         [DisplayName("Bàn")]

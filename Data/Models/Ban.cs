@@ -10,7 +10,6 @@ namespace Data.Models
     public class Ban
     {
         [Key]
-        [MaxLength(20), Column(TypeName = "varchar(20)")]
         [DisplayName("Mã bàn")]
         public string MaBan { get; set; }
 

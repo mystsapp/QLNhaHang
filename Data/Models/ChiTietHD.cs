@@ -14,7 +14,7 @@ namespace Data.Models
 
         [DisplayName("Mã HD")]
         [MaxLength(20), Column(TypeName = "varchar(20)")]
-        public int MaHD { get; set; }
+        public string MaHD { get; set; }
 
         [ForeignKey("MaHD")]
         public virtual HoaDon HoaDon { get; set; }

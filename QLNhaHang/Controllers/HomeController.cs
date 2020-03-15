@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using QLNhaHang.Data.Repositories;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public HomeController(IUnitOfWork unitOfWork, IVanPhongRepository vanPhongRepository)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         public ActionResult Index()
         {
             return View();

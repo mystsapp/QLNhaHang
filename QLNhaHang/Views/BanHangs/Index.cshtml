@@ -1,0 +1,118 @@
+﻿@model QLNhaHang.Models.BanHangViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách bàn</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            @foreach (var ban in Model.Bans)
+            {
+                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer" style="max-width: 12rem;">
+                    <div class="card-header">@ban.TenBan</div>
+                    <div class="card-body text-warning">
+                        <h5 class="card-title">@*Warning card title*@</h5>
+                        @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                        <p>
+                            <img class="imgBan" src="~/Assets/Images/Empty_Desk.jpg" />
+                        </p>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Footer
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+
+@section Scripts{
+    <script>
+        $('.cursor-pointer').click(function () {
+            //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
+            //$(".imgBan").click(function () {
+            //    // Change src attribute of image
+            //    $(this).attr("src", "Assets/Images/Desk.jpg");
+            //});
+            if ($(this).hasClass("bg-warning")) {
+                $(this).removeClass("bg-warning");
+
+            }
+            else {
+                $('.card.bg-warning').removeClass("bg-warning");
+                $('.card-body').removeClass("text-warning");
+                $(this).addClass("bg-warning");
+            }
+
+        });
+
+        $('.listAllTab').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    </script>
+    <style>
+        .cursor-pointer:hover {
+            background-color: #3E5C9A;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+
+        .imgBan {
+            border: 5px solid #ddd;
+            border-radius: 10%;
+        }
+    </style>
+    @*<script src="~/js/Admin/CapThe/indexController.js"></script>*@
+}

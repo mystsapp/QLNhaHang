@@ -61,10 +61,88 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authentication.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authentication.Core.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authentication.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Authorization.Policy, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Authorization.Policy.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Authorization.Policy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Hosting.Server.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Hosting.Server.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Extensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Extensions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Http.Features, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.ResponseCaching.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.ResponseCaching.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.ResponseCaching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Routing.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.Routing.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Routing.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.2.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Hosting.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Hosting.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.2.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -75,14 +153,38 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -93,8 +195,11 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.0\lib\net45\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -162,13 +267,681 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Interfaces\IRepository.cs" />
+    <Compile Include="Data\Models\Ban.cs" />
+    <Compile Include="Data\Models\ChiTietHD.cs" />
+    <Compile Include="Data\Models\HoaDon.cs" />
+    <Compile Include="Data\Models\KhachHang.cs" />
+    <Compile Include="Data\Models\LoaiThucDon.cs" />
+    <Compile Include="Data\Models\MonDaGoi.cs" />
+    <Compile Include="Data\Models\NhanVien.cs" />
+    <Compile Include="Data\Models\Role.cs" />
+    <Compile Include="Data\Models\ThucDon.cs" />
+    <Compile Include="Data\Models\VanPhong.cs" />
+    <Compile Include="Data\QLNhaHangDbContext.cs" />
+    <Compile Include="Data\Repositories\BanRepository.cs" />
+    <Compile Include="Data\Repositories\Repository.cs" />
+    <Compile Include="Data\Repositories\UnitOfWork.cs" />
+    <Compile Include="Data\Repositories\VanPhongRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003150209243_initialDb.cs" />
+    <Compile Include="Migrations\202003150209243_initialDb.designer.cs">
+      <DependentUpon>202003150209243_initialDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\MyCss.css" />
+    <Content Include="Assets\css\site.css" />
+    <Content Include="Assets\Images\arr.png" />
+    <Content Include="Assets\Images\Desk.jpg" />
+    <Content Include="Assets\Images\Empty_Desk.jpg" />
+    <Content Include="Assets\Images\favicon.ico" />
+    <Content Include="Assets\Images\favicon.png" />
+    <Content Include="Assets\Images\logo1.png" />
+    <Content Include="Assets\Images\LogoLeft.ico" />
+    <Content Include="Assets\Images\LogoLogin.png" />
+    <Content Include="Assets\Images\saigontourist.png" />
+    <Content Include="Assets\Images\TheImage\10120000021h_1.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000021h_2.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000022h_1.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000022h_2.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000023h_1.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000023h_2.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000024h_1.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000024h_2.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000025h_1.jpg" />
+    <Content Include="Assets\Images\TheImage\10120000025h_2.jpg" />
+    <Content Include="Assets\Images\TheImage\20220000026h_1.png" />
+    <Content Include="Assets\Images\TheImage\20220000026h_2.png" />
+    <Content Include="Assets\Images\TheImage\20220000027h_1.png" />
+    <Content Include="Assets\Images\TheImage\20220000027h_2.png" />
+    <Content Include="Assets\Images\TheImage\20220000028h_1.png" />
+    <Content Include="Assets\Images\TheImage\20220000028h_2.png" />
+    <Content Include="Assets\Images\TheImage\20220000029h_1.png" />
+    <Content Include="Assets\Images\TheImage\20220000029h_2.png" />
+    <Content Include="Assets\Images\TheImage\20220000030h_1.png" />
+    <Content Include="Assets\Images\TheImage\20220000030h_2.png" />
+    <Content Include="Assets\lib\bootbox.js\bootbox.js" />
+    <Content Include="Assets\lib\bootbox.js\bootbox.min.js" />
+    <Content Include="Assets\lib\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.foundation.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.material.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.material.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.uikit.css" />
+    <Content Include="Assets\lib\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Assets\lib\datatables\css\jquery.dataTables.css" />
+    <Content Include="Assets\lib\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Assets\lib\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Assets\lib\datatables\images\sort_asc.png" />
+    <Content Include="Assets\lib\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Assets\lib\datatables\images\sort_both.png" />
+    <Content Include="Assets\lib\datatables\images\sort_desc.png" />
+    <Content Include="Assets\lib\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Assets\lib\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.dataTables.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.dataTables.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.foundation.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.material.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.material.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.uikit.js" />
+    <Content Include="Assets\lib\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Assets\lib\datatables\js\jquery.dataTables.js" />
+    <Content Include="Assets\lib\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Assets\lib\datatables\js\jquery.dataTables_.js" />
+    <Content Include="Assets\lib\dist\css\adminlte.min.css" />
+    <Content Include="Assets\lib\dist\img\AdminLTELogo.png" />
+    <Content Include="Assets\lib\dist\img\user1-128x128.jpg" />
+    <Content Include="Assets\lib\dist\img\user2-160x160.jpg" />
+    <Content Include="Assets\lib\dist\img\user3-128x128.jpg" />
+    <Content Include="Assets\lib\dist\img\user5-128x128.jpg" />
+    <Content Include="Assets\lib\dist\img\user6-128x128.jpg" />
+    <Content Include="Assets\lib\dist\img\user7-128x128.jpg" />
+    <Content Include="Assets\lib\dist\img\user8-128x128 %281%29.jpg" />
+    <Content Include="Assets\lib\dist\img\user8-128x128.jpg" />
+    <Content Include="Assets\lib\dist\js\adminlte.js" />
+    <Content Include="Assets\lib\dist\js\adminlte.min.js" />
+    <Content Include="Assets\lib\dist\js\pages\dashboard.js" />
+    <Content Include="Assets\lib\dist\js\pages\demo.js" />
+    <Content Include="Assets\lib\font-awesome\css\all.css" />
+    <Content Include="Assets\lib\font-awesome\css\all.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\brands.css" />
+    <Content Include="Assets\lib\font-awesome\css\brands.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\fontawesome.css" />
+    <Content Include="Assets\lib\font-awesome\css\fontawesome.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\regular.css" />
+    <Content Include="Assets\lib\font-awesome\css\regular.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\solid.css" />
+    <Content Include="Assets\lib\font-awesome\css\solid.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\svg-with-js.css" />
+    <Content Include="Assets\lib\font-awesome\css\svg-with-js.min.css" />
+    <Content Include="Assets\lib\font-awesome\css\v4-shims.css" />
+    <Content Include="Assets\lib\font-awesome\css\v4-shims.min.css" />
+    <Content Include="Assets\lib\font-awesome\js\all.js" />
+    <Content Include="Assets\lib\font-awesome\js\all.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\brands.js" />
+    <Content Include="Assets\lib\font-awesome\js\brands.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\conflict-detection.js" />
+    <Content Include="Assets\lib\font-awesome\js\conflict-detection.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\fontawesome.js" />
+    <Content Include="Assets\lib\font-awesome\js\fontawesome.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\regular.js" />
+    <Content Include="Assets\lib\font-awesome\js\regular.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\solid.js" />
+    <Content Include="Assets\lib\font-awesome\js\solid.min.js" />
+    <Content Include="Assets\lib\font-awesome\js\v4-shims.js" />
+    <Content Include="Assets\lib\font-awesome\js\v4-shims.min.js" />
+    <Content Include="Assets\lib\font-awesome\sprites\brands.svg" />
+    <Content Include="Assets\lib\font-awesome\sprites\regular.svg" />
+    <Content Include="Assets\lib\font-awesome\sprites\solid.svg" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-brands-400.svg" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-regular-400.svg" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Assets\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <Content Include="Assets\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Assets\lib\jquery-validation-unobtrusive\LICENSE.txt" />
+    <Content Include="Assets\lib\jquery-validation\dist\additional-methods.js" />
+    <Content Include="Assets\lib\jquery-validation\dist\additional-methods.min.js" />
+    <Content Include="Assets\lib\jquery-validation\dist\jquery.validate.js" />
+    <Content Include="Assets\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="Assets\lib\jquery.maskedinput\jquery.maskedinput.js" />
+    <Content Include="Assets\lib\jquery.maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_444444_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_555555_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_777620_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_777777_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.js" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.min.js" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.structure.css" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.structure.min.css" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.theme.css" />
+    <Content Include="Assets\lib\jqueryui\jquery-ui.theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\base\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\base\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\base\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\base\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_diagonals-thick_8_333333_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_glass_40_111111_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_glass_55_1c1c1c_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_highlight-hard_100_f9f9f9_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_highlight-hard_40_aaaaaa_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_highlight-soft_50_aaaaaa_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_inset-hard_45_cd0a0a_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-bg_inset-hard_55_ffeb80_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_4ca300_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_ededed_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_ffcf29_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\black-tie\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_glass_55_fbf8ee_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_highlight-hard_100_eeeeee_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-bg_highlight-soft_15_cc0000_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-icons_004276_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\blitzer\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\cupertino\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_highlight-hard_20_0972a5_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_highlight-soft_33_003147_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_highlight-soft_35_222222_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_highlight-soft_44_444444_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-bg_loop_25_000000_21x21.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dark-hive\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_diagonals-thick_15_0b3e6f_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_dots-medium_30_0b58a2_4x4.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_dots-small_20_333333_2x2.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_dots-small_30_a32d00_2x2.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_dots-small_40_00498f_2x2.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-bg_gloss-wave_20_111111_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-icons_00498f_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-icons_98d2fb_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-icons_9ccdfc_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\dot-luv\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-bg_gloss-wave_30_3d3644_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-bg_highlight-soft_100_dcd9de_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-bg_highlight-soft_100_eae6ea_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-bg_highlight-soft_25_30273a_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-bg_highlight-soft_45_5f5964_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_734d99_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_8d78a5_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_a8a3ae_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_ebccce_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\eggplant\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_diagonals-small_25_c5ddfc_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_diagonals-thick_20_e69700_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_diagonals-thick_22_1484e6_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_diagonals-thick_26_2293f7_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_highlight-soft_100_f9f9f9_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-bg_inset-hard_100_eeeeee_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-icons_0a82eb_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-icons_0b54d5_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-icons_5fa5e3_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-icons_fcdd4a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\excite-bike\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-bg_highlight-soft_100_f6f6f6_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-bg_highlight-soft_25_0073ea_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-bg_highlight-soft_50_dddddd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-icons_0073ea_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-icons_666666_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-icons_ff0084_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\flick\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_diagonals-small_40_db4865_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_diagonals-small_50_93c3cd_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_diagonals-small_50_ff3853_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_diagonals-small_75_ccd232_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_dots-medium_80_ffff38_4x4.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_dots-small_35_35414f_2x2.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-bg_white-lines_85_f7f7ba_40x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_88a206_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_c02669_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_e1e463_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_ffeb33_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\hot-sneaks\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_glass_100_f5f0e5_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_glass_25_cb842e_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_glass_70_ede4d4_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_c47a23_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_cb672b_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_f08000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_f35f07_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\humanity\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_highlight-hard_30_285c00_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_highlight-soft_33_3a8104_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_highlight-soft_50_4eb305_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_highlight-soft_60_4ca20b_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-bg_inset-soft_10_285c00_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-icons_4eb305_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-icons_72b42d_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\le-frog\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_glass_15_5f391b_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_gloss-wave_20_1c160d_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_gloss-wave_25_453326_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_gloss-wave_30_44372c_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_highlight-soft_20_201913_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_highlight-soft_20_619226_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-bg_inset-soft_10_201913_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_9bcc60_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_add978_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_e3ddc9_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_f1fd86_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\mint-choc\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-bg_glass_100_f8f8f8_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-bg_glass_35_dddddd_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-bg_glass_60_eeeeee_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-bg_inset-hard_75_999999_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-bg_inset-soft_50_c9c9c9_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-icons_3383bb_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-icons_70b2e1_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-icons_999999_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\images\ui-icons_fbc856_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\overcast\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_diagonal-maze_20_6e4f1c_10x10.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_diagonal-maze_40_000000_10x10.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_10_eceadf_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_10_f8f7f6_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_15_eceadf_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_15_f7f3de_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_15_ffffff_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_65_654b24_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-bg_fine-grain_68_b83400_60x60.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_3572ac_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_8c291d_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_b83400_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_fbdb93_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\pepper-grinder\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\redmond\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\smoothness\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_glass_55_fcf0ba_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_gloss-wave_100_ece8da_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-hard_100_f5f3e5_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-hard_100_fafaf4_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-hard_15_459e00_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-hard_95_cccccc_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-soft_25_67b021_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_highlight-soft_95_ffedad_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-bg_inset-soft_15_2b2922_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_808080_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_847e71_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_8DC262_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_eeeeee_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\south-street\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_056b93_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\start\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\start\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\start\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\start\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_d19405_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_eb990f_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\sunny\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_10_4f4221_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_20_372806_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_25_675423_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_25_d5ac5d_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_8_261803_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_diamond_8_443113_10x8.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_070603_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_e8e2b5_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_e9cd86_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_efec9f_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_f2ec64_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_f9f2bd_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\images\ui-icons_ff7519_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\swanky-purse\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_diagonals-small_50_262626_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_glass_40_0a0a0a_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_glass_55_f1fbe5_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_glass_60_000000_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_gloss-wave_55_000000_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_gloss-wave_85_9fda58_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-bg_gloss-wave_95_f6ecd5_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_000000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_1f1f1f_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_9fda58_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_b8ec79_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\trontastic\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_glass_20_555555_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_glass_40_0078a3_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_gloss-wave_25_333333_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_inset-soft_25_000000_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-bg_inset-soft_30_f58400_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-darkness\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\ui-lightness\theme.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_gloss-wave_16_121212_500x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_highlight-hard_15_888888_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_highlight-hard_55_555555_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_highlight-soft_35_adadad_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_highlight-soft_60_dddddd_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-bg_inset-soft_15_121212_1x100.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_666666_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_aaaaaa_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_bbbbbb_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_c98000_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\images\ui-icons_f29a00_256x240.png" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\jquery-ui.css" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\jquery-ui.min.css" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\theme.css" />
+    <Content Include="Assets\lib\jqueryui\themes\vader\theme.min.css" />
+    <Content Include="Assets\lib\jquery\dist\jquery.js" />
+    <Content Include="Assets\lib\jquery\dist\jquery.min.js" />
+    <Content Include="Assets\lib\jquery\LICENSE.txt" />
+    <Content Include="Assets\lib\plugins\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Assets\lib\plugins\chart.js\Chart.min.js" />
+    <Content Include="Assets\lib\plugins\datatables-bs4\css\dataTables.bootstrap4.css" />
+    <Content Include="Assets\lib\plugins\datatables-bs4\js\dataTables.bootstrap4.js" />
+    <Content Include="Assets\lib\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Assets\lib\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Assets\lib\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Assets\lib\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="Assets\lib\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="Assets\lib\plugins\jquery-knob\jquery.knob.min.js" />
+    <Content Include="Assets\lib\plugins\jquery\jquery-ui.min.js" />
+    <Content Include="Assets\lib\plugins\jquery\jquery.min.js" />
+    <Content Include="Assets\lib\plugins\jqvmap\jquery.vmap.min.js" />
+    <Content Include="Assets\lib\plugins\jqvmap\jquery.vmap.usa.js" />
+    <Content Include="Assets\lib\plugins\jqvmap\jqvmap.min.css" />
+    <Content Include="Assets\lib\plugins\moment\moment.min.js" />
+    <Content Include="Assets\lib\plugins\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="Assets\lib\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="Assets\lib\plugins\select2\css\select2.min.css" />
+    <Content Include="Assets\lib\plugins\select2\js\select2.full.min.js" />
+    <Content Include="Assets\lib\plugins\sparklines\sparkline.js" />
+    <Content Include="Assets\lib\plugins\summernote\summernote-bs4.css" />
+    <Content Include="Assets\lib\plugins\summernote\summernote-bs4.min.js" />
+    <Content Include="Assets\lib\plugins\sweetalert2\sweetalert2.min.js" />
+    <Content Include="Assets\lib\plugins\tempusdominus-bootstrap-4\css\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Assets\lib\plugins\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
+    <Content Include="Assets\lib\select2\css\select2.css" />
+    <Content Include="Assets\lib\select2\css\select2.min.css" />
+    <Content Include="Assets\lib\select2\js\i18n\af.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ar.js" />
+    <Content Include="Assets\lib\select2\js\i18n\az.js" />
+    <Content Include="Assets\lib\select2\js\i18n\bg.js" />
+    <Content Include="Assets\lib\select2\js\i18n\bn.js" />
+    <Content Include="Assets\lib\select2\js\i18n\bs.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ca.js" />
+    <Content Include="Assets\lib\select2\js\i18n\cs.js" />
+    <Content Include="Assets\lib\select2\js\i18n\da.js" />
+    <Content Include="Assets\lib\select2\js\i18n\de.js" />
+    <Content Include="Assets\lib\select2\js\i18n\dsb.js" />
+    <Content Include="Assets\lib\select2\js\i18n\el.js" />
+    <Content Include="Assets\lib\select2\js\i18n\en.js" />
+    <Content Include="Assets\lib\select2\js\i18n\es.js" />
+    <Content Include="Assets\lib\select2\js\i18n\et.js" />
+    <Content Include="Assets\lib\select2\js\i18n\eu.js" />
+    <Content Include="Assets\lib\select2\js\i18n\fa.js" />
+    <Content Include="Assets\lib\select2\js\i18n\fi.js" />
+    <Content Include="Assets\lib\select2\js\i18n\fr.js" />
+    <Content Include="Assets\lib\select2\js\i18n\gl.js" />
+    <Content Include="Assets\lib\select2\js\i18n\he.js" />
+    <Content Include="Assets\lib\select2\js\i18n\hi.js" />
+    <Content Include="Assets\lib\select2\js\i18n\hr.js" />
+    <Content Include="Assets\lib\select2\js\i18n\hsb.js" />
+    <Content Include="Assets\lib\select2\js\i18n\hu.js" />
+    <Content Include="Assets\lib\select2\js\i18n\hy.js" />
+    <Content Include="Assets\lib\select2\js\i18n\id.js" />
+    <Content Include="Assets\lib\select2\js\i18n\is.js" />
+    <Content Include="Assets\lib\select2\js\i18n\it.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ja.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ka.js" />
+    <Content Include="Assets\lib\select2\js\i18n\km.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ko.js" />
+    <Content Include="Assets\lib\select2\js\i18n\lt.js" />
+    <Content Include="Assets\lib\select2\js\i18n\lv.js" />
+    <Content Include="Assets\lib\select2\js\i18n\mk.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ms.js" />
+    <Content Include="Assets\lib\select2\js\i18n\nb.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ne.js" />
+    <Content Include="Assets\lib\select2\js\i18n\nl.js" />
+    <Content Include="Assets\lib\select2\js\i18n\pl.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ps.js" />
+    <Content Include="Assets\lib\select2\js\i18n\pt-BR.js" />
+    <Content Include="Assets\lib\select2\js\i18n\pt.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ro.js" />
+    <Content Include="Assets\lib\select2\js\i18n\ru.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sk.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sl.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sq.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sr-Cyrl.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sr.js" />
+    <Content Include="Assets\lib\select2\js\i18n\sv.js" />
+    <Content Include="Assets\lib\select2\js\i18n\th.js" />
+    <Content Include="Assets\lib\select2\js\i18n\tk.js" />
+    <Content Include="Assets\lib\select2\js\i18n\tr.js" />
+    <Content Include="Assets\lib\select2\js\i18n\uk.js" />
+    <Content Include="Assets\lib\select2\js\i18n\vi.js" />
+    <Content Include="Assets\lib\select2\js\i18n\zh-CN.js" />
+    <Content Include="Assets\lib\select2\js\i18n\zh-TW.js" />
+    <Content Include="Assets\lib\select2\js\select2.full.js" />
+    <Content Include="Assets\lib\select2\js\select2.full.min.js" />
+    <Content Include="Assets\lib\select2\js\select2.js" />
+    <Content Include="Assets\lib\select2\js\select2.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -179,6 +952,24 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Assets\lib\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Assets\lib\dist\css\adminlte.min.css.map" />
+    <Content Include="Assets\lib\dist\js\adminlte.js.map" />
+    <Content Include="Assets\lib\jquery\dist\jquery.min.map" />
+    <Content Include="Assets\lib\jquery-validation\LICENSE.md" />
+    <Content Include="Assets\lib\bootbox.js\bootbox.min.js.map" />
+    <Content Include="Assets\lib\plugins\bootstrap\js\bootstrap.bundle.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -204,10 +995,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\AccessDenied.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\_Leftmenu.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
+    <Content Include="Views\BanHangs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -223,10 +1019,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{a7d9c1a9-698c-4b05-a078-582b6138ed57}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Migrations\202003150209243_initialDb.resx">
+      <DependentUpon>202003150209243_initialDb.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
