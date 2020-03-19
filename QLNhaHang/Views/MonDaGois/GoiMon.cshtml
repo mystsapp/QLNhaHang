@@ -1,0 +1,169 @@
+﻿@model QLNhaHang.Models.MonDaGoiViewModel
+@using QLNhaHang.Data.Models
+
+@{
+    ViewBag.Title = "Goi Mon";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Gọi món</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Gọi món - @Model.Ban.TenBan</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form method="post" autocomplete="off">
+                <div class="p-4 border rounded">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group row">
+
+                        <div class="col-3">
+                            Tên món
+                            @Html.DropDownList("ThucDonId",
+                                                             new SelectList((List<ThucDon>)TempData["thucDon"], "Id", "TenMon"),
+                                                             htmlAttributes: new { @class = "form-control border-input tenMon" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThucDonId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-3">
+                            Giá tiền
+                            @Html.EditorFor(model => model.MonDaGoi.GiaTien, new { htmlAttributes = new { @class = "form-control numbers" } })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-3">
+                            Số lượng
+                            @Html.EditorFor(model => model.MonDaGoi.SoLuong, new { htmlAttributes = new { @class = "form-control txtSoLuong", @value = 1 } })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-3">
+                            Thành tiền
+                            @Html.EditorFor(model => model.MonDaGoi.ThanhTien, new { htmlAttributes = new { @class = "form-control numbers" } })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group ">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
+                        <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl})"><i class="fas fa-backward"></i></a>
+                    </div>
+
+                </div>
+
+            </form>
+            <form>
+                <input id="hidMaTD" type="hidden" name="maTD" />
+                <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                <input type="hidden" value="@Model.Ban.MaBan" name="maBan" />
+                <input id="hidSoLuong" type="hidden" name="soLuong" />
+                <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
+            </form>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i>Danh sách món</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;" >
+                @if (Model.MonDaGois != null)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.TenMon)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.LoaiThucDon.PhuPhi)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.MonDaGois)
+                            {
+                                i++;
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                    <td>@Html.DisplayFor(m => item.ThucDon.LoaiThucDon.PhuPhi)</td>
+                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> No data. </span>
+                }
+            </div>
+
+
+            @*////////////////////////////////////////////////////*@
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/MonDaChon/goiMonController.js"></script>
+}

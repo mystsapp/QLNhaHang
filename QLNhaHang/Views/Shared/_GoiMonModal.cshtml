@@ -1,0 +1,190 @@
+﻿@model QLNhaHang.Models.BanHangViewModel
+
+<div class="modal fade" id="modal-goimon" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Default Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" autocomplete="off" enctype="multipart/form-data">
+                    <div class="p-4 border rounded">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                @Html.LabelFor(model => model.ThucDon.TenMon, htmlAttributes: new { @class = "control-label col-md-2" })
+                            </div>
+                            <div class="col-4">
+                                @Html.DropDownList("option",
+                                new SelectList(Model.ThucDons, "Id", "TenMon"),
+                                htmlAttributes: new { @class = "form-control border-input", @id = "ddlStatusS" })
+
+                                @Html.ValidationMessageFor(model => model.ThucDon.TenMon, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="CapThe.NguoiNhan"></label>
+                            </div>
+                            <div class="col-4">
+                                <select asp-for="CapThe.NguoiNhan" class="form-control border-input ddlNguoiNhan"
+                                        asp-items="@(new SelectList(Model.Users,"HoTen","HoTen"))">
+                                </select>
+                                <span class="text-danger" asp-validation-for="CapThe.NguoiNhan"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="CapThe.Httt"></label>
+                            </div>
+                            <div class="col-4">
+                                <select asp-for="CapThe.Httt" class="form-control border-input ddlHTTT"
+                                        asp-items="@(new SelectList(Model.HTTTs,"TenHT","TenHT"))">
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="CapThe.GhiChu"></label>
+                            </div>
+                            <div class="col-4">
+                                <textarea asp-for="CapThe.GhiChu" class="form-control"></textarea>
+                                <span class="text-danger" asp-validation-for="CapThe.GhiChu"></span>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="NoiNhan"></label>
+                            </div>
+                            <div class="col-4">
+                                <select asp-for="NoiNhan" class="form-control border-input " id="ddlNoiNhan"
+                                        asp-items="@(new SelectList(Model.NoiNhanViewModels,"CodeTKH","Name"))">
+                                </select>
+                                <span class="text-danger" asp-validation-for="NoiNhan"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="LoaiThe"></label>
+                            </div>
+                            <div class="col-4">
+                                <select asp-for="LoaiThe" class="form-control border-input" id="ddlLoaiThe"
+                                        asp-items="@(new SelectList(Model.LoaiThes,"MaLoai","TenLoai"))">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="ChiTietCapThe.SoSeriTu"></label>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" asp-for="ChiTietCapThe.SoSeriTu" class="form-control" id="txtSeriTu" />
+                                <span class="text-danger" asp-validation-for="ChiTietCapThe.SoSeriTu"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="ChiTietCapThe.SoSeriDen"></label>
+                            </div>
+                            <div class="col-4">
+                                <input type="number" asp-for="ChiTietCapThe.SoSeriDen" class="form-control" id="txtSeriDen" />
+                                <span class="text-danger" asp-validation-for="ChiTietCapThe.SoSeriDen"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="ChiTietCapThe.MenhGia"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="ChiTietCapThe.MenhGia" class="form-control numbers" />
+                                <span class="text-danger" asp-validation-for="ChiTietCapThe.MenhGia"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="ChiTietCapThe.SoLuong"></label>
+                            </div>
+                            <div class="col-4">
+                                <input asp-for="ChiTietCapThe.SoLuong" class="form-control" id="txtSoLuong" />
+                                <span class="text-danger" asp-validation-for="ChiTietCapThe.SoLuong"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                @*<label>Hình thức</label>*@
+                                <label>Trạng thái</label>
+                            </div>
+                            <div class="col-4">
+                                <input readonly value="Nội bộ" class="form-control" />
+                                <span class="text-danger" asp-validation-for="ChiTietCapThe.MenhGia"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="ThongTinThe.Hinh1"></label>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" name="files" class="form-control" />
+                                <span class="text-danger" asp-validation-for="ThongTinThe.Hinh1"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                <label asp-for="ThongTinThe.Hinh2"></label>
+                            </div>
+                            <div class="col-4">
+                                <input type="file" name="files" class="form-control" />
+                                <span class="text-danger" asp-validation-for="ThongTinThe.Hinh2"></span>
+                            </div>
+
+                            <div class="col-2">
+                                <label asp-for="ThongTinThe.GhiChu"></label>
+                            </div>
+                            <div class="col-4">
+                                <textarea asp-for="ThongTinThe.GhiChu" class="form-control"></textarea>
+                                <span class="text-danger" asp-validation-for="ThongTinThe.GhiChu"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                            <a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

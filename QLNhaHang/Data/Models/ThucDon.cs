@@ -11,16 +11,13 @@ namespace QLNhaHang.Data.Models
     {
         public int Id { get; set; }
 
-        [MaxLength(200), Column(TypeName = "varchar")]
+        [MaxLength(200), Column(TypeName = "nvarchar")]
         [StringLength(200)]
         [DisplayName("Tên món")]
         public string TenMon { get; set; }
 
         [DisplayName("Giá tiền")]
         public decimal GiaTien { get; set; }
-
-        [DisplayName("Phụ phí")]
-        public decimal PhuPhi { get; set; }
 
         [DisplayName("Đơn vị tính")]
         [MaxLength(20), Column(TypeName = "varchar")]

@@ -16,14 +16,31 @@ namespace QLNhaHang.Controllers
         public BanHangsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            
+            BanHangVM = new BanHangViewModel();
         }
         // GET: BanHangs
-        public ActionResult Index()
+        public ActionResult Index(string maBan = null)
         {
-            BanHangVM = new BanHangViewModel();
+            //BanHangVM.StrUrl = UriHelper.GetDisplayUrl(Request);
+            ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
             BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();
+            
             return View(BanHangVM);
+        }
+
+        public ActionResult creat()
+        {
+            return View();
+        }
+
+        public ActionResult edit()
+        {
+            return View();
+        }
+
+        public ActionResult DetailsRedirect(string strUrl)
+        {
+            return Redirect(strUrl);
         }
     }
 }

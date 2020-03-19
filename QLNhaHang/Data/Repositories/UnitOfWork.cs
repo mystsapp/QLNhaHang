@@ -11,6 +11,8 @@ namespace QLNhaHang.Data.Repositories
     {
         IBanRepository banRepository { get; }
         IVanPhongRepository vanPhongRepository { get; }
+        IMonDaGoiRepository monDaGoiRepository { get; }
+        IThucDonRepository thucDonRepository { get; }
         Task<int> Complete();
     }
     public class UnitOfWork : IUnitOfWork
@@ -22,11 +24,17 @@ namespace QLNhaHang.Data.Repositories
             _context = context;
             banRepository = new BanRepository(_context);
             vanPhongRepository = new VanPhongRepository(_context);
+            monDaGoiRepository = new MonDaGoiRepository(_context);
+            thucDonRepository = new ThucDonRepository(_context);
         }
 
         public IBanRepository banRepository { get; }
 
         public IVanPhongRepository vanPhongRepository { get; }
+
+        public IMonDaGoiRepository monDaGoiRepository { get; }
+
+        public IThucDonRepository thucDonRepository { get; }
 
         public async Task<int> Complete()
         {

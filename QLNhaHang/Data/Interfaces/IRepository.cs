@@ -13,6 +13,7 @@ namespace Data.Interfaces
         Task<IEnumerable<T>> GetAllIncludeOneAsync(Expression<Func<T, object>> expression);
         IEnumerable<T> GetAllIncludeOne(Expression<Func<T, object>> expression);
         Task<IEnumerable<T>> GetAllIncludeAsync(Expression<Func<T, object>> predicate, Expression<Func<T, object>> predicate2);
+        IEnumerable<T> GetAllInclude(Expression<Func<T, object>> predicate, Expression<Func<T, object>> predicate2);
         IEnumerable<T> Find(Func<T, bool> predicate);
         T GetById(int id);
         T GetByStringId(string id);

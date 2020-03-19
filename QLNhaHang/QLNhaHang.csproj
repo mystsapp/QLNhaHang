@@ -270,6 +270,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MonDaGoisController.cs" />
     <Compile Include="Data\Interfaces\IRepository.cs" />
     <Compile Include="Data\Models\Ban.cs" />
     <Compile Include="Data\Models\ChiTietHD.cs" />
@@ -283,7 +284,9 @@
     <Compile Include="Data\Models\VanPhong.cs" />
     <Compile Include="Data\QLNhaHangDbContext.cs" />
     <Compile Include="Data\Repositories\BanRepository.cs" />
+    <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
+    <Compile Include="Data\Repositories\ThucDonRepository.cs" />
     <Compile Include="Data\Repositories\UnitOfWork.cs" />
     <Compile Include="Data\Repositories\VanPhongRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -293,8 +296,25 @@
     <Compile Include="Migrations\202003150209243_initialDb.designer.cs">
       <DependentUpon>202003150209243_initialDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003170413405_fixMenu.cs" />
+    <Compile Include="Migrations\202003170413405_fixMenu.designer.cs">
+      <DependentUpon>202003170413405_fixMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003180341276_fixHoaDon.cs" />
+    <Compile Include="Migrations\202003180341276_fixHoaDon.designer.cs">
+      <DependentUpon>202003180341276_fixHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003180653155_addGiaMonDaChon.cs" />
+    <Compile Include="Migrations\202003180653155_addGiaMonDaChon.designer.cs">
+      <DependentUpon>202003180653155_addGiaMonDaChon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190215230_fixPhuPhi.cs" />
+    <Compile Include="Migrations\202003190215230_fixPhuPhi.designer.cs">
+      <DependentUpon>202003190215230_fixPhuPhi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
+    <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,12 +325,32 @@
     <Content Include="Assets\Images\Empty_Desk.jpg" />
     <Content Include="Assets\Images\favicon.ico" />
     <Content Include="Assets\Images\favicon.png" />
+    <Content Include="Assets\Images\goimon.jfif" />
+    <Content Include="Assets\Images\goimon1.png" />
+    <Content Include="Assets\Images\inhoadon.png" />
     <Content Include="Assets\Images\logo1.png" />
     <Content Include="Assets\Images\LogoLeft.ico" />
     <Content Include="Assets\Images\LogoLogin.png" />
+    <Content Include="Assets\Images\maytinh.png" />
     <Content Include="Assets\Images\saigontourist.png" />
+    <Content Include="Assets\Images\thucdon.png" />
+    <Content Include="Assets\Images\tinhtien.jfif" />
+    <Content Include="Assets\js\MonDaChon\createController.js" />
+    <Content Include="Assets\js\MonDaChon\goiMonController.js" />
+    <Content Include="Assets\js\BanHang\createController.js" />
+    <Content Include="Assets\js\BanHang\indexController.js" />
     <Content Include="Assets\lib\bootbox.js\bootbox.js" />
     <Content Include="Assets\lib\bootbox.js\bootbox.min.js" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-grid.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-grid.min.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-reboot.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-reboot.min.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap.min.css" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.bundle.js" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.bundle.min.js" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.js" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.min.js" />
     <Content Include="Assets\lib\datatables\css\dataTables.bootstrap.css" />
     <Content Include="Assets\lib\datatables\css\dataTables.bootstrap.min.css" />
     <Content Include="Assets\lib\datatables\css\dataTables.bootstrap4.css" />
@@ -950,6 +990,16 @@
     <Content Include="Assets\lib\jquery-validation\LICENSE.md" />
     <Content Include="Assets\lib\bootbox.js\bootbox.min.js.map" />
     <Content Include="Assets\lib\plugins\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-grid.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-reboot.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\css\bootstrap.min.css.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.bundle.js.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.js.map" />
+    <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -981,6 +1031,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
     <Content Include="Views\BanHangs\Index.cshtml" />
+    <Content Include="Views\Shared\_GoiMonModal.cshtml" />
+    <Content Include="Views\BanHangs\GoiMon.cshtml" />
+    <Content Include="Views\BanHangs\edit.cshtml" />
+    <Content Include="Views\BanHangs\creat.cshtml" />
+    <Content Include="Views\MonDaGois\GoiMon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1001,6 +1056,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003150209243_initialDb.resx">
       <DependentUpon>202003150209243_initialDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170413405_fixMenu.resx">
+      <DependentUpon>202003170413405_fixMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003180341276_fixHoaDon.resx">
+      <DependentUpon>202003180341276_fixHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003180653155_addGiaMonDaChon.resx">
+      <DependentUpon>202003180653155_addGiaMonDaChon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190215230_fixPhuPhi.resx">
+      <DependentUpon>202003190215230_fixPhuPhi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

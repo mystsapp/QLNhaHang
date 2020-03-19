@@ -6,14 +6,14 @@ using System.Web;
 
 namespace QLNhaHang.Models
 {
-    public class BanHangViewModel
+    public class MonDaGoiViewModel
     {
-        public List<Ban> Bans { get; set; }
-        public List<MonDaGoi> MonDaGois { get; set; }
         public List<ThucDon> ThucDons { get; set; }
-        public ThucDon ThucDon { get; set; }
+        public List<MonDaGoi> MonDaGois { get; set; }
         public MonDaGoi MonDaGoi { get; set; }
+        public Ban Ban { get; set; }
         public string StrUrl { get; set; }
-     
+        public string MaBan { get; set; }
+
     }
 }

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Data.Models
+namespace QLNhaHang.Data.Models
 {
     public class Ban
     {

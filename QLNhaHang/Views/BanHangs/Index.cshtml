@@ -1,6 +1,8 @@
 ﻿@model QLNhaHang.Models.BanHangViewModel
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 <!-- Content Header (Page header) -->
@@ -8,13 +10,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
-                </ol>
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
+                    </ol>*@
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -39,30 +41,157 @@
         <div class="card-body">
             @foreach (var ban in Model.Bans)
             {
-                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer" style="max-width: 12rem;">
+                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer" style="max-width: 12rem;" data-id="@ban.MaBan">
                     <div class="card-header">@ban.TenBan</div>
                     <div class="card-body text-warning">
                         <h5 class="card-title">@*Warning card title*@</h5>
                         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
                         <p>
-                            <img class="imgBan" src="~/Assets/Images/Empty_Desk.jpg" />
+                            <img class="imgBan" width="100" src="~/Assets/Images/Empty_Desk.jpg" />
                         </p>
                     </div>
                 </div>
 
             }
-
+            <form>
+                <input id="hidMaBan" type="hidden" name="maBan" />
+                <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
+            </form>
         </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-            Footer
-        </div>
-        <!-- /.card-footer-->
     </div>
     <!-- /.card -->
-
 </section>
 
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thông tin chi tiết</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;" class="col-10 float-left">
+                @if (Model.MonDaGois != null)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.TenMon)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.MonDaGois)
+                            {
+                                i++;
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> No data. </span>
+                }
+            </div>
+            <div class="col-2 float-left">
+                <div>
+                    <div class="mb-1">
+
+                        <form action="/MonDaGois/GoiMon" id="frmGoiMon">
+                            <input type="hidden" name="maBan" id="hidMaBanGoiMon"/>
+                            <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
+                            <button type="button" class="btn btn-outline-warning" id="btnGoiMon">
+                                @*data-toggle="modal" data-target="#modal-goimon">*@
+                                <div class="float-left mr-1">
+                                    <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/goimon1.png" alt="Card image" />
+                                </div>
+                                @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                                <div class="float-left font-weight-bold mt-1">
+                                    &nbsp; Gọi món <br /> (F1)
+                                </div>
+                            </button>
+                        </form>
+                        @*@Html.Partial("_GoiMonModal", Model)*@
+                    </div>
+
+                    <div class="mb-1">
+
+                        <button class="btn btn-outline-warning">
+                            <div class="float-left mr-1">
+                                <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/thucdon.png" alt="Card image" />
+                            </div>
+                            @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                            <div class="float-left font-weight-bold mt-1">
+                                Thực đơn <br /> (F2)
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="mb-1">
+
+                        <button class="btn btn-outline-warning">
+                            <div class="float-left mr-1">
+                                <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/tinhtien.jfif" alt="Card image" />
+                            </div>
+                            @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                            <div class="float-left font-weight-bold mt-1">
+                                &nbsp; Tính tiền<br />(F3)
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="mb-1">
+
+                        <button class="btn btn-outline-warning">
+                            <div class="float-left mr-1">
+                                <img class="card-img-top toolImage" style="height: 50px; width: 46px" src="/Assets/Images/inhoadon.png" alt="Card image" />
+                            </div>
+                            @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                            <div class="float-left font-weight-bold mt-1">
+                                In hóa đơn<br />(F4)
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="mb-1">
+
+                        <button class="btn btn-outline-warning">
+                            <div class="float-left mr-1">
+                                <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/maytinh.png" alt="Card image" />
+                            </div>
+                            @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                            <div class="float-left font-weight-bold mt-1">
+                                &nbsp; Máy tính <br /> (F5)
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
 
 @section Scripts{
     <script>
@@ -95,7 +224,8 @@
     </script>
     <style>
         .cursor-pointer:hover {
-            background-color: #3E5C9A;
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107!important;
             cursor: pointer;
             color: white;
         }
@@ -113,6 +243,11 @@
             border: 5px solid #ddd;
             border-radius: 10%;
         }
+
+        .toolImage {
+            border: 1px solid #ddd;
+            border-radius: 20%;
+        }
     </style>
-    @*<script src="~/js/Admin/CapThe/indexController.js"></script>*@
+    <script src="~/Assets/js/BanHang/indexController.js"></script>
 }

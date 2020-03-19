@@ -1,5 +1,4 @@
-﻿using Data.Models;
-using QLNhaHang.Data.Models;
+﻿using QLNhaHang.Data.Models;
 using System.Data.Entity;
 
 namespace QLNhaHang.Data

@@ -17,6 +17,9 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Tên loại")]
         public string TenLoai { get; set; }
 
+        [DisplayName("Phụ phí")]
+        public decimal? PhuPhi { get; set; }
+
         [MaxLength(200), Column(TypeName = "nvarchar")]
         [StringLength(200)]
         [DisplayName("Mô tả")]

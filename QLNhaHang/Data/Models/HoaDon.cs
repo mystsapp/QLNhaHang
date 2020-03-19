@@ -1,5 +1,4 @@
-﻿using Data.Models;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -46,12 +45,17 @@ namespace QLNhaHang.Data.Models
         public DateTime NgayTao { get; set; }
         public DateTime NgayGiao { get; set; }
 
+
         [MaxLength(300), Column(TypeName = "nvarchar")]
         [StringLength(300)]
         [DisplayName("Ghi chú")]
         public string GhiChu { get; set; }
 
         [DisplayName("Thành tiền HD")]
-        public decimal ThanhTienHD { get; set; }
+        public decimal? ThanhTienHD { get; set; }
+        public decimal? PhiPhucvu { get; set; }
+        public decimal? VAT { get; set; }
+        public decimal? TongTien { get; set; }
+
     }
 }
