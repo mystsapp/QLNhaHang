@@ -13,7 +13,7 @@ namespace QLNhaHang.Data.Repositories
         IVanPhongRepository vanPhongRepository { get; }
         IMonDaGoiRepository monDaGoiRepository { get; }
         IThucDonRepository thucDonRepository { get; }
-        Task<int> Complete();
+        int Complete();
     }
     public class UnitOfWork : IUnitOfWork
     {
@@ -36,9 +36,9 @@ namespace QLNhaHang.Data.Repositories
 
         public IThucDonRepository thucDonRepository { get; }
 
-        public async Task<int> Complete()
+        public int Complete()
         {
-            return await _context.SaveChangesAsync();
+            return _context.SaveChanges();
         }
 
         public void Dispose()

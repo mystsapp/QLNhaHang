@@ -25,6 +25,10 @@ var goiMonController = {
             $('#hidSubmit').click();
         });
 
+        //var inputNumberVal = $('input.numbers').val();
+        //$('input.numbers').val(function (index, value) {
+        //    return addCommas(value);
+        //});
         // format .numbers
         $('input.numbers').keyup(function (event) {
 

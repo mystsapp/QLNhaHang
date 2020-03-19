@@ -29,5 +29,7 @@ namespace QLNhaHang.Data.Models
         [MaxLength(250), Column(TypeName = "nvarchar")]
         [DisplayName("Ghi chú")]
         public string GhiChu { get; set; }
+
+        public bool Flag { get; set; }
     }
 }

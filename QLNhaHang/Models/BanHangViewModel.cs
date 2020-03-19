@@ -13,6 +13,7 @@ namespace QLNhaHang.Models
         public List<ThucDon> ThucDons { get; set; }
         public ThucDon ThucDon { get; set; }
         public MonDaGoi MonDaGoi { get; set; }
+        public Ban Ban { get; set; }
         public string StrUrl { get; set; }
      
     }

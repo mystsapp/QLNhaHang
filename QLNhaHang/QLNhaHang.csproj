@@ -312,6 +312,22 @@
     <Compile Include="Migrations\202003190215230_fixPhuPhi.designer.cs">
       <DependentUpon>202003190215230_fixPhuPhi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003190642091_addPhi.cs" />
+    <Compile Include="Migrations\202003190642091_addPhi.designer.cs">
+      <DependentUpon>202003190642091_addPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190644567_fixPhiPhucVu.cs" />
+    <Compile Include="Migrations\202003190644567_fixPhiPhucVu.designer.cs">
+      <DependentUpon>202003190644567_fixPhiPhucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190901114_addTongTien.cs" />
+    <Compile Include="Migrations\202003190901114_addTongTien.designer.cs">
+      <DependentUpon>202003190901114_addTongTien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003190953123_addBanFlag.cs" />
+    <Compile Include="Migrations\202003190953123_addBanFlag.designer.cs">
+      <DependentUpon>202003190953123_addBanFlag.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
@@ -1068,6 +1084,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003190215230_fixPhuPhi.resx">
       <DependentUpon>202003190215230_fixPhuPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190642091_addPhi.resx">
+      <DependentUpon>202003190642091_addPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190644567_fixPhiPhucVu.resx">
+      <DependentUpon>202003190644567_fixPhiPhucVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190901114_addTongTien.resx">
+      <DependentUpon>202003190901114_addTongTien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003190953123_addBanFlag.resx">
+      <DependentUpon>202003190953123_addBanFlag.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -33,5 +33,6 @@ namespace Data.Interfaces
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task<IEnumerable<T>> FindIncludeOneAsync(Expression<Func<T, object>> expressObj, Expression<Func<T, bool>> expression);
         IEnumerable<T> FindIncludeOne(Expression<Func<T, object>> expressObj, Func<T, bool> predicate);
+        IEnumerable<T> FindIncludeTwo(Expression<Func<T, object>> expressObj, Expression<Func<T, object>> expressObj2, Func<T, bool> predicate);
     }
 }

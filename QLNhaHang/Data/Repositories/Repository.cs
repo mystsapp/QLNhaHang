@@ -119,5 +119,10 @@ namespace QLNhaHang.Data.Repositories
         {
             return _context.Set<T>().Include(predicate).Include(predicate2).ToList();
         }
+
+        public IEnumerable<T> FindIncludeTwo(Expression<Func<T, object>> expressObj,Expression<Func<T, object>> expressObj2, Func<T, bool> predicate)
+        {
+            return _context.Set<T>().Include(expressObj).Include(expressObj2).Where(predicate);
+        }
     }
 }

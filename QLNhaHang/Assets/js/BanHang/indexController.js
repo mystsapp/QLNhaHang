@@ -4,10 +4,39 @@
     },
 
     registerEvent: function () {
-        $('.cursor-pointer').click(function () {
+
+        ///////// change table image
+        var idList = [];
+        //$.each($('.cursor-pointer'), function (i, item) {
+        //    if ($(this).prop('checked')) {
+        //        idList.push({
+        //            Id: $(item).data('id')
+        //        });
+        //    }
+
+        //});
+
+        //if (idList.length !== 0) {
+        //    $('#stringId').val(JSON.stringify(idList));
+        //    $('#frmExportAll').submit();
+        //}
+        //else {
+        //    bootbox.alert({
+        //        size: "small",
+        //        title: "Information",
+        //        message: "Bạn chưa chọn bàn giao!",
+        //        callback: function () {
+        //            //e.preventDefault();
+
+        //        }
+        //    });
+        //}
+        ///////// change table image
+        
+        $('.cursor-pointer').off('click').on('click', function () {
             id = $(this).data('id');
+            
             $('#hidMaBan').val(id);
-            $('#hidMaBanGoiMon').val(id);
 
             //var page = $('.active span').text();
             //$('#hidPage').val(page);
@@ -23,10 +52,11 @@
             //    }
             //});
 
-            $('#btnSubmit').click();
+            $('#hidSubmit').click();
         });
 
         $('#btnGoiMon').off('click').on('click', function () {
+
             var id = $('#hidMaBanGoiMon').val();
             if (id === '') {
                 bootbox.alert({
