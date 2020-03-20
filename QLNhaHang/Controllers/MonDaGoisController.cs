@@ -126,6 +126,18 @@ namespace QLNhaHang.Controllers
             return RedirectToAction(nameof(GoiMon), new { maBan = maBan, strUrl = strUrl });
         }
 
+        /// tinh tien
+        public ActionResult TinhTien(string maBan = null, string strUrl = null)
+        {
+            MonDaGoiVM.StrUrl = strUrl;
+            MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
+                                              .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+                                              .ToList();
+            MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            MonDaGoiVM.TongTien = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
+            return View(MonDaGoiVM);
+        }
+
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

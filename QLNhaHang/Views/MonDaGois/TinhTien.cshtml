@@ -1,0 +1,128 @@
+﻿@model QLNhaHang.Models.MonDaGoiViewModel
+
+@{
+    ViewBag.Title = "TinhTien";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Tính tiền</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Tính tiền - @Model.Ban.TenBan</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div id="invoice">
+                <section class="invoice">
+
+                    <div class="row">
+
+                        <div class="col-4">
+                            <p class="lead">Amount Due 2/22/2014</p>
+
+                            <div class="table-responsive">
+                                <table class="table mytable text-nowrap" id="listAll">
+                                    <thead>
+                                        <tr class="table-info">
+                                            <th>STT</th>
+                                            <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.TenMon)</th>
+                                            <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
+                                            <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{int i = 1;}
+                                        @foreach (var item in Model.MonDaGois)
+                                        {
+
+                                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                                <td>@i</td>
+                                                <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                                <td class="text-center">@Html.DisplayFor(m => item.SoLuong)</td>
+                                                <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+
+                                            </tr>
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                                <span> Tổng tiền: @Html.Raw(Model.TongTien.Value.ToString("N0")) VND</span>
+
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </section>
+            </div>
+            
+            <button class="btn btn-outline-warning mt-2" id="btnPrint">
+                <img class="card-img-top toolImage" src="~/Assets/Images/inhoadon.png" style="height: 30px; width: 30px"/>
+            </button>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+
+
+@section Scripts{
+    <script>
+        $("#btnPrint").off('click').on('click', function () {
+            //Print ele2 with default options
+            $("#invoice").print({
+                //Use Global styles
+                globalStyles: false,
+                //Add link with attrbute media=print
+                //mediaPrint: false,
+                //Custom stylesheet
+                //stylesheet: "http://fonts.googleapis.com/css?family=Inconsolata",
+                //Print in a hidden iframe
+                //iframe: false,
+                //Don't print this
+                //noPrintSelector: ".avoid-this"
+                //Add this at top
+                //prepend: "Hello World!!!<br/>",
+                //Add this on bottom
+                //append: "<span><br/>Buh Bye!</span>",
+                //Log to console when printing is done via a deffered callback
+                // deferred: $.Deferred().done(function () { console.log('Printing done', arguments); })
+            });
+        });
+    </script>
+    <style>
+        .toolImage {
+            border: 1px solid #ddd;
+            border-radius: 20%;
+        }
+    </style>
+}

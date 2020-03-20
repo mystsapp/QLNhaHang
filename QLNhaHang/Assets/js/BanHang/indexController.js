@@ -83,6 +83,25 @@
                 $('#frmGoiMon').submit();
             }
         });
+
+        $('#btnTinhTien').off('click').on('click', function () {
+
+            var id = $('#hidMaBanTinhTien').val();
+            if (id === '') {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa chọn <b> bàn </b> nào !",
+                    callback: function () {
+                        //e.preventDefault();
+                    }
+                });
+
+            }
+            else {
+                $('#frmTinhTien').submit();
+            }
+        });
     }
 };
 indexController.init();

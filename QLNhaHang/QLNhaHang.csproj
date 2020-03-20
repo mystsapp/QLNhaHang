@@ -473,6 +473,8 @@
     <Content Include="Assets\lib\jquery-validation\dist\jquery.validate.min.js" />
     <Content Include="Assets\lib\jquery.maskedinput\jquery.maskedinput.js" />
     <Content Include="Assets\lib\jquery.maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="Assets\lib\jQuery.print\jQuery.print.js" />
+    <Content Include="Assets\lib\jQuery.print\jQuery.print.min.js" />
     <Content Include="Assets\lib\jqueryui\images\ui-icons_444444_256x240.png" />
     <Content Include="Assets\lib\jqueryui\images\ui-icons_555555_256x240.png" />
     <Content Include="Assets\lib\jqueryui\images\ui-icons_777620_256x240.png" />
@@ -1024,6 +1026,8 @@
     <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.bundle.min.js.map" />
     <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.js.map" />
     <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.min.js.map" />
+    <Content Include="libman.json" />
+    <Content Include="Assets\lib\jQuery.print\jQuery.print.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1060,6 +1064,7 @@
     <Content Include="Views\BanHangs\edit.cshtml" />
     <Content Include="Views\BanHangs\creat.cshtml" />
     <Content Include="Views\MonDaGois\GoiMon.cshtml" />
+    <Content Include="Views\MonDaGois\TinhTien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

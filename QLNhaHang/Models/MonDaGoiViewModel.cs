@@ -18,6 +18,7 @@ namespace QLNhaHang.Models
         public string StrUrl { get; set; }
         public string MaBan { get; set; }
         public decimal PhuPhi { get; set; }
+        public decimal? TongTien { get; set; }
 
     }
 }
