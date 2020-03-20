@@ -44,7 +44,6 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("ThucDonId")]
         public virtual ThucDon ThucDon { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
-        public decimal? TongTien { get; set; }
+        
     }
 }

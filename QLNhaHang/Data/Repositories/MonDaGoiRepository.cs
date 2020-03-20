@@ -16,5 +16,6 @@ namespace QLNhaHang.Data.Repositories
         public MonDaGoiRepository(QLNhaHangDbContext context) : base(context)
         {
         }
+
     }
 }

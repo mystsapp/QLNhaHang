@@ -31,5 +31,7 @@ namespace QLNhaHang.Data.Models
         public string GhiChu { get; set; }
 
         public bool Flag { get; set; }
+
+       
     }
 }

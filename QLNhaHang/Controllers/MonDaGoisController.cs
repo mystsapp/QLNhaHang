@@ -69,6 +69,7 @@ namespace QLNhaHang.Controllers
                     MonDaGoiVM.MonDaGoi.PhuPhi = 0;
                 }
                 MonDaGoiVM.MonDaGoi.SoLuong = soLuong;
+                
             }
             return View(MonDaGoiVM);
         }
@@ -79,23 +80,50 @@ namespace QLNhaHang.Controllers
             var monDaGoi = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan))
                                                          .Where(x => x.ThucDonId.Equals(model.MonDaGoi.ThucDonId))
                                                          .FirstOrDefault();
+            /////////////// update mon if exist ///////////
             if(monDaGoi != null)
             {
                 model.MonDaGoi.SoLuong += monDaGoi.SoLuong;
                 model.MonDaGoi.PhuPhi += monDaGoi.PhuPhi;
                 model.MonDaGoi.ThanhTien += monDaGoi.ThanhTien;
             }
+            /////////////// update mon if exist ///////////
             _unitOfWork.monDaGoiRepository.Create(model.MonDaGoi);
+            
             if (monDaGoi != null)
             {
                 _unitOfWork.monDaGoiRepository.Delete(monDaGoi);
-            }
                 
+            }
+            //////////// update flag and total money ///////
+            var banFromDb = _unitOfWork.banRepository.GetByStringId(maBan);
+            banFromDb.Flag = true;
+            
+            _unitOfWork.banRepository.Update(banFromDb);
+            //////////// update flag and total money ///////
             _unitOfWork.Complete();
             SetAlert("Thêm mới thành công!", "success");
-
-
             return RedirectToAction(nameof(GoiMon), new { maBan = maBan, strUrl = strUrl});
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, string strUrl, string maBan)
+        {
+            var monDaGoi = _unitOfWork.monDaGoiRepository.GetById(id);
+            _unitOfWork.monDaGoiRepository.Delete(monDaGoi);
+            /////////////////// off flag ban if null mon'/////////////
+            var monInBan = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan == maBan);
+            if(monInBan.Count() == 0)
+            {
+                var banById = _unitOfWork.banRepository.GetByStringId(maBan);
+                banById.Flag = false;
+                _unitOfWork.banRepository.Update(banById);
+                
+            }
+            /////////////////// off flag ban if null mon'/////////////
+            _unitOfWork.Complete();
+            SetAlert("Xóa thành công!", "success");
+            return RedirectToAction(nameof(GoiMon), new { maBan = maBan, strUrl = strUrl });
         }
 
         protected void SetAlert(string message, string type)

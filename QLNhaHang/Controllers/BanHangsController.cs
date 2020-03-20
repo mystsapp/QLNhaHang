@@ -17,13 +17,16 @@ namespace QLNhaHang.Controllers
         {
             _unitOfWork = unitOfWork;
             BanHangVM = new BanHangViewModel() {
+                Ban = new Data.Models.Ban(),
                 MonDaGoi = new Data.Models.MonDaGoi()
             };
         }
         // GET: BanHangs
         public ActionResult Index(string maBan = null)
         {
-
+            ///////////////////// load Ban by flag /////////////////////
+            //var banByFlags = _unitOfWork.banRepository.Find(x => x.Flag);
+            ///////////////////// load Ban by flag /////////////////////
             //BanHangVM.StrUrl = UriHelper.GetDisplayUrl(Request);
             ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
             BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();            
@@ -37,8 +40,9 @@ namespace QLNhaHang.Controllers
                                                   .ToList();
 
                 var listDecimal = BanHangVM.MonDaGois.Select(x => x.ThanhTien).ToList();
-                BanHangVM.MonDaGoi.TongTien = listDecimal.Sum();
+                BanHangVM.TongTien = listDecimal.Sum();
             }
+            
             return View(BanHangVM);
         }
 

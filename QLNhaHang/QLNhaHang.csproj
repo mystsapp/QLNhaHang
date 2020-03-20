@@ -328,6 +328,14 @@
     <Compile Include="Migrations\202003190953123_addBanFlag.designer.cs">
       <DependentUpon>202003190953123_addBanFlag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003200644104_moveTongTienToBan.cs" />
+    <Compile Include="Migrations\202003200644104_moveTongTienToBan.designer.cs">
+      <DependentUpon>202003200644104_moveTongTienToBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003200711083_removeTongTienToBan.cs" />
+    <Compile Include="Migrations\202003200711083_removeTongTienToBan.designer.cs">
+      <DependentUpon>202003200711083_removeTongTienToBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
@@ -1096,6 +1104,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003190953123_addBanFlag.resx">
       <DependentUpon>202003190953123_addBanFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003200644104_moveTongTienToBan.resx">
+      <DependentUpon>202003200644104_moveTongTienToBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003200711083_removeTongTienToBan.resx">
+      <DependentUpon>202003200711083_removeTongTienToBan.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

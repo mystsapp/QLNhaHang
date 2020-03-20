@@ -6,7 +6,17 @@
     registerEvent: function () {
 
         ///////// change table image
-        var idList = [];
+        //$.ajax({
+        //        url: '/CapThes/Index',
+        //        data: {
+        //            maCT: id
+        //        },
+        //        dataType: 'json',
+        //        type: 'GET',
+        //        success: function (response) {
+
+        //        }
+        //    });
         //$.each($('.cursor-pointer'), function (i, item) {
         //    if ($(this).prop('checked')) {
         //        idList.push({
