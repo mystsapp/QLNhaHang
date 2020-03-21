@@ -21,7 +21,7 @@ namespace QLNhaHang.Data.Models
         public string HoTen { get; set; }
 
         [DisplayName("Ngày sinh")]
-        public DateTime NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
 
         [DisplayName("Giới tính")]
         [MaxLength(5), Column(TypeName = "nvarchar")]

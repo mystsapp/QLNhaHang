@@ -45,5 +45,6 @@ namespace QLNhaHang.Data.Models
         public virtual ThucDon ThucDon { get; set; }
 
         
+
     }
 }

@@ -78,7 +78,7 @@
         <div class="card-header">
             @if (Model.Ban != null)
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thông tin chi tiết - @Model.Ban.TenBan</h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thông tin chi tiết  <strong>@Model.Ban.TenBan</strong></h3>
             }
             else
             {
@@ -147,7 +147,7 @@
                             }
                             @*<input type="hidden" name="maBan" id="hidMaBanGoiMon" />*@
                             <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
-                            <button type="button" class="btn btn-outline-warning" id="btnGoiMon">
+                            <button type="button" class="btn btn-outline-warning btn-block" id="btnGoiMon">
                                 @*data-toggle="modal" data-target="#modal-goimon">*@
                                 <div class="float-left mr-1">
                                     <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/goimon1.png" alt="Card image" />
@@ -166,7 +166,7 @@
 
                             @*<input type="hidden" name="maBan" id="hidMaBanGoiMon" />*@
                             <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
-                            <button class="btn btn-outline-warning" id="btnThucDon">
+                            <button class="btn btn-outline-warning btn-block" id="btnThucDon">
                                 <div class="float-left mr-1">
                                     <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/thucdon.png" alt="Card image" />
                                 </div>
@@ -186,7 +186,7 @@
                             }
                             @*<input type="hidden" name="maBan" id="hidMaBanGoiMon" />*@
                             <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
-                            <button type="button" class="btn btn-outline-warning" id="btnTinhTien">
+                            <button type="button" class="btn btn-outline-warning btn-block" id="btnTinhTien">
                                 <div class="float-left mr-1">
                                     <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/tinhtien.jfif" alt="Card image" />
                                 </div>
@@ -200,7 +200,7 @@
 
                     <div class="mb-1">
 
-                        <button class="btn btn-outline-warning">
+                        <button class="btn btn-outline-warning btn-block">
                             <div class="float-left mr-1">
                                 <img class="card-img-top toolImage" style="height: 50px; width: 46px" src="/Assets/Images/inhoadon.png" alt="Card image" />
                             </div>
@@ -213,7 +213,7 @@
 
                     <div class="mb-1">
 
-                        <button class="btn btn-outline-warning">
+                        <button class="btn btn-outline-warning btn-block">
                             <div class="float-left mr-1">
                                 <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/maytinh.png" alt="Card image" />
                             </div>

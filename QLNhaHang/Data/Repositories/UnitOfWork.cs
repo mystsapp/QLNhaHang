@@ -13,6 +13,8 @@ namespace QLNhaHang.Data.Repositories
         IVanPhongRepository vanPhongRepository { get; }
         IMonDaGoiRepository monDaGoiRepository { get; }
         IThucDonRepository thucDonRepository { get; }
+        IHoaDonRepository hoaDonRepository { get; }
+        IChiTietHDRepository chiTietHDRepository { get; }
         int Complete();
     }
     public class UnitOfWork : IUnitOfWork
@@ -26,6 +28,8 @@ namespace QLNhaHang.Data.Repositories
             vanPhongRepository = new VanPhongRepository(_context);
             monDaGoiRepository = new MonDaGoiRepository(_context);
             thucDonRepository = new ThucDonRepository(_context);
+            hoaDonRepository = new HoaDonRepository(_context);
+            chiTietHDRepository = new ChiTietHDRepository(_context);
         }
 
         public IBanRepository banRepository { get; }
@@ -35,6 +39,10 @@ namespace QLNhaHang.Data.Repositories
         public IMonDaGoiRepository monDaGoiRepository { get; }
 
         public IThucDonRepository thucDonRepository { get; }
+
+        public IHoaDonRepository hoaDonRepository { get; }
+
+        public IChiTietHDRepository chiTietHDRepository { get; }
 
         public int Complete()
         {

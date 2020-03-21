@@ -15,10 +15,13 @@ namespace QLNhaHang.Models
         public MonDaGoi MonDaGoi { get; set; }
         public ThucDon ThucDon { get; set; }
         public Ban Ban { get; set; }
+        public HoaDon HoaDon { get; set; }
+        public ChiTietHD ChiTietHD { get; set; }
         public string StrUrl { get; set; }
         public string MaBan { get; set; }
         public decimal PhuPhi { get; set; }
         public decimal? TongTien { get; set; }
+        public string NumberId { get; set; }
 
     }
 }

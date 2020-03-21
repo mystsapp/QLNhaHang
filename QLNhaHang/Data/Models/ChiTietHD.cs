@@ -27,7 +27,7 @@ namespace QLNhaHang.Data.Models
         public virtual ThucDon ThucDon { get; set; }
 
         [DisplayName("Đơn giá")]
-        public decimal DonGia { get; set; }
+        public decimal? DonGia { get; set; }
 
         [DisplayName("Số lượng")]
         public int SoLuong { get; set; }

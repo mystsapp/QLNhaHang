@@ -38,14 +38,14 @@
             </div>
         </div>
         <div class="card-body">
+            <div class="p-4 border rounded">
+                <div id="invoice">
 
-            <div id="invoice">
-                <section class="invoice">
-
-                    <div class="row">
+                    <div class="form-group row">
 
                         <div class="col-4">
                             <p class="lead">Amount Due 2/22/2014</p>
+                            <p class="lead">Number ID: @Model.NumberId</p>
 
                             <div class="table-responsive">
                                 <table class="table mytable text-nowrap" id="listAll">
@@ -82,12 +82,34 @@
                         <!-- /.col -->
                     </div>
                     <!-- /.row -->
-                </section>
+                </div>
+
+                <div class="form-group">
+
+                    @*<button class="btn btn-outline-warning " id="btnPrint"><i class="fas fa-print"></i></button>*@
+
+                    <span id="confirmDeleteSpan" style="display: none">
+                        <span class="text-dark">Bạn có chắc chắn muốn in không?</span>
+                        <button class="btn btn-outline-warning " id="btnPrint">Yes</button>
+                        <a href="#" class="btn btn-primary" onclick="confirmDelete(false)">No</a>
+                    </span>
+
+                    <span id="deleteSpan">
+                        <a href="#" class="btn btn-outline-warning " onclick="confirmDelete(true)"><i class="fas fa-print"></i></a>
+                    </span>
+
+                    <a class="btn btn-success btnBack" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
+                </div>
+
+                <form>
+                    <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                    <input type="hidden" value="@Model.Ban.MaBan" name="maBan" />
+                    <input type="hidden" value="@Model.NumberId" name="numberId" />
+                    <input type="submit" hidden formaction="/MonDaGois/TinhTienPost" formmethod="post" id="hidSubmit" />
+                </form>
+
             </div>
-            
-            <button class="btn btn-outline-warning mt-2" id="btnPrint">
-                <img class="card-img-top toolImage" src="~/Assets/Images/inhoadon.png" style="height: 30px; width: 30px"/>
-            </button>
+
         </div>
     </div>
     <!-- /.card -->
@@ -97,8 +119,24 @@
 
 @section Scripts{
     <script>
+        function confirmDelete(isDeleteClicked) {
+            var deleteSpan = 'deleteSpan';
+            var confirmDeleteSpan = 'confirmDeleteSpan';
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+
         $("#btnPrint").off('click').on('click', function () {
-            //Print ele2 with default options
+
+
+
+            ////Print ele2 with default options
             $("#invoice").print({
                 //Use Global styles
                 globalStyles: false,
@@ -115,14 +153,16 @@
                 //Add this on bottom
                 //append: "<span><br/>Buh Bye!</span>",
                 //Log to console when printing is done via a deffered callback
-                // deferred: $.Deferred().done(function () { console.log('Printing done', arguments); })
+                deferred: $.Deferred().done(function () {
+                    //console.log('Printing done', arguments);
+
+                    $('#hidSubmit').click();
+
+                })
+
+
             });
         });
     </script>
-    <style>
-        .toolImage {
-            border: 1px solid #ddd;
-            border-radius: 20%;
-        }
-    </style>
+
 }

@@ -42,8 +42,8 @@ namespace QLNhaHang.Data.Models
         [DisplayName("HT Thanh Toán")]
         public string HTThanhToan { get; set; }
 
-        public DateTime NgayTao { get; set; }
-        public DateTime NgayGiao { get; set; }
+        public DateTime? NgayTao { get; set; }
+        public DateTime? NgayGiao { get; set; }
 
 
         [MaxLength(300), Column(TypeName = "nvarchar")]
@@ -56,6 +56,10 @@ namespace QLNhaHang.Data.Models
         public decimal? PhiPhucvu { get; set; }
         public decimal? VAT { get; set; }
         public decimal? TongTien { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string NumberId { get; set; }
 
     }
 }

@@ -284,6 +284,8 @@
     <Compile Include="Data\Models\VanPhong.cs" />
     <Compile Include="Data\QLNhaHangDbContext.cs" />
     <Compile Include="Data\Repositories\BanRepository.cs" />
+    <Compile Include="Data\Repositories\ChiTietHDRepository.cs" />
+    <Compile Include="Data\Repositories\HoaDonRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\ThucDonRepository.cs" />
@@ -336,10 +338,32 @@
     <Compile Include="Migrations\202003200711083_removeTongTienToBan.designer.cs">
       <DependentUpon>202003200711083_removeTongTienToBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003210312551_addNumberId.cs" />
+    <Compile Include="Migrations\202003210312551_addNumberId.designer.cs">
+      <DependentUpon>202003210312551_addNumberId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210337149_delNumberIdinMDG.cs" />
+    <Compile Include="Migrations\202003210337149_delNumberIdinMDG.designer.cs">
+      <DependentUpon>202003210337149_delNumberIdinMDG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210425305_fixDonGiaCTHD.cs" />
+    <Compile Include="Migrations\202003210425305_fixDonGiaCTHD.designer.cs">
+      <DependentUpon>202003210425305_fixDonGiaCTHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210456195_fixNgayTaoNullable.cs" />
+    <Compile Include="Migrations\202003210456195_fixNgayTaoNullable.designer.cs">
+      <DependentUpon>202003210456195_fixNgayTaoNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003210503393_fixNgaySinhNullable.cs" />
+    <Compile Include="Migrations\202003210503393_fixNgaySinhNullable.designer.cs">
+      <DependentUpon>202003210503393_fixNgaySinhNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\GetNextId.cs" />
+    <Compile Include="Utilities\SessionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\MyCss.css" />
@@ -1115,6 +1139,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003200711083_removeTongTienToBan.resx">
       <DependentUpon>202003200711083_removeTongTienToBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210312551_addNumberId.resx">
+      <DependentUpon>202003210312551_addNumberId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210337149_delNumberIdinMDG.resx">
+      <DependentUpon>202003210337149_delNumberIdinMDG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210425305_fixDonGiaCTHD.resx">
+      <DependentUpon>202003210425305_fixDonGiaCTHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210456195_fixNgayTaoNullable.resx">
+      <DependentUpon>202003210456195_fixNgayTaoNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003210503393_fixNgaySinhNullable.resx">
+      <DependentUpon>202003210503393_fixNgaySinhNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

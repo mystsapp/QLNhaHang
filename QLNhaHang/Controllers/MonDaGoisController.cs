@@ -1,5 +1,7 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
+using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,9 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM = new MonDaGoiViewModel()
             {
                 Ban = new Data.Models.Ban(),
-                MonDaGoi = new Data.Models.MonDaGoi()
+                MonDaGoi = new Data.Models.MonDaGoi(),
+                HoaDon = new HoaDon(),
+                ChiTietHD = new ChiTietHD()
             };
         }
         // GET: MonDaGois
@@ -135,9 +139,97 @@ namespace QLNhaHang.Controllers
                                               .ToList();
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             MonDaGoiVM.TongTien = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
+
+            // get last numberId in HD table find next  here
+            // prefix in VPandYear
+            var hoaDon =_unitOfWork.hoaDonRepository.GetAll()
+                                                            .OrderByDescending(x => x.NumberId)
+                                                            .FirstOrDefault();
+            if(hoaDon != null)
+            {
+                MonDaGoiVM.NumberId = GetNextId.NextID(hoaDon.NumberId, "00120");
+            }
+            else
+            {
+                MonDaGoiVM.NumberId = GetNextId.NextID("", "00120");
+            }
+
             return View(MonDaGoiVM);
         }
 
+        /// tinh tien post => add HD, CTHD, remove Ban flag, MonDaGoi clear
+        public ActionResult TinhTienPost(string strUrl, string maBan, string numberId)
+        {
+            //var user = Session[]
+            MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
+                                              .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+                                              .ToList();
+            MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            //////////// add to HD, CTHD ///////////////
+            /////maHD
+
+            //var lastMaHD = _unitOfWork.hoaDonRepository
+            //                          .Find(x => x.MaNV.Equals(user.HoTen))
+            //                          .OrderByDescending(x => x.MaHD).FirstOrDefault().MaHD;
+            //var lastMaCTPrefix = lastMaHD.Split('/')[0];
+
+            //var maVP = _unitOfWork.vanPhongRepository.Find(x => x.Name == user.VanPhong).SingleOrDefault().MaVP;
+            //var namTao = DateTime.Now.Year.ToString().Substring(2);
+            //var nowPrefixMaCT = maVP + namTao;
+
+            //if (lastMaCTPrefix == nowPrefixMaCT)
+            //{
+            //    var prefixMaCT = lastMaCTPrefix + "/";
+            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(lastMaHD, prefixMaCT);
+            //}
+            //else
+            //{
+            //    var prefixMaCT = nowPrefixMaCT + "/";
+            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", prefixMaCT);
+            //}
+
+            var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
+                                                            .OrderByDescending(x => x.NumberId)
+                                                            .FirstOrDefault();
+            if (hoaDon != null)
+            {
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(hoaDon.MaHD, "00120");
+            }
+            else
+            {
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", "00120");
+            }
+            MonDaGoiVM.HoaDon.NumberId = numberId;
+            MonDaGoiVM.HoaDon.MaNV = "001200001";
+            MonDaGoiVM.HoaDon.MaKH = "001200001";
+            MonDaGoiVM.HoaDon.MaBan = maBan;
+            MonDaGoiVM.HoaDon.NgayTao = DateTime.Now;
+            MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
+
+            _unitOfWork.hoaDonRepository.Create(MonDaGoiVM.HoaDon);
+            _unitOfWork.Complete();
+            /////maHD
+            /// CTHD
+            foreach (var monDaGoi in MonDaGoiVM.MonDaGois)
+            {
+                MonDaGoiVM.ChiTietHD.MaHD = MonDaGoiVM.HoaDon.MaHD;
+                MonDaGoiVM.ChiTietHD.MaThucDon = monDaGoi.ThucDonId;
+                MonDaGoiVM.ChiTietHD.DonGia = monDaGoi.GiaTien;
+                MonDaGoiVM.ChiTietHD.SoLuong = monDaGoi.SoLuong;
+
+                _unitOfWork.chiTietHDRepository.Create(MonDaGoiVM.ChiTietHD);
+                _unitOfWork.Complete();
+            }
+            /// CTHD
+            /////////////// add to HD, CTHD ///////////////
+            /// clear MonDaGois <-> Ban Flag
+            _unitOfWork.monDaGoiRepository.DeleteRange(MonDaGoiVM.MonDaGois);
+            MonDaGoiVM.Ban.Flag = false;
+            _unitOfWork.banRepository.Update(MonDaGoiVM.Ban);
+            _unitOfWork.Complete();
+            /// /// clear MonDaChons <-> Ban Flag
+            return Redirect(strUrl);
+        }
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;
