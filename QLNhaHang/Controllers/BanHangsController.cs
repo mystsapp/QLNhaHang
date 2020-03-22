@@ -46,6 +46,24 @@ namespace QLNhaHang.Controllers
             return View(BanHangVM);
         }
 
+        public JsonResult MonInBan(string maBan)
+        {
+            var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan));
+            if (mons.Count() > 0)
+            {
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false
+                });
+            }
+        }
         public ActionResult creat()
         {
             return View();

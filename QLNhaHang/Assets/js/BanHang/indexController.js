@@ -99,8 +99,33 @@
 
             }
             else {
-                $('#frmTinhTien').submit();
+                $.ajax({
+                    url: '/BanHangs/MonInBan',
+                    data: {
+                        maBan: id
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.status) {
+                            $('#frmTinhTien').submit();
+                        }
+                        else {
+                            bootbox.alert({
+                                size: "small",
+                                title: "Information",
+                                message: "Bàn này <b> chưa gọi món <b/> nào !",
+                                callback: function () {
+                                    //e.preventDefault();
+                                }
+                            });
+                        }
+                    }
+                });
+                
             }
+
+               
         });
     }
 };
