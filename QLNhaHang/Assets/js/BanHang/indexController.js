@@ -42,10 +42,10 @@
         //    });
         //}
         ///////// change table image
-        
+
         $('.cursor-pointer').off('click').on('click', function () {
             id = $(this).data('id');
-            
+
             $('#hidMaBan').val(id);
 
             //var page = $('.active span').text();
@@ -122,11 +122,55 @@
                         }
                     }
                 });
-                
+
             }
 
-               
+
         });
+
+        $('#btnInHoaDon').off('click').on('click', function () {
+
+            var id = $('#hidMaBanInHoaDon').val();
+            if (id === '') {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa chọn <b> bàn </b> nào !",
+                    callback: function () {
+                        //e.preventDefault();
+                    }
+                });
+
+            }
+            else {
+                $.ajax({
+                    url: '/BanHangs/MonInBan',
+                    data: {
+                        maBan: id
+                    },
+                    dataType: 'json',
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.status) {
+                            $('#frmInHoaDon').submit();
+                        }
+                        else {
+                            bootbox.alert({
+                                size: "small",
+                                title: "Information",
+                                message: "Bàn này <b> chưa gọi món <b/> nào !",
+                                callback: function () {
+                                    //e.preventDefault();
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+
+        });
+
     }
 };
 indexController.init();

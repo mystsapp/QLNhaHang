@@ -1,9 +1,11 @@
-﻿using QLNhaHang.Data.Models;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -37,17 +39,17 @@ namespace QLNhaHang.Controllers
                                               .Where(x => x.MaBan.Equals(maBan))
                                               .OrderBy(x => x.ThucDon.TenMon)
                                               .ToList();
-            
+
             if (!string.IsNullOrEmpty(maBan))
             {
                 MonDaGoiVM.MonDaGoi.MaBan = maBan;
                 MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             }
-            
+
             if (maTD != 0)
             {
                 MonDaGoiVM.MonDaGoi.ThucDonId = maTD;
-                MonDaGoiVM.MonDaGoi.GiaTien = _unitOfWork.thucDonRepository.GetById(maTD).GiaTien;                
+                MonDaGoiVM.MonDaGoi.GiaTien = _unitOfWork.thucDonRepository.GetById(maTD).GiaTien;
             }
             else
             {
@@ -64,7 +66,7 @@ namespace QLNhaHang.Controllers
             {
                 var loaiTD = _unitOfWork.thucDonRepository.GetById(maTD).LoaiThucDon;
                 MonDaGoiVM.MonDaGoi.ThanhTien = MonDaGoiVM.MonDaGoi.GiaTien * soLuong;
-                if(loaiTD.PhuPhi != null)
+                if (loaiTD.PhuPhi != null)
                 {
                     MonDaGoiVM.MonDaGoi.PhuPhi = loaiTD.PhuPhi * soLuong;
                 }
@@ -73,7 +75,7 @@ namespace QLNhaHang.Controllers
                     MonDaGoiVM.MonDaGoi.PhuPhi = 0;
                 }
                 MonDaGoiVM.MonDaGoi.SoLuong = soLuong;
-                
+
             }
             return View(MonDaGoiVM);
         }
@@ -85,7 +87,7 @@ namespace QLNhaHang.Controllers
                                                          .Where(x => x.ThucDonId.Equals(model.MonDaGoi.ThucDonId))
                                                          .FirstOrDefault();
             /////////////// update mon if exist ///////////
-            if(monDaGoi != null)
+            if (monDaGoi != null)
             {
                 model.MonDaGoi.SoLuong += monDaGoi.SoLuong;
                 model.MonDaGoi.PhuPhi += monDaGoi.PhuPhi;
@@ -93,21 +95,21 @@ namespace QLNhaHang.Controllers
             }
             /////////////// update mon if exist ///////////
             _unitOfWork.monDaGoiRepository.Create(model.MonDaGoi);
-            
+
             if (monDaGoi != null)
             {
                 _unitOfWork.monDaGoiRepository.Delete(monDaGoi);
-                
+
             }
             //////////// update flag and total money ///////
             var banFromDb = _unitOfWork.banRepository.GetByStringId(maBan);
             banFromDb.Flag = true;
-            
+
             _unitOfWork.banRepository.Update(banFromDb);
             //////////// update flag and total money ///////
             _unitOfWork.Complete();
             SetAlert("Thêm mới thành công!", "success");
-            return RedirectToAction(nameof(GoiMon), new { maBan = maBan, strUrl = strUrl});
+            return RedirectToAction(nameof(GoiMon), new { maBan = maBan, strUrl = strUrl });
         }
 
         [HttpPost]
@@ -117,12 +119,12 @@ namespace QLNhaHang.Controllers
             _unitOfWork.monDaGoiRepository.Delete(monDaGoi);
             /////////////////// off flag ban if null mon'/////////////
             var monInBan = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan == maBan);
-            if(monInBan.Count() == 0)
+            if (monInBan.Count() == 0)
             {
                 var banById = _unitOfWork.banRepository.GetByStringId(maBan);
                 banById.Flag = false;
                 _unitOfWork.banRepository.Update(banById);
-                
+
             }
             /////////////////// off flag ban if null mon'/////////////
             _unitOfWork.Complete();
@@ -142,10 +144,10 @@ namespace QLNhaHang.Controllers
 
             // get last numberId in HD table find next  here
             // prefix in VPandYear
-            var hoaDon =_unitOfWork.hoaDonRepository.GetAll()
+            var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
                                                             .OrderByDescending(x => x.NumberId)
                                                             .FirstOrDefault();
-            if(hoaDon != null)
+            if (hoaDon != null)
             {
                 MonDaGoiVM.NumberId = GetNextId.NextID(hoaDon.NumberId, "00120");
             }
@@ -229,6 +231,56 @@ namespace QLNhaHang.Controllers
             _unitOfWork.Complete();
             /// /// clear MonDaChons <-> Ban Flag
             return Redirect(strUrl);
+        }
+
+        //public ActionResult InHoaDon(string maBan, string strUrl)
+        //{
+        //    ReportDocument rd = new ReportDocument();
+        //    rd.Load(Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt"));
+        //    var listMonInBan = _unitOfWork.monDaGoiRepository
+        //                                      .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+        //                                      .ToList();
+        //    var dt = EntityToTable.ToDataTable(listMonInBan);
+        //    rd.SetDataSource(dt);
+        //    Response.Buffer = false;
+        //    Response.ClearContent();
+        //    Response.ClearHeaders();
+        //    try
+        //    {
+        //        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+        //        stream.Seek(0, SeekOrigin.Begin);
+        //        return File(stream, "application/pdf", "mon" + DateTime.Now + ".pdf");
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
+
+        public CrystalReportPdfResult InHoaDon(string maBan, string strUrl)
+        {
+            var listMonInBan = _unitOfWork.monDaGoiRepository
+                                          .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+                                          .ToList();
+            //var listMonInBan = _unitOfWork.monDaGoiRepository
+            //                              .Find(x => x.MaBan.Equals(maBan));
+            var items = listMonInBan.Select(x => new
+            {
+                x.Id,
+                x.SoLuong,
+                x.ThanhTien,
+                x.GiaTien,
+                x.PhuPhi,
+                x.PhiPhucVu,
+                x.ThucDon.TenMon
+
+            }).ToList();
+            var dt = EntityToTable.ToDataTable(items);
+            ReportDocument rd = new ReportDocument();
+            string reportPath = Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt");
+            return new CrystalReportPdfResult(reportPath, dt);
         }
         protected void SetAlert(string message, string type)
         {

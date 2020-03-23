@@ -55,6 +55,9 @@
     <Reference Include="Autofac.Integration.WebApi, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.5.0.0\lib\net461\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -362,6 +365,19 @@
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ListMon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListMon.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportInHoaDon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportInHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilities\CrystalReportPdfResult.cs" />
+    <Compile Include="Utilities\EntityToTable.cs" />
     <Compile Include="Utilities\GetNextId.cs" />
     <Compile Include="Utilities\SessionExtensions.cs" />
   </ItemGroup>
@@ -1052,6 +1068,17 @@
     <Content Include="Assets\lib\bootstrap-4.4.1-dist\js\bootstrap.min.js.map" />
     <Content Include="libman.json" />
     <Content Include="Assets\lib\jQuery.print\jQuery.print.min.js.map" />
+    <Content Include="Report\ListMon.xsc">
+      <DependentUpon>ListMon.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\ListMon.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ListMon.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\ListMon.xss">
+      <DependentUpon>ListMon.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1155,6 +1182,13 @@
     <EmbeddedResource Include="Migrations\202003210503393_fixNgaySinhNullable.resx">
       <DependentUpon>202003210503393_fixNgaySinhNullable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\ReportInHoaDon.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportInHoaDon.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
