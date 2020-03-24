@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initialDb : DbMigration
+    public partial class initDb198 : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@
                         SoLuongKhach = c.Int(nullable: false),
                         CheckBan = c.Int(nullable: false),
                         GhiChu = c.String(maxLength: 250),
+                        Flag = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.MaBan);
             
@@ -26,7 +27,7 @@
                         MaCTHD = c.Int(nullable: false, identity: true),
                         MaHD = c.String(maxLength: 20, unicode: false),
                         MaThucDon = c.Int(nullable: false),
-                        DonGia = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DonGia = c.Decimal(precision: 18, scale: 2),
                         SoLuong = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.MaCTHD)
@@ -44,10 +45,14 @@
                         MaKH = c.String(maxLength: 50, unicode: false),
                         MaBan = c.String(maxLength: 20, unicode: false),
                         HTThanhToan = c.String(maxLength: 50),
-                        NgayTao = c.DateTime(nullable: false),
-                        NgayGiao = c.DateTime(nullable: false),
+                        NgayTao = c.DateTime(),
+                        NgayGiao = c.DateTime(),
                         GhiChu = c.String(maxLength: 300),
-                        ThanhTienHD = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ThanhTienHD = c.Decimal(precision: 18, scale: 2),
+                        PhiPhucvu = c.Decimal(precision: 18, scale: 2),
+                        VAT = c.Decimal(precision: 18, scale: 2),
+                        TongTien = c.Decimal(precision: 18, scale: 2),
+                        NumberId = c.String(maxLength: 20, unicode: false),
                     })
                 .PrimaryKey(t => t.MaHD)
                 .ForeignKey("dbo.Bans", t => t.MaBan)
@@ -79,7 +84,7 @@
                     {
                         MaNV = c.String(nullable: false, maxLength: 20, unicode: false),
                         HoTen = c.String(maxLength: 50),
-                        NgaySinh = c.DateTime(nullable: false),
+                        NgaySinh = c.DateTime(),
                         GioiTinh = c.String(maxLength: 5),
                         DiaChi = c.String(maxLength: 100),
                         DienThoai = c.String(maxLength: 15, unicode: false),
@@ -129,9 +134,8 @@
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        TenMon = c.String(maxLength: 200, unicode: false),
+                        TenMon = c.String(maxLength: 200),
                         GiaTien = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        PhuPhi = c.Decimal(nullable: false, precision: 18, scale: 2),
                         DonViTinh = c.String(maxLength: 20, unicode: false),
                         MaLoaiId = c.Int(nullable: false),
                         GhiChu = c.String(maxLength: 200, unicode: false),
@@ -146,6 +150,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         TenLoai = c.String(maxLength: 100),
+                        PhuPhi = c.Decimal(precision: 18, scale: 2),
                         MoTa = c.String(maxLength: 200),
                         GhiChu = c.String(maxLength: 200),
                     })
@@ -157,7 +162,10 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         SoLuong = c.Int(nullable: false),
-                        ThanhTien = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ThanhTien = c.Decimal(precision: 18, scale: 2),
+                        GiaTien = c.Decimal(precision: 18, scale: 2),
+                        PhuPhi = c.Decimal(precision: 18, scale: 2),
+                        PhiPhucVu = c.Boolean(nullable: false),
                         MaBan = c.String(maxLength: 20, unicode: false),
                         ThucDonId = c.Int(nullable: false),
                     })

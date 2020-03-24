@@ -1,0 +1,299 @@
+﻿@model QLNhaHang.Models.HoaDonViewModel
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
+                    </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Tìm hóa đơn</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form action="/HoaDons/Index" method="get" autocomplete="off">
+
+                <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
+                    @* we will add search criteria *@
+
+                    <div class="col-12">
+                        <div class="row" style="padding-top: 10px;">
+
+                            <div class="col-3">
+                                Nhập thông tin
+                                @*@Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control", @value="@ViewData["currentFilter"]" } })*@
+                                <input class="form-control" placeholder="Type name, Id..." name="searchString" value="@ViewBag.searchString" />
+                            </div>
+
+                            <div class="col-3">
+                                Từ ngày
+                                <input class="form-control maskInput" name="searchFromDate" value="@ViewBag.searchFromDate" />
+                            </div>
+
+                            <div class="col-3">
+                                Đến ngày
+                                <input class="form-control maskInput" name="searchToDate" value="@ViewBag.searchToDate" />
+                            </div>
+
+                            <input type="hidden" name="maHD" id="hidMaHD" />
+                            <input type="hidden" name="page" id="hidPage" />
+                            <div class="col-3">
+                                <br />
+                                <button type="submit" class="btn btn-primary form-control" id="btnSubmit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            @*<form>
+                <input id="hidMaHD" type="hidden" name="maHD" />
+                <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
+            </form>*@
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách bàn</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @if (Model.HoaDons != null)
+            {
+                <table class="table mytable text-nowrap" id="listAll">
+                    <thead>
+
+                        <tr class="table-info">
+                            <th>STT</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().MaHD)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().KhachHang.TenKH)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().Ban.TenBan)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().NgayTao)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().ThanhTienHD)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().NumberId)</th>
+                            @*<th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().PhuPhi)</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 1;}
+                        @foreach (var item in Model.HoaDons)
+                        {
+
+                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                <td class="tdVal" data-id="@item.MaHD">@i</td>
+
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.KhachHang.TenKH)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
+                                <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
+
+                            </tr>
+                            i++;
+
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <span>No data.</span>
+            }
+
+
+            @Html.PagedListPager(Model.HoaDons, page => Url.Action("Index",
+                                new
+                                     {
+                                         page,
+                                         @searchString = @ViewBag.searchString,
+                                            @searchFromDate = @ViewBag.searchFromDate,
+                                            @searchToDate = @ViewBag.searchToDate
+                                     }))
+
+            <form>
+                <input id="hidMaBan" type="hidden" name="maBan" />
+                <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
+            </form>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.ChiTietHDs.Count() != 0)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết hóa đơn <b>- @Model.HoaDon.MaHD</b></h3>
+            }
+            else
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết hóa đơn </h3>
+            }
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @if (Model.ChiTietHDs != null)
+            {
+                <table class="table mytable text-nowrap" id="listAll">
+                    <thead>
+                        <tr class="table-info">
+                            <th>STT</th>
+                            <th>@Html.DisplayNameFor(m => m.ChiTietHDs.FirstOrDefault().MaHD)</th>
+                            <th>@Html.DisplayNameFor(m => m.ChiTietHDs.FirstOrDefault().ThucDon.TenMon)</th>
+                            <th>@Html.DisplayNameFor(m => m.ChiTietHDs.FirstOrDefault().DonGia)</th>
+                            <th>@Html.DisplayNameFor(m => m.ChiTietHDs.FirstOrDefault().SoLuong)</th>
+                            @*<th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().PhuPhi)</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 1;}
+                        @foreach (var item in Model.ChiTietHDs)
+                        {
+
+                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                <td>@i</td>
+                                <td>@Html.DisplayFor(m => item.MaHD)</td>
+                                <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                <td>@string.Format("{0:0,0}", item.DonGia)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                            </tr>
+                            i++;
+
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <span>No data.</span>
+            }
+
+
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+@section Scripts{
+    <script>
+        $('.cursor-pointer').click(function () {
+            //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
+            //$(".imgBan").click(function () {
+            //    // Change src attribute of image
+            //    $(this).attr("src", "Assets/Images/Desk.jpg");
+            //});
+            if ($(this).hasClass("bg-warning")) {
+                $(this).removeClass("bg-warning");
+
+            }
+            else {
+                $('.card.bg-warning').removeClass("bg-warning");
+                $('.card-body').removeClass("text-warning");
+                $(this).addClass("bg-warning");
+            }
+
+        });
+
+        $('.listAllTab').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    </script>
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+
+        .imgBan {
+            border: 5px solid #ddd;
+            border-radius: 10%;
+        }
+
+        .toolImage {
+            border: 1px solid #ddd;
+            border-radius: 20%;
+        }
+    </style>
+    <script src="~/Assets/js/HoaDon/indexController.js"></script>
+}

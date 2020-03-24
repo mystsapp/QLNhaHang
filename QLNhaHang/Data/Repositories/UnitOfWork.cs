@@ -52,6 +52,7 @@ namespace QLNhaHang.Data.Repositories
         public void Dispose()
         {
             _context.Dispose();
+            GC.Collect();
         }
     }
 }
