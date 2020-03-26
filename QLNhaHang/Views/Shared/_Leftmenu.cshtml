@@ -44,7 +44,7 @@
                 with font-awesome or any other icon font library -->
                     @*@if (user.Nhom == "Admins")
                     {*@
-                    <li class="nav-item has-treeview">
+                    @*<li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -53,7 +53,7 @@
                             </p>
                         </a>
 
-                    </li>
+                    </li>*@
                     
                     <li class="nav-item has-treeview">
                         <a href="/HoaDons/Index" class="nav-link">
@@ -69,6 +69,49 @@
                     @if (user.Nhom != "KDO")
                     {*@
                     @* Danh muc báo cáo *@
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Quản trị
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Tài khoản
+
+                                    </p>
+                                </a>
+
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="/KhachHangs/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Khách hảng
+
+                                    </p>
+                                </a>
+
+                            </li>
+                            
+                            <li class="nav-item has-treeview">
+                                <a href="/HoaDons/ThongTinHD" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Thông tin HD
+
+                                    </p>
+                                </a>
+
+                            </li>
+                        </ul>
+                    </li>
+                     @* Danh muc báo cáo *@
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -93,38 +136,7 @@
                             
                         </ul>
                     </li>
-                    @*}
-
-                    @if (user.Nhom == "KDO" || user.Nhom == "Admins")
-                    {*@
-                    @*<li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Kinh doanh Online
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="BaoCao" asp-action="KinhDoanhOnline" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Theo ngày bán</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="BaoCao" asp-action="KinhDoanhOnlineNgayDi" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Theo ngày đi</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>*@
-                    @*}*@
-
-
-
+                    
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

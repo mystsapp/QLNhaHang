@@ -348,6 +348,7 @@
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhachHangsController.cs" />
     <Compile Include="Controllers\MonDaGoisController.cs" />
     <Compile Include="Data\Interfaces\IRepository.cs" />
     <Compile Include="Data\Models\Ban.cs" />
@@ -364,6 +365,7 @@
     <Compile Include="Data\Repositories\BanRepository.cs" />
     <Compile Include="Data\Repositories\ChiTietHDRepository.cs" />
     <Compile Include="Data\Repositories\HoaDonRepository.cs" />
+    <Compile Include="Data\Repositories\KhachHangRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\ThucDonRepository.cs" />
@@ -372,13 +374,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003230233500_initDb198.cs" />
-    <Compile Include="Migrations\202003230233500_initDb198.designer.cs">
-      <DependentUpon>202003230233500_initDb198.cs</DependentUpon>
+    <Compile Include="Migrations\202003250804397_fixHDCol.cs" />
+    <Compile Include="Migrations\202003250804397_fixHDCol.designer.cs">
+      <DependentUpon>202003250804397_fixHDCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003250805379_fixHDCol1.cs" />
+    <Compile Include="Migrations\202003250805379_fixHDCol1.designer.cs">
+      <DependentUpon>202003250805379_fixHDCol1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003260306207_addDiaChi.cs" />
+    <Compile Include="Migrations\202003260306207_addDiaChi.designer.cs">
+      <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
+    <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ListMon.Designer.cs">
@@ -415,6 +426,7 @@
     <Content Include="Assets\Images\saigontourist.png" />
     <Content Include="Assets\Images\thucdon.png" />
     <Content Include="Assets\Images\tinhtien.jfif" />
+    <Content Include="Assets\js\KhachHang\indexController.js" />
     <Content Include="Assets\js\HoaDon\indexController.js" />
     <Content Include="Assets\js\MonDaChon\createController.js" />
     <Content Include="Assets\js\MonDaChon\goiMonController.js" />
@@ -1128,13 +1140,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
     <Content Include="Views\BanHangs\Index.cshtml" />
-    <Content Include="Views\Shared\_GoiMonModal.cshtml" />
+    <Content Include="Views\Shared\_InHoaDonModal.cshtml" />
     <Content Include="Views\BanHangs\GoiMon.cshtml" />
     <Content Include="Views\BanHangs\edit.cshtml" />
     <Content Include="Views\BanHangs\creat.cshtml" />
     <Content Include="Views\MonDaGois\GoiMon.cshtml" />
     <Content Include="Views\MonDaGois\TinhTien.cshtml" />
     <Content Include="Views\HoaDons\Index.cshtml" />
+    <Content Include="Views\KhachHangs\Index.cshtml" />
+    <Content Include="Views\KhachHangs\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1153,8 +1167,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003230233500_initDb198.resx">
-      <DependentUpon>202003230233500_initDb198.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003250804397_fixHDCol.resx">
+      <DependentUpon>202003250804397_fixHDCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003250805379_fixHDCol1.resx">
+      <DependentUpon>202003250805379_fixHDCol1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003260306207_addDiaChi.resx">
+      <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -13,6 +13,8 @@ namespace QLNhaHang.Models
         public IEnumerable<ChiTietHD> ChiTietHDs { get; set; }
         public HoaDon HoaDon { get; set; }
         public ChiTietHD ChiTietHD { get; set; }
+        public KhachHang KhachHang { get; set; }
         public string StrUrl { get; set; }
+        public string Id { get; set; }
     }
 }

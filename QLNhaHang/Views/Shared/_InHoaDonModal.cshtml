@@ -1,0 +1,139 @@
+﻿@model QLNhaHang.Models.HoaDonViewModel
+
+<div class="modal fade" id="modal-InHoaDon" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nập thông tin xuất hóa đơn</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" autocomplete="off" enctype="multipart/form-data">
+                    <div class="p-4 border rounded">
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                Mẫu số
+                                @Html.TextBoxFor(model => model.HoaDon.MauSo, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.HoaDon.MauSo, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Ký hiệu
+                                @Html.TextBoxFor(model => model.HoaDon.KyHieu, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.HoaDon.KyHieu, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Quyển số
+                                @Html.TextBoxFor(model => model.HoaDon.QuyenSo, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.HoaDon.QuyenSo, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Số
+                                @Html.TextBoxFor(model => model.HoaDon.So, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.HoaDon.So, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Số thứ tự
+                                @Html.TextBoxFor(model => model.HoaDon.SoThuTu, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.HoaDon.SoThuTu, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group row">
+
+                            <div class="col-2">
+                                Họ tên
+                                @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Tên đơn vị
+                                @Html.TextBoxFor(model => model.KhachHang.TenDonVi, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Địa chỉ
+                                @Html.TextBoxFor(model => model.KhachHang.DiaChi, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-2">
+                                Mã số thuế
+                                @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer ">
+                @*justify-content-between*@
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveHDModal"><i class="fas fa-save"></i></button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
+
+
+    @*<a asp-action="ExportList" asp-controller="BanGiaos" id="btnExportAll"><i class="fas fa-file-word"></i></a>*@
+    <input type="hidden" name="stringId" id="stringId" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+
+</form>
+
+@section Scripts{
+    <script>
+        $('#btnSaveHDModal').off('click').on('click', function () {
+
+            var idList = [];
+            $.each($('.ckId'), function (i, item) {
+                if ($(this).prop('checked')) {
+                    idList.push({
+                        Id: $(item).data('id')
+                    });
+                }
+
+            });
+
+            if (idList.length !== 0) {
+                $('#stringId').val(JSON.stringify(idList));
+                $('#frmExportAll').submit();
+            }
+            else {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa chọn HD giao!",
+                    callback: function () {
+                        //e.preventDefault();
+
+                    }
+                });
+            }
+
+        });
+    </script>
+}

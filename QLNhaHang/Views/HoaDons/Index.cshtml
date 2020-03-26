@@ -22,6 +22,7 @@
     </div><!-- /.container-fluid -->
 </section>
 
+
 <!-- Main content -->
 <section class="content">
 
@@ -78,10 +79,10 @@
                 </div>
             </form>
             @*<form>
-                <input id="hidMaHD" type="hidden" name="maHD" />
-                <input type="hidden" value="@Model.StrUrl" name="strUrl" />
-                <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
-            </form>*@
+                    <input id="hidMaHD" type="hidden" name="maHD" />
+                    <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                    <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
+                </form>*@
         </div>
     </div>
     <!-- /.card -->
@@ -120,6 +121,16 @@
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().ThanhTienHD)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().NumberId)</th>
                             @*<th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().PhuPhi)</th>*@
+                            <th>#</th>
+                            <th>
+                                @*<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
+                                    <input type="hidden" name="stringId" id="stringId" />
+                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
+                                    @Html.Partial("~/Views/Shared/_InHoaDonModal.cshtml", Model)
+                                    <button type="button" data-toggle="modal" data-target="#modal-InHoaDon" class="text-primary btn btn-outline-light btn-sm" id="btnExportAll"><i class="fas fa-file-word"></i> Xuất</button>
+                                
+                                @*</form>*@
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -127,19 +138,38 @@
                         @foreach (var item in Model.HoaDons)
                         {
 
-                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                        <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                <td class="tdVal" data-id="@item.MaHD">@i</td>
+                            <td class="tdVal" data-id="@item.MaHD">@i</td>
 
-                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
-                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.KhachHang.TenKH)</td>
-                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
-                                <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
-                                <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
-                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
-                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
+                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
+                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.KhachHang.TenKH)</td>
+                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
+                            <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
+                            <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
+                            @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
 
-                            </tr>
+                            <td>
+                                <form action="/HoaDons/Delete?id=@item.MaHD" @*asp-route-id="@item.Id"*@ method="post">
+
+                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                    @*<input type="hidden" name="maBan" value="@Model.MonDaGoi.MaBan" />*@
+                                    <span id="confirmDeleteSpan_@item.MaHD" style="display: none">
+                                        <span class="text-dark">Bạn có chắc chắn muốn xóa dòng này không?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaHD', false)">No</a>
+                                    </span>
+
+                                    <span id="deleteSpan_@item.MaHD">
+                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaHD', true)"><i class="fas fa-trash-alt"></i></a>
+                                    </span>
+                                </form>
+                            </td>
+                            <td align="center">
+                                <input type="checkbox" class="ckId" data-id="@item.MaHD" />
+                            </td>
+                        </tr>
                             i++;
 
                         }
@@ -295,5 +325,20 @@
             border-radius: 20%;
         }
     </style>
+
+    <script>
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
     <script src="~/Assets/js/HoaDon/indexController.js"></script>
 }

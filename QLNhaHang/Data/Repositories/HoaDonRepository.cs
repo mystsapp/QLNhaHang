@@ -12,7 +12,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IHoaDonRepository : IRepository<HoaDon>
     {
-        IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int page);
+        IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int? page);
     }
     public class HoaDonRepository : Repository<HoaDon>, IHoaDonRepository
     {
@@ -20,7 +20,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int page)
+        public IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int? page)
         {
 
             // return a 404 if user browses to before the first page
@@ -39,20 +39,62 @@ namespace QLNhaHang.Data.Repositories
             }
 
             var count = list.Count();
-
+            DateTime fromDate, toDate;
             if (!string.IsNullOrEmpty(searchFromDate) && !string.IsNullOrEmpty(searchToDate))
             {
-                //var f = DateTime.ParseExact(searchFromDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                //var t = DateTime.ParseExact(searchToDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                //list.Where(x => x.NgayTao >= f && x.NgayTao < DbFunctions.AddDays(t, 1))/*.ToPagedList(page, pageSize)*/;
-                DateTime fromDate, toDate;
-                if (DateTime.TryParse(searchFromDate, out fromDate) &&
-                   DateTime.TryParse(searchToDate, out toDate))
+                
+                try
                 {
-                    list.Where(x => x.NgayTao >= fromDate && x.NgayTao < (toDate.AddDays(1))/*.ToPagedList(page, pageSize)*/;
+                    fromDate = DateTime.Parse(searchFromDate);
+                    toDate = DateTime.Parse(searchToDate);
+                    
+                    if (fromDate > toDate)
+                    {
+                        return null;
+                    }
+                    list = list.Where(x => x.NgayTao >= fromDate &&
+                                       x.NgayTao < DbFunctions.AddDays(toDate, 1));
                 }
-            }
+                catch (Exception)
+                {
 
+                    return null;
+                }
+
+
+                //list.Where(x => x.NgayTao >= fromDate && x.NgayTao < (toDate.AddDays(1))/*.ToPagedList(page, pageSize)*/;
+
+                
+
+            }
+            if (!string.IsNullOrEmpty(searchFromDate))
+            {
+                try
+                {
+                    fromDate = DateTime.Parse(searchFromDate);
+                    list = list.Where(x => x.NgayTao >= fromDate);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+                
+            }
+            if (!string.IsNullOrEmpty(searchToDate))
+            {
+                try
+                {
+                    toDate = DateTime.Parse(searchToDate);
+                    list = list.Where(x => x.NgayTao < DbFunctions.AddDays(toDate, 1));
+                    
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+                
+            }
+            count = list.Count();
             // page the list
             const int pageSize = 2;
             decimal aa = (decimal)list.Count() / (decimal)pageSize;
@@ -61,7 +103,7 @@ namespace QLNhaHang.Data.Repositories
             {
                 page--;
             }
-            var listPaged = list.OrderBy(x => x.NgayTao).ToPagedList(page, pageSize);
+            var listPaged = list.OrderBy(x => x.NgayTao).ToPagedList(page ?? 1, pageSize);
             //if (page > listPaged.PageCount)
             //    page--;
             // return a 404 if user browses to pages beyond last page. special case first page if no items exist

@@ -39,6 +39,11 @@ namespace QLNhaHang.Data.Models
         [MaxLength(15), Column(TypeName = "varchar")]
         [StringLength(15)]
         public string Phone { get; set; }
+        
+        [MaxLength(250), Column(TypeName = "nvarchar")]
+        [StringLength(250)]
+        [DisplayName("Địa chỉ")]
+        public string DiaChi { get; set; }
 
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]

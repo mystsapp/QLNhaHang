@@ -7,13 +7,13 @@ namespace QLNhaHang.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class initDb198 : IMigrationMetadata
+    public sealed partial class fixHDCol1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initDb198));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(fixHDCol1));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003230233500_initDb198"; }
+            get { return "202003250805379_fixHDCol1"; }
         }
         
         string IMigrationMetadata.Source

@@ -61,5 +61,17 @@ namespace QLNhaHang.Data.Models
         [MaxLength(20), Column(TypeName = "varchar")]
         public string NumberId { get; set; }
 
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string MauSo { get; set; }
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string KyHieu { get; set; }
+        public int QuyenSo { get; set; }
+        public long So { get; set; }
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string SoThuTu { get; set; }
+
     }
 }
