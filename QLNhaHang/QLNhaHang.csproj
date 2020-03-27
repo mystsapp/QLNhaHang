@@ -386,8 +386,17 @@
     <Compile Include="Migrations\202003260306207_addDiaChi.designer.cs">
       <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003270258186_fixGioiTinh.cs" />
+    <Compile Include="Migrations\202003270258186_fixGioiTinh.designer.cs">
+      <DependentUpon>202003270258186_fixGioiTinh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003270333494_fixGioiTinhString.cs" />
+    <Compile Include="Migrations\202003270333494_fixGioiTinhString.designer.cs">
+      <DependentUpon>202003270333494_fixGioiTinhString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
+    <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
@@ -1149,6 +1158,7 @@
     <Content Include="Views\HoaDons\Index.cshtml" />
     <Content Include="Views\KhachHangs\Index.cshtml" />
     <Content Include="Views\KhachHangs\Create.cshtml" />
+    <Content Include="Views\KhachHangs\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1175,6 +1185,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003260306207_addDiaChi.resx">
       <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003270258186_fixGioiTinh.resx">
+      <DependentUpon>202003270258186_fixGioiTinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003270333494_fixGioiTinhString.resx">
+      <DependentUpon>202003270333494_fixGioiTinhString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -7,29 +7,32 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row ">
             <div class="col-sm-6">
-                <a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
             </div>
             <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Danh sách khách hàng</li>
-                </ol>
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách khách hàng</li>
+                    </ol>*@
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 
-<!-- Main content -->
 <section class="content">
 
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Tìm hóa đơn</h3>
+            <h3 class="card-title">
+                <i class="fas fa-list-alt text-warning"></i> Danh sách khách hàng
+
+            </h3>
 
             <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -39,7 +42,6 @@
             </div>
         </div>
         <div class="card-body">
-
             <form action="/KhachHangs/Index" method="get" autocomplete="off">
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
@@ -66,34 +68,7 @@
                     </div>
                 </div>
             </form>
-            @*<form>
-                    <input id="hidMaHD" type="hidden" name="maHD" />
-                    <input type="hidden" value="@Model.StrUrl" name="strUrl" />
-                    <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
-                </form>*@
-        </div>
-    </div>
-    <!-- /.card -->
-</section>
-<!-- /.content -->
-
-<section class="content">
-
-    <!-- Default box -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách khách hàng</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
+            <br />
 
             <div style="overflow-x:auto;">
                 @if (Model.KhachHangs != null)
@@ -125,18 +100,19 @@
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.TenKH)</td>
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.TenDonVi)</td>
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.MaSoThue)</td>
-                                    <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.Email)</td>
+                                    <td class="tdVal" data-id="@item.MaKH">@Html.Raw(item.Email)</td>
+                                    @*<td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.Email)</td>*@
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.Phone)</td>
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.GioiTinh)</td>
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.DiaChi)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <form action="/KhachHangs/Delete?id=@item.MaKH" @*asp-route-id="@item.Id"*@ method="post">
+                                        <form action="/KhachHangs/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                            @*<input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                                <input type="hidden" name="maBan" value="@Model.MonDaGoi.MaBan" />*@
+                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                            <input type="hidden" name="maKH" value="@item.MaKH" />
                                             <span id="confirmDeleteSpan_@item.MaKH" style="display: none">
-                                                <span class="text-dark">Bạn có chắc chắn muốn xóa dòng này không?</span>
+                                                <span class="text-dark text-bold">Xoa?</span>
                                                 <button type="submit" class="btn btn-danger">Yes</button>
                                                 <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaKH', false)">No</a>
                                             </span>
@@ -177,7 +153,7 @@
         <div class="card-header">
             @if (Model.KhachHang != null)
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách <b> @Model.KhachHang.TenKH</b></h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách -<b> @Model.KhachHang.TenKH</b></h3>
             }
             else
             {
@@ -185,6 +161,7 @@
             }
 
             <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "KhachHangs", new { strUrl = Model.StrUrl, maKH = Model.KhachHang.MaKH })"><i class="fas fa-edit"></i> Cập nhật</a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -195,64 +172,64 @@
         </div>
         <div class="card-body">
 
-                <div class="p-4 border rounded" >
+            <div class="p-4 border rounded">
 
-                    <div class="form-group row">
+                <div class="form-group row">
 
-                        <div class="col-2">
-                            Mã KH
-                            @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-2">
-                            Họ tên
-                            @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-2">
-                            Email
-                            @Html.TextBoxFor(model => model.KhachHang.DiaChi, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-2">
-                            Phone
-                            @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-2">
-                            MST
-                            @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-2">
-                            Giới tính
-                            @Html.TextBoxFor(model => model.KhachHang.TenDonVi, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
-                        </div>
+                    <div class="col-2">
+                        Mã KH
+                        @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.MaKH, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-2">
+                        Họ tên
+                        @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-6">
-                            Địa chỉ
-                            @Html.TextAreaFor(model => model.KhachHang.MaSoThue, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-6">
-                            Tên đơn vị
-                            @Html.TextAreaFor(model => model.KhachHang.MaSoThue, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
-                        </div>
-                        
-
-
+                    <div class="col-2">
+                        Email
+                        @Html.TextBoxFor(model => model.KhachHang.Email, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
                     </div>
+
+                    <div class="col-2">
+                        Phone
+                        @Html.TextBoxFor(model => model.KhachHang.Phone, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.Phone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        MST
+                        @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Giới tính
+                        @Html.TextBoxFor(model => model.KhachHang.GioiTinh, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.GioiTinh, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-6">
+                        Địa chỉ
+                        @Html.TextAreaFor(model => model.KhachHang.DiaChi, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-6">
+                        Tên đơn vị
+                        @Html.TextAreaFor(model => model.KhachHang.TenDonVi, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
+                    </div>
+
+
 
                 </div>
+
+            </div>
 
         </div>
         <!-- /.card-body -->

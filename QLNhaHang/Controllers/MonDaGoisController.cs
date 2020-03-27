@@ -191,7 +191,7 @@ namespace QLNhaHang.Controllers
             //}
 
             var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
-                                                            .OrderByDescending(x => x.NumberId)
+                                                            .OrderByDescending(x => x.MaHD)
                                                             .FirstOrDefault();
             if (hoaDon != null)
             {

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Web.Mvc;
 
 namespace QLNhaHang.Data.Models
 {
@@ -13,16 +14,18 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã KH")]
         [StringLength(50)]
         [MaxLength(50), Column(TypeName = "varchar")]
+        [Required]
         public string MaKH { get; set; }
 
         [StringLength(100)]
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [DisplayName("Tên KH")]
+        //[Remote("IsStringNameAvailable", "KhachHangs", ErrorMessage = "Tên KH đã tồn tại")]
         public string TenKH { get; set; }
 
+        [DisplayName("Giới tính")]
         [MaxLength(10), Column(TypeName = "nvarchar")]
         [StringLength(10)]
-        [DisplayName("Giới tính")]
         public string GioiTinh { get; set; }
         public DateTime NgayTao { get; set; }
 
@@ -33,7 +36,8 @@ namespace QLNhaHang.Data.Models
 
         [MaxLength(50), Column(TypeName = "varchar")]
         [StringLength(50)]
-        [DataType(DataType.EmailAddress)]
+        //[DataType(DataType.EmailAddress, ErrorMessage = "Chưa đúng định dạng email")]
+        [EmailAddress(ErrorMessage = "Chưa đúng định dạng email")]
         public string Email { get; set; }
 
         [MaxLength(15), Column(TypeName = "varchar")]
