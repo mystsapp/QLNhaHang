@@ -1,0 +1,105 @@
+﻿@model QLNhaHang.Models.ThongTinHDViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Tạo mới thông tin HD</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Tạo mới thông tin HD</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form method="post" autocomplete="off">
+                <div class="p-4 border rounded">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.StrUrl)
+                    @*@Html.HiddenFor(model => model.KhachHang.NgayTao)
+                    @Html.HiddenFor(model => model.KhachHang.NguoiTao)*@
+
+                    <div class="form-group row">
+
+                        <div class="col-6">
+                            Mẫu số
+                            @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-6">
+                            Ký hiệu
+                            @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-6">
+                            Quyển số
+                            @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            Số
+                            @Html.TextBoxFor(model => model.ThongTinHD.So, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-6">
+                            Số thứ tự
+                            @Html.TextBoxFor(model => model.ThongTinHD.So, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group ">
+
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
+                        <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

@@ -5,6 +5,18 @@
     {
       "library": "jQuery.print@1.6.0",
       "destination": "Assets/lib/jQuery.print/"
+    },
+    {
+      "library": "angular.js@1.7.9",
+      "destination": "Assets/lib/angular.js/"
+    },
+    {
+      "library": "angular-chart.js@1.1.1",
+      "destination": "Assets/lib/angular-chart.js/"
+    },
+    {
+      "library": "Chart.js@2.9.3",
+      "destination": "Assets/lib/Chart.js/"
     }
   ]
 }
