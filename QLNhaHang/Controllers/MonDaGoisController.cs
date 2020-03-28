@@ -203,7 +203,8 @@ namespace QLNhaHang.Controllers
             }
             MonDaGoiVM.HoaDon.NumberId = numberId;
             MonDaGoiVM.HoaDon.MaNV = "001200001";
-            MonDaGoiVM.HoaDon.MaKH = "001200001";
+            //MonDaGoiVM.HoaDon.MaKH = "001200001";
+            MonDaGoiVM.HoaDon.TenKH = "Khách Lẽ";
             MonDaGoiVM.HoaDon.MaBan = maBan;
             MonDaGoiVM.HoaDon.NgayTao = DateTime.Now;
             MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();

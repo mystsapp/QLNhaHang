@@ -29,13 +29,13 @@ namespace QLNhaHang.Data.Repositories
 
             // retrieve list from database/whereverand
 
-            var list = GetAllIncludeThree(x => x.Ban, y => y.NhanVien, z => z.KhachHang).AsQueryable();
+            var list = GetAllInclude(x => x.Ban, y => y.NhanVien).AsQueryable();
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))
             {
                 list = list.Where(x => x.MaHD.ToLower().Contains(searchString.ToLower()) ||
                                        x.NhanVien.HoTen.ToLower().Contains(searchString.ToLower()) ||
-                                       x.KhachHang.TenKH.ToLower().Contains(searchString.ToLower()));
+                                       x.TenKH.ToLower().Contains(searchString.ToLower()));
             }
 
             var count = list.Count();
@@ -96,7 +96,7 @@ namespace QLNhaHang.Data.Repositories
             }
             count = list.Count();
             // page the list
-            const int pageSize = 2;
+            const int pageSize = 4;
             decimal aa = (decimal)list.Count() / (decimal)pageSize;
             var bb = Math.Ceiling(aa);
             if (page > bb)

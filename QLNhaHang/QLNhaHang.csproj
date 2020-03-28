@@ -401,6 +401,14 @@
     <Compile Include="Migrations\202003280242088_addThongTinHD.designer.cs">
       <DependentUpon>202003280242088_addThongTinHD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003281324259_addKHToHD.cs" />
+    <Compile Include="Migrations\202003281324259_addKHToHD.designer.cs">
+      <DependentUpon>202003281324259_addKHToHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281328350_fixThanhTienM.cs" />
+    <Compile Include="Migrations\202003281328350_fixThanhTienM.designer.cs">
+      <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -1957,6 +1965,7 @@
     <Content Include="Views\ThongTinHDs\Create.cshtml" />
     <Content Include="Views\ThongTinHDs\Edit.cshtml" />
     <Content Include="Views\ThongTinHDs\Index.cshtml" />
+    <Content Include="Views\Shared\_InHDTayModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1992,6 +2001,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003280242088_addThongTinHD.resx">
       <DependentUpon>202003280242088_addThongTinHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281324259_addKHToHD.resx">
+      <DependentUpon>202003281324259_addKHToHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281328350_fixThanhTienM.resx">
+      <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

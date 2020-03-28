@@ -21,13 +21,13 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("MaNV")]
         public virtual NhanVien NhanVien { get; set; }
 
-        [DisplayName("Khách hàng")]
-        [StringLength(50)]
-        [MaxLength(50), Column(TypeName = "varchar")]
-        public string MaKH { get; set; }
+        //[DisplayName("Khách hàng")]
+        //[StringLength(50)]
+        //[MaxLength(50), Column(TypeName = "varchar")]
+        //public string MaKH { get; set; }
 
-        [ForeignKey("MaKH")]
-        public virtual KhachHang KhachHang { get; set; }
+        //[ForeignKey("MaKH")]
+        //public virtual KhachHang KhachHang { get; set; }
 
         [DisplayName("Bàn")]
         [StringLength(20)]
@@ -55,12 +55,14 @@ namespace QLNhaHang.Data.Models
         public decimal? ThanhTienHD { get; set; }
         public decimal? PhiPhucvu { get; set; }
         public decimal? VAT { get; set; }
-        public decimal? TongTien { get; set; }
+        public decimal? ThanhTienM { get; set; }
 
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string NumberId { get; set; }
-
+        /// <summary>
+        /// for ThongTinHD
+        /// </summary>
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string MauSo { get; set; }
@@ -72,6 +74,34 @@ namespace QLNhaHang.Data.Models
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string SoThuTu { get; set; }
+
+        ///////////// for KhachHang
+        [StringLength(100)]
+        [MaxLength(100), Column(TypeName = "nvarchar")]
+        [DisplayName("Tên KH")]
+        //[Remote("IsStringNameAvailable", "KhachHangs", ErrorMessage = "Tên KH đã tồn tại")]
+        public string TenKH { get; set; }
+
+        [MaxLength(15), Column(TypeName = "varchar")]
+        [StringLength(15)]
+        public string Phone { get; set; }
+
+        [MaxLength(250), Column(TypeName = "nvarchar")]
+        [StringLength(250)]
+        [DisplayName("Địa chỉ")]
+        public string DiaChi { get; set; }
+
+        [MaxLength(100), Column(TypeName = "nvarchar")]
+        [StringLength(100)]
+        [DisplayName("Tên đơn vị")]
+        public string TenDonVi { get; set; }
+
+        [MaxLength(20), Column(TypeName = "varchar")]
+        [StringLength(20)]
+        [DisplayName("Mã số thuế")]
+        public string MaSoThue { get; set; }
+
+        
 
     }
 }

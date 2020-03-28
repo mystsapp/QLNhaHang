@@ -31,7 +31,7 @@ namespace QLNhaHang.Controllers
                 if (hd == null)
                 {
                     var lastMaHD = _unitOfWork.hoaDonRepository
-                                          .GetAllIncludeThree(x => x.NhanVien, y => y.KhachHang, z => z.Ban)
+                                          .GetAllInclude(x => x.NhanVien, y => y.Ban)
                                           .OrderByDescending(x => x.MaHD).FirstOrDefault().MaHD;
                     maHD = lastMaHD;
                 }

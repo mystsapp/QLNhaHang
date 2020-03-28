@@ -115,7 +115,7 @@
                         <tr class="table-info">
                             <th>STT</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().MaHD)</th>
-                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().KhachHang.TenKH)</th>
+                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().TenKH)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().Ban.TenBan)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().NgayTao)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().ThanhTienHD)</th>
@@ -126,9 +126,9 @@
                                 @*<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
                                     <input type="hidden" name="stringId" id="stringId" />
                                     <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
-                                    @Html.Partial("~/Views/Shared/_InHoaDonModal.cshtml", Model)
-                                    <button type="button" data-toggle="modal" data-target="#modal-InHoaDon" class="text-primary btn btn-outline-light btn-sm" id="btnExportAll"><i class="fas fa-file-word"></i> Xuất</button>
-                                
+
+                                Xuất HD
+
                                 @*</form>*@
                             </th>
                         </tr>
@@ -138,38 +138,42 @@
                         @foreach (var item in Model.HoaDons)
                         {
 
-                        <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                            <td class="tdVal" data-id="@item.MaHD">@i</td>
+                                <td class="tdVal" data-id="@item.MaHD">@i</td>
 
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.KhachHang.TenKH)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
-                            <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
-                            @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.TenKH)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
+                                <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
 
-                            <td>
-                                <form action="/HoaDons/Delete?id=@item.MaHD" @*asp-route-id="@item.Id"*@ method="post">
+                                <td>
+                                    <form action="/HoaDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                    @*<input type="hidden" name="maBan" value="@Model.MonDaGoi.MaBan" />*@
-                                    <span id="confirmDeleteSpan_@item.MaHD" style="display: none">
-                                        <span class="text-dark">Bạn có chắc chắn muốn xóa dòng này không?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
-                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaHD', false)">No</a>
-                                    </span>
+                                        <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                        <input type="hidden" name="id" value="@item.MaHD" />
+                                        <span id="confirmDeleteSpan_@item.MaHD" style="display: none">
+                                            <span class="text-dark">Xóa?</span>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaHD', false)">No</a>
+                                        </span>
 
-                                    <span id="deleteSpan_@item.MaHD">
-                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaHD', true)"><i class="fas fa-trash-alt"></i></a>
-                                    </span>
-                                </form>
-                            </td>
-                            <td align="center">
-                                <input type="checkbox" class="ckId" data-id="@item.MaHD" />
-                            </td>
-                        </tr>
+                                        <span id="deleteSpan_@item.MaHD">
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaHD', true)"><i class="fas fa-trash-alt"></i></a>
+                                        </span>
+                                    </form>
+                                </td>
+                                <td align="center">
+                                    <div class="btn-group-sm">
+
+                                        <button class="btn btn-outline-success" title="HD tự động" data-toggle="modal" data-target="#modal-InHoaDon"><i class="fas fa-file-alt"></i></button>
+                                        <button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
                             i++;
 
                         }
@@ -269,25 +273,28 @@
     <!-- /.card -->
 </section>
 
+@Html.Partial("~/Views/Shared/_InHoaDonModal.cshtml", Model)
+@Html.Partial("~/Views/Shared/_InHDTayModel.cshtml", Model)
+
 @section Scripts{
     <script>
-        $('.cursor-pointer').click(function () {
-            //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
-            //$(".imgBan").click(function () {
-            //    // Change src attribute of image
-            //    $(this).attr("src", "Assets/Images/Desk.jpg");
-            //});
-            if ($(this).hasClass("bg-warning")) {
-                $(this).removeClass("bg-warning");
+        //$('.cursor-pointer').click(function () {
+        //    //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
+        //    //$(".imgBan").click(function () {
+        //    //    // Change src attribute of image
+        //    //    $(this).attr("src", "Assets/Images/Desk.jpg");
+        //    //});
+        //    if ($(this).hasClass("bg-warning")) {
+        //        $(this).removeClass("bg-warning");
 
-            }
-            else {
-                $('.card.bg-warning').removeClass("bg-warning");
-                $('.card-body').removeClass("text-warning");
-                $(this).addClass("bg-warning");
-            }
+        //    }
+        //    else {
+        //        $('.card.bg-warning').removeClass("bg-warning");
+        //        $('.card-body').removeClass("text-warning");
+        //        $(this).addClass("bg-warning");
+        //    }
 
-        });
+        //});
 
         $('.listAllTab').DataTable({
             "paging": true,
