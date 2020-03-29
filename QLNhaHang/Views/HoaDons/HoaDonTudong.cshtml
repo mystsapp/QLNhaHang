@@ -1,0 +1,299 @@
+﻿@model QLNhaHang.Models.HoaDonViewModel
+@{
+    ViewBag.Title = "Hoa Don Tu dong";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh Sách Cấp Thẻ</li>
+                    </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.HoaDon != null)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thông tin hóa đơn - <b>@Model.HoaDon.MaHD</b></h3>
+            }
+            else
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thông tin hóa đơn</h3>
+            }
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <fieldset class="groupbox-border rounded ">
+                <legend class="groupbox-border">Thông tin hoá đơn </legend>
+                @if (Model.ThongTinHDs != null)
+                {
+                    <table class="table mytable text-nowrap listAll">
+                        <thead>
+
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().MauSo)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().KyHieu)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().QuyenSo)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().So)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().SoThuTu)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.ThongTinHDs)
+                            {
+
+                                <tr class="cursor-pointer tdValTT" data-id="@item.Id">
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.MauSo)</td>
+                                    <td>@Html.DisplayFor(m => item.KyHieu)</td>
+                                    <td>@Html.DisplayFor(m => item.QuyenSo)</td>
+                                    <td>@Html.DisplayFor(m => item.So)</td>
+                                    <td>@Html.DisplayFor(m => item.SoThuTu)</td>
+                                </tr>
+                                i++;
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>No data.</span>
+                }
+                <hr />
+
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        Mẫu số
+                        @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-2">
+                        Ký hiệu
+                        @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-2">
+                        Quyển số
+                        @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Số
+                        @Html.TextBoxFor(model => model.ThongTinHD.So, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-3">
+                        Số thứ tự
+                        @Html.TextBoxFor(model => model.ThongTinHD.So, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @*<div class="form-group ">
+                        <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
+                    </div>*@
+            </fieldset>
+
+            <fieldset class="groupbox-border rounded ">
+                <legend class="groupbox-border">Thông tin khách hàng </legend>
+                @if (Model.KhachHangs != null)
+                {
+                    <table class="table mytable text-nowrap listAll">
+                        <thead>
+
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaKH)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenKH)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenDonVi)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaSoThue)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().DiaChi)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().Phone)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.KhachHangs)
+                            {
+
+                                <tr class="cursor-pointer tdValKH" data-id="@item.MaKH">
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.MaKH)</td>
+                                    <td>@Html.DisplayFor(m => item.TenKH)</td>
+                                    <td>@Html.DisplayFor(m => item.TenDonVi)</td>
+                                    <td>@Html.DisplayFor(m => item.MaSoThue)</td>
+                                    <td>@Html.DisplayFor(m => item.DiaChi)</td>
+                                    <td>@Html.DisplayFor(m => item.Phone)</td>
+                                </tr>
+                                i++;
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>No data.</span>
+                }
+                <hr />
+
+
+                <div class="form-group row">
+
+                    <div class="col-3">
+                        Mã KH
+                        @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.KhachHang.MaKH, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-3">
+                        Họ tên
+                        @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-3">
+                        Địa chỉ
+                        @Html.TextAreaFor(model => model.KhachHang.DiaChi, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-3">
+                        Tên đơn vị
+                        @Html.TextAreaFor(model => model.KhachHang.TenDonVi, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3">
+                        MST
+                        @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-3">
+                        Giới tính <br />
+                        @Html.TextBoxFor(model => model.KhachHang.GioiTinh, null, new { @class = "form-control " })
+                    </div>
+
+                    <div class="col-3">
+                        Email
+                        @Html.TextBoxFor(model => model.KhachHang.Email, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-3">
+                        Phone
+                        @Html.TextBoxFor(model => model.KhachHang.Phone, null, new { @class = "form-control " })
+                        @Html.ValidationMessageFor(model => model.KhachHang.Phone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </fieldset>
+            <br />
+            <div class="form-group ">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-save"></i></button>
+                <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<form id="frmThongTinHD" action="/HoaDons/HoaDonTuDong">
+    <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+    <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
+    <input type="hidden" id="hidMaThongTinHDId" name="maThongTinHDId" />
+
+</form>
+<form id="frmKhachHang" action="/HoaDons/HoaDonTuDong">
+    <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+    <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
+    <input type="hidden" id="hidMaKH" name="maKH" />
+</form>
+
+@section Scripts{
+    <script>
+        //$('.cursor-pointer').click(function () {
+        //    //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
+        //    //$(".imgBan").click(function () {
+        //    //    // Change src attribute of image
+        //    //    $(this).attr("src", "Assets/Images/Desk.jpg");
+        //    //});
+        //    if ($(this).hasClass("bg-warning")) {
+        //        $(this).removeClass("bg-warning");
+
+        //    }
+        //    else {
+        //        $('.card.bg-warning').removeClass("bg-warning");
+        //        $('.card-body').removeClass("text-warning");
+        //        $(this).addClass("bg-warning");
+        //    }
+
+        //});
+
+        $('.listAll').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+                //"iDisplayLength": 5
+    </script>
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+    </style>
+
+    <script src="~/Assets/js/HoaDon/hoaDonTuDongController.js"></script>
+}

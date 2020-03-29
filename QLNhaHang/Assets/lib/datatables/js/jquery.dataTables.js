@@ -11218,7 +11218,8 @@
 		 *      } );
 		 *    } )
 		 */
-		"iDisplayLength": 10,
+		//"iDisplayLength": 10,
+		"iDisplayLength": 5,
 	
 	
 		/**

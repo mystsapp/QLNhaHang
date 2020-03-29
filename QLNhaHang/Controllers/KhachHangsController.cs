@@ -26,7 +26,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Index(string maKH = null, string searchString = null, string strUrl = null, int page = 1)
         {
             KhachHangVM.StrUrl = Request.Url.AbsoluteUri.ToString();
-            if (maKH != null)
+            if (!string.IsNullOrEmpty(maKH))
             {
 
                 var khachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);

@@ -16,5 +16,11 @@ namespace QLNhaHang.Models
         public KhachHang KhachHang { get; set; }
         public string StrUrl { get; set; }
         public string Id { get; set; }
+        public decimal? TongTien { get; set; }
+
+        ///////// in HoaDon ////
+        public IEnumerable<KhachHang> KhachHangs { get; set; }
+        public IEnumerable<ThongTinHD> ThongTinHDs { get; set; }
+        public ThongTinHD ThongTinHD { get; set; }
     }
 }

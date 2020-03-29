@@ -451,6 +451,7 @@
     <Content Include="Assets\Images\saigontourist.png" />
     <Content Include="Assets\Images\thucdon.png" />
     <Content Include="Assets\Images\tinhtien.jfif" />
+    <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
     <Content Include="Assets\js\ThongTinHD\indexController.js" />
     <Content Include="Assets\js\KhachHang\indexController.js" />
@@ -1966,6 +1967,7 @@
     <Content Include="Views\ThongTinHDs\Edit.cshtml" />
     <Content Include="Views\ThongTinHDs\Index.cshtml" />
     <Content Include="Views\Shared\_InHDTayModel.cshtml" />
+    <Content Include="Views\HoaDons\HoaDonTuDong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

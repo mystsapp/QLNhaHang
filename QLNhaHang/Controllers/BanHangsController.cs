@@ -29,9 +29,9 @@ namespace QLNhaHang.Controllers
             ///////////////////// load Ban by flag /////////////////////
             //BanHangVM.StrUrl = UriHelper.GetDisplayUrl(Request);
             ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
-            BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();            
+            BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();
 
-            if (maBan != null)
+            if (!string.IsNullOrEmpty(maBan))
             {
                 BanHangVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
                 BanHangVM.MonDaGois = _unitOfWork.monDaGoiRepository

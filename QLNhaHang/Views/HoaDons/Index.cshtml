@@ -8,7 +8,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
             <div class="col-sm-6">
                 @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
             </div>
@@ -23,13 +23,12 @@
 </section>
 
 
-<!-- Main content -->
 <section class="content">
 
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Tìm hóa đơn</h3>
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách hóa đơn</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -78,34 +77,7 @@
                     </div>
                 </div>
             </form>
-            @*<form>
-                    <input id="hidMaHD" type="hidden" name="maHD" />
-                    <input type="hidden" value="@Model.StrUrl" name="strUrl" />
-                    <input type="submit" hidden formaction="/MonDaGois/GoiMon" formmethod="get" id="hidSubmit" />
-                </form>*@
-        </div>
-    </div>
-    <!-- /.card -->
-</section>
-<!-- /.content -->
-
-<section class="content">
-
-    <!-- Default box -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách bàn</h3>
-
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
+            <br />
 
             @if (Model.HoaDons != null)
             {
@@ -124,8 +96,8 @@
                             <th>#</th>
                             <th>
                                 @*<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
-                                    <input type="hidden" name="stringId" id="stringId" />
-                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
+                            <input type="hidden" name="stringId" id="stringId" />
+                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
 
                                 Xuất HD
 
@@ -169,8 +141,9 @@
                                 <td align="center">
                                     <div class="btn-group-sm">
 
-                                        <button class="btn btn-outline-success" title="HD tự động" data-toggle="modal" data-target="#modal-InHoaDon"><i class="fas fa-file-alt"></i></button>
-                                        <button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>
+                                        <a class="btn btn-outline-success" title="HD tự động" href="@Url.Action("HoaDonTudong", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-file-alt"></i></a>
+                                        <a class="btn btn-outline-info" title="HD tay" href="@Url.Action("HoaDonTay", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})" ><i class="far fa-file-alt"></i></a>
+                                        @*<button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>*@
                                     </div>
                                 </td>
                             </tr>
@@ -261,6 +234,7 @@
                         }
                     </tbody>
                 </table>
+                <span> Tổng tiền: @Html.Raw(Model.TongTien.Value.ToString("N0")) VND</span>
             }
             else
             {
