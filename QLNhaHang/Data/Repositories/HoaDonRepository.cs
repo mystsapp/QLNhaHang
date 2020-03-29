@@ -42,18 +42,18 @@ namespace QLNhaHang.Data.Repositories
             DateTime fromDate, toDate;
             if (!string.IsNullOrEmpty(searchFromDate) && !string.IsNullOrEmpty(searchToDate))
             {
-                
+
                 try
                 {
                     fromDate = DateTime.Parse(searchFromDate);
                     toDate = DateTime.Parse(searchToDate);
-                    
+
                     if (fromDate > toDate)
                     {
                         return null;
                     }
                     list = list.Where(x => x.NgayTao >= fromDate &&
-                                       x.NgayTao < DbFunctions.AddDays(toDate, 1));
+                                       x.NgayTao < toDate.AddDays(1));
                 }
                 catch (Exception)
                 {
@@ -64,36 +64,40 @@ namespace QLNhaHang.Data.Repositories
 
                 //list.Where(x => x.NgayTao >= fromDate && x.NgayTao < (toDate.AddDays(1))/*.ToPagedList(page, pageSize)*/;
 
-                
+
 
             }
-            if (!string.IsNullOrEmpty(searchFromDate))
+            else
             {
-                try
+                if (!string.IsNullOrEmpty(searchFromDate))
                 {
-                    fromDate = DateTime.Parse(searchFromDate);
-                    list = list.Where(x => x.NgayTao >= fromDate);
+                    try
+                    {
+                        fromDate = DateTime.Parse(searchFromDate);
+                        list = list.Where(x => x.NgayTao >= fromDate);
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
                 }
-                catch (Exception)
+                if (!string.IsNullOrEmpty(searchToDate))
                 {
-                    return null;
+                    try
+                    {
+                        toDate = DateTime.Parse(searchToDate);
+                        list = list.Where(x => x.NgayTao < toDate.AddDays(1));
+
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
                 }
-                
             }
-            if (!string.IsNullOrEmpty(searchToDate))
-            {
-                try
-                {
-                    toDate = DateTime.Parse(searchToDate);
-                    list = list.Where(x => x.NgayTao < DbFunctions.AddDays(toDate, 1));
-                    
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-                
-            }
+
             count = list.Count();
             // page the list
             const int pageSize = 4;
@@ -113,5 +117,6 @@ namespace QLNhaHang.Data.Repositories
 
             return listPaged;
         }
+
     }
 }

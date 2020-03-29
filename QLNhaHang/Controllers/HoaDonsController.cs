@@ -92,6 +92,31 @@ namespace QLNhaHang.Controllers
             return View(HoaDonVM);
         }
 
+        [HttpPost,ActionName("HoaDonTuDong")]
+        public ActionResult HoaDonTuDongPost(HoaDonViewModel model, string maHD)
+        {
+            var hoaDon = _unitOfWork.hoaDonRepository
+                                    .FindIncludeTwo(x => x.Ban, y => y.NhanVien, z => z.MaHD.Equals(maHD))
+                                    .FirstOrDefault();
+            //// Khach hang
+            hoaDon.TenKH = model.KhachHang.TenKH;
+            hoaDon.Phone = model.KhachHang.Phone;
+            hoaDon.DiaChi = model.KhachHang.DiaChi;
+            hoaDon.TenDonVi = model.KhachHang.TenDonVi;
+            hoaDon.MaSoThue = model.KhachHang.MaSoThue;
+            //// thong tin HD
+            hoaDon.MauSo = model.ThongTinHD.MauSo;
+            hoaDon.KyHieu = model.ThongTinHD.KyHieu;
+            hoaDon.QuyenSo = model.ThongTinHD.QuyenSo;
+            hoaDon.So = model.ThongTinHD.So;
+            hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
+
+            ////// update hoa don
+            _unitOfWork.hoaDonRepository.Update(hoaDon);
+            _unitOfWork.Complete();
+            return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
+        }
+
         public ActionResult ExportList(string stringId, string strUrl)
         {
 
