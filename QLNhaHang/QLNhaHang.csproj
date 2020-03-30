@@ -409,6 +409,14 @@
     <Compile Include="Migrations\202003281328350_fixThanhTienM.designer.cs">
       <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003300443496_addCheckIn.cs" />
+    <Compile Include="Migrations\202003300443496_addCheckIn.designer.cs">
+      <DependentUpon>202003300443496_addCheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003300811530_addThonTinthem.cs" />
+    <Compile Include="Migrations\202003300811530_addThonTinthem.designer.cs">
+      <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -417,6 +425,17 @@
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\DS_HoaDon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_HoaDon.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DS_HoaDon_Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_HoaDon_Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Report\ListMon.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -451,6 +470,7 @@
     <Content Include="Assets\Images\saigontourist.png" />
     <Content Include="Assets\Images\thucdon.png" />
     <Content Include="Assets\Images\tinhtien.jfif" />
+    <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
     <Content Include="Assets\js\ThongTinHD\indexController.js" />
@@ -1914,6 +1934,17 @@
     <Content Include="Assets\lib\angular.js\angular-touch.min.js.map" />
     <Content Include="Assets\lib\angular.js\angular.min.js.map" />
     <Content Include="Assets\lib\angular-chart.js\angular-chart.min.js.map" />
+    <Content Include="Report\DS_HoaDon.xsc">
+      <DependentUpon>DS_HoaDon.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DS_HoaDon.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_HoaDon.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DS_HoaDon.xss">
+      <DependentUpon>DS_HoaDon.xsd</DependentUpon>
+    </Content>
     <None Include="Report\ListMon.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1968,6 +1999,7 @@
     <Content Include="Views\ThongTinHDs\Index.cshtml" />
     <Content Include="Views\Shared\_InHDTayModel.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTuDong.cshtml" />
+    <Content Include="Views\HoaDons\HoaDonTay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2009,6 +2041,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003281328350_fixThanhTienM.resx">
       <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003300443496_addCheckIn.resx">
+      <DependentUpon>202003300443496_addCheckIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003300811530_addThonTinthem.resx">
+      <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\DS_HoaDon_Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DS_HoaDon_Report.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\ReportInHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

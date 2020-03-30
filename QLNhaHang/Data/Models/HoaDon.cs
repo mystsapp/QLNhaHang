@@ -55,7 +55,7 @@ namespace QLNhaHang.Data.Models
         public decimal? ThanhTienHD { get; set; }
         public decimal? PhiPhucvu { get; set; }
         public decimal? VAT { get; set; }
-        public decimal? ThanhTienM { get; set; }
+        
 
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
@@ -101,7 +101,16 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã số thuế")]
         public string MaSoThue { get; set; }
 
-        
+        public bool? DaIn { get; set; }
+        public DateTime? NgayIn { get; set; }
 
+        ///// thong tin them
+        [MaxLength(300), Column(TypeName = "nvarchar")]
+        [StringLength(300)]
+        [DisplayName("Nội dung")]
+        public string NoiDung { get; set; }
+
+        [DisplayName("Số tiền")]
+        public decimal? SoTien { get; set; }
     }
 }

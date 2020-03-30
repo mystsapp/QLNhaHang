@@ -22,5 +22,9 @@ namespace QLNhaHang.Models
         public IEnumerable<KhachHang> KhachHangs { get; set; }
         public IEnumerable<ThongTinHD> ThongTinHDs { get; set; }
         public ThongTinHD ThongTinHD { get; set; }
+
+        public string SoTien { get; set; }
+        public string NoiDung { get; set; }
+
     }
 }

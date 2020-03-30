@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using Newtonsoft.Json;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
+using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -111,6 +114,8 @@ namespace QLNhaHang.Controllers
             hoaDon.So = model.ThongTinHD.So;
             hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
 
+            hoaDon.NgayIn = DateTime.Now;
+            hoaDon.DaIn = true;
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
@@ -128,9 +133,92 @@ namespace QLNhaHang.Controllers
             return View();
         }
 
-        public ActionResult Export(int id, string strUrl)
+        public ActionResult Export(string id, string strUrl)
         {
-            return View();
+            var hoaDon = _unitOfWork.hoaDonRepository
+                                    .FindIncludeTwo(x => x.Ban, y => y.NhanVien, z => z.MaHD.Equals(id)).ToList();
+            var ctHoaDons = _unitOfWork.chiTietHDRepository
+                                       .FindIncludeTwo(x => x.HoaDon, y => y.ThucDon, z => z.MaHD.Equals(id))
+                                       .ToList();
+            var list = ctHoaDons.Where(item1 => hoaDon.Any(item2 => item1.MaHD == item2.MaHD));
+            var items = list.Select(x => new
+            {
+                x.MaHD,
+                x.HoaDon.NhanVien.HoTen,
+                x.HoaDon.Ban.TenBan,
+                x.HoaDon.HTThanhToan,
+                x.HoaDon.NgayTao,
+                x.HoaDon.GhiChu,
+                x.HoaDon.ThanhTienHD,
+                x.HoaDon.PhiPhucvu,
+                x.HoaDon.VAT,
+                x.HoaDon.NumberId,
+                x.HoaDon.MauSo,
+                x.HoaDon.KyHieu,
+                x.HoaDon.SoThuTu,
+                x.HoaDon.QuyenSo,
+                x.HoaDon.So,
+                x.HoaDon.TenKH,
+                x.HoaDon.Phone,
+                x.HoaDon.DiaChi,
+                x.HoaDon.TenDonVi,
+                x.HoaDon.MaSoThue,
+                x.HoaDon.SoTien,
+                x.ThucDon.TenMon,
+                x.DonGia,
+                x.SoLuong
+
+            });
+            var dt = EntityToTable.ToDataTable(items);
+            ReportDocument rd = new ReportDocument();
+            string reportPath = Path.Combine(Server.MapPath("~/Report"), "DS_HoaDon_Report.rpt");
+            return new CrystalReportPdfResult(reportPath, dt);
+        }
+
+        public ActionResult HoaDonTay(string maHD, string strUrl, int maThongTinHDId = 0, string maKH = null)
+        {
+            HoaDonVM.StrUrl = strUrl;
+            HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
+            HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
+            if (maThongTinHDId != 0)
+            {
+                HoaDonVM.ThongTinHD = _unitOfWork.thongTinHDRepository.GetById(maThongTinHDId);
+            }
+            if (!string.IsNullOrEmpty(maKH))
+            {
+                HoaDonVM.KhachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);
+            }
+            return View(HoaDonVM);
+        }
+
+        [HttpPost, ActionName("HoaDonTay")]
+        public ActionResult HoaDonTayPost(HoaDonViewModel model, string maHD)
+        {
+            var hoaDon = _unitOfWork.hoaDonRepository
+                                    .FindIncludeTwo(x => x.Ban, y => y.NhanVien, z => z.MaHD.Equals(maHD))
+                                    .FirstOrDefault();
+            //// Khach hang
+            hoaDon.TenKH = model.KhachHang.TenKH;
+            hoaDon.Phone = model.KhachHang.Phone;
+            hoaDon.DiaChi = model.KhachHang.DiaChi;
+            hoaDon.TenDonVi = model.KhachHang.TenDonVi;
+            hoaDon.MaSoThue = model.KhachHang.MaSoThue;
+            //// thong tin HD
+            hoaDon.MauSo = model.ThongTinHD.MauSo;
+            hoaDon.KyHieu = model.ThongTinHD.KyHieu;
+            hoaDon.QuyenSo = model.ThongTinHD.QuyenSo;
+            hoaDon.So = model.ThongTinHD.So;
+            hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
+
+            hoaDon.NgayIn = DateTime.Now;
+            hoaDon.DaIn = true;
+            hoaDon.SoTien = decimal.Parse(model.SoTien);
+            hoaDon.NoiDung = model.NoiDung;
+            ////// update hoa don
+            _unitOfWork.hoaDonRepository.Update(hoaDon);
+            _unitOfWork.Complete();
+            return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 
         protected void SetAlert(string message, string type)
