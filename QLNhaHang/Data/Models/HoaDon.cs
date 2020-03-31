@@ -20,6 +20,18 @@ namespace QLNhaHang.Data.Models
 
         [ForeignKey("MaNV")]
         public virtual NhanVien NhanVien { get; set; }
+        
+        [DisplayName("Văn phòng")]
+        public int VanPhongId { get; set; }
+
+        [ForeignKey("VanPhongId")]
+        public virtual VanPhong VanPhong { get; set; }
+
+        //[Required]
+        //[MaxLength(10), Column(TypeName = "varchar")]
+        //[StringLength(10)]
+        //[DisplayName("Mã VP")]
+        //public string MaVP { get; set; }
 
         //[DisplayName("Khách hàng")]
         //[StringLength(50)]
@@ -69,8 +81,8 @@ namespace QLNhaHang.Data.Models
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string KyHieu { get; set; }
-        public int QuyenSo { get; set; }
-        public long So { get; set; }
+        public int? QuyenSo { get; set; }
+        public long? So { get; set; }
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string SoThuTu { get; set; }

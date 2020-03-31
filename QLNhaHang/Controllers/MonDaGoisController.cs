@@ -207,6 +207,7 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.HoaDon.TenKH = "Khách Lẽ";
             MonDaGoiVM.HoaDon.MaBan = maBan;
             MonDaGoiVM.HoaDon.NgayTao = DateTime.Now;
+            MonDaGoiVM.HoaDon.VanPhongId = 1;
             MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             _unitOfWork.hoaDonRepository.Create(MonDaGoiVM.HoaDon);

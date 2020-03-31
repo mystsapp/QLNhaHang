@@ -417,6 +417,38 @@
     <Compile Include="Migrations\202003300811530_addThonTinthem.designer.cs">
       <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003310326280_addVPToHD.cs" />
+    <Compile Include="Migrations\202003310326280_addVPToHD.designer.cs">
+      <DependentUpon>202003310326280_addVPToHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310337206_addVPToHD1.cs" />
+    <Compile Include="Migrations\202003310337206_addVPToHD1.designer.cs">
+      <DependentUpon>202003310337206_addVPToHD1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310347124_addVPToHD3.cs" />
+    <Compile Include="Migrations\202003310347124_addVPToHD3.designer.cs">
+      <DependentUpon>202003310347124_addVPToHD3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310348381_addVPToHD4.cs" />
+    <Compile Include="Migrations\202003310348381_addVPToHD4.designer.cs">
+      <DependentUpon>202003310348381_addVPToHD4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310401065_fixNullHD.cs" />
+    <Compile Include="Migrations\202003310401065_fixNullHD.designer.cs">
+      <DependentUpon>202003310401065_fixNullHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310402377_fixNullHD1.cs" />
+    <Compile Include="Migrations\202003310402377_fixNullHD1.designer.cs">
+      <DependentUpon>202003310402377_fixNullHD1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310406200_addVPHD.cs" />
+    <Compile Include="Migrations\202003310406200_addVPHD.designer.cs">
+      <DependentUpon>202003310406200_addVPHD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003310422400_addVPBan.cs" />
+    <Compile Include="Migrations\202003310422400_addVPBan.designer.cs">
+      <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -429,6 +461,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_HoaDon.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DS_HoaDonTay.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_HoaDonTay.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DS_HoaDonTay_Report.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_HoaDonTay_Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\DS_HoaDon_Report.cs">
       <AutoGen>True</AutoGen>
@@ -1945,6 +1988,17 @@
     <Content Include="Report\DS_HoaDon.xss">
       <DependentUpon>DS_HoaDon.xsd</DependentUpon>
     </Content>
+    <Content Include="Report\DS_HoaDonTay.xsc">
+      <DependentUpon>DS_HoaDonTay.xsd</DependentUpon>
+    </Content>
+    <None Include="Report\DS_HoaDonTay.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_HoaDonTay.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Report\DS_HoaDonTay.xss">
+      <DependentUpon>DS_HoaDonTay.xsd</DependentUpon>
+    </Content>
     <None Include="Report\ListMon.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -2047,6 +2101,34 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003300811530_addThonTinthem.resx">
       <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310326280_addVPToHD.resx">
+      <DependentUpon>202003310326280_addVPToHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310337206_addVPToHD1.resx">
+      <DependentUpon>202003310337206_addVPToHD1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310347124_addVPToHD3.resx">
+      <DependentUpon>202003310347124_addVPToHD3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310348381_addVPToHD4.resx">
+      <DependentUpon>202003310348381_addVPToHD4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310401065_fixNullHD.resx">
+      <DependentUpon>202003310401065_fixNullHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310402377_fixNullHD1.resx">
+      <DependentUpon>202003310402377_fixNullHD1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310406200_addVPHD.resx">
+      <DependentUpon>202003310406200_addVPHD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003310422400_addVPBan.resx">
+      <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DS_HoaDonTay_Report.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDon_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

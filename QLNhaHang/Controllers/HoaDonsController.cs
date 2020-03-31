@@ -55,7 +55,7 @@ namespace QLNhaHang.Controllers
 
             HoaDonVM.ChiTietHDs = _unitOfWork.chiTietHDRepository
                                              .FindIncludeTwo(x => x.HoaDon, y => y.ThucDon, z => z.MaHD.Equals(maHD));
-            HoaDonVM.TongTien = HoaDonVM.ChiTietHDs.Sum(x => x.DonGia);
+            HoaDonVM.TongTien = HoaDonVM.ChiTietHDs.Sum(x => (x.DonGia * x.SoLuong));
 
             HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(searchString, searchFromDate, searchToDate, page);
             if(HoaDonVM.HoaDons == null)
@@ -218,7 +218,20 @@ namespace QLNhaHang.Controllers
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
-            return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
+            return RedirectToAction(nameof(ExportHDTay), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
+        }
+
+        public ActionResult ExportHDTay(string id, string strUrl)
+        {
+            var items = _unitOfWork.hoaDonRepository
+                                    .GetAllIncludeThree(x => x.Ban, y => y.NhanVien, v => v.VanPhong)
+                                    .Where(x => x.MaHD.Equals(id))
+                                    .ToList();
+            
+            var dt = EntityToTable.ToDataTable(items);
+            ReportDocument rd = new ReportDocument();
+            string reportPath = Path.Combine(Server.MapPath("~/Report"), "DS_HoaDonTay_Report.rpt");
+            return new CrystalReportPdfResult(reportPath, dt);
         }
 
         protected void SetAlert(string message, string type)

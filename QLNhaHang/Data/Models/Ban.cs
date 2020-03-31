@@ -32,6 +32,11 @@ namespace QLNhaHang.Data.Models
 
         public bool Flag { get; set; }
 
-       
+        [DisplayName("Văn phòng")]
+        public int VanPhongId { get; set; }
+
+        [ForeignKey("VanPhongId")]
+        public virtual VanPhong VanPhong { get; set; }
+
     }
 }
