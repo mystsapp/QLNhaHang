@@ -351,6 +351,7 @@
     <Compile Include="Controllers\ThongTinHDsController.cs" />
     <Compile Include="Controllers\KhachHangsController.cs" />
     <Compile Include="Controllers\MonDaGoisController.cs" />
+    <Compile Include="Controllers\ThucDonsController.cs" />
     <Compile Include="Data\Interfaces\IRepository.cs" />
     <Compile Include="Data\Models\Ban.cs" />
     <Compile Include="Data\Models\ChiTietHD.cs" />
@@ -449,6 +450,10 @@
     <Compile Include="Migrations\202003310422400_addVPBan.designer.cs">
       <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003311346121_fixThucDobn.cs" />
+    <Compile Include="Migrations\202003311346121_fixThucDobn.designer.cs">
+      <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -456,6 +461,7 @@
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
+    <Compile Include="Models\ThucDonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\DS_HoaDon.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2057,6 +2063,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ThucDons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2125,6 +2132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003310422400_addVPBan.resx">
       <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003311346121_fixThucDobn.resx">
+      <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -31,8 +31,16 @@ namespace QLNhaHang.Data.Models
         public virtual LoaiThucDon LoaiThucDon { get; set; }
 
         [DisplayName("Ghi chú")]
-        [MaxLength(200), Column(TypeName = "varchar")]
+        [MaxLength(200), Column(TypeName = "nvarchar")]
         [StringLength(200)]
         public string GhiChu { get; set; }
+        
+        [DisplayName("Ngày tạo")]
+        public DateTime NgayTao { get; set; }
+        
+        [DisplayName("Người tạo")]
+        [MaxLength(50), Column(TypeName = "nvarchar")]
+        [StringLength(50)]
+        public string NguoiTao { get; set; }
     }
 }

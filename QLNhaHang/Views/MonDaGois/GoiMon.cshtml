@@ -63,8 +63,8 @@
 
                         <div class="col-3">
                             Giá tiền
-                            @Html.TextBoxFor(model => model.MonDaGoi.GiaTien, "{0:N0}", new { @class = "form-control numbers" })
-                            @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger"})
+                            @Html.TextBoxFor(model => model.MonDaGoi.GiaTien, "{0:N0}", new { @class = "form-control numbers", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-3">
@@ -76,8 +76,8 @@
 
                         <div class="col-3">
                             Thành tiền
-                            @Html.TextBoxFor(model => model.MonDaGoi.ThanhTien, "{0:N0}", new { @class = "form-control numbers"  })
-                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger"})
+                            @Html.TextBoxFor(model => model.MonDaGoi.ThanhTien, "{0:N0}", new { @class = "form-control numbers", @disabled = "disabled" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger" })
                         </div>
 
                     </div>

@@ -28,8 +28,8 @@ namespace QLNhaHang.Controllers
             };
         }
         // GET: HoaDons
-        public ActionResult Index(string maHD = null, string searchString = null, 
-                                  string searchFromDate = null, string searchToDate = null, 
+        public ActionResult Index(string maHD = null, string searchString = null,
+                                  string searchFromDate = null, string searchToDate = null,
                                   int page = 1)
         {
             HoaDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
@@ -44,11 +44,11 @@ namespace QLNhaHang.Controllers
                                           .OrderByDescending(x => x.MaHD).FirstOrDefault().MaHD;
                     maHD = lastMaHD;
                 }
-                
+
             }
 
             ////////////////////
-            
+
             ViewBag.searchString = searchString;
             ViewBag.searchFromDate = searchFromDate;
             ViewBag.searchToDate = searchToDate;
@@ -58,7 +58,7 @@ namespace QLNhaHang.Controllers
             HoaDonVM.TongTien = HoaDonVM.ChiTietHDs.Sum(x => (x.DonGia * x.SoLuong));
 
             HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(searchString, searchFromDate, searchToDate, page);
-            if(HoaDonVM.HoaDons == null)
+            if (HoaDonVM.HoaDons == null)
             {
                 HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon("", "", "", 1);
                 SetAlert("Lỗi định dạng ngày tháng.", "error");
@@ -72,7 +72,7 @@ namespace QLNhaHang.Controllers
         {
             var hoaDon = _unitOfWork.hoaDonRepository.GetByStringId(id);
             _unitOfWork.hoaDonRepository.Delete(hoaDon);
-           
+
             _unitOfWork.Complete();
             SetAlert("Xóa thành công!", "success");
             return Redirect(strUrl);
@@ -95,7 +95,7 @@ namespace QLNhaHang.Controllers
             return View(HoaDonVM);
         }
 
-        [HttpPost,ActionName("HoaDonTuDong")]
+        [HttpPost, ActionName("HoaDonTuDong")]
         public ActionResult HoaDonTuDongPost(HoaDonViewModel model, string maHD)
         {
             var hoaDon = _unitOfWork.hoaDonRepository
@@ -223,11 +223,41 @@ namespace QLNhaHang.Controllers
 
         public ActionResult ExportHDTay(string id, string strUrl)
         {
-            var items = _unitOfWork.hoaDonRepository
+            var list = _unitOfWork.hoaDonRepository
                                     .GetAllIncludeThree(x => x.Ban, y => y.NhanVien, v => v.VanPhong)
                                     .Where(x => x.MaHD.Equals(id))
                                     .ToList();
-            
+
+            var items = list.Select(x => new
+            {
+                x.MaHD,
+                x.NhanVien.HoTen,
+                x.Ban.TenBan,
+                x.HTThanhToan,
+                x.NgayTao,
+                x.GhiChu,
+                x.ThanhTienHD,
+                x.PhiPhucvu,
+                x.VAT,
+                x.NumberId,
+                x.MauSo,
+                x.KyHieu,
+                x.SoThuTu,
+                x.QuyenSo,
+                x.So,
+                x.TenKH,
+                x.Phone,
+                x.DiaChi,
+                x.TenDonVi,
+                x.MaSoThue,
+                x.SoTien,
+                MaVP = x.VanPhong.MaVP,
+                TenVP = x.VanPhong.Name,
+                DiaChiVP = x.VanPhong.DiaChi,
+                DienThoaiVP = x.VanPhong.DienThoai,
+
+            });
+
             var dt = EntityToTable.ToDataTable(items);
             ReportDocument rd = new ReportDocument();
             string reportPath = Path.Combine(Server.MapPath("~/Report"), "DS_HoaDonTay_Report.rpt");
