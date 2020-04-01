@@ -78,7 +78,7 @@ namespace QLNhaHang.Controllers
 
         public JsonResult IsStringNameAvailable(string TenKHCreate)
         {
-            var boolName = _unitOfWork.khachHangRepository.Find(x => x.TenKH.ToLower() == TenKHCreate.ToLower()).FirstOrDefault();
+            var boolName = _unitOfWork.khachHangRepository.Find(x => x.TenKH.Trim().ToLower() == TenKHCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);

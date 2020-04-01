@@ -348,6 +348,7 @@
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoaiThucDonsController.cs" />
     <Compile Include="Controllers\ThongTinHDsController.cs" />
     <Compile Include="Controllers\KhachHangsController.cs" />
     <Compile Include="Controllers\MonDaGoisController.cs" />
@@ -369,6 +370,7 @@
     <Compile Include="Data\Repositories\ChiTietHDRepository.cs" />
     <Compile Include="Data\Repositories\HoaDonRepository.cs" />
     <Compile Include="Data\Repositories\KhachHangRepository.cs" />
+    <Compile Include="Data\Repositories\LoaiThucDonRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\ThongTinHDRepository.cs" />
@@ -454,11 +456,16 @@
     <Compile Include="Migrations\202003311346121_fixThucDobn.designer.cs">
       <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004010930130_TenMonnVarChar.cs" />
+    <Compile Include="Migrations\202004010930130_TenMonnVarChar.designer.cs">
+      <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
+    <Compile Include="Models\LoaiThucDonViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
     <Compile Include="Models\ThucDonViewModel.cs" />
@@ -522,6 +529,9 @@
     <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
+    <Content Include="Assets\js\ThucDon\editController.js" />
+    <Content Include="Assets\js\ThucDon\createController.js" />
+    <Content Include="Assets\js\ThucDon\indexController.js" />
     <Content Include="Assets\js\ThongTinHD\indexController.js" />
     <Content Include="Assets\js\KhachHang\indexController.js" />
     <Content Include="Assets\js\HoaDon\indexController.js" />
@@ -2060,10 +2070,13 @@
     <Content Include="Views\Shared\_InHDTayModel.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTuDong.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTay.cshtml" />
+    <Content Include="Views\ThucDons\Create.cshtml" />
+    <Content Include="Views\ThucDons\Edit.cshtml" />
+    <Content Include="Views\ThucDons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ThucDons\" />
+    <Folder Include="Views\LoaiThucDons\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2135,6 +2148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003311346121_fixThucDobn.resx">
       <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004010930130_TenMonnVarChar.resx">
+      <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

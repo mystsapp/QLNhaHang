@@ -161,22 +161,22 @@
                         @*@Html.Partial("_GoiMonModal", Model)*@
                     </div>
 
-                    <div class="mb-1">
-                        <form action="/ThucDons/ThucDon" id="frmThucDon">
+                    @*<div class="mb-1">
+                        <form action="/ThucDons/Index" id="frmThucDon">
 
-                            @*<input type="hidden" name="maBan" id="hidMaBanGoiMon" />*@
+                            
                             <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
                             <button class="btn btn-outline-warning btn-block" id="btnThucDon">
                                 <div class="float-left mr-1">
                                     <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/thucdon.png" alt="Card image" />
                                 </div>
-                                @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                                
                                 <div class="float-left font-weight-bold mt-1">
                                     Thực đơn <br /> (F2)
                                 </div>
                             </button>
                         </form>
-                    </div>
+                    </div>*@
 
                     <div class="mb-1">
                         <form action="/MonDaGois/TinhTien" id="frmTinhTien">

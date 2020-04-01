@@ -20,7 +20,7 @@ namespace QLNhaHang.Data.Models
         public decimal GiaTien { get; set; }
 
         [DisplayName("Đơn vị tính")]
-        [MaxLength(20), Column(TypeName = "varchar")]
+        [MaxLength(20), Column(TypeName = "nvarchar")]
         [StringLength(20)]
         public string DonViTinh { get; set; }
 

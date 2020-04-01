@@ -18,11 +18,12 @@ namespace QLNhaHang.Controllers
             _unitOfWork = unitOfWork;
             ThucDonVM = new ThucDonViewModel()
             {
-                ThucDon = new Data.Models.ThucDon()
+                ThucDon = new Data.Models.ThucDon(),
+                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll().ToList()
             };
         }
         // GET: KhachHangs
-        public ActionResult Index(int id = 0, string searchString = null, string strUrl = null, int page = 1)
+        public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
             ThucDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             if (id != 0)
@@ -54,6 +55,7 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePost(ThucDonViewModel model)
         {
+            model.ThucDon.GiaTien = decimal.Parse(model.GiaTien);
             model.ThucDon.NgayTao = DateTime.Now;
             model.ThucDon.NguoiTao = "Admin";
             model.ThucDon.TenMon = model.TenMonCreate;
@@ -65,7 +67,7 @@ namespace QLNhaHang.Controllers
 
         public JsonResult IsStringNameAvailable(string TenMonCreate)
         {
-            var boolName = _unitOfWork.thucDonRepository.Find(x => x.TenMon.ToLower() == TenMonCreate.ToLower()).FirstOrDefault();
+            var boolName = _unitOfWork.thucDonRepository.Find(x => x.TenMon.Trim().ToLower() == TenMonCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -79,6 +81,7 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, int id)
         {
+            
             ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
             if (ThucDonVM.ThucDon == null)
             {
@@ -87,13 +90,15 @@ namespace QLNhaHang.Controllers
             }
 
             ThucDonVM.StrUrl = strUrl;
-            
+            ThucDonVM.GiaTien = ThucDonVM.ThucDon.GiaTien.ToString().Split('.')[0];
+
             return View(ThucDonVM);
         }
 
         [HttpPost, ActionName("Edit")]
         public ActionResult EditPost(string strUrl, int id, ThucDonViewModel model)
         {
+            model.ThucDon.GiaTien = decimal.Parse(model.GiaTien);
             if (id != model.ThucDon.Id)
             {
                 ViewBag.ErrorMessage = "Món này không tồn tại";
