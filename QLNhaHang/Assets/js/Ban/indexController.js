@@ -6,7 +6,7 @@
     registerEvent: function () {
         $('.tdVal').click(function () {
             id = $(this).data('id');
-            $('#hidMaKH').val(id);
+            $('#hidMaBan').val(id);
             //var page = $('.active .page-link').text();
             var page = $('.active a').text();
             $('#hidPage').val(page);

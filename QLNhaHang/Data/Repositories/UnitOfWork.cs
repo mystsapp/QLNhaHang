@@ -18,6 +18,7 @@ namespace QLNhaHang.Data.Repositories
         IKhachHangRepository khachHangRepository { get; }
         IThongTinHDRepository thongTinHDRepository { get; }
         ILoaiThucDonRepository loaiThucDonRepository { get; }
+        IRoleRepository roleRepository { get; }
         int Complete();
     }
     public class UnitOfWork : IUnitOfWork
@@ -36,6 +37,7 @@ namespace QLNhaHang.Data.Repositories
             khachHangRepository = new KhachHangRepository(_context);
             thongTinHDRepository = new ThongTinHDRepository(_context);
             loaiThucDonRepository = new LoaiThucDonRepository(_context);
+            roleRepository = new RoleRepository(_context);
         }
 
         public IBanRepository banRepository { get; }
@@ -55,6 +57,8 @@ namespace QLNhaHang.Data.Repositories
         public IThongTinHDRepository thongTinHDRepository { get; }
 
         public ILoaiThucDonRepository loaiThucDonRepository { get; }
+
+        public IRoleRepository roleRepository { get; }
 
         public int Complete()
         {
