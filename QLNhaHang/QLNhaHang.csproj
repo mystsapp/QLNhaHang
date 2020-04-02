@@ -465,6 +465,10 @@
     <Compile Include="Migrations\202004020234333_fixLoaiThucDon.designer.cs">
       <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004020420206_fixBan.cs" />
+    <Compile Include="Migrations\202004020420206_fixBan.designer.cs">
+      <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -535,6 +539,7 @@
     <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
+    <Content Include="Assets\js\Ban\indexController.js" />
     <Content Include="Assets\js\LoaiThucDon\createController.js" />
     <Content Include="Assets\js\LoaiThucDon\editController.js" />
     <Content Include="Assets\js\LoaiThucDon\indexController.js" />
@@ -2085,10 +2090,12 @@
     <Content Include="Views\LoaiThucDons\Create.cshtml" />
     <Content Include="Views\LoaiThucDons\Edit.cshtml" />
     <Content Include="Views\LoaiThucDons\Index.cshtml" />
+    <Content Include="Views\Bans\Create.cshtml" />
+    <Content Include="Views\Bans\Edit.cshtml" />
+    <Content Include="Views\Bans\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bans\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2166,6 +2173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004020234333_fixLoaiThucDon.resx">
       <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004020420206_fixBan.resx">
+      <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

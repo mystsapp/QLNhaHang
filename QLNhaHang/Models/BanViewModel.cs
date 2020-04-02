@@ -1,5 +1,6 @@
 ﻿using PagedList;
 using QLNhaHang.Data.Models;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace QLNhaHang.Models
@@ -8,6 +9,7 @@ namespace QLNhaHang.Models
     {
         public Ban Ban { get; set; }
         public IPagedList<Ban> Bans { get; set; }
+        public List<VanPhong> VanPhongs { get; set; }
         public string StrUrl { get; set; }
         [Remote("IsStringNameAvailable", "Bans", ErrorMessage = "Bàn này đã tồn tại")]
         public string TenBanCreate { get; set; }

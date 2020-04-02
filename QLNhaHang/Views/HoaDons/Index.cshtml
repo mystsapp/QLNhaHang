@@ -79,7 +79,7 @@
             </form>
             <br />
 
-            @if (Model.HoaDons != null)
+            @if (Model.HoaDons.Count != 0)
             {
                 <table class="table mytable text-nowrap" id="listAll">
                     <thead>
@@ -87,8 +87,8 @@
                         <tr class="table-info">
                             <th>
                                 @*<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
-            <input type="hidden" name="stringId" id="stringId" />
-            <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
+                                    <input type="hidden" name="stringId" id="stringId" />
+                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
 
                                 Xuất HD
 
@@ -111,43 +111,43 @@
                         @foreach (var item in Model.HoaDons)
                         {
 
-                        <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
-                            <td align="center">
-                                <div class="btn-group-sm">
+                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                                <td align="center">
+                                    <div class="btn-group-sm">
 
-                                    <a class="btn btn-outline-success" title="HD tự động" href="@Url.Action("HoaDonTudong", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-file-alt"></i></a>
-                                    <a class="btn btn-outline-info" title="HD tay" href="@Url.Action("HoaDonTay", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="far fa-file-alt"></i></a>
-                                    @*<button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>*@
-                                </div>
-                            </td>
-                            <td class="tdVal" data-id="@item.MaHD">@i</td>
+                                        <a class="btn btn-outline-success" title="HD tự động" href="@Url.Action("HoaDonTudong", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-file-alt"></i></a>
+                                        <a class="btn btn-outline-info" title="HD tay" href="@Url.Action("HoaDonTay", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="far fa-file-alt"></i></a>
+                                        @*<button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>*@
+                                    </div>
+                                </td>
+                                <td class="tdVal" data-id="@item.MaHD">@i</td>
 
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.TenKH)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
-                            <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
-                            <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
-                            @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
-                            <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.TenKH)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
+                                <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>
+                                <td class="tdVal" data-id="@item.MaHD">@string.Format("{0:0,0}", item.ThanhTienHD)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.NumberId)</td>
 
-                            <td>
-                                <form action="/HoaDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                <td>
+                                    <form action="/HoaDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                    <input type="hidden" name="id" value="@item.MaHD" />
-                                    <span id="confirmDeleteSpan_@item.MaHD" style="display: none">
-                                        <span class="text-dark">Xóa?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
-                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaHD', false)">No</a>
-                                    </span>
+                                        <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                        <input type="hidden" name="id" value="@item.MaHD" />
+                                        <span id="confirmDeleteSpan_@item.MaHD" style="display: none">
+                                            <span class="text-dark">Xóa?</span>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaHD', false)">No</a>
+                                        </span>
 
-                                    <span id="deleteSpan_@item.MaHD">
-                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaHD', true)"><i class="fas fa-trash-alt"></i></a>
-                                    </span>
-                                </form>
-                            </td>
+                                        <span id="deleteSpan_@item.MaHD">
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaHD', true)"><i class="fas fa-trash-alt"></i></a>
+                                        </span>
+                                    </form>
+                                </td>
 
-                        </tr>
+                            </tr>
                             i++;
 
                         }
@@ -156,7 +156,7 @@
             }
             else
             {
-                <span>No data.</span>
+                <span> Không có dử liệu trong bảng. </span>
             }
 
 

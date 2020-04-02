@@ -25,6 +25,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
             LoaiVM.StrUrl = Request.Url.AbsoluteUri.ToString();
+            ViewBag.searchString = searchString;
             if (id != 0)
             {
 

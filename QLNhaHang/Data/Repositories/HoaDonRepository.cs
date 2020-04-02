@@ -107,6 +107,7 @@ namespace QLNhaHang.Data.Repositories
             {
                 page--;
             }
+            page = (page == 0) ? 1 : page;
             var listPaged = list.OrderBy(x => x.NgayTao).ToPagedList(page ?? 1, pageSize);
             //if (page > listPaged.PageCount)
             //    page--;

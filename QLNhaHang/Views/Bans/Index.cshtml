@@ -1,4 +1,4 @@
-﻿@model QLNhaHang.Models.ThongTinHDViewModel
+﻿@model QLNhaHang.Models.BanViewModel
 @using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
@@ -27,12 +27,12 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                <i class="fas fa-list-alt text-warning"></i> Danh sách thông tin HD
+                <i class="fas fa-list-alt text-warning"></i> Danh sách bàn
 
             </h3>
 
             <div class="card-tools">
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "ThongTinHDs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "Bans", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/ThongTinHDs/Index" method="get" autocomplete="off">
+            <form action="/Bans/Index" method="get" autocomplete="off">
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -56,7 +56,7 @@
                                 <input class="form-control" placeholder="Type name, Id..." name="searchString" value="@ViewBag.searchString" />
                             </div>
 
-                            <input type="hidden" name="id" id="hidTTHD" />
+                            <input type="hidden" name="maBan" id="hidMaBan" />
                             <input type="hidden" name="page" id="hidPage" />
                             <div class="col-3">
                                 <br />
@@ -71,48 +71,47 @@
             <br />
 
             <div style="overflow-x:auto;">
-                @if (Model.ThongTinHDs.Count != 0)
+                @if (Model.Bans.Count() != 0)
                 {
                     <table class="table mytable text-nowrap" id="listAll">
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().MauSo)</th>
-                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().KyHieu)</th>
-                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().QuyenSo)</th>
-                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().So)</th>
-                                <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().SoThuTu)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().MaBan)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().TenBan)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().SoLuongKhach)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().VanPhongId)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().GhiChu)</th>
                                 <th>#</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{int i = 1;}
-                            @foreach (var item in Model.ThongTinHDs)
+                            @foreach (var item in Model.Bans)
                             {
 
                                 <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td class="tdVal" data-id="@item.Id">@i</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MauSo)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.KyHieu)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.QuyenSo)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.So)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.SoThuTu)</td>
-
+                                    <td class="tdVal" data-id="@item.MaBan">@i</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.MaBan)</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.TenBan)</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.SoLuongKhach)</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.VanPhong.Name)</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.GhiChu)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <form action="/ThongTinHDs/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                        <form action="/Bans/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
                                             <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                            <input type="hidden" name="id" value="@item.Id" />
-                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                            <input type="hidden" name="maBan" value="@item.MaBan" />
+                                            <span id="confirmDeleteSpan_@item.MaBan" style="display: none">
                                                 <span class="text-dark text-bold">Xóa?</span>
                                                 <button type="submit" class="btn btn-danger">Yes</button>
-                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaBan', false)">No</a>
                                             </span>
 
-                                            <span id="deleteSpan_@item.Id">
-                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                            <span id="deleteSpan_@item.MaBan">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaBan', true)"><i class="fas fa-trash-alt"></i></a>
                                             </span>
                                         </form>
                                     </td>
@@ -126,7 +125,7 @@
                 {
                     <span> Không có dử liệu trong bảng. </span>
                 }
-                @Html.PagedListPager(Model.ThongTinHDs, page => Url.Action("Index",
+                @Html.PagedListPager(Model.Bans, page => Url.Action("Index",
                                 new
                                      {
                                          page,
@@ -145,17 +144,17 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            @if (Model.ThongTinHD.KyHieu != null)
+            @if (Model.Ban.TenBan != null)
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết HD -<b> @Model.ThongTinHD.KyHieu</b></h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết bàn -<b> @Model.Ban.TenBan</b></h3>
             }
             else
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết HD </h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết bàn </h3>
             }
 
             <div class="card-tools">
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "ThongTinHDs", new { strUrl = Model.StrUrl, id = Model.ThongTinHD.Id })"><i class="fas fa-edit"></i> Cập nhật</a>
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Bans", new { strUrl = Model.StrUrl, maBan = Model.Ban.MaBan })"><i class="fas fa-edit"></i> Cập nhật</a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -171,34 +170,33 @@
                 <div class="form-group row">
 
                     <div class="col-2">
-                        Mẩu số
-                        @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
+                        Mã Bàn
+                        @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-2">
-                        Ký Hiệu
-                        @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
+                        Tên bàn
+                        @Html.TextBoxFor(model => model.Ban.TenBan, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.TenBan, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-2">
-                        Quyển số
-                        @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
+                        Số lượng khách
+                        @Html.TextBoxFor(model => model.Ban.SoLuongKhach, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.SoLuongKhach, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-2">
-                        Số
-                        @Html.TextBoxFor(model => model.ThongTinHD.So, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                        Văn phòng
+                        @Html.TextBoxFor(model => model.Ban.VanPhong.Name, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.VanPhong.Name, "", new { @class = "text-danger" })
                     </div>
 
-                    <div class="col-2">
-                        Số Thứ Tự
-                        @Html.TextBoxFor(model => model.ThongTinHD.SoThuTu, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThongTinHD.SoThuTu, "", new { @class = "text-danger" })
+                    <div class="col-4">
+                        Ghi chú
+                        @Html.TextBoxFor(model => model.Ban.GhiChu, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.GhiChu, "", new { @class = "text-danger" })
                     </div>
-
 
                 </div>
 
@@ -213,7 +211,7 @@
 
 @section Scripts{
 
-    <script src="~/Assets/js/ThongTinHD/indexController.js"></script>
+    <script src="~/Assets/js/Ban/indexController.js"></script>
     <script>
         function confirmDelete(uniqueId, isDeleteClicked) {
             var deleteSpan = 'deleteSpan_' + uniqueId;

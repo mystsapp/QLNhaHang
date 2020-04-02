@@ -133,7 +133,7 @@
                 }
                 else
                 {
-                    <span> No data. </span>
+                    <span> Chưa có dử liệu trong bảng. </span>
                 }
             </div>
             <div class="col-2 float-left">
@@ -162,21 +162,21 @@
                     </div>
 
                     @*<div class="mb-1">
-                        <form action="/ThucDons/Index" id="frmThucDon">
+                            <form action="/ThucDons/Index" id="frmThucDon">
 
-                            
-                            <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
-                            <button class="btn btn-outline-warning btn-block" id="btnThucDon">
-                                <div class="float-left mr-1">
-                                    <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/thucdon.png" alt="Card image" />
-                                </div>
-                                
-                                <div class="float-left font-weight-bold mt-1">
-                                    Thực đơn <br /> (F2)
-                                </div>
-                            </button>
-                        </form>
-                    </div>*@
+
+                                <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
+                                <button class="btn btn-outline-warning btn-block" id="btnThucDon">
+                                    <div class="float-left mr-1">
+                                        <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/thucdon.png" alt="Card image" />
+                                    </div>
+
+                                    <div class="float-left font-weight-bold mt-1">
+                                        Thực đơn <br /> (F2)
+                                    </div>
+                                </button>
+                            </form>
+                        </div>*@
 
                     <div class="mb-1">
                         <form action="/MonDaGois/TinhTien" id="frmTinhTien">
@@ -200,24 +200,24 @@
 
                     @*<div class="mb-1">
 
-                        <form action="/MonDaGois/InHoaDon" id="frmInHoaDon">
-                            @if (Model.Ban != null)
-                            {
-                                <input type="hidden" name="maBan" id="hidMaBanInHoaDon" value="@Model.Ban.MaBan" />
-                            }
-                            
-                            <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
-                            <button type="button" class="btn btn-outline-warning btn-block" id="btnInHoaDon">
-                                <div class="float-left mr-1">
-                                    <img class="card-img-top toolImage" style="height: 50px; width: 46px" src="/Assets/Images/inhoadon.png" alt="Card image" />
-                                </div>
-                                
-                                <div class="float-left font-weight-bold mt-1">
-                                    In hóa đơn<br />(F4)
-                                </div>
-                            </button>
-                        </form>
-                    </div>*@
+                            <form action="/MonDaGois/InHoaDon" id="frmInHoaDon">
+                                @if (Model.Ban != null)
+                                {
+                                    <input type="hidden" name="maBan" id="hidMaBanInHoaDon" value="@Model.Ban.MaBan" />
+                                }
+
+                                <input type="hidden" name="strUrl" value="@ViewBag.strUrl" />
+                                <button type="button" class="btn btn-outline-warning btn-block" id="btnInHoaDon">
+                                    <div class="float-left mr-1">
+                                        <img class="card-img-top toolImage" style="height: 50px; width: 46px" src="/Assets/Images/inhoadon.png" alt="Card image" />
+                                    </div>
+
+                                    <div class="float-left font-weight-bold mt-1">
+                                        In hóa đơn<br />(F4)
+                                    </div>
+                                </button>
+                            </form>
+                        </div>*@
 
                     <div class="mb-1">
 

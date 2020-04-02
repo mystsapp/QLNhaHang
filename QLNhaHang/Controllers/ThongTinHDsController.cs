@@ -26,6 +26,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Index(int id = 0, string searchString = null, string strUrl = null, int page = 1)
         {
             ThongTinHDVM.StrUrl = Request.Url.AbsoluteUri.ToString();
+            ViewBag.searchString = searchString;
             ///// for delete
             if (id != 0)
             {

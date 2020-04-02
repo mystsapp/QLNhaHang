@@ -71,7 +71,7 @@
             <br />
 
             <div style="overflow-x:auto;">
-                @if (Model.LoaiThucDons != null)
+                @if (Model.LoaiThucDons.Count != 0)
                 {
                     <table class="table mytable text-nowrap" id="listAll">
                         <thead>
@@ -93,10 +93,10 @@
 
                                     <td class="tdVal" data-id="@item.Id">@i</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.TenLoai)</td>
-                                    <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}",item.PhuPhi)</td>
+                                    <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}", item.PhuPhi)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MoTa)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
-                                    
+
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
                                         <form action="/LoaiThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
@@ -122,7 +122,7 @@
                 }
                 else
                 {
-                    <span> No data. </span>
+                    <span> Không có dử liệu trong bảng. </span>
                 }
                 @Html.PagedListPager(Model.LoaiThucDons, page => Url.Action("Index",
                                 new
@@ -194,12 +194,12 @@
 
                 </div>
 
-                </div>
-
             </div>
 
         </div>
-        <!-- /.card-body -->
+
+    </div>
+    <!-- /.card-body -->
     </div>
     <!-- /.card -->
 </section>

@@ -19,13 +19,15 @@ namespace QLNhaHang.Controllers
             _unitOfWork = unitOfWork;
             BanVM = new BanViewModel()
             {
-                Ban = new Data.Models.Ban()
+                Ban = new Data.Models.Ban(),
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
             };
         }
         // GET: Bans
         public ActionResult Index(string maBan = null, string searchString = null, int page = 1)
         {
             BanVM.StrUrl = Request.Url.AbsoluteUri.ToString();
+            ViewBag.searchString = searchString;
             if (!string.IsNullOrEmpty(maBan))
             {
 
@@ -43,6 +45,7 @@ namespace QLNhaHang.Controllers
             }
 
             BanVM.Bans = _unitOfWork.banRepository.ListBan(searchString, page);
+            
             return View(BanVM);
         }
 
@@ -59,26 +62,26 @@ namespace QLNhaHang.Controllers
             {
                 BanVM.Ban.MaBan = GetNextId.NextID("", "00120");
             }
-            TempData["gioiTinh"] = ListGioiTinh();
-            KhachHangVM.StrUrl = strUrl;
-            return View(KhachHangVM);
+            
+            BanVM.StrUrl = strUrl;
+            return View(BanVM);
         }
 
         [HttpPost, ActionName("Create")]
-        public ActionResult CreatePost(KhachHangViewModel model)
+        public ActionResult CreatePost(BanViewModel model)
         {
-            model.KhachHang.NgayTao = DateTime.Now;
-            model.KhachHang.NguoiTao = "Admin";
-            model.KhachHang.TenKH = model.TenKHCreate;
-            _unitOfWork.khachHangRepository.Create(model.KhachHang);
+            model.Ban.NgayTao = DateTime.Now;
+            model.Ban.NguoiTao = "Admin";
+            model.Ban.TenBan = model.TenBanCreate;
+            _unitOfWork.banRepository.Create(model.Ban);
             _unitOfWork.Complete();
             SetAlert("Thêm mới thành công.", "success");
             return Redirect(model.StrUrl);
         }
 
-        public JsonResult IsStringNameAvailable(string TenKHCreate)
+        public JsonResult IsStringNameAvailable(string TenBanCreate)
         {
-            var boolName = _unitOfWork.khachHangRepository.Find(x => x.TenKH.Trim().ToLower() == TenKHCreate.Trim().ToLower()).FirstOrDefault();
+            var boolName = _unitOfWork.banRepository.Find(x => x.TenBan.Trim().ToLower() == TenBanCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -89,67 +92,46 @@ namespace QLNhaHang.Controllers
             }
         }
 
-        public JsonResult IsStringNameEditAvailable(string TenKHEdit)
-        {
-            var boolName = _unitOfWork.khachHangRepository.Find(x => x.TenKH.ToLower() == TenKHEdit.ToLower()).FirstOrDefault();
-            if (boolName == null)
-            {
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(false, JsonRequestBehavior.AllowGet);
-            }
-        }
 
-        public ActionResult Edit(string strUrl, string maKH)
+        public ActionResult Edit(string strUrl, string maBan)
         {
-            KhachHangVM.KhachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);
-            if (KhachHangVM.KhachHang == null)
+            BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            if (BanVM.Ban == null)
             {
-                ViewBag.ErrorMessage = "Khách hàng này không tồn tại";
+                ViewBag.ErrorMessage = "Bàn này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
-            TempData["gioiTinh"] = ListGioiTinh();
-            KhachHangVM.StrUrl = strUrl;
-            //KhachHangVM.TenKHEdit = KhachHangVM.KhachHang.TenKH;
-            return View(KhachHangVM);
+
+            BanVM.StrUrl = strUrl;
+            
+            return View(BanVM);
         }
 
         [HttpPost, ActionName("Edit")]
-        public ActionResult EditPost(string strUrl, string maKH, KhachHangViewModel model)
+        public ActionResult EditPost(string strUrl, string maBan, BanViewModel model)
         {
-            if (maKH != model.KhachHang.MaKH)
+            if (maBan != model.Ban.MaBan)
             {
-                ViewBag.ErrorMessage = "Khách hàng này không tồn tại";
+                ViewBag.ErrorMessage = "Bàn này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
-            //model.KhachHang.TenKH = model.TenKHEdit;
-            _unitOfWork.khachHangRepository.Update(model.KhachHang);
+            
+            _unitOfWork.banRepository.Update(model.Ban);
             _unitOfWork.Complete();
             SetAlert("Cập nhật thành công", "success");
             return Redirect(strUrl);
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeletePost(string strUrl, string maKH)
+        public ActionResult DeletePost(string strUrl, string maBan)
         {
-            var khachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);
-            _unitOfWork.khachHangRepository.Delete(khachHang);
+            var ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            _unitOfWork.banRepository.Delete(ban);
             _unitOfWork.Complete();
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-        private List<GioiTinhViewModel> ListGioiTinh()
-        {
-            return new List<GioiTinhViewModel>()
-            {
-                new GioiTinhViewModel() { Id = "None", Name = "--None--" },
-                new GioiTinhViewModel() { Id = "Nam", Name = "Nam" },
-                new GioiTinhViewModel() { Id = "Nử", Name = "Nử" }
-            };
-        }
-
+        
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

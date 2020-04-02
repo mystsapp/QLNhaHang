@@ -71,7 +71,7 @@
             <br />
 
             <div style="overflow-x:auto;">
-                @if (Model.KhachHangs != null)
+                @if (Model.KhachHangs.Count != 0)
                 {
                     <table class="table mytable text-nowrap" id="listAll">
                         <thead>
@@ -130,7 +130,7 @@
                 }
                 else
                 {
-                    <span> No data. </span>
+                    <span> Không có dử liệu trong bảng. </span>
                 }
                 @Html.PagedListPager(Model.KhachHangs, page => Url.Action("Index",
                                 new

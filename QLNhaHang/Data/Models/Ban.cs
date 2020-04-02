@@ -38,5 +38,13 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("VanPhongId")]
         public virtual VanPhong VanPhong { get; set; }
 
+        [DisplayName("Ngày tạo")]
+        public DateTime NgayTao { get; set; }
+
+        [DisplayName("Người tạo")]
+        [MaxLength(50), Column(TypeName = "nvarchar")]
+        [StringLength(50)]
+        public string NguoiTao { get; set; }
+
     }
 }
