@@ -1,0 +1,243 @@
+﻿@model QLNhaHang.Models.LoaiThucDonViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách khách hàng</li>
+                    </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-list-alt text-warning"></i> Danh sách Loại
+
+            </h3>
+
+            <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "LoaiThucDons", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="/LoaiThucDons/Index" method="get" autocomplete="off">
+
+                <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
+                    @* we will add search criteria *@
+
+                    <div class="col-12">
+                        <div class="row" style="padding-top: 10px;">
+
+                            <div class="col-3">
+                                Nhập thông tin
+                                @*@Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control", @value="@ViewData["currentFilter"]" } })*@
+                                <input class="form-control" placeholder="Type name, Id..." name="searchString" value="@ViewBag.searchString" />
+                            </div>
+
+                            <input type="hidden" name="id" id="hidId" />
+                            <input type="hidden" name="page" id="hidPage" />
+                            <div class="col-3">
+                                <br />
+                                <button type="submit" class="btn btn-primary form-control" id="btnSubmit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+
+            <div style="overflow-x:auto;">
+                @if (Model.LoaiThucDons != null)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().TenLoai)</th>
+                                <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().PhuPhi)</th>
+                                <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().MoTa)</th>
+                                <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().GhiChu)</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.LoaiThucDons)
+                            {
+
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td class="tdVal" data-id="@item.Id">@i</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.TenLoai)</td>
+                                    <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}",item.PhuPhi)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MoTa)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
+                                    
+                                    <td>
+                                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
+                                        <form action="/LoaiThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
+
+                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                <span class="text-dark text-bold">Xóa?</span>
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                            </span>
+
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> No data. </span>
+                }
+                @Html.PagedListPager(Model.LoaiThucDons, page => Url.Action("Index",
+                                new
+                                     {
+                                         page,
+                                         @searchString = @ViewBag.searchString
+                                     }))
+            </div>
+
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.LoaiThucDon.TenLoai != null)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách -<b> @Model.LoaiThucDon.TenLoai</b></h3>
+            }
+            else
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách </h3>
+            }
+
+            <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "LoaiThucDons", new { strUrl = Model.StrUrl, id = Model.LoaiThucDon.Id })"><i class="fas fa-edit"></i> Cập nhật</a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="p-4 border rounded">
+
+                <div class="form-group row">
+
+                    <div class="col-2">
+                        Tên loại
+                        @Html.TextBoxFor(model => model.LoaiThucDon.TenLoai, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Phụ phí
+                        @Html.TextBoxFor(model => model.LoaiThucDon.PhuPhi, "{0:N0}", new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.LoaiThucDon.PhuPhi, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Mô tả
+                        @Html.TextBoxFor(model => model.LoaiThucDon.MoTa, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.LoaiThucDon.MoTa, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Ghi chú
+                        @Html.TextBoxFor(model => model.LoaiThucDon.GhiChu, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.LoaiThucDon.GhiChu, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/LoaiThucDon/indexController.js"></script>
+    <script>
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+    </style>
+}
+

@@ -22,7 +22,7 @@ namespace QLNhaHang.Controllers
             };
         }
         // GET: LoaiThucDons
-        public ActionResult Index(int id = 0, string searchString = null, string strUrl = null, int page = 1)
+        public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
             LoaiVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             if (id != 0)
@@ -54,6 +54,11 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePost(LoaiThucDonViewModel model)
         {
+            if (!string.IsNullOrEmpty(model.PhuPhi))
+            {
+                model.LoaiThucDon.PhuPhi = decimal.Parse(model.PhuPhi);
+            }
+            
             model.LoaiThucDon.NgayTao = DateTime.Now;
             model.LoaiThucDon.NguoiTao = "Admin";
             model.LoaiThucDon.TenLoai = model.TenLoaiCreate;

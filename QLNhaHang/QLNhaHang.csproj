@@ -346,6 +346,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BanHangsController.cs" />
+    <Compile Include="Controllers\BansController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiThucDonsController.cs" />
@@ -460,10 +461,15 @@
     <Compile Include="Migrations\202004010930130_TenMonnVarChar.designer.cs">
       <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004020234333_fixLoaiThucDon.cs" />
+    <Compile Include="Migrations\202004020234333_fixLoaiThucDon.designer.cs">
+      <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
+    <Compile Include="Models\BanViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\LoaiThucDonViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
@@ -529,6 +535,9 @@
     <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
+    <Content Include="Assets\js\LoaiThucDon\createController.js" />
+    <Content Include="Assets\js\LoaiThucDon\editController.js" />
+    <Content Include="Assets\js\LoaiThucDon\indexController.js" />
     <Content Include="Assets\js\ThucDon\editController.js" />
     <Content Include="Assets\js\ThucDon\createController.js" />
     <Content Include="Assets\js\ThucDon\indexController.js" />
@@ -2073,10 +2082,13 @@
     <Content Include="Views\ThucDons\Create.cshtml" />
     <Content Include="Views\ThucDons\Edit.cshtml" />
     <Content Include="Views\ThucDons\Index.cshtml" />
+    <Content Include="Views\LoaiThucDons\Create.cshtml" />
+    <Content Include="Views\LoaiThucDons\Edit.cshtml" />
+    <Content Include="Views\LoaiThucDons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LoaiThucDons\" />
+    <Folder Include="Views\Bans\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2151,6 +2163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004010930130_TenMonnVarChar.resx">
       <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004020234333_fixLoaiThucDon.resx">
+      <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

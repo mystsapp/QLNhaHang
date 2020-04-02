@@ -14,7 +14,8 @@ namespace QLNhaHang.Models
         public LoaiThucDon LoaiThucDon { get; set; }
         public string StrUrl { get; set; }
 
-        [Remote("IsStringNameAvailable", "KhachHangs", ErrorMessage = "Tên KH đã tồn tại")]
+        [Remote("IsStringNameAvailable", "LoaiThucDons", ErrorMessage = "Loại này đã tồn tại")]
         public string TenLoaiCreate { get; set; }
+        public string PhuPhi { get; set; }
     }
 }
