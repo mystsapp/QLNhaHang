@@ -2096,10 +2096,12 @@
     <Content Include="Views\Bans\Create.cshtml" />
     <Content Include="Views\Bans\Edit.cshtml" />
     <Content Include="Views\Bans\Index.cshtml" />
+    <Content Include="Views\VanPhongs\Create.cshtml" />
+    <Content Include="Views\VanPhongs\Edit.cshtml" />
+    <Content Include="Views\VanPhongs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\VanPhongs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

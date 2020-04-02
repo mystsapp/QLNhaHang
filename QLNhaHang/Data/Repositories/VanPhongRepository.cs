@@ -1,12 +1,14 @@
 ﻿using Data.Interfaces;
 using PagedList;
 using QLNhaHang.Data.Models;
+using System;
+using System.Linq;
 
 namespace QLNhaHang.Data.Repositories
 {
     public interface IVanPhongRepository : IRepository<VanPhong>
     {
-        IPagedList<VanPhong> ListVanPhong(string searchString, int page);
+        IPagedList<VanPhong> ListVanPhong(string searchString, int? page);
     }
 
     public class VanPhongRepository : Repository<VanPhong>, IVanPhongRepository
@@ -15,7 +17,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<VanPhong> ListVanPhong(string searchString, int page)
+        public IPagedList<VanPhong> ListVanPhong(string searchString, int? page)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -23,20 +25,13 @@ namespace QLNhaHang.Data.Repositories
 
             // retrieve list from database/whereverand
 
-            var list = GetAllIncludeOne(x => x.);
+            var list = GetAllIncludeOne(x => x.Role).AsQueryable();
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))
             {
-                list = list.Where(x => x.TenMon.ToLower().Contains(searchString.ToLower()) ||
-                                       x.LoaiThucDon.TenLoai.ToLower().Contains(searchString.ToLower()) ||
-                                       x.DonViTinh.ToLower().Contains(searchString.ToLower()));
+                list = list.Where(x => x.Name.ToLower().Contains(searchString.ToLower()));
             }
-            decimal donGia;
-            if (decimal.TryParse(searchString, out donGia))
-            {
-                list = list.Where(x => x.GiaTien == donGia);
-            }
-
+            
             var count = list.Count();
 
             // page the list

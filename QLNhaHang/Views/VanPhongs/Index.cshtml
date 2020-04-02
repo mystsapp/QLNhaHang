@@ -1,0 +1,246 @@
+﻿@model QLNhaHang.Models.VanPhongViewModel
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách khách hàng</li>
+                    </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-list-alt text-warning"></i> Danh sách VP
+            </h3>
+
+            <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "VanPhongs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <form action="/ThucDons/Index" method="get" autocomplete="off">
+
+                <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
+                    @* we will add search criteria *@
+
+                    <div class="col-12">
+                        <div class="row" style="padding-top: 10px;">
+
+                            <div class="col-3">
+                                Nhập thông tin
+                                @*@Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control", @value="@ViewData["currentFilter"]" } })*@
+                                <input class="form-control" placeholder="Type name, Id..." name="searchString" value="@ViewBag.searchString" />
+                            </div>
+
+                            <input type="hidden" name="id" id="hidId" />
+                            <input type="hidden" name="page" id="hidPage" />
+                            <div class="col-3">
+                                <br />
+                                <button type="submit" class="btn btn-primary form-control" id="btnSubmit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+
+            <div style="overflow-x:auto;">
+                @if (Model.VanPhongs.Count() != 0)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().MaVP)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DiaChi)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DienThoai)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role.Name)</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.VanPhongs)
+                            {
+
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td class="tdVal" data-id="@item.Id">@i</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Name)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MaVP)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DiaChi)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DienThoai)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Role.Name)</td>
+                                    <td>
+                                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
+                                        <form action="/VanPhongs/Delete" @*asp-route-id="@item.Id"*@ method="post">
+
+                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                <span class="text-dark text-bold">Xóa?</span>
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                            </span>
+
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> Không có dử liệu trong bảng. </span>
+                }
+                @Html.PagedListPager(Model.VanPhongs, page => Url.Action("Index",
+                                new
+                                     {
+                                         page,
+                                         @searchString = @ViewBag.searchString
+                                     }))
+            </div>
+
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.VanPhong.Name != null)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết VP -<b> @Model.VanPhong.Name</b></h3>
+            }
+            else
+            {
+        <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết VP </h3>
+            }
+
+            <div class="card-tools">
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "VanPhongs", new { strUrl = Model.StrUrl, id = Model.VanPhong.Id })"><i class="fas fa-edit"></i> Cập nhật</a>
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="p-4 border rounded">
+
+                <div class="form-group row">
+
+                    <div class="col-2">
+                        Tên VP
+                        @Html.TextBoxFor(model => model.VanPhong.TenMon, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ThucDon.TenMon, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Mã VP
+                        @Html.TextBoxFor(model => model.ThucDon.GiaTien, "{0:N0}", new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ThucDon.GiaTien, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Địa chỉ
+                        @Html.TextBoxFor(model => model.ThucDon.DonViTinh, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ThucDon.DonViTinh, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-2">
+                        Điện thoại
+                        @Html.TextBoxFor(model => model.ThucDon.LoaiThucDon.TenLoai, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ThucDon.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-4">
+                        Role
+                        @Html.TextAreaFor(model => model.ThucDon.GhiChu, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.ThucDon.GhiChu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/ThucDon/indexController.js"></script>
+    <script>
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+    </style>
+}
+
