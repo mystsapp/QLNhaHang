@@ -1,4 +1,4 @@
-﻿@model QLNhaHang.Models.ThucDonViewModel
+﻿@model QLNhaHang.Models.VanPhongViewModel
 @using QLNhaHang.Data.Models
 @{
     ViewBag.Title = "Create";
@@ -13,7 +13,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Thêm mới thực đơn</li>
+                    <li class="breadcrumb-item active">Thêm mới văn phòng</li>
                 </ol>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thêm mới thực đơn</h3>
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thêm mới văn phòng</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -52,37 +52,36 @@
                     <div class="form-group row">
 
                         <div class="col-6">
-                            Tên món
-                            @Html.TextBoxFor(model => model.TenMonCreate, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.TenMonCreate, "", new { @class = "text-danger" })
+                            Tên VP
+                            @Html.TextBoxFor(model => model.TenVPCreate, null, new { @class = "form-control "})
+                            @Html.ValidationMessageFor(model => model.TenVPCreate, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-6">
-                            Giá tiền
-                            @Html.TextBoxFor(model => model.GiaTien, null, new { @class = "form-control numbers" })
-                            @Html.ValidationMessageFor(model => model.GiaTien, "", new { @class = "text-danger" })
+                            Mã VP
+                            @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.MaVP, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-6">
-                            Đơn vị tính
-                            @Html.TextBoxFor(model => model.ThucDon.DonViTinh, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThucDon.DonViTinh, "", new { @class = "text-danger" })
+                            Địa chỉ
+                            @Html.TextBoxFor(model => model.VanPhong.DiaChi, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.DiaChi, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-6">
-                            Tên loại
-
-                            @Html.DropDownListFor(model => model.ThucDon.MaLoaiId,
-                                        new SelectList(Model.LoaiThucDons, "Id", "TenLoai"),
-                                        htmlAttributes: new { @class = "form-control border-input " })
+                            Điện thoại
+                            @Html.TextBoxFor(model => model.VanPhong.DienThoai, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.DienThoai, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-6">
-                            Ghi chú
-                            @Html.TextAreaFor(model => model.ThucDon.GhiChu, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThucDon.GhiChu, "", new { @class = "text-danger" })
+                            Role
+                            @Html.DropDownListFor(model => model.VanPhong.Role,
+                                         new SelectList(Model.Roles, "Name", "Name"),
+                                         htmlAttributes: new { @class = "form-control border-input " })
                         </div>
                     </div>
 
@@ -102,6 +101,6 @@
 <!-- /.content -->
 
 @section Scripts{
-    <script src="~/Assets/js/ThucDon/createController.js"></script>
+    <script src="~/Assets/js/VanPhong/createController.js"></script>
     
 }

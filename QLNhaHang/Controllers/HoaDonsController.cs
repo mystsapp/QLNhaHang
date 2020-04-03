@@ -251,6 +251,7 @@ namespace QLNhaHang.Controllers
                 x.TenDonVi,
                 x.MaSoThue,
                 x.SoTien,
+                x.NoiDung,
                 MaVP = x.VanPhong.MaVP,
                 TenVP = x.VanPhong.Name,
                 DiaChiVP = x.VanPhong.DiaChi,

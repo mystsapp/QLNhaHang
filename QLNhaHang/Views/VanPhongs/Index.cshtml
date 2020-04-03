@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/ThucDons/Index" method="get" autocomplete="off">
+            <form action="/VanPhongs/Index" method="get" autocomplete="off">
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -80,7 +80,7 @@
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().MaVP)</th>
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DiaChi)</th>
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DienThoai)</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role.Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role)</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -96,7 +96,7 @@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MaVP)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DiaChi)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DienThoai)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Role.Name)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Role)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
                                         <form action="/VanPhongs/Delete" @*asp-route-id="@item.Id"*@ method="post">
@@ -170,32 +170,32 @@
 
                     <div class="col-2">
                         Tên VP
-                        @Html.TextBoxFor(model => model.VanPhong.TenMon, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThucDon.TenMon, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.VanPhong.Name, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.VanPhong.Name, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-2">
                         Mã VP
-                        @Html.TextBoxFor(model => model.ThucDon.GiaTien, "{0:N0}", new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThucDon.GiaTien, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.VanPhong.MaVP, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-2">
                         Địa chỉ
-                        @Html.TextBoxFor(model => model.ThucDon.DonViTinh, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThucDon.DonViTinh, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.VanPhong.DiaChi, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.VanPhong.DiaChi, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-2">
                         Điện thoại
-                        @Html.TextBoxFor(model => model.ThucDon.LoaiThucDon.TenLoai, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThucDon.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.VanPhong.DienThoai, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.VanPhong.DienThoai, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-4">
                         Role
-                        @Html.TextAreaFor(model => model.ThucDon.GhiChu, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.ThucDon.GhiChu, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.VanPhong.Role, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.VanPhong.Role, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -210,7 +210,7 @@
 
 @section Scripts{
 
-    <script src="~/Assets/js/ThucDon/indexController.js"></script>
+    <script src="~/Assets/js/VanPhong/indexController.js"></script>
     <script>
         function confirmDelete(uniqueId, isDeleteClicked) {
             var deleteSpan = 'deleteSpan_' + uniqueId;

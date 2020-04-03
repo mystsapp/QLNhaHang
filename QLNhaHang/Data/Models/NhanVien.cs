@@ -62,13 +62,13 @@ namespace QLNhaHang.Data.Models
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         public string NguoiTao { get; set; }
-        public DateTime? Ngaytao { get; set; }
+        public DateTime? NgayTao { get; set; }
 
         [DisplayName("Người cập nhật")]
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         public string NguoiCapNhat { get; set; }
-        public DateTime? Ngaycapnhat { get; set; }
+        public DateTime? NgayCapNhat { get; set; }
 
         [DisplayName("Role")]
         public int RoleId { get; set; }

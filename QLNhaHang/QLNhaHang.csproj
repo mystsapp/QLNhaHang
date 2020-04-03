@@ -345,6 +345,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\BansController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
@@ -374,6 +375,7 @@
     <Compile Include="Data\Repositories\KhachHangRepository.cs" />
     <Compile Include="Data\Repositories\LoaiThucDonRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
+    <Compile Include="Data\Repositories\NhanVienRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\RoleRepository.cs" />
     <Compile Include="Data\Repositories\ThongTinHDRepository.cs" />
@@ -471,6 +473,14 @@
     <Compile Include="Migrations\202004020420206_fixBan.designer.cs">
       <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004030352389_fixVP.cs" />
+    <Compile Include="Migrations\202004030352389_fixVP.designer.cs">
+      <DependentUpon>202004030352389_fixVP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004030359296_fixVPRole.cs" />
+    <Compile Include="Migrations\202004030359296_fixVPRole.designer.cs">
+      <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -479,6 +489,7 @@
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\LoaiThucDonViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
+    <Compile Include="Models\NhanVienViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
     <Compile Include="Models\VanPhongViewModel.cs" />
     <Compile Include="Models\ThucDonViewModel.cs" />
@@ -519,6 +530,7 @@
     <Compile Include="Utilities\CrystalReportPdfResult.cs" />
     <Compile Include="Utilities\EntityToTable.cs" />
     <Compile Include="Utilities\GetNextId.cs" />
+    <Compile Include="Utilities\MaHoaSHA1.cs" />
     <Compile Include="Utilities\SessionExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -546,6 +558,12 @@
     <Content Include="Assets\js\LoaiThucDon\createController.js" />
     <Content Include="Assets\js\LoaiThucDon\editController.js" />
     <Content Include="Assets\js\LoaiThucDon\indexController.js" />
+    <Content Include="Assets\js\NhanVien\createController.js" />
+    <Content Include="Assets\js\NhanVien\editController.js" />
+    <Content Include="Assets\js\NhanVien\indexController.js" />
+    <Content Include="Assets\js\VanPhong\createController.js" />
+    <Content Include="Assets\js\VanPhong\editController.js" />
+    <Content Include="Assets\js\VanPhong\indexController.js" />
     <Content Include="Assets\js\ThucDon\editController.js" />
     <Content Include="Assets\js\ThucDon\createController.js" />
     <Content Include="Assets\js\ThucDon\indexController.js" />
@@ -2099,6 +2117,9 @@
     <Content Include="Views\VanPhongs\Create.cshtml" />
     <Content Include="Views\VanPhongs\Edit.cshtml" />
     <Content Include="Views\VanPhongs\Index.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2182,6 +2203,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004020420206_fixBan.resx">
       <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004030352389_fixVP.resx">
+      <DependentUpon>202004030352389_fixVP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004030359296_fixVPRole.resx">
+      <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
