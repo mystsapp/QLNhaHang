@@ -232,16 +232,21 @@
 
                     <div class="col-2">
                         Trạng thái
-                        @if (Model.NhanVien.TrangThai)
+                        @if (Model.NhanVien.MaNV != null)
                         {
-                            <br />
-                            <span class=" badge badge-success">Kích hoạt</span>
+                            if (Model.NhanVien.TrangThai)
+                            {
+                                <br />
+                                <span class=" badge badge-success">Kích hoạt</span>
+                            }
+                            if (!Model.NhanVien.TrangThai)
+                            {
+                                <br />
+                                <span class=" badge badge-danger">khóa</span>
+                            }
                         }
-                        else
-                        {
-                            <br />
-                            <span class=" badge badge-danger">khóa</span>
-                        }
+
+
                     </div>
 
                     <div class="col-2">
@@ -250,7 +255,7 @@
                     </div>
                     <div class="col-2">
                         Người cập nhật
-                        @Html.TextBoxFor(model => model.NhanVien.NgayCapNhat, new { @class = "form-control ", @readonly = "true" })
+                        @Html.TextBoxFor(model => model.NhanVien.NguoiCapNhat, new { @class = "form-control ", @readonly = "true" })
                     </div>
                 </div>
                 

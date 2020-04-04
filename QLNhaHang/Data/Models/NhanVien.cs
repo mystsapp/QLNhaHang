@@ -16,11 +16,14 @@ namespace QLNhaHang.Data.Models
         public string MaNV { get; set; }
 
         [DisplayName("Họ tên")]
+        [Required(ErrorMessage = "Họ tên không được để trống")]
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         public string HoTen { get; set; }
 
-        [DisplayName("Ngày sinh")]
+        //[DisplayName("Ngày sinh")]
+        //[DataType(DataType.Date, ErrorMessage = "abcd")]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? NgaySinh { get; set; }
 
         [DisplayName("Giới tính")]

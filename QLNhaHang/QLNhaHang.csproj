@@ -481,6 +481,10 @@
     <Compile Include="Migrations\202004030359296_fixVPRole.designer.cs">
       <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004040339518_fixNVAtr.cs" />
+    <Compile Include="Migrations\202004040339518_fixNVAtr.designer.cs">
+      <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
@@ -2209,6 +2213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004030359296_fixVPRole.resx">
       <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004040339518_fixNVAtr.resx">
+      <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

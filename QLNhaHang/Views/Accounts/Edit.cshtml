@@ -50,7 +50,7 @@
                     @Html.HiddenFor(model => model.NhanVien.MaNV)
                     @Html.HiddenFor(model => model.NhanVien.NgayTao)
                     @Html.HiddenFor(model => model.NhanVien.NguoiTao)
-
+                    @Html.HiddenFor(model => model.OldPass)
 
                     <div class="form-group row">
 
@@ -69,14 +69,14 @@
                     <div class="form-group row">
                         <div class="col-6">
                             Username
-                            @Html.TextBoxFor(model => model.UsernameCreate, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.UsernameCreate, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.NhanVien.Username, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.NhanVien.Username, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-6">
                             Password
-                            @Html.TextBoxFor(model => model.NhanVien.Password, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.NhanVien.Password, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.EditPassword, null, new { @class = "form-control ", @type = "password"  })
+                            @Html.ValidationMessageFor(model => model.EditPassword, "", new { @class = "text-danger" })
                         </div>
 
                     </div>
@@ -94,24 +94,61 @@
                             @Html.ValidationMessageFor(model => model.NhanVien.PhongBan, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-6">
-                            Văn phòng
-                            @Html.DropDownListFor(model => model.NhanVien.VanPhongId,
-                                        new SelectList(Model.VanPhongs, "Id", "Name"),
-                                        htmlAttributes: new { @class = "form-control border-input " })
-                        </div>
                     </div>
 
                     <div class="form-group row">
-
                         <div class="col-6">
                             Văn phòng
                             @Html.DropDownListFor(model => model.NhanVien.VanPhongId,
                                         new SelectList(Model.VanPhongs, "Id", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input " })
                         </div>
-                    </div>
 
+                        <div class="col-6">
+                            Chức vụ
+                            @Html.TextBoxFor(model => model.NhanVien.ChucVu, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.NhanVien.ChucVu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            Địa chỉ
+                            @Html.TextBoxFor(model => model.NhanVien.DiaChi, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.NhanVien.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            Điện thoại
+                            @Html.TextBoxFor(model => model.NhanVien.DienThoai, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.NhanVien.DienThoai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            Giới tính
+                            @Html.DropDownListFor(model => model.NhanVien.GioiTinh,
+                                        new SelectList(Model.GioiTinhs, "Id", "Name"),
+                                        htmlAttributes: new { @class = "form-control border-input " })
+                        </div>
+
+                        <div class="col-6">
+                            Ngày sinh
+                            @Html.TextBoxFor(model => model.NgaySinh, null, new { @class = "form-control maskInput" })
+                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        
+                        <div class="col-6">
+                            Trạng thái
+                            <div class="custom-control custom-checkbox">                                
+                                @Html.CheckBoxFor(model => model.NhanVien.TrangThai, new { @class = "custom-control-input", @id="customCheckbox1" })
+                                <label for="customCheckbox1" class="custom-control-label "></label>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.NhanVien.TrangThai, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
                     <div class="form-group ">
 

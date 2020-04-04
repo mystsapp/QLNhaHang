@@ -1,6 +1,7 @@
 ﻿using Data.Interfaces;
 using PagedList;
 using QLNhaHang.Data.Models;
+using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,33 @@ namespace QLNhaHang.Data.Repositories
                 return null;
 
             return listPaged;
+        }
+
+        public int Login(string username, string password)
+        {
+            var result = Find(x => x.Username == username).FirstOrDefault();
+            if (result == null)
+            {
+                return 0;
+            }
+            else
+            {
+                if (result.TrangThai == false)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (result.Password == MaHoaSHA1.EncodeSHA1(password))
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
+            }
         }
     }
 }

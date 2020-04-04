@@ -77,7 +77,9 @@ namespace QLNhaHang.Controllers
             model.NhanVien.NguoiTao = "Admin";
             model.NhanVien.Password = MaHoaSHA1.EncodeSHA1(model.NhanVien.Password);
             model.NhanVien.Username = model.UsernameCreate;
-            model.NhanVien.NguoiTao = user.Username;            
+            //model.NhanVien.NguoiTao = user.Username;            
+            model.NhanVien.NguoiTao = "Admin";            
+            model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);            
 
             _unitOfWork.nhanVienRepository.Create(model.NhanVien);
             _unitOfWork.Complete();
@@ -86,7 +88,7 @@ namespace QLNhaHang.Controllers
         }
 
         public JsonResult IsStringNameAvailable(string UsernameCreate)
-        {
+            {
             var boolName = _unitOfWork.nhanVienRepository.Find(x => x.Username.Trim().ToLower() == UsernameCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
@@ -103,12 +105,15 @@ namespace QLNhaHang.Controllers
         {
 
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
+            
             if (NhanVienVM.NhanVien == null)
             {
                 ViewBag.ErrorMessage = "Nhân viên này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
-
+            NhanVienVM.NgaySinh = NhanVienVM.NhanVien.NgaySinh.ToString();
+            NhanVienVM.OldPass = NhanVienVM.NhanVien.Password;
+            NhanVienVM.NhanVien.Password = "";
             NhanVienVM.StrUrl = strUrl;
 
             return View(NhanVienVM);
@@ -123,14 +128,21 @@ namespace QLNhaHang.Controllers
                 return View("~/Views/Shared/NotFound.cshtml");
             }
 
-            if (string.IsNullOrEmpty(model.NhanVien.Password))
+            if (string.IsNullOrEmpty(model.EditPassword))
             {
                 model.NhanVien.Password = model.OldPass;
             }
             else
             {
-                model.NhanVien.Password = MaHoaSHA1.EncodeSHA1(model.NhanVien.Password);
+                model.NhanVien.Password = MaHoaSHA1.EncodeSHA1(model.EditPassword);
             }
+            model.NhanVien.NgayCapNhat = DateTime.Now;
+            model.NhanVien.NguoiCapNhat = "Admin";
+            if (!string.IsNullOrEmpty(model.NgaySinh))
+            {
+                model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);
+            }
+
             _unitOfWork.nhanVienRepository.Update(model.NhanVien);
             _unitOfWork.Complete();
             SetAlert("Cập nhật thành công", "success");
