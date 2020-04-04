@@ -348,6 +348,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\BansController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiThucDonsController.cs" />
@@ -487,11 +488,13 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
+    <Compile Include="Models\changepassViewModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
     <Compile Include="Models\BanViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\LoaiThucDonViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\NhanVienViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
@@ -2124,9 +2127,13 @@
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Accounts\Edit.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Accounts\changepass.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

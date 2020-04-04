@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
 

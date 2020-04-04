@@ -7,13 +7,13 @@
     <li class="nav-item dropdown">
 
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user">Welcome - @*@(HttpContextAccessor.HttpContext.Session.Gets<User>("loginUser").SingleOrDefault().Username)*@!</i>
+            <i class="fas fa-user">Welcome - @Session["hoten"]!</i>
         </a>
 
         <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdownMenuLink">
             <div class="container">
-                <a asp-controller="Login" asp-action="changepass" asp-route-strUrl="@Url.RouteUrl(ViewContext.RouteData.Values)" class="dropdown-item">Change password</a>
-                <a asp-controller="Login" asp-action="logout" class="dropdown-item">Logout</a>
+                <a href="@Url.Action("changepass", "Accounts", new { strUrl = Url.RouteUrl(ViewContext.RouteData.Values)})" class="dropdown-item">Change password</a>
+                <a href="/Accounts/Logout" class="dropdown-item">Logout</a>
 
             </div>
         </div>

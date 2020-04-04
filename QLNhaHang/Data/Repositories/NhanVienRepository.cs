@@ -12,6 +12,8 @@ namespace QLNhaHang.Data.Repositories
     public interface INhanVienRepository : IRepository<NhanVien>
     {
         IPagedList<NhanVien> ListNhanVien(string gioiTinh, string searchString, int? page);
+        int Login(string username, string password);
+        int Changepass(string username, string newpass);
     }
     public class NhanVienRepository : Repository<NhanVien>, INhanVienRepository
     {
@@ -67,7 +69,7 @@ namespace QLNhaHang.Data.Repositories
 
         public int Login(string username, string password)
         {
-            var result = Find(x => x.Username == username).FirstOrDefault();
+            var result = Find(x => x.Username.Trim().ToLower() == username.Trim().ToLower()).FirstOrDefault();
             if (result == null)
             {
                 return 0;
@@ -90,6 +92,19 @@ namespace QLNhaHang.Data.Repositories
                     }
                 }
             }
+        }
+
+        public int Changepass(string username, string newpass)
+        {
+            try
+            {
+                var result = Find(x => x.Username.Trim().ToLower() == username.Trim().ToLower()).FirstOrDefault();
+
+                result.Password = newpass;
+                _context.SaveChanges();
+                return 1;
+            }
+            catch { throw; }
         }
     }
 }
