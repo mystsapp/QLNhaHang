@@ -1,5 +1,7 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
+using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +10,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class VanPhongsController : Controller
+    public class VanPhongsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public VanPhongViewModel VanPhongVM { get; set; }
@@ -49,6 +51,20 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Create(string strUrl)
         {
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
+            var vanPhong = _unitOfWork.vanPhongRepository.GetAll().OrderByDescending(x => x.MaVP).FirstOrDefault();
+            if (vanPhong == null)
+            {
+                VanPhongVM.VanPhong.MaVP = GetNextId.NextVPID("", "");
+            }
+            else
+            {
+                VanPhongVM.VanPhong.MaVP = GetNextId.NextVPID(vanPhong.MaVP, "");
+            }
             VanPhongVM.StrUrl = strUrl;
             return View(VanPhongVM);
         }
@@ -56,6 +72,7 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePost(VanPhongViewModel model)
         {
+            
             
             model.VanPhong.NgayTao = DateTime.Now;
             model.VanPhong.NguoiTao = "Admin";
@@ -120,21 +137,5 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }

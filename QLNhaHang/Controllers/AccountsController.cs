@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Models;
+﻿using Newtonsoft.Json;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
@@ -24,7 +25,7 @@ namespace QLNhaHang.Controllers
                 Roles = _unitOfWork.roleRepository.GetAll().ToList(),
                 GioiTinhs = ListGioiTinh(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
-        };
+            };
         }
         // GET: Accounts
         public ActionResult Index(string maNV = null, string gioiTinh = null, string searchString = null, int page = 1)
@@ -65,7 +66,7 @@ namespace QLNhaHang.Controllers
             {
                 if (user.Role.Name.Equals("Admins"))
                 {
-                    
+
                     var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
                     var currentPrefix = user.VanPhong.MaVP + yearPrefix;
 
@@ -92,7 +93,7 @@ namespace QLNhaHang.Controllers
                 }
                 else
                 {
-                    NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Name == user.VanPhong.Name).ToList();
+                    NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role.Name).ToList();
                     NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name == user.Role.Name).ToList();
                     NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
                     var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
@@ -229,6 +230,24 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
+        public JsonResult GetVPByRole(int roleId)
+        {
+            var roleName = _unitOfWork.roleRepository.GetById(roleId).Name;
+            
+            if(roleName == "Users" || roleName == "Admins")
+            {
+                var listVPs = _unitOfWork.vanPhongRepository.GetAll();
+                return Json(new
+                {
+                    data = JsonConvert.SerializeObject(listVPs)
+                }, JsonRequestBehavior.AllowGet);
+            }
+            var listVP = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
+            return Json(new
+            {
+                data = JsonConvert.SerializeObject(listVP)
+            }, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetNextMaNV(int vanPhongId)
         {
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
