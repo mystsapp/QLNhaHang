@@ -26,5 +26,7 @@ namespace QLNhaHang.Models
 
         [Display(Name = "Password")]
         public string EditPassword { get; set; }
+
+        
     }
 }

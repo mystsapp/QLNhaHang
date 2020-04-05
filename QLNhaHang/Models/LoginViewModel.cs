@@ -16,6 +16,7 @@ namespace QLNhaHang.Models
         [Required(ErrorMessage = "Vui lòng nhập Password")]
         public string Password { get; set; }
 
-        public string userId { get; set; }
+        /////// change pass
+        public string strUrl { get; set; }
     }
 }

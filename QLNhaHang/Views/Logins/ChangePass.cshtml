@@ -1,21 +1,20 @@
-﻿@model QLNhaHang.Models.LoginViewModel
+﻿@model QLNhaHang.Models.ChangePassModel
 @{
-    ViewBag.Title = "changepass";
+    ViewBag.Title = "ChangePass";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="login-box cursor-pointer">
+<div class="login-box ">
     <div class="login-logo ">
-        <a href="#"><b>Đổi Mật Khẩu</b></a>
+        <a href=""><b>Đổi Mật Khẩu</b> </a>
     </div>
     <!-- /.login-logo -->
-    <div class="card ">
-        <div class="card-body login-card-body ">
+ @*   @*<div class="card ">
+        <div class="card-body login-card-body ">*@
 
             <form method="post" autocomplete="off">
 
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                @*<input type="hidden" name="@Model.strUrl" />*@
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(model => model.Username, null, new { @class = "form-control ", placeholder = "Username" })
                     <div class="input-group-append">
@@ -32,23 +31,24 @@
                         </div>
                     </div>
                 </div>
-
-                @*<div class="input-group mb-3">
+                
+                <div class="input-group mb-3">
                     @Html.TextBoxFor(model => model.NewPassword, null, new { @class = "form-control ", type = "password", placeholder = "New Password" })
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                </div>*@
-                @*<div class="input-group mb-3">
+                </div>
+                
+                <div class="input-group mb-3">
                     @Html.TextBoxFor(model => model.Confirmpassword, null, new { @class = "form-control ", type = "password", placeholder = "Confirm Password" })
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 <div class="row">
 
                     <button type="submit" class="btn btn-primary btn-block">Đồng ý</button>
@@ -56,10 +56,9 @@
                 </div>
             </form>
 
-
-        </div>
+        @*</div>*@
         <!-- /.login-card-body -->
-    </div>
+    @*</div>*@
 </div>
 <style>
     .cursor-pointer {

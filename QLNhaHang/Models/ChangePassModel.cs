@@ -1,10 +1,12 @@
-﻿
-
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
 namespace QLNhaHang.Models
 {
-    public class changepassViewModel
+    public class ChangePassModel
     {
         [Display(Name = "Tên đăng nhập")]
         [Required(ErrorMessage = "Vui lòng nhập username")]
@@ -24,6 +26,5 @@ namespace QLNhaHang.Models
         public string Confirmpassword { get; set; }
 
         public string strUrl { get; set; }
-        
     }
 }

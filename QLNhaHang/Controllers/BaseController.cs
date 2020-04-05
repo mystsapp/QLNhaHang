@@ -16,7 +16,7 @@ namespace QLNhaHang.Controllers
             if (Session["username"] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new
-                    RouteValueDictionary(new { controller = "Accounts", action = "Login", area = "" }));
+                    RouteValueDictionary(new { controller = "Logins", action = "Login", area = "" }));
             }
             base.OnActionExecuting(filterContext);
         }
