@@ -11,7 +11,24 @@ var createController = {
     },
 
     registerEvent: function () {
-        
+        $('.ddlVanPhong').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            //$('#hidMaTD').val(optionValue);
+            $.ajax({
+                url: '/Accounts/GetNextMaNV',
+                type: 'GET',
+                data: {
+                    vanPhongId: optionValue
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status) {
+                        $('.txtMaNV').val(response.data);
+                    }
+                }
+            });
+        });
+
         //var inputNumberVal = $('input.numbers').val();
         //$('input.numbers').val(function (index, value) {
         //    return addCommas(value);

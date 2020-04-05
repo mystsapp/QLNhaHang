@@ -39,7 +39,7 @@
         </div>
         <div class="card-body">
 
-            <form method="post" autocomplete="off">
+            <form autocomplete="off" >
                 <div class="p-4 border rounded">
 
                     @Html.AntiForgeryToken()
@@ -52,7 +52,7 @@
 
                         <div class="col-6">
                             Mã NV
-                            @Html.TextBoxFor(model => model.NhanVien.MaNV, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.TextBoxFor(model => model.NhanVien.MaNV, null, new { @class = "form-control txtMaNV", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.NhanVien.MaNV, "", new { @class = "text-danger" })
                         </div>
 
@@ -95,7 +95,7 @@
                             Văn phòng
                             @Html.DropDownListFor(model => model.NhanVien.VanPhongId,
                                         new SelectList(Model.VanPhongs, "Id", "Name"),
-                                        htmlAttributes: new { @class = "form-control border-input " })
+                                        htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
                         </div>
 
                         <div class="col-6">
@@ -146,7 +146,8 @@
 
                     <div class="form-group ">
 
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        <button type="submit" formaction="/Accounts/Create" formmethod="post" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        <input type="submit" formaction="/Accounts/Create" formmethod="get" hidden id="frmCreateNhanVienGet"/>
                         @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
                         <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
                     </div>

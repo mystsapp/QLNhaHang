@@ -22,9 +22,9 @@ namespace QLNhaHang.Controllers
             {
                 NhanVien = new Data.Models.NhanVien(),
                 Roles = _unitOfWork.roleRepository.GetAll().ToList(),
-                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
-                GioiTinhs = ListGioiTinh()
-            };
+                GioiTinhs = ListGioiTinh(),
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
+        };
         }
         // GET: Accounts
         public ActionResult Index(string maNV = null, string gioiTinh = null, string searchString = null, int page = 1)
@@ -56,15 +56,85 @@ namespace QLNhaHang.Controllers
         public ActionResult Create(string strUrl)
         {
             NhanVienVM.StrUrl = strUrl;
-            var nhanVien = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV).FirstOrDefault();
-            if(nhanVien != null)
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name.Equals("Users"))
             {
-                NhanVienVM.NhanVien.MaNV = GetNextId.NextID(nhanVien.MaNV, "00120");
+                return View("~/Views/Shared/AccessDeny.cshtml");
             }
             else
             {
-                NhanVienVM.NhanVien.MaNV = GetNextId.NextID("", "00120");
+                if (user.Role.Name.Equals("Admins"))
+                {
+                    
+                    var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+                    var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+
+                    var nhanViens = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV);
+                    var listOldNVTrung = new List<NhanVien>();
+                    foreach (var nv in nhanViens)
+                    {
+                        var oldPrefix = nv.MaNV.Substring(0, 5);
+                        if (currentPrefix == oldPrefix)
+                        {
+                            listOldNVTrung.Add(nv);
+                        }
+                    }
+                    if (listOldNVTrung.Count() != 0)
+                    {
+                        var lastMaNV = listOldNVTrung.OrderByDescending(x => x.MaNV).FirstOrDefault();
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV, currentPrefix);
+                    }
+                    else
+                    {
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID("", currentPrefix);
+                    }
+
+                }
+                else
+                {
+                    NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Name == user.VanPhong.Name).ToList();
+                    NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name == user.Role.Name).ToList();
+                    NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
+                    var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+                    var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+
+                    var nhanViens = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV);
+                    var listOldNVTrung = new List<NhanVien>();
+                    foreach (var nv in nhanViens)
+                    {
+                        var oldPrefix = nv.MaNV.Substring(0, 5);
+                        if (currentPrefix == oldPrefix)
+                        {
+                            listOldNVTrung.Add(nv);
+                        }
+                    }
+                    if (listOldNVTrung.Count() != 0)
+                    {
+                        var lastMaNV = listOldNVTrung.OrderByDescending(x => x.MaNV).FirstOrDefault();
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV, currentPrefix);
+                    }
+                    else
+                    {
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID("", currentPrefix);
+                    }
+                }
             }
+
+
+
+
+
+            //if (nhanVien != null)
+            //{
+            //    var oldPrefix = nhanVien.MaNV.Substring(4);
+
+            //    if(oldPrefix == currentPrefix)
+            //    NhanVienVM.NhanVien.MaNV = GetNextId.NextID(nhanVien.MaNV, "00120");
+            //}
+            //else
+            //{
+            //    NhanVienVM.NhanVien.MaNV = GetNextId.NextID("", "00120");
+            //}
             return View(NhanVienVM);
         }
 
@@ -78,8 +148,8 @@ namespace QLNhaHang.Controllers
             model.NhanVien.Password = MaHoaSHA1.EncodeSHA1(model.NhanVien.Password);
             model.NhanVien.Username = model.UsernameCreate;
             //model.NhanVien.NguoiTao = user.Username;            
-            model.NhanVien.NguoiTao = "Admin";            
-            model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);            
+            model.NhanVien.NguoiTao = "Admin";
+            model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);
 
             _unitOfWork.nhanVienRepository.Create(model.NhanVien);
             _unitOfWork.Complete();
@@ -88,7 +158,7 @@ namespace QLNhaHang.Controllers
         }
 
         public JsonResult IsStringNameAvailable(string UsernameCreate)
-            {
+        {
             var boolName = _unitOfWork.nhanVienRepository.Find(x => x.Username.Trim().ToLower() == UsernameCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
@@ -105,7 +175,7 @@ namespace QLNhaHang.Controllers
         {
 
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
-            
+
             if (NhanVienVM.NhanVien == null)
             {
                 ViewBag.ErrorMessage = "Nhân viên này không tồn tại";
@@ -159,6 +229,41 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
+        public JsonResult GetNextMaNV(int vanPhongId)
+        {
+            var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+            var currentPrefix = _unitOfWork.vanPhongRepository.GetById(vanPhongId).MaVP + yearPrefix;
+
+            var nhanViens = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV);
+            var listOldNVTrung = new List<NhanVien>();
+            foreach (var nv in nhanViens)
+            {
+                var oldPrefix = nv.MaNV.Substring(0, 5);
+                if (currentPrefix == oldPrefix)
+                {
+                    listOldNVTrung.Add(nv);
+                }
+            }
+            if (listOldNVTrung.Count() != 0)
+            {
+                var lastMaNV = listOldNVTrung.OrderByDescending(x => x.MaNV).FirstOrDefault();
+                return Json(new
+                {
+                    status = true,
+                    data = GetNextId.NextID(lastMaNV.MaNV, currentPrefix)
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = true,
+                    data = GetNextId.NextID("", currentPrefix)
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         private List<GioiTinhViewModel> ListGioiTinh()
         {
             return new List<GioiTinhViewModel>()
@@ -169,6 +274,6 @@ namespace QLNhaHang.Controllers
             };
         }
 
-       
+
     }
 }

@@ -2132,6 +2132,7 @@
     <Content Include="Views\Logins\Login.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Logins\ChangePass.cshtml" />
+    <Content Include="Views\Shared\AccessDeny.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
