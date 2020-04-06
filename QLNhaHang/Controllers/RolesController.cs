@@ -1,7 +1,6 @@
 ﻿using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
-using QLNhaHang.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,44 +9,47 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class VanPhongsController : BaseController
+    public class RolesController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
-        public VanPhongViewModel VanPhongVM { get; set; }
+        public RoleViewModel RoleVM { get; set; }
 
-        public VanPhongsController(IUnitOfWork unitOfWork)
+        public RolesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            VanPhongVM = new VanPhongViewModel()
+            RoleVM = new RoleViewModel()
             {
-                VanPhong = new Data.Models.VanPhong(),
-                Roles = _unitOfWork.roleRepository.GetAll().ToList(),
+                Role = new Data.Models.Role(),
+                VanPhongs = new List<VanPhong>(),
                 NhanViens = new List<NhanVien>()
             };
         }
-        // GET: VanPhongs
+        // GET: Roles
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
-            VanPhongVM.StrUrl = Request.Url.AbsoluteUri.ToString();
+            RoleVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
             if (id != 0)
             {
 
-                var vanPhong = _unitOfWork.vanPhongRepository.GetById(id);
-                if (vanPhong == null)
+                var role = _unitOfWork.roleRepository.GetById(id);
+                if (role == null)
                 {
-                    var lastId = _unitOfWork.vanPhongRepository
+                    var lastId = _unitOfWork.roleRepository
                                             .GetAll().OrderByDescending(x => x.Id)
                                             .FirstOrDefault().Id;
                     id = lastId;
 
                 }
-                VanPhongVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(id);
-                VanPhongVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.VanPhongId == id).ToList();
+                RoleVM.Role = _unitOfWork.roleRepository.GetById(id);
+
+                RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(RoleVM.Role.Name)).ToList();
+                RoleVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.RoleId.Equals(id)).ToList();
+
             }
 
-            VanPhongVM.VanPhongs = _unitOfWork.vanPhongRepository.ListVanPhong(searchString, page);
-            return View(VanPhongVM);
+            RoleVM.Roles = _unitOfWork.roleRepository.ListRole(searchString, page);
+            return View(RoleVM);
         }
 
         public ActionResult Create(string strUrl)
@@ -57,36 +59,28 @@ namespace QLNhaHang.Controllers
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            var vanPhong = _unitOfWork.vanPhongRepository.GetAll().OrderByDescending(x => x.MaVP).FirstOrDefault();
-            if (vanPhong == null)
-            {
-                VanPhongVM.VanPhong.MaVP = GetNextId.NextVPID("", "");
-            }
-            else
-            {
-                VanPhongVM.VanPhong.MaVP = GetNextId.NextVPID(vanPhong.MaVP, "");
-            }
-            VanPhongVM.StrUrl = strUrl;
-            return View(VanPhongVM);
+            
+            RoleVM.StrUrl = strUrl;
+            return View(RoleVM);
         }
 
         [HttpPost, ActionName("Create")]
-        public ActionResult CreatePost(VanPhongViewModel model)
+        public ActionResult CreatePost(RoleViewModel model)
         {
-            
-            
-            model.VanPhong.NgayTao = DateTime.Now;
-            model.VanPhong.NguoiTao = "Admin";
-            model.VanPhong.Name = model.TenVPCreate;
-            _unitOfWork.vanPhongRepository.Create(model.VanPhong);
+
+
+            model.Role.NgayTao = DateTime.Now;
+            model.Role.NguoiTao = "Admin";
+            model.Role.Name = model.TenRoleCreate;
+            _unitOfWork.roleRepository.Create(model.Role);
             _unitOfWork.Complete();
             SetAlert("Thêm mới thành công.", "success");
             return Redirect(model.StrUrl);
         }
 
-        public JsonResult IsStringNameAvailable(string TenVPCreate)
+        public JsonResult IsStringNameAvailable(string TenRoleCreate)
         {
-            var boolName = _unitOfWork.vanPhongRepository.Find(x => x.Name.Trim().ToLower() == TenVPCreate.Trim().ToLower()).FirstOrDefault();
+            var boolName = _unitOfWork.roleRepository.Find(x => x.Name.Trim().ToLower() == TenRoleCreate.Trim().ToLower()).FirstOrDefault();
             if (boolName == null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -101,28 +95,28 @@ namespace QLNhaHang.Controllers
         public ActionResult Edit(string strUrl, int id)
         {
 
-            VanPhongVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(id);
-            if (VanPhongVM.VanPhong == null)
+            RoleVM.Role = _unitOfWork.roleRepository.GetById(id);
+            if (RoleVM.Role == null)
             {
                 ViewBag.ErrorMessage = "Tên này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
 
-            VanPhongVM.StrUrl = strUrl;
+            RoleVM.StrUrl = strUrl;
 
-            return View(VanPhongVM);
+            return View(RoleVM);
         }
 
         [HttpPost, ActionName("Edit")]
-        public ActionResult EditPost(string strUrl, int id, VanPhongViewModel model)
+        public ActionResult EditPost(string strUrl, int id, RoleViewModel model)
         {
-            if (id != model.VanPhong.Id)
+            if (id != model.Role.Id)
             {
                 ViewBag.ErrorMessage = "Tên này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
             //model.KhachHang.TenKH = model.TenKHEdit;
-            _unitOfWork.vanPhongRepository.Update(model.VanPhong);
+            _unitOfWork.roleRepository.Update(model.Role);
             _unitOfWork.Complete();
             SetAlert("Cập nhật thành công", "success");
             return Redirect(strUrl);
@@ -131,12 +125,11 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeletePost(string strUrl, int id)
         {
-            var vanPhong = _unitOfWork.vanPhongRepository.GetById(id);
-            _unitOfWork.vanPhongRepository.Delete(vanPhong);
+            var role = _unitOfWork.roleRepository.GetById(id);
+            _unitOfWork.roleRepository.Delete(role);
             _unitOfWork.Complete();
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-
     }
 }

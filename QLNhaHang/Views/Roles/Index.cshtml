@@ -1,4 +1,4 @@
-﻿@model QLNhaHang.Models.VanPhongViewModel
+﻿@model QLNhaHang.Models.RoleViewModel
 @using PagedList.Mvc
 @{
     ViewBag.Title = "Index";
@@ -27,11 +27,11 @@
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                <i class="fas fa-list-alt text-warning"></i> Danh sách VP
+                <i class="fas fa-list-alt text-warning"></i> Danh sách Role
             </h3>
 
             <div class="card-tools">
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "VanPhongs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "Roles", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/VanPhongs/Index" method="get" autocomplete="off">
+            <form action="/Roles/Index" method="get" autocomplete="off">
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -70,37 +70,31 @@
             <br />
 
             <div style="overflow-x:auto;">
-                @if (Model.VanPhongs.Count() != 0)
+                @if (Model.Roles.Count() != 0)
                 {
                     <table class="table mytable text-nowrap" id="listAll">
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Name)</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().MaVP)</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DiaChi)</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DienThoai)</th>
-                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role)</th>
+                                <th>@Html.DisplayNameFor(m => m.Roles.FirstOrDefault().Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.Roles.FirstOrDefault().MieuTa)</th>
                                 <th>#</th>
                             </tr>
                         </thead>
                         <tbody>
                             @{int i = 1;}
-                            @foreach (var item in Model.VanPhongs)
+                            @foreach (var item in Model.Roles)
                             {
 
                                 <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
                                     <td class="tdVal" data-id="@item.Id">@i</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Name)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MaVP)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DiaChi)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DienThoai)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Role)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MieuTa)</td>
                                     <td>
-                                        <div class="btn-group ">
-                                            <a class="btn btn-sm btn-info" href="@Url.Action("Edit", "VanPhongs", new { strUrl = Model.StrUrl, id = item.Id })"><i class="fas fa-edit"></i></a>
-                                            <form action="/VanPhongs/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                        <div class="btn-group " role="group">
+                                            <a class="btn btn-sm btn-info" href="@Url.Action("Edit", "Roles", new { strUrl = Model.StrUrl, id = item.Id })"><i class="fas fa-edit"></i></a>
+                                            <form action="/Roles/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
                                                 <input type="hidden" name="strUrl" value="@Model.StrUrl" />
                                                 <input type="hidden" name="id" value="@item.Id" />
@@ -115,6 +109,7 @@
                                                 </span>
                                             </form>
                                         </div>
+
                                     </td>
                                 </tr>
                                 i++;
@@ -126,7 +121,7 @@
                 {
                     <span> Không có dử liệu trong bảng. </span>
                 }
-                @Html.PagedListPager(Model.VanPhongs, page => Url.Action("Index",
+                @Html.PagedListPager(Model.Roles, page => Url.Action("Index",
                                 new
                                      {
                                          page,
@@ -145,16 +140,17 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            @if (Model.VanPhong.Name != null)
+            @if (Model.Role.Name != null)
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách NV -<b> @Model.VanPhong.Name</b></h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách VP -<b> @Model.Role.Name</b></h3>
             }
             else
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách NV </h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách VP </h3>
             }
 
             <div class="card-tools">
+
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -165,36 +161,79 @@
         </div>
         <div class="card-body">
 
+            <div style="overflow-x:auto;">
+                @if (Model.VanPhongs.Count() != 0)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().MaVP)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DiaChi)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DienThoai)</th>
+                                <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role)</th>
 
-            @*<div class="col-2">
-                    Tên VP
-                    @Html.TextBoxFor(model => model.VanPhong.Name, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.Name, "", new { @class = "text-danger" })
-                </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.VanPhongs)
+                            {
 
-                <div class="col-2">
-                    Mã VP
-                    @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.MaVP, "", new { @class = "text-danger" })
-                </div>
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                <div class="col-2">
-                    Địa chỉ
-                    @Html.TextBoxFor(model => model.VanPhong.DiaChi, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.DiaChi, "", new { @class = "text-danger" })
-                </div>
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.Name)</td>
+                                    <td>@Html.DisplayFor(m => item.MaVP)</td>
+                                    <td>@Html.DisplayFor(m => item.DiaChi)</td>
+                                    <td>@Html.DisplayFor(m => item.DienThoai)</td>
+                                    <td>@Html.DisplayFor(m => item.Role)</td>
 
-                <div class="col-2">
-                    Điện thoại
-                    @Html.TextBoxFor(model => model.VanPhong.DienThoai, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.DienThoai, "", new { @class = "text-danger" })
-                </div>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> Không có dử liệu trong bảng. </span>
+                }
 
-                <div class="col-4">
-                    Role
-                    @Html.TextBoxFor(model => model.VanPhong.Role, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.Role, "", new { @class = "text-danger" })
-                </div>*@
+            </div>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.Role.Name != null)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách NV -<b> @Model.Role.Name</b></h3>
+            }
+            else
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách NV </h3>
+            }
+
+            <div class="card-tools">
+
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
 
             <div style="overflow-x:auto;">
                 @if (Model.NhanViens.Count() != 0)
@@ -218,13 +257,13 @@
 
                                 <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td class="tdVal" data-id="@item.MaNV">@i</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.HoTen)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.Username)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.Role.Name)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.PhongBan)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.VanPhong.Name)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.HoTen)</td>
+                                    <td>@Html.DisplayFor(m => item.Username)</td>
+                                    <td>@Html.DisplayFor(m => item.Role.Name)</td>
+                                    <td>@Html.DisplayFor(m => item.PhongBan)</td>
+                                    <td>@Html.DisplayFor(m => item.VanPhong.Name)</td>
+                                    <td>
                                         @if (item.TrangThai)
                                         {
                                             <span class="label label-success">Kích hoạt</span>
@@ -247,6 +286,7 @@
                 }
 
             </div>
+
         </div>
         <!-- /.card-body -->
     </div>
@@ -256,7 +296,7 @@
 
 @section Scripts{
 
-    <script src="~/Assets/js/VanPhong/indexController.js"></script>
+    <script src="~/Assets/js/Role/indexController.js"></script>
     <script>
         function confirmDelete(uniqueId, isDeleteClicked) {
             var deleteSpan = 'deleteSpan_' + uniqueId;

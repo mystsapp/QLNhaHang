@@ -20,5 +20,13 @@ namespace QLNhaHang.Data.Models
         [MaxLength(150), Column(TypeName = "nvarchar")]
         [StringLength(150)]
         public string MieuTa { get; set; }
+
+        [DisplayName("Ngày tạo")]
+        public DateTime NgayTao { get; set; }
+
+        [DisplayName("Người tạo")]
+        [MaxLength(50), Column(TypeName = "nvarchar")]
+        [StringLength(50)]
+        public string NguoiTao { get; set; }
     }
 }

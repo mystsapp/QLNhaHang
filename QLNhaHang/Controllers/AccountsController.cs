@@ -32,6 +32,7 @@ namespace QLNhaHang.Controllers
         {
             NhanVienVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
+            var user = (NhanVien)Session["UserSession"];
             /////// for delete //////
             if (!string.IsNullOrEmpty(maNV))
             {
@@ -48,8 +49,8 @@ namespace QLNhaHang.Controllers
                 NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
 
             }
-
-            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(gioiTinh, searchString, page);
+            
+            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, gioiTinh, searchString, page);
             /////// for delete //////
             return View(NhanVienVM);
         }
@@ -174,7 +175,11 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, string maNV)
         {
-
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
 
             if (NhanVienVM.NhanVien == null)
@@ -232,21 +237,33 @@ namespace QLNhaHang.Controllers
 
         public JsonResult GetVPByRole(int roleId)
         {
+            var user = (NhanVien)Session["UserSession"];
             var roleName = _unitOfWork.roleRepository.GetById(roleId).Name;
-            
-            if(roleName == "Users" || roleName == "Admins")
+
+            if (roleName == "Users" || roleName == "Admins")
             {
+                if(user.Role.Name != "Admins")
+                {
+                    return Json(new
+                    {
+                        data = JsonConvert.SerializeObject(_unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)))
+                    }, JsonRequestBehavior.AllowGet);
+                }
                 var listVPs = _unitOfWork.vanPhongRepository.GetAll();
                 return Json(new
                 {
                     data = JsonConvert.SerializeObject(listVPs)
                 }, JsonRequestBehavior.AllowGet);
             }
-            var listVP = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
-            return Json(new
+            else
             {
-                data = JsonConvert.SerializeObject(listVP)
-            }, JsonRequestBehavior.AllowGet);
+                var listVP = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
+                return Json(new
+                {
+                    data = JsonConvert.SerializeObject(listVP)
+                }, JsonRequestBehavior.AllowGet);
+            }
+
         }
         public JsonResult GetNextMaNV(int vanPhongId)
         {

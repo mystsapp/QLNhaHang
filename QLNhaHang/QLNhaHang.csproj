@@ -353,6 +353,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoaiThucDonsController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\ThongTinHDsController.cs" />
     <Compile Include="Controllers\KhachHangsController.cs" />
     <Compile Include="Controllers\MonDaGoisController.cs" />
@@ -487,6 +488,10 @@
     <Compile Include="Migrations\202004040339518_fixNVAtr.designer.cs">
       <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004060355173_addForRole.cs" />
+    <Compile Include="Migrations\202004060355173_addForRole.designer.cs">
+      <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -500,6 +505,7 @@
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\NhanVienViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\VanPhongViewModel.cs" />
     <Compile Include="Models\ThucDonViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -570,6 +576,9 @@
     <Content Include="Assets\js\NhanVien\createController.js" />
     <Content Include="Assets\js\NhanVien\editController.js" />
     <Content Include="Assets\js\NhanVien\indexController.js" />
+    <Content Include="Assets\js\Role\createController.js" />
+    <Content Include="Assets\js\Role\editController.js" />
+    <Content Include="Assets\js\Role\indexController.js" />
     <Content Include="Assets\js\VanPhong\createController.js" />
     <Content Include="Assets\js\VanPhong\editController.js" />
     <Content Include="Assets\js\VanPhong\indexController.js" />
@@ -2133,6 +2142,9 @@
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Logins\ChangePass.cshtml" />
     <Content Include="Views\Shared\AccessDeny.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2226,6 +2238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004040339518_fixNVAtr.resx">
       <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004060355173_addForRole.resx">
+      <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
