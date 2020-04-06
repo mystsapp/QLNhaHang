@@ -87,7 +87,7 @@
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="MaHD" DataSetColumn="MaHD" />
-              <Mapping SourceColumn="ThanhTienM" DataSetColumn="ThanhTienM" />
+              <Mapping SourceColumn="ThanhTienM" DataSetColumn="ThanhTienVAT" />
               <Mapping SourceColumn="MaNV" DataSetColumn="HoTen" />
               <Mapping SourceColumn="MaBan" DataSetColumn="TenBan" />
               <Mapping SourceColumn="HTThanhToan" DataSetColumn="HTThanhToan" />
@@ -129,7 +129,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="ThanhTienM" msprop:Generator_ColumnVarNameInTable="columnThanhTienM" msprop:Generator_ColumnPropNameInRow="ThanhTienM" msprop:Generator_ColumnPropNameInTable="ThanhTienMColumn" msprop:Generator_UserColumnName="ThanhTienM" type="xs:decimal" minOccurs="0" />
+              <xs:element name="ThanhTienVAT" msprop:Generator_ColumnVarNameInTable="columnThanhTienVAT" msprop:Generator_ColumnPropNameInRow="ThanhTienVAT" msprop:Generator_ColumnPropNameInTable="ThanhTienVATColumn" msprop:Generator_UserColumnName="ThanhTienVAT" type="xs:decimal" minOccurs="0" />
               <xs:element name="HoTen" msdata:Caption="MaNV" msprop:Generator_ColumnVarNameInTable="columnHoTen" msprop:Generator_ColumnPropNameInRow="HoTen" msprop:Generator_ColumnPropNameInTable="HoTenColumn" msprop:Generator_UserColumnName="HoTen" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

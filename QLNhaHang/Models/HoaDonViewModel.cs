@@ -26,5 +26,7 @@ namespace QLNhaHang.Models
         public string SoTien { get; set; }
         public string NoiDung { get; set; }
 
+        public decimal VAT { get; set; }
+        public string ThanhTienVAT { get; set; }
     }
 }

@@ -28,6 +28,8 @@ namespace QLNhaHang.Controllers
         // GET: Bans
         public ActionResult Index(string maBan = null, string searchString = null, int page = 1)
         {
+            var user = (NhanVien)Session["UserSession"];
+            
             BanVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
             if (!string.IsNullOrEmpty(maBan))
@@ -46,13 +48,18 @@ namespace QLNhaHang.Controllers
                 
             }
 
-            BanVM.Bans = _unitOfWork.banRepository.ListBan(searchString, page);
+            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, searchString, page);
             
             return View(BanVM);
         }
 
         public ActionResult Create(string strUrl)
         {
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name != "Admins")
+            {
+                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)).ToList();
+            }
             var ban = _unitOfWork.banRepository.GetAllIncludeOne(x => x.VanPhong)
                                                 .OrderByDescending(x => x.MaBan)
                                                 .FirstOrDefault();
@@ -169,21 +176,5 @@ namespace QLNhaHang.Controllers
             }
         }
 
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }

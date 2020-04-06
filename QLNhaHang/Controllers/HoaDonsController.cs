@@ -24,7 +24,8 @@ namespace QLNhaHang.Controllers
             {
                 HoaDon = new Data.Models.HoaDon(),
                 ThongTinHD = new Data.Models.ThongTinHD(),
-                KhachHang = new Data.Models.KhachHang()
+                KhachHang = new Data.Models.KhachHang(),
+                VAT = 10
             };
         }
         // GET: HoaDons
@@ -78,10 +79,22 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        public ActionResult HoaDonTuDong(string maHD, string strUrl, int maThongTinHDId = 0, string maKH = null)
+        public ActionResult HoaDonTuDong(decimal vat = 0, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
         {
+
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            if(vat == 0)
+            {
+                HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                HoaDonVM.VAT = HoaDonVM.VAT;
+            }
+            else
+            {
+                HoaDonVM.ThanhTienVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                HoaDonVM.VAT = vat;
+            }
+            
             HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
             HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
             if (maThongTinHDId != 0)
@@ -113,6 +126,9 @@ namespace QLNhaHang.Controllers
             hoaDon.QuyenSo = model.ThongTinHD.QuyenSo;
             hoaDon.So = model.ThongTinHD.So;
             hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
+
+            hoaDon.VAT = model.VAT;
+            hoaDon.ThanhTienVAT = decimal.Parse(model.ThanhTienVAT);
 
             hoaDon.NgayIn = DateTime.Now;
             hoaDon.DaIn = true;
@@ -150,6 +166,7 @@ namespace QLNhaHang.Controllers
                 x.HoaDon.NgayTao,
                 x.HoaDon.GhiChu,
                 x.HoaDon.ThanhTienHD,
+                x.HoaDon.ThanhTienVAT,
                 x.HoaDon.PhiPhucvu,
                 x.HoaDon.VAT,
                 x.HoaDon.NumberId,

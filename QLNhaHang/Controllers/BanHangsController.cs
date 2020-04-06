@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,8 @@ namespace QLNhaHang.Controllers
         public BanHangsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            BanHangVM = new BanHangViewModel() {
+            BanHangVM = new BanHangViewModel()
+            {
                 Ban = new Data.Models.Ban(),
                 MonDaGoi = new Data.Models.MonDaGoi()
             };
@@ -24,12 +26,20 @@ namespace QLNhaHang.Controllers
         // GET: BanHangs
         public ActionResult Index(string maBan = null)
         {
+            var user = (NhanVien)Session["UserSession"];
+            
             ///////////////////// load Ban by flag /////////////////////
             //var banByFlags = _unitOfWork.banRepository.Find(x => x.Flag);
             ///////////////////// load Ban by flag /////////////////////
             //BanHangVM.StrUrl = UriHelper.GetDisplayUrl(Request);
             ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
-            BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();
+
+            BanHangVM.Bans = _unitOfWork.banRepository.GetAllIncludeOne(x => x.VanPhong).ToList();
+
+            if (user.Role.Name != "Admins")
+            {
+                BanHangVM.Bans = BanHangVM.Bans.Where(x => x.VanPhong.Name.Equals(user.VanPhong.Name)).ToList();
+            }
 
             if (!string.IsNullOrEmpty(maBan))
             {
@@ -42,7 +52,7 @@ namespace QLNhaHang.Controllers
                 var listDecimal = BanHangVM.MonDaGois.Select(x => x.ThanhTien).ToList();
                 BanHangVM.TongTien = listDecimal.Sum();
             }
-            
+
             return View(BanHangVM);
         }
 

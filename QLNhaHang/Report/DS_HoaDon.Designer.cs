@@ -281,7 +281,7 @@ namespace QLNhaHang.Report {
             
             private global::System.Data.DataColumn columnMaHD;
             
-            private global::System.Data.DataColumn columnThanhTienM;
+            private global::System.Data.DataColumn columnThanhTienVAT;
             
             private global::System.Data.DataColumn columnHoTen;
             
@@ -372,9 +372,9 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn ThanhTienMColumn {
+            public global::System.Data.DataColumn ThanhTienVATColumn {
                 get {
-                    return this.columnThanhTienM;
+                    return this.columnThanhTienVAT;
                 }
             }
             
@@ -601,7 +601,7 @@ namespace QLNhaHang.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public HoaDonsRow AddHoaDonsRow(
                         string MaHD, 
-                        decimal ThanhTienM, 
+                        decimal ThanhTienVAT, 
                         string HoTen, 
                         string TenBan, 
                         string HTThanhToan, 
@@ -628,7 +628,7 @@ namespace QLNhaHang.Report {
                 HoaDonsRow rowHoaDonsRow = ((HoaDonsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MaHD,
-                        ThanhTienM,
+                        ThanhTienVAT,
                         HoTen,
                         TenBan,
                         HTThanhToan,
@@ -682,7 +682,7 @@ namespace QLNhaHang.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             internal void InitVars() {
                 this.columnMaHD = base.Columns["MaHD"];
-                this.columnThanhTienM = base.Columns["ThanhTienM"];
+                this.columnThanhTienVAT = base.Columns["ThanhTienVAT"];
                 this.columnHoTen = base.Columns["HoTen"];
                 this.columnTenBan = base.Columns["TenBan"];
                 this.columnHTThanhToan = base.Columns["HTThanhToan"];
@@ -713,8 +713,8 @@ namespace QLNhaHang.Report {
             private void InitClass() {
                 this.columnMaHD = new global::System.Data.DataColumn("MaHD", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMaHD);
-                this.columnThanhTienM = new global::System.Data.DataColumn("ThanhTienM", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnThanhTienM);
+                this.columnThanhTienVAT = new global::System.Data.DataColumn("ThanhTienVAT", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnThanhTienVAT);
                 this.columnHoTen = new global::System.Data.DataColumn("HoTen", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHoTen);
                 this.columnTenBan = new global::System.Data.DataColumn("TenBan", typeof(string), null, global::System.Data.MappingType.Element);
@@ -936,17 +936,17 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public decimal ThanhTienM {
+            public decimal ThanhTienVAT {
                 get {
                     try {
-                        return ((decimal)(this[this.tableHoaDons.ThanhTienMColumn]));
+                        return ((decimal)(this[this.tableHoaDons.ThanhTienVATColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ThanhTienM\' in table \'HoaDons\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ThanhTienVAT\' in table \'HoaDons\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableHoaDons.ThanhTienMColumn] = value;
+                    this[this.tableHoaDons.ThanhTienVATColumn] = value;
                 }
             }
             
@@ -1310,14 +1310,14 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsThanhTienMNull() {
-                return this.IsNull(this.tableHoaDons.ThanhTienMColumn);
+            public bool IsThanhTienVATNull() {
+                return this.IsNull(this.tableHoaDons.ThanhTienVATColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetThanhTienMNull() {
-                this[this.tableHoaDons.ThanhTienMColumn] = global::System.Convert.DBNull;
+            public void SetThanhTienVATNull() {
+                this[this.tableHoaDons.ThanhTienVATColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1733,7 +1733,7 @@ namespace QLNhaHang.Report.DS_HoaDonTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "HoaDons";
             tableMapping.ColumnMappings.Add("MaHD", "MaHD");
-            tableMapping.ColumnMappings.Add("ThanhTienM", "ThanhTienM");
+            tableMapping.ColumnMappings.Add("ThanhTienM", "ThanhTienVAT");
             tableMapping.ColumnMappings.Add("MaNV", "HoTen");
             tableMapping.ColumnMappings.Add("MaBan", "TenBan");
             tableMapping.ColumnMappings.Add("HTThanhToan", "HTThanhToan");

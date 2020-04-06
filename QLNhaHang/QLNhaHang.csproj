@@ -492,6 +492,10 @@
     <Compile Include="Migrations\202004060355173_addForRole.designer.cs">
       <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004061016586_addVATMoney.cs" />
+    <Compile Include="Migrations\202004061016586_addVATMoney.designer.cs">
+      <DependentUpon>202004061016586_addVATMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -2050,6 +2054,7 @@
     <Content Include="Report\DS_HoaDon.xsc">
       <DependentUpon>DS_HoaDon.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Report\DS_HoaDon.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -2242,6 +2247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004060355173_addForRole.resx">
       <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061016586_addVATMoney.resx">
+      <DependentUpon>202004061016586_addVATMoney.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
