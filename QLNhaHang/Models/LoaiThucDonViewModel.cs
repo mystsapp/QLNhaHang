@@ -11,6 +11,7 @@ namespace QLNhaHang.Models
     public class LoaiThucDonViewModel
     {
         public IPagedList<LoaiThucDon> LoaiThucDons { get; set; }
+        public List<ThucDon> ThucDons { get; set; }
         public LoaiThucDon LoaiThucDon { get; set; }
         public string StrUrl { get; set; }
 

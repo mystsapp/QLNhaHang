@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
 using System;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class BansController : Controller
+    public class BansController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public BanViewModel BanVM { get; set; }
@@ -21,6 +22,7 @@ namespace QLNhaHang.Controllers
             {
                 Ban = new Data.Models.Ban(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
+                
             };
         }
         // GET: Bans
@@ -41,7 +43,7 @@ namespace QLNhaHang.Controllers
 
                 }
                 BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
-
+                
             }
 
             BanVM.Bans = _unitOfWork.banRepository.ListBan(searchString, page);
@@ -131,7 +133,42 @@ namespace QLNhaHang.Controllers
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-        
+
+        public JsonResult GetNextMaBan(int vanPhongId)
+        {
+            var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+            var currentPrefix = _unitOfWork.vanPhongRepository.GetById(vanPhongId).MaVP + yearPrefix;
+
+            var bans = _unitOfWork.banRepository.GetAll().OrderByDescending(x => x.MaBan);
+            var listOldBanTrung = new List<Ban>();
+            foreach (var ban in bans)
+            {
+                var oldPrefix = ban.MaBan.Substring(0, 5);
+                if (currentPrefix == oldPrefix)
+                {
+                    listOldBanTrung.Add(ban);
+                }
+            }
+            if (listOldBanTrung.Count() != 0)
+            {
+                var lastMaBan = listOldBanTrung.OrderByDescending(x => x.MaBan).FirstOrDefault();
+                return Json(new
+                {
+                    status = true,
+                    data = GetNextId.NextID(lastMaBan.MaBan, currentPrefix)
+                }, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = true,
+                    data = GetNextId.NextID("", currentPrefix)
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

@@ -40,7 +40,7 @@ namespace QLNhaHang.Controllers
 
                 }
                 ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
-
+                
             }
 
             ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(searchString, page);

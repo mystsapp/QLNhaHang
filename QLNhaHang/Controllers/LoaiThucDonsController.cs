@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace QLNhaHang.Controllers
             _unitOfWork = unitOfWork;
             LoaiVM = new LoaiThucDonViewModel()
             {
-                LoaiThucDon = new Data.Models.LoaiThucDon()
+                LoaiThucDon = new Data.Models.LoaiThucDon(),
+                ThucDons = new List<Data.Models.ThucDon>()
             };
         }
         // GET: LoaiThucDons
@@ -39,7 +41,7 @@ namespace QLNhaHang.Controllers
 
                 }
                 LoaiVM.LoaiThucDon = _unitOfWork.loaiThucDonRepository.GetById(id);
-
+                LoaiVM.ThucDons = _unitOfWork.thucDonRepository.Find(x => x.MaLoaiId.Equals(id)).ToList();
             }
 
             LoaiVM.LoaiThucDons = _unitOfWork.loaiThucDonRepository.ListLoai(searchString, page);
@@ -48,6 +50,11 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Create(string strUrl)
         {
+            //var user = (NhanVien)Session["UserSession"];
+            //if (user.Role.Name == "Users")
+            //{
+            //    return View("~/Views/Shared/AccessDeny.cshtml");
+            //}
             LoaiVM.StrUrl = strUrl;
             return View(LoaiVM);
         }
@@ -84,6 +91,11 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, int id)
         {
+            //var user = (NhanVien)Session["UserSession"];
+            //if (user.Role.Name == "Users")
+            //{
+            //    return View("~/Views/Shared/AccessDeny.cshtml");
+            //}
             LoaiVM.LoaiThucDon = _unitOfWork.loaiThucDonRepository.GetById(id);
             if (LoaiVM.LoaiThucDon == null)
             {
@@ -114,6 +126,11 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeletePost(string strUrl, int id)
         {
+            //var user = (NhanVien)Session["UserSession"];
+            //if (user.Role.Name == "Users")
+            //{
+            //    return View("~/Views/Shared/AccessDeny.cshtml");
+            //}
             var loai = _unitOfWork.loaiThucDonRepository.GetById(id);
             _unitOfWork.loaiThucDonRepository.Delete(loai);
             _unitOfWork.Complete();

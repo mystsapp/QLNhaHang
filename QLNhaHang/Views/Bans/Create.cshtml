@@ -47,23 +47,23 @@
 
                     @Html.HiddenFor(model => model.StrUrl)
                     @*@Html.HiddenFor(model => model.KhachHang.NgayTao)
-                    @Html.HiddenFor(model => model.KhachHang.NguoiTao)*@
+                        @Html.HiddenFor(model => model.KhachHang.NguoiTao)*@
 
                     <div class="form-group row">
 
                         <div class="col-6">
                             Mã bàn
-                            @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control txtMaBan", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger " })
                         </div>
 
                         <div class="col-6">
                             Văn phòng
                             @Html.DropDownListFor(model => model.Ban.VanPhongId,
                                          new SelectList(Model.VanPhongs, "Id", "Name"),
-                                         htmlAttributes: new { @class = "form-control border-input " })
+                                         htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
                         </div>
-                        
+
                     </div>
 
 
@@ -105,3 +105,8 @@
     <!-- /.card -->
 </section>
 <!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/Ban/createController.js"></script>
+}

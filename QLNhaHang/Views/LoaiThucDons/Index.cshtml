@@ -145,11 +145,11 @@
         <div class="card-header">
             @if (Model.LoaiThucDon.TenLoai != null)
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách -<b> @Model.LoaiThucDon.TenLoai</b></h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách thực đơn -<b> @Model.LoaiThucDon.TenLoai</b></h3>
             }
             else
             {
-                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Chi tiết khách </h3>
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách thực đơn </h3>
             }
 
             <div class="card-tools">
@@ -164,35 +164,93 @@
         </div>
         <div class="card-body">
 
-            <div class="p-4 border rounded">
+            @*<div class="p-4 border rounded">
 
-                <div class="form-group row">
+                    <div class="form-group row">
 
-                    <div class="col-2">
-                        Tên loại
-                        @Html.TextBoxFor(model => model.LoaiThucDon.TenLoai, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
+                        <div class="col-2">
+                            Tên loại
+                            @Html.TextBoxFor(model => model.LoaiThucDon.TenLoai, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-2">
+                            Phụ phí
+                            @Html.TextBoxFor(model => model.LoaiThucDon.PhuPhi, "{0:N0}", new { @class = "form-control ", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.LoaiThucDon.PhuPhi, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-2">
+                            Mô tả
+                            @Html.TextBoxFor(model => model.LoaiThucDon.MoTa, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.LoaiThucDon.MoTa, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-2">
+                            Ghi chú
+                            @Html.TextBoxFor(model => model.LoaiThucDon.GhiChu, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.LoaiThucDon.GhiChu, "", new { @class = "text-danger" })
+                        </div>
+
                     </div>
 
-                    <div class="col-2">
-                        Phụ phí
-                        @Html.TextBoxFor(model => model.LoaiThucDon.PhuPhi, "{0:N0}", new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.LoaiThucDon.PhuPhi, "", new { @class = "text-danger" })
-                    </div>
+                </div>*@
 
-                    <div class="col-2">
-                        Mô tả
-                        @Html.TextBoxFor(model => model.LoaiThucDon.MoTa, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.LoaiThucDon.MoTa, "", new { @class = "text-danger" })
-                    </div>
+            <div style="overflow-x:auto;">
+                @if (Model.ThucDons.Count() != 0)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().TenMon)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().GiaTien)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().DonViTinh)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().LoaiThucDon.TenLoai)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().GhiChu)</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.ThucDons)
+                            {
 
-                    <div class="col-2">
-                        Ghi chú
-                        @Html.TextBoxFor(model => model.LoaiThucDon.GhiChu, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.LoaiThucDon.GhiChu, "", new { @class = "text-danger" })
-                    </div>
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                </div>
+                                    <td class="tdVal" data-id="@item.Id">@i</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.TenMon)</td>
+                                    <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}", item.GiaTien)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DonViTinh)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.LoaiThucDon.TenLoai)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
+                                    <td>
+                                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
+                                        <form action="/ThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
+
+                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                <span class="text-dark text-bold">Xóa?</span>
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                            </span>
+
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> Không có dử liệu trong bảng. </span>
+                }
 
             </div>
 

@@ -27,6 +27,11 @@ namespace QLNhaHang.Controllers
         // GET: Roles
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name != "Admins")
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             RoleVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
             if (id != 0)
@@ -55,7 +60,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Create(string strUrl)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Name != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -94,7 +99,11 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, int id)
         {
-
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name != "Admins")
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             RoleVM.Role = _unitOfWork.roleRepository.GetById(id);
             if (RoleVM.Role == null)
             {

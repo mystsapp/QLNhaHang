@@ -566,6 +566,7 @@
     <Content Include="Assets\Images\saigontourist.png" />
     <Content Include="Assets\Images\thucdon.png" />
     <Content Include="Assets\Images\tinhtien.jfif" />
+    <Content Include="Assets\js\Ban\createController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
     <Content Include="Assets\js\Home\homeController.js" />

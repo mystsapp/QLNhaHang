@@ -6,45 +6,45 @@
     @{
         var user = HttpContextAccessor.HttpContext.Session.Get<Users>("loginUser");
     }*@
-    <aside class="main-sidebar elevation-4 sidebar-light-primary">
+<aside class="main-sidebar elevation-4 sidebar-light-primary">
 
-        <!-- Brand Logo -->
-        @*<a href="/" style="background-color:#3c8dbc; display: block; padding-bottom:8px">
+    <!-- Brand Logo -->
+    @*<a href="/" style="background-color:#3c8dbc; display: block; padding-bottom:8px">
         @*<span class="logo-mini">
             <img src="~/Images/favicon.png" />
         </span>*@
-        @*    <span class="logo-lg">
+    @*    <span class="logo-lg">
                 <img src="~/Assets/Images/logo1.png" class="mypicture"/>
             </span>
         </a>*@
 
-        <a href="#" class="brand-link navbar-orange">
-            <img src="~/Assets/lib/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">Saigontourist</span>
-        </a>
+    <a href="#" class="brand-link navbar-orange">
+        <img src="~/Assets/lib/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Saigontourist</span>
+    </a>
 
 
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    @*<img src="~/lib/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">*@
-                    <i class="fas fa-user-circle text-green fa-2x"></i>
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Online</a>
-                </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                @*<img src="~/lib/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">*@
+                <i class="fas fa-user-circle text-green fa-2x"></i>
             </div>
+            <div class="info">
+                <a href="#" class="d-block">Online</a>
+            </div>
+        </div>
 
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
-                    @*@if (user.Nhom == "Admins")
+                @*@if (user.Nhom == "Admins")
                     {*@
-                    @*<li class="nav-item has-treeview">
+                @*<li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
@@ -54,161 +54,163 @@
                         </a>
 
                     </li>*@
-                    
-                    <li class="nav-item has-treeview">
-                        <a href="/HoaDons/Index" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                In hóa đơn
 
-                            </p>
-                        </a>
+                <li class="nav-item has-treeview">
+                    <a href="/HoaDons/Index" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            In hóa đơn
 
-                    </li>
-                    @*}
+                        </p>
+                    </a>
+
+                </li>
+                @*}
                     @if (user.Nhom != "KDO")
                     {*@
-                    @* Danh muc báo cáo *@
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Quản trị
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item has-treeview">
-                                <a href="/Accounts/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Nhân viên
+                @* Danh muc báo cáo *@
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Quản trị
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="/Accounts/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Nhân viên
 
-                                    </p>
-                                </a>
+                                </p>
+                            </a>
 
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="/KhachHangs/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Khách hảng
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="/KhachHangs/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Khách hảng
 
-                                    </p>
-                                </a>
+                                </p>
+                            </a>
 
-                            </li>
-                            
-                            <li class="nav-item has-treeview">
-                                <a href="/ThongTinHDs/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Thông tin HD
+                        </li>
 
-                                    </p>
-                                </a>
+                        <li class="nav-item has-treeview">
+                            <a href="/ThongTinHDs/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Thông tin HD
 
-                            </li>
-                            
+                                </p>
+                            </a>
+
+                        </li>
+                        @if (Session["Role"].ToString() == "Admins")
+                        {
                             <li class="nav-item has-treeview">
                                 <a href="/Roles/Index" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
-                                        Role
 
                                     </p>
                                 </a>
 
                             </li>
-                            
-                        </ul>
-                    </li>
-                     @* Danh muc báo cáo *@
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Danh mục
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item has-treeview">
-                                <a href="/ThucDons/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Thực đơn
+                        }
 
-                                    </p>
-                                </a>
 
-                            </li>
-                            <li class="nav-item has-treeview">
-                                <a href="/LoaiThucDons/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Loại thực đơn
+                    </ul>
+                </li>
+                @* Danh muc báo cáo *@
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Danh mục
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item has-treeview">
+                            <a href="/ThucDons/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Thực đơn
 
-                                    </p>
-                                </a>
+                                </p>
+                            </a>
 
-                            </li>
-                            
-                            <li class="nav-item has-treeview">
-                                <a href="/Bans/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Danh sách bàn
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="/LoaiThucDons/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Loại thực đơn
 
-                                    </p>
-                                </a>
+                                </p>
+                            </a>
 
-                            </li>
-                            
-                            <li class="nav-item has-treeview">
-                                <a href="/VanPhongs/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Văn phòng
+                        </li>
 
-                                    </p>
-                                </a>
+                        <li class="nav-item has-treeview">
+                            <a href="/Bans/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Danh sách bàn
 
-                            </li>
+                                </p>
+                            </a>
 
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Thống kê
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="BaoCao" asp-action="SaleTheoQuay" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Theo ngày bán</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-area="" asp-controller="BaoCao" asp-action="SaleTheoNgayDi" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Theo đơn vị bán</p>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="/VanPhongs/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Văn phòng
+
+                                </p>
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Thống kê
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="BaoCao" asp-action="SaleTheoQuay" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Theo ngày bán</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="BaoCao" asp-action="SaleTheoNgayDi" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Theo đơn vị bán</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
 
 

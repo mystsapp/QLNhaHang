@@ -31,7 +31,11 @@
             </h3>
 
             <div class="card-tools">
+                @if (Session["role"].ToString() == "Admins")
+                {
                 <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "VanPhongs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                }
+                
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -81,7 +85,10 @@
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DiaChi)</th>
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().DienThoai)</th>
                                 <th>@Html.DisplayNameFor(m => m.VanPhongs.FirstOrDefault().Role)</th>
-                                <th>#</th>
+                                @if (Session["role"].ToString() == "Admins")
+                                {
+                                    <th>#</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -97,25 +104,29 @@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DiaChi)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DienThoai)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.Role)</td>
-                                    <td>
-                                        <div class="btn-group ">
-                                            <a class="btn btn-sm btn-info" href="@Url.Action("Edit", "VanPhongs", new { strUrl = Model.StrUrl, id = item.Id })"><i class="fas fa-edit"></i></a>
-                                            <form action="/VanPhongs/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                    @if (Session["role"].ToString() == "Admins")
+                                    {
+                                        <td>
+                                            <div class="btn-group ">
+                                                <a class="btn btn-sm btn-info" href="@Url.Action("Edit", "VanPhongs", new { strUrl = Model.StrUrl, id = item.Id })"><i class="fas fa-edit"></i></a>
+                                                <form action="/VanPhongs/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                                <input type="hidden" name="id" value="@item.Id" />
-                                                <span id="confirmDeleteSpan_@item.Id" style="display: none">
-                                                    <span class="text-dark text-bold">Xóa?</span>
-                                                    <button type="submit" class="btn btn-danger">Yes</button>
-                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
-                                                </span>
+                                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                        <span class="text-dark text-bold">Xóa?</span>
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                                    </span>
 
-                                                <span id="deleteSpan_@item.Id">
-                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
-                                                </span>
-                                            </form>
-                                        </div>
-                                    </td>
+                                                    <span id="deleteSpan_@item.Id">
+                                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                                    </span>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    }
+
                                 </tr>
                                 i++;
                             }
