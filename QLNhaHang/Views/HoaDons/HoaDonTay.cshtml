@@ -227,18 +227,32 @@
                 <fieldset class="groupbox-border rounded ">
                     <legend class="groupbox-border">Thông tin thêm </legend>
                     <div class="form-group row">
-                        
+
                         <div class="col-3">
                             Số tiền
-                            @Html.TextBoxFor(model => model.SoTien, null, new { @class = "form-control numbers" })
+                            @Html.TextBoxFor(model => model.SoTien, null, new { @class = "form-control numbers txtSoTien" })
                             @Html.ValidationMessageFor(model => model.SoTien, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-9">
+                        <div class="col-1">
+                            VAT(10%)
+                            @Html.TextBoxFor(model => model.VAT, null, new { @class = "form-control txtVAT" })
+
+                        </div>
+                        <div class="col-2">
+                            Thành tiền(VAT)
+                            @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
+                            @Html.TextBoxFor(model => model.ThanhTienVAT, null, new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.ThanhTienVAT, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
                             Nội dung
-                            @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control " })
+                            @Html.TextBoxFor(model => model.NoiDung, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
                         </div>
+
+
                     </div>
                 </fieldset>
                 <br />
@@ -257,6 +271,8 @@
     <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
     <input type="hidden" name="strUrl" value="@Model.StrUrl" />
     <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
+    <input type="hidden" name="vat" value="@Model.VAT" />
+    <input type="hidden" name="sotien" value="@Model.SoTien" />
     <input type="hidden" id="hidMaThongTinHDId" name="maThongTinHDId" />
 
 </form>
@@ -264,7 +280,19 @@
     <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
     <input type="hidden" name="strUrl" value="@Model.StrUrl" />
     <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
+    <input type="hidden" name="vat" value="@Model.VAT" />
+    <input type="hidden" name="sotien" value="@Model.SoTien" />
     <input type="hidden" id="hidMaKH" name="maKH" />
+</form>
+
+<form id="frmVAT" action="/HoaDons/HoaDonTay">
+    <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+    <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
+    <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
+    <input type="hidden" id="hidVAT" name="vat" />
+    <input type="hidden" id="hidSoTien" name="sotien" />
+
 </form>
 
 @section Scripts{

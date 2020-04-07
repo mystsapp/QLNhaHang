@@ -13,6 +13,7 @@ namespace QLNhaHang.Data.Repositories
     public interface IHoaDonRepository : IRepository<HoaDon>
     {
         IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int? page);
+        List<HoaDon> FindIncludeThree(string name);
     }
     public class HoaDonRepository : Repository<HoaDon>, IHoaDonRepository
     {
@@ -117,6 +118,11 @@ namespace QLNhaHang.Data.Repositories
 
 
             return listPaged;
+        }
+
+        public List<HoaDon> FindIncludeThree(string name)
+        {
+            return _context.HoaDons.Include(x => x.Ban).Include(y => y.NhanVien).Include(z => z.VanPhong).Where(a => a.MaHD.Equals(name)).ToList();
         }
 
     }

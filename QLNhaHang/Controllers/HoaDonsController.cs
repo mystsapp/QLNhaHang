@@ -151,8 +151,7 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Export(string id, string strUrl)
         {
-            var hoaDon = _unitOfWork.hoaDonRepository
-                                    .FindIncludeTwo(x => x.Ban, y => y.NhanVien, z => z.MaHD.Equals(id)).ToList();
+            var hoaDon = _unitOfWork.hoaDonRepository.FindIncludeThree(id);
             var ctHoaDons = _unitOfWork.chiTietHDRepository
                                        .FindIncludeTwo(x => x.HoaDon, y => y.ThucDon, z => z.MaHD.Equals(id))
                                        .ToList();
@@ -160,7 +159,16 @@ namespace QLNhaHang.Controllers
             var items = list.Select(x => new
             {
                 x.MaHD,
-                x.HoaDon.NhanVien.HoTen,
+                x.HoaDon.NumberId,
+                x.HoaDon.MauSo,
+                x.HoaDon.KyHieu,
+                x.HoaDon.SoThuTu,
+                x.HoaDon.QuyenSo,
+                x.HoaDon.So,
+                TenVP = x.HoaDon.VanPhong.Name,
+                DiaChiVP = x.HoaDon.VanPhong.DiaChi,
+                DienThoaiVP = x.HoaDon.VanPhong.DienThoai,
+                HoTenNV = x.HoaDon.NhanVien.HoTen,
                 x.HoaDon.Ban.TenBan,
                 x.HoaDon.HTThanhToan,
                 x.HoaDon.NgayTao,
@@ -168,18 +176,12 @@ namespace QLNhaHang.Controllers
                 x.HoaDon.ThanhTienHD,
                 x.HoaDon.ThanhTienVAT,
                 x.HoaDon.PhiPhucvu,
-                x.HoaDon.VAT,
-                x.HoaDon.NumberId,
-                x.HoaDon.MauSo,
-                x.HoaDon.KyHieu,
-                x.HoaDon.SoThuTu,
-                x.HoaDon.QuyenSo,
-                x.HoaDon.So,
-                x.HoaDon.TenKH,
-                x.HoaDon.Phone,
-                x.HoaDon.DiaChi,
-                x.HoaDon.TenDonVi,
-                x.HoaDon.MaSoThue,
+                x.HoaDon.VAT,                
+                TenKH = x.HoaDon.TenKH,
+                DienThoaiKH = x.HoaDon.Phone,
+                DiaChiKH = x.HoaDon.DiaChi,
+                TenDonViKH = x.HoaDon.TenDonVi,
+                MstKH = x.HoaDon.MaSoThue,
                 x.HoaDon.SoTien,
                 x.ThucDon.TenMon,
                 x.DonGia,
@@ -192,10 +194,21 @@ namespace QLNhaHang.Controllers
             return new CrystalReportPdfResult(reportPath, dt);
         }
 
-        public ActionResult HoaDonTay(string maHD, string strUrl, int maThongTinHDId = 0, string maKH = null)
+        public ActionResult HoaDonTay(decimal vat = 0, string sotien = null, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
         {
+            HoaDonVM.VAT = 0;
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            //if (vat == 0)
+            //{
+            //    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * decimal.Parse(sotien) + decimal.Parse(sotien)).ToString();
+            //    HoaDonVM.VAT = HoaDonVM.VAT;
+            //}
+            if (vat != 0 && !string.IsNullOrEmpty(sotien))
+            {
+                HoaDonVM.ThanhTienVAT = (vat / 100 * decimal.Parse(sotien) + decimal.Parse(sotien)).ToString().Split('.')[0];
+                HoaDonVM.VAT = vat;
+            }
             HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
             HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
             if (maThongTinHDId != 0)
@@ -232,6 +245,9 @@ namespace QLNhaHang.Controllers
             hoaDon.DaIn = true;
             hoaDon.SoTien = decimal.Parse(model.SoTien);
             hoaDon.NoiDung = model.NoiDung;
+
+            hoaDon.VAT = model.VAT;
+            hoaDon.ThanhTienVAT = decimal.Parse(model.ThanhTienVAT);
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
@@ -256,17 +272,18 @@ namespace QLNhaHang.Controllers
                 x.ThanhTienHD,
                 x.PhiPhucvu,
                 x.VAT,
+                x.ThanhTienVAT,
                 x.NumberId,
                 x.MauSo,
                 x.KyHieu,
                 x.SoThuTu,
                 x.QuyenSo,
                 x.So,
-                x.TenKH,
-                x.Phone,
-                x.DiaChi,
-                x.TenDonVi,
-                x.MaSoThue,
+                TenKH = x.TenKH,
+                DienThoaiKH = x.Phone,
+                DiaChiKH = x.DiaChi,
+                DonViKH = x.TenDonVi,
+                MstKH = x.MaSoThue,
                 x.SoTien,
                 x.NoiDung,
                 MaVP = x.VanPhong.MaVP,

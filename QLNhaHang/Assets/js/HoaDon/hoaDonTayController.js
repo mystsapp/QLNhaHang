@@ -36,6 +36,19 @@ var hoaDonTayController = {
             $('#frmKhachHang').submit();
         });
 
+        $('.txtVAT').off('blur').on('blur', function () {
+            //hoaDonTuDongController.loadThanhTienVAT();
+            id = $(this).val();
+            sotien = $('.txtSoTien').val();
+            $('#hidVAT').val(id);
+            $('#hidSoTien').val(sotien);
+            $('#frmVAT').submit();
+        });
+
+
+        $('input.numbers').val(function (index, value) {
+            return addCommas(value);
+        });
         $('input.numbers').keyup(function (event) {
 
             // Chỉ cho nhập số
