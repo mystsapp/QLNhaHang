@@ -7,13 +7,13 @@ namespace QLNhaHang.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class addForRole : IMigrationMetadata
+    public sealed partial class addTongTienSauPPV : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addForRole));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addTongTienSauPPV));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004060355173_addForRole"; }
+            get { return "202004071251146_addTongTienSauPPV"; }
         }
         
         string IMigrationMetadata.Source

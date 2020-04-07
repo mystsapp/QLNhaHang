@@ -1,0 +1,108 @@
+﻿@model QLNhaHang.Models.HoaDonViewModel
+
+<div class="modal fade" id="modal-KhachHangModal" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nập thông tin xuất hóa đơn</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                @if (Model.KhachHangs != null)
+                {
+                    <table class="table mytable text-nowrap listAll">
+                        <thead>
+
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaKH)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenKH)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenDonVi)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaSoThue)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().DiaChi)</th>
+                                <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().Phone)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.KhachHangs)
+                            {
+
+                                <tr class="cursor-pointer tdValKH" data-id="@item.MaKH">
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.MaKH)</td>
+                                    <td>@Html.DisplayFor(m => item.TenKH)</td>
+                                    <td>@Html.DisplayFor(m => item.TenDonVi)</td>
+                                    <td>@Html.DisplayFor(m => item.MaSoThue)</td>
+                                    <td>@Html.DisplayFor(m => item.DiaChi)</td>
+                                    <td>@Html.DisplayFor(m => item.Phone)</td>
+                                </tr>
+                                i++;
+
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span>No data.</span>
+                }
+
+            </div>
+            <div class="modal-footer ">
+                @*justify-content-between*@
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveHDModal"><i class="fas fa-save"></i></button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
+
+
+    @*<a asp-action="ExportList" asp-controller="BanGiaos" id="btnExportAll"><i class="fas fa-file-word"></i></a>*@
+    <input type="hidden" name="stringId" id="stringId" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+
+</form>
+
+@section Scripts{
+    <script>
+        $('#btnSaveHDModal').off('click').on('click', function () {
+
+            var idList = [];
+            $.each($('.ckId'), function (i, item) {
+                if ($(this).prop('checked')) {
+                    idList.push({
+                        Id: $(item).data('id')
+                    });
+                }
+
+            });
+
+            if (idList.length !== 0) {
+                $('#stringId').val(JSON.stringify(idList));
+                $('#frmExportAll').submit();
+            }
+            else {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa chọn HD giao!",
+                    callback: function () {
+                        //e.preventDefault();
+
+                    }
+                });
+            }
+
+        });
+    </script>
+}

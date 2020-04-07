@@ -44,6 +44,13 @@ var hoaDonTuDongController = {
             $('#frmVAT').submit();
         });
 
+        $('.txtPPV').off('blur').on('blur', function () {
+            //hoaDonTuDongController.loadThanhTienVAT();
+            id = $(this).val();
+            $('#hidPPV').val(id);
+            $('#frmPPV').submit();
+        });
+
         //var inputNumberVal = $('input.numbers').val();
         $('input.numbers').val(function (index, value) {
             return addCommas(value);

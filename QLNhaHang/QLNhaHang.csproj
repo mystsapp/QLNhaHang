@@ -388,113 +388,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003250804397_fixHDCol.cs" />
-    <Compile Include="Migrations\202003250804397_fixHDCol.designer.cs">
-      <DependentUpon>202003250804397_fixHDCol.cs</DependentUpon>
+    <Compile Include="Migrations\202004071214363_addTyLePPV.cs" />
+    <Compile Include="Migrations\202004071214363_addTyLePPV.designer.cs">
+      <DependentUpon>202004071214363_addTyLePPV.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003250805379_fixHDCol1.cs" />
-    <Compile Include="Migrations\202003250805379_fixHDCol1.designer.cs">
-      <DependentUpon>202003250805379_fixHDCol1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003260306207_addDiaChi.cs" />
-    <Compile Include="Migrations\202003260306207_addDiaChi.designer.cs">
-      <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003270258186_fixGioiTinh.cs" />
-    <Compile Include="Migrations\202003270258186_fixGioiTinh.designer.cs">
-      <DependentUpon>202003270258186_fixGioiTinh.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003270333494_fixGioiTinhString.cs" />
-    <Compile Include="Migrations\202003270333494_fixGioiTinhString.designer.cs">
-      <DependentUpon>202003270333494_fixGioiTinhString.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003280242088_addThongTinHD.cs" />
-    <Compile Include="Migrations\202003280242088_addThongTinHD.designer.cs">
-      <DependentUpon>202003280242088_addThongTinHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003281324259_addKHToHD.cs" />
-    <Compile Include="Migrations\202003281324259_addKHToHD.designer.cs">
-      <DependentUpon>202003281324259_addKHToHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003281328350_fixThanhTienM.cs" />
-    <Compile Include="Migrations\202003281328350_fixThanhTienM.designer.cs">
-      <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003300443496_addCheckIn.cs" />
-    <Compile Include="Migrations\202003300443496_addCheckIn.designer.cs">
-      <DependentUpon>202003300443496_addCheckIn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003300811530_addThonTinthem.cs" />
-    <Compile Include="Migrations\202003300811530_addThonTinthem.designer.cs">
-      <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310326280_addVPToHD.cs" />
-    <Compile Include="Migrations\202003310326280_addVPToHD.designer.cs">
-      <DependentUpon>202003310326280_addVPToHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310337206_addVPToHD1.cs" />
-    <Compile Include="Migrations\202003310337206_addVPToHD1.designer.cs">
-      <DependentUpon>202003310337206_addVPToHD1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310347124_addVPToHD3.cs" />
-    <Compile Include="Migrations\202003310347124_addVPToHD3.designer.cs">
-      <DependentUpon>202003310347124_addVPToHD3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310348381_addVPToHD4.cs" />
-    <Compile Include="Migrations\202003310348381_addVPToHD4.designer.cs">
-      <DependentUpon>202003310348381_addVPToHD4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310401065_fixNullHD.cs" />
-    <Compile Include="Migrations\202003310401065_fixNullHD.designer.cs">
-      <DependentUpon>202003310401065_fixNullHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310402377_fixNullHD1.cs" />
-    <Compile Include="Migrations\202003310402377_fixNullHD1.designer.cs">
-      <DependentUpon>202003310402377_fixNullHD1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310406200_addVPHD.cs" />
-    <Compile Include="Migrations\202003310406200_addVPHD.designer.cs">
-      <DependentUpon>202003310406200_addVPHD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003310422400_addVPBan.cs" />
-    <Compile Include="Migrations\202003310422400_addVPBan.designer.cs">
-      <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003311346121_fixThucDobn.cs" />
-    <Compile Include="Migrations\202003311346121_fixThucDobn.designer.cs">
-      <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004010930130_TenMonnVarChar.cs" />
-    <Compile Include="Migrations\202004010930130_TenMonnVarChar.designer.cs">
-      <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004020234333_fixLoaiThucDon.cs" />
-    <Compile Include="Migrations\202004020234333_fixLoaiThucDon.designer.cs">
-      <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004020420206_fixBan.cs" />
-    <Compile Include="Migrations\202004020420206_fixBan.designer.cs">
-      <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004030352389_fixVP.cs" />
-    <Compile Include="Migrations\202004030352389_fixVP.designer.cs">
-      <DependentUpon>202004030352389_fixVP.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004030359296_fixVPRole.cs" />
-    <Compile Include="Migrations\202004030359296_fixVPRole.designer.cs">
-      <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004040339518_fixNVAtr.cs" />
-    <Compile Include="Migrations\202004040339518_fixNVAtr.designer.cs">
-      <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004060355173_addForRole.cs" />
-    <Compile Include="Migrations\202004060355173_addForRole.designer.cs">
-      <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004061016586_addVATMoney.cs" />
-    <Compile Include="Migrations\202004061016586_addVATMoney.designer.cs">
-      <DependentUpon>202004061016586_addVATMoney.cs</DependentUpon>
+    <Compile Include="Migrations\202004071251146_addTongTienSauPPV.cs" />
+    <Compile Include="Migrations\202004071251146_addTongTienSauPPV.designer.cs">
+      <DependentUpon>202004071251146_addTongTienSauPPV.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
@@ -573,6 +473,7 @@
     <Content Include="Assets\js\Ban\createController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTayController.js" />
     <Content Include="Assets\js\HoaDon\hoaDonTuDongController.js" />
+    <Content Include="Assets\js\HoaDon\modalTTHDController.js" />
     <Content Include="Assets\js\Home\homeController.js" />
     <Content Include="Assets\js\Ban\indexController.js" />
     <Content Include="Assets\js\LoaiThucDon\createController.js" />
@@ -2113,7 +2014,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
     <Content Include="Views\BanHangs\Index.cshtml" />
-    <Content Include="Views\Shared\_InHoaDonModal.cshtml" />
+    <Content Include="Views\Shared\_KhachHangModal.cshtml" />
     <Content Include="Views\BanHangs\GoiMon.cshtml" />
     <Content Include="Views\BanHangs\edit.cshtml" />
     <Content Include="Views\BanHangs\creat.cshtml" />
@@ -2126,7 +2027,7 @@
     <Content Include="Views\ThongTinHDs\Create.cshtml" />
     <Content Include="Views\ThongTinHDs\Edit.cshtml" />
     <Content Include="Views\ThongTinHDs\Index.cshtml" />
-    <Content Include="Views\Shared\_InHDTayModel.cshtml" />
+    <Content Include="Views\Shared\_ThongTinHDModal.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTuDong.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTay.cshtml" />
     <Content Include="Views\ThucDons\Create.cshtml" />
@@ -2170,86 +2071,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003250804397_fixHDCol.resx">
-      <DependentUpon>202003250804397_fixHDCol.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004071214363_addTyLePPV.resx">
+      <DependentUpon>202004071214363_addTyLePPV.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003250805379_fixHDCol1.resx">
-      <DependentUpon>202003250805379_fixHDCol1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003260306207_addDiaChi.resx">
-      <DependentUpon>202003260306207_addDiaChi.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003270258186_fixGioiTinh.resx">
-      <DependentUpon>202003270258186_fixGioiTinh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003270333494_fixGioiTinhString.resx">
-      <DependentUpon>202003270333494_fixGioiTinhString.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003280242088_addThongTinHD.resx">
-      <DependentUpon>202003280242088_addThongTinHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003281324259_addKHToHD.resx">
-      <DependentUpon>202003281324259_addKHToHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003281328350_fixThanhTienM.resx">
-      <DependentUpon>202003281328350_fixThanhTienM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003300443496_addCheckIn.resx">
-      <DependentUpon>202003300443496_addCheckIn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003300811530_addThonTinthem.resx">
-      <DependentUpon>202003300811530_addThonTinthem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310326280_addVPToHD.resx">
-      <DependentUpon>202003310326280_addVPToHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310337206_addVPToHD1.resx">
-      <DependentUpon>202003310337206_addVPToHD1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310347124_addVPToHD3.resx">
-      <DependentUpon>202003310347124_addVPToHD3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310348381_addVPToHD4.resx">
-      <DependentUpon>202003310348381_addVPToHD4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310401065_fixNullHD.resx">
-      <DependentUpon>202003310401065_fixNullHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310402377_fixNullHD1.resx">
-      <DependentUpon>202003310402377_fixNullHD1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310406200_addVPHD.resx">
-      <DependentUpon>202003310406200_addVPHD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003310422400_addVPBan.resx">
-      <DependentUpon>202003310422400_addVPBan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311346121_fixThucDobn.resx">
-      <DependentUpon>202003311346121_fixThucDobn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004010930130_TenMonnVarChar.resx">
-      <DependentUpon>202004010930130_TenMonnVarChar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004020234333_fixLoaiThucDon.resx">
-      <DependentUpon>202004020234333_fixLoaiThucDon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004020420206_fixBan.resx">
-      <DependentUpon>202004020420206_fixBan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004030352389_fixVP.resx">
-      <DependentUpon>202004030352389_fixVP.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004030359296_fixVPRole.resx">
-      <DependentUpon>202004030359296_fixVPRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004040339518_fixNVAtr.resx">
-      <DependentUpon>202004040339518_fixNVAtr.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004060355173_addForRole.resx">
-      <DependentUpon>202004060355173_addForRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004061016586_addVATMoney.resx">
-      <DependentUpon>202004061016586_addVATMoney.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004071251146_addTongTienSauPPV.resx">
+      <DependentUpon>202004071251146_addTongTienSauPPV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

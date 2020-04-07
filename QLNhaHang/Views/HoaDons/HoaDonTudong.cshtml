@@ -50,89 +50,78 @@
             <form method="post" autocomplete="off">
                 <fieldset class="groupbox-border rounded ">
                     <legend class="groupbox-border">Thông tin hoá đơn </legend>
-                    @if (Model.ThongTinHDs != null)
-                    {
-                        <table class="table mytable text-nowrap listAll">
-                            <thead>
-
-                                <tr class="table-info">
-                                    <th>STT</th>
-                                    <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().MauSo)</th>
-                                    <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().KyHieu)</th>
-                                    <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().QuyenSo)</th>
-                                    <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().So)</th>
-                                    <th>@Html.DisplayNameFor(m => m.ThongTinHDs.FirstOrDefault().SoThuTu)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{int i = 1;}
-                                @foreach (var item in Model.ThongTinHDs)
-                                {
-
-                                    <tr class="cursor-pointer tdValTT" data-id="@item.Id">
-
-                                        <td>@i</td>
-                                        <td>@Html.DisplayFor(m => item.MauSo)</td>
-                                        <td>@Html.DisplayFor(m => item.KyHieu)</td>
-                                        <td>@Html.DisplayFor(m => item.QuyenSo)</td>
-                                        <td>@Html.DisplayFor(m => item.So)</td>
-                                        <td>@Html.DisplayFor(m => item.SoThuTu)</td>
-                                    </tr>
-                                    i++;
-
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <span>No data.</span>
-                    }
-                    <hr />
-
 
                     <div class="form-group row">
 
-                        <div class="col-2">
-                            Mẫu số
-                            @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-2">
-                            Ký hiệu
-                            @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="col-2">
-                            Quyển số
-                            @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
-                        </div>
+                        <div class="col-md-2">
+                            Số thứ tự
+                            <div class="input-group input-group">
+                                @Html.TextBoxFor(model => model.ThongTinHD.SoThuTu, null, new { @class = "form-control txtSTT" })
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#modal-ThongTinHD"><i class="fas fa-search"></i></button>
+                                </span>
+                                @Html.ValidationMessageFor(model => model.ThongTinHD.SoThuTu, "", new { @class = "text-danger" })
 
-                        <div class="col-2">
-                            Số
-                            @Html.TextBoxFor(model => model.ThongTinHD.So, new { @class = "form-control " })
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            Số hóa đơn
+                            @Html.TextBoxFor(model => model.ThongTinHD.So, new { @class = "form-control txtSoHD" })
                             @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-1">
-                            Số thứ tự
-                            @Html.TextBoxFor(model => model.ThongTinHD.SoThuTu, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.SoThuTu, "", new { @class = "text-danger" })
+                        <div class="col-md-2">
+                            Ký hiệu
+                            @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control txtKyHieu" })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            Quyển số
+                            @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, new { @class = "form-control txtQuyenSo" })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
                         </div>
 
-                        
-                        <div class="col-1">
+                        <div class="col-md-2">
+                            Mẫu số
+                            @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control txtMauSo" })
+                            @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="col-md-2">
+                            HTTT
+                            @Html.TextBoxFor(model => model.HoaDon.HTThanhToan, null, new { @class = "form-control txtHTTT" })
+                            @Html.ValidationMessageFor(model => model.HoaDon.HTThanhToan, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+
+                        <div class="col-md-2">
+                            Phí phục vụ(%)
+                            @Html.TextBoxFor(model => model.TyLePPV, null, new { @class = "form-control txtPPV" })
+
+                        </div>
+                        <div class="col-md-2">
+                            Thành tiền(PPV)
+                            @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
+                            @Html.TextBoxFor(model => model.ThanhTienSauPPV, null, new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.ThanhTienSauPPV, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-2">
                             VAT(10%)
                             @Html.TextBoxFor(model => model.VAT, null, new { @class = "form-control txtVAT" })
 
                         </div>
-                        <div class="col-2">
+                        <div class="col-md-2">
                             Thành tiền(VAT)
                             @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
                             @Html.TextBoxFor(model => model.ThanhTienVAT, null, new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.ThanhTienVAT, "", new { @class = "text-danger" })
                         </div>
+
                     </div>
                     @*<div class="form-group ">
                             <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
@@ -141,69 +130,35 @@
 
                 <fieldset class="groupbox-border rounded ">
                     <legend class="groupbox-border">Thông tin khách hàng </legend>
-                    @if (Model.KhachHangs != null)
-                    {
-                        <table class="table mytable text-nowrap listAll">
-                            <thead>
-
-                                <tr class="table-info">
-                                    <th>STT</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaKH)</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenKH)</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().TenDonVi)</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().MaSoThue)</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().DiaChi)</th>
-                                    <th>@Html.DisplayNameFor(m => m.KhachHangs.FirstOrDefault().Phone)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @{int i = 1;}
-                                @foreach (var item in Model.KhachHangs)
-                                {
-
-                                    <tr class="cursor-pointer tdValKH" data-id="@item.MaKH">
-
-                                        <td>@i</td>
-                                        <td>@Html.DisplayFor(m => item.MaKH)</td>
-                                        <td>@Html.DisplayFor(m => item.TenKH)</td>
-                                        <td>@Html.DisplayFor(m => item.TenDonVi)</td>
-                                        <td>@Html.DisplayFor(m => item.MaSoThue)</td>
-                                        <td>@Html.DisplayFor(m => item.DiaChi)</td>
-                                        <td>@Html.DisplayFor(m => item.Phone)</td>
-                                    </tr>
-                                    i++;
-
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <span>No data.</span>
-                    }
-                    <hr />
-
-
+                    
                     <div class="form-group row">
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Mã KH
-                            @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control ", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaKH, "", new { @class = "text-danger" })
+                            <div class="input-group input-group">
+                                @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control " })
+                                <span class="input-group-append">
+                                    <button type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#modal-KhachHangModal"><i class="fas fa-search"></i></button>
+                                </span>
+                                @Html.ValidationMessageFor(model => model.KhachHang.MaKH, "", new { @class = "text-danger" })
+
+                            </div>
+
                         </div>
-                        <div class="col-3">
+                        
+                        <div class="col-md-3">
                             Họ tên
                             @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Địa chỉ
                             @Html.TextAreaFor(model => model.KhachHang.DiaChi, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Tên đơn vị
                             @Html.TextAreaFor(model => model.KhachHang.TenDonVi, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
@@ -212,24 +167,24 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-3">
+                        <div class="col-md-3">
                             MST
                             @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Giới tính <br />
                             @Html.TextBoxFor(model => model.KhachHang.GioiTinh, null, new { @class = "form-control " })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Email
                             @Html.TextBoxFor(model => model.KhachHang.Email, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Phone
                             @Html.TextBoxFor(model => model.KhachHang.Phone, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.Phone, "", new { @class = "text-danger" })
@@ -254,15 +209,17 @@
     <input type="hidden" name="strUrl" value="@Model.StrUrl" />
     <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
     <input type="hidden" name="vat" value="@Model.VAT" />
+    <input type="hidden" name="ppv" value="@Model.TyLePPV" />
     <input type="hidden" id="hidMaThongTinHDId" name="maThongTinHDId" />
 
-    
+
 </form>
 <form id="frmKhachHang" action="/HoaDons/HoaDonTuDong">
     <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
     <input type="hidden" name="strUrl" value="@Model.StrUrl" />
     <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
     <input type="hidden" name="vat" value="@Model.VAT" />
+    <input type="hidden" name="ppv" value="@Model.TyLePPV" />
     <input type="hidden" id="hidMaKH" name="maKH" />
 </form>
 
@@ -271,9 +228,20 @@
     <input type="hidden" name="strUrl" value="@Model.StrUrl" />
     <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
     <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
+    <input type="hidden" name="ppv" value="@Model.TyLePPV" />
     <input type="hidden" id="hidVAT" name="vat" />
-
 </form>
+
+<form id="frmPPV" action="/HoaDons/HoaDonTuDong">
+    <input type="hidden" name="maHD" value="@Model.HoaDon.MaHD" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+    <input type="hidden" name="maThongTinHDId" value="@Model.ThongTinHD.Id" />
+    <input type="hidden" name="maKH" value="@Model.KhachHang.MaKH" />
+    <input type="hidden" name="vat" value="@Model.VAT" />
+    <input type="hidden" id="hidPPV" name="ppv" />
+</form>
+@Html.Partial("~/Views/Shared/_ThongTinHDModal.cshtml", Model)
+@Html.Partial("~/Views/Shared/_KhachHangModal.cshtml", Model)
 
 @section Scripts{
     <script>
@@ -303,7 +271,7 @@
             "info": true,
             "autoWidth": false,
         });
-                    //"iDisplayLength": 5
+                                //"iDisplayLength": 5
     </script>
     <style>
         .cursor-pointer:hover {
@@ -325,4 +293,5 @@
     </style>
 
     <script src="~/Assets/js/HoaDon/hoaDonTuDongController.js"></script>
+    @*<script src="~/Assets/js/HoaDon/modalTTHDController.js"></script>*@
 }

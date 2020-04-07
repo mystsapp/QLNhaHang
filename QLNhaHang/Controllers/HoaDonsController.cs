@@ -79,21 +79,46 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        public ActionResult HoaDonTuDong(decimal vat = 0, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
+        public ActionResult HoaDonTuDong(decimal ppv = 0, decimal vat = 0, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
         {
 
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
-            if(vat == 0)
+            if(ppv != 0)
             {
-                HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
-                HoaDonVM.VAT = HoaDonVM.VAT;
+                HoaDonVM.ThanhTienSauPPV = (ppv / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                HoaDonVM.TyLePPV = ppv;
+                if (vat == 0)
+                {
+
+                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + HoaDonVM.ThanhTienSauPPV).ToString().Split('.')[0];
+                    HoaDonVM.VAT = HoaDonVM.VAT;
+
+                }
+                else
+                {
+                    HoaDonVM.ThanhTienVAT = (vat / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.VAT = vat;
+
+                }
             }
             else
             {
-                HoaDonVM.ThanhTienVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
-                HoaDonVM.VAT = vat;
+                if (vat == 0)
+                {
+
+                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.VAT = HoaDonVM.VAT;
+
+                }
+                else
+                {
+                    HoaDonVM.ThanhTienVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.VAT = vat;
+
+                }
             }
+            
             
             HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
             HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
@@ -127,8 +152,13 @@ namespace QLNhaHang.Controllers
             hoaDon.So = model.ThongTinHD.So;
             hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
 
+            hoaDon.TyLePPV = model.TyLePPV;
+            hoaDon.PhiPhucvu = model.TyLePPV / 100 * hoaDon.ThanhTienHD;
+            hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
+
             hoaDon.VAT = model.VAT;
-            hoaDon.ThanhTienVAT = decimal.Parse(model.ThanhTienVAT);
+            hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
+            hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
 
             hoaDon.NgayIn = DateTime.Now;
             hoaDon.DaIn = true;
@@ -168,15 +198,19 @@ namespace QLNhaHang.Controllers
                 TenVP = x.HoaDon.VanPhong.Name,
                 DiaChiVP = x.HoaDon.VanPhong.DiaChi,
                 DienThoaiVP = x.HoaDon.VanPhong.DienThoai,
+                MstVP = x.HoaDon.VanPhong.MaSoThue,
                 HoTenNV = x.HoaDon.NhanVien.HoTen,
                 x.HoaDon.Ban.TenBan,
                 x.HoaDon.HTThanhToan,
                 x.HoaDon.NgayTao,
                 x.HoaDon.GhiChu,
                 x.HoaDon.ThanhTienHD,
-                x.HoaDon.ThanhTienVAT,
+                x.HoaDon.TyLePPV,
                 x.HoaDon.PhiPhucvu,
+                x.HoaDon.TongTienSauPPV,
                 x.HoaDon.VAT,                
+                x.HoaDon.TienThueVAT,
+                x.HoaDon.ThanhTienVAT,
                 TenKH = x.HoaDon.TenKH,
                 DienThoaiKH = x.HoaDon.Phone,
                 DiaChiKH = x.HoaDon.DiaChi,
@@ -185,7 +219,8 @@ namespace QLNhaHang.Controllers
                 x.HoaDon.SoTien,
                 x.ThucDon.TenMon,
                 x.DonGia,
-                x.SoLuong
+                x.SoLuong,
+                ThanhTienHH = x.DonGia * x.SoLuong
 
             });
             var dt = EntityToTable.ToDataTable(items);
@@ -297,6 +332,11 @@ namespace QLNhaHang.Controllers
             ReportDocument rd = new ReportDocument();
             string reportPath = Path.Combine(Server.MapPath("~/Report"), "DS_HoaDonTay_Report.rpt");
             return new CrystalReportPdfResult(reportPath, dt);
+        }
+
+        public JsonResult GetByTTHDId(int id)
+        {
+            return Json(JsonConvert.SerializeObject(_unitOfWork.thongTinHDRepository.GetById(id)), JsonRequestBehavior.AllowGet);
         }
 
         protected void SetAlert(string message, string type)

@@ -28,5 +28,8 @@ namespace QLNhaHang.Models
 
         public decimal VAT { get; set; }
         public string ThanhTienVAT { get; set; }
+        
+        public decimal TyLePPV { get; set; }
+        public string ThanhTienSauPPV { get; set; }
     }
 }

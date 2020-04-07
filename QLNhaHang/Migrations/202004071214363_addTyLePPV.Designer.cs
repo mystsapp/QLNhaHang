@@ -7,13 +7,13 @@ namespace QLNhaHang.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class fixGioiTinhString : IMigrationMetadata
+    public sealed partial class addTyLePPV : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(fixGioiTinhString));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addTyLePPV));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003270333494_fixGioiTinhString"; }
+            get { return "202004071214363_addTyLePPV"; }
         }
         
         string IMigrationMetadata.Source

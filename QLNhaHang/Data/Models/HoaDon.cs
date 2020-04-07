@@ -65,8 +65,13 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Thành tiền HD")]
         public decimal? ThanhTienHD { get; set; }
+        public decimal? TyLePPV { get; set; }
         public decimal? PhiPhucvu { get; set; }
+        public decimal? TongTienSauPPV { get; set; }
         public decimal? VAT { get; set; }
+        [DisplayName("Tiền thuế GTGT")]
+        public decimal? TienThueVAT { get; set; }
+        
         [DisplayName("Thành tiền VAT")]
         public decimal? ThanhTienVAT { get; set; }
 
