@@ -13,7 +13,7 @@ var hoaDonTayController = {
         $('.tdValTT').click(function () {
             id = $(this).data('id');
             $('#hidMaThongTinHDId').val(id);
-            
+
             //$.ajax({
             //    url: '/CapThes/Index',
             //    data: {
@@ -39,12 +39,34 @@ var hoaDonTayController = {
         $('.txtVAT').off('blur').on('blur', function () {
             //hoaDonTuDongController.loadThanhTienVAT();
             id = $(this).val();
-            sotien = $('.txtSoTien').val();
+            //sotien = $('.txtSoTien').val();
             $('#hidVAT').val(id);
-            $('#hidSoTien').val(sotien);
+            //$('#hidSoTien').val(sotien);
             $('#frmVAT').submit();
         });
 
+        $('.txtPPV').off('blur').on('blur', function () {
+            //hoaDonTuDongController.loadThanhTienVAT();
+            var ppv = $(this).val();
+            var sotien = $('.txtSoTien').val();
+            if (sotien === "") {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa nhập <b>số tiền</b>!",
+                    callback: function () {
+                        //e.preventDefault();
+
+                    }
+                });
+            }
+            else {
+                $('#hidPPV').val(ppv);
+                $('#soTien').val(sotien);
+                $('#frmPPV').submit();
+            }
+
+        });
 
         $('input.numbers').val(function (index, value) {
             return addCommas(value);
