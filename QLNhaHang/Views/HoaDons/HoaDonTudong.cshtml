@@ -48,7 +48,7 @@
 
         <div class="card-body">
             <form method="post" autocomplete="off">
-                <fieldset class="groupbox-border rounded ">
+                <fieldset class="groupbox-border ">
                     <legend class="groupbox-border">Thông tin hoá đơn </legend>
 
                     <div class="form-group row">
@@ -99,9 +99,15 @@
                     <div class="form-group row">
 
                         <div class="col-md-2">
-                            Phí phục vụ(%)
+                            Tỷ lệ PPV(%)
                             @Html.TextBoxFor(model => model.TyLePPV, null, new { @class = "form-control txtPPV" })
 
+                        </div>
+                        <div class="col-md-2">
+                            Tiền PPV
+                            @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
+                            @Html.TextBoxFor(model => model.TienPPV, null, new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.TienPPV, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-2">
                             Thành tiền(PPV)
@@ -116,7 +122,13 @@
 
                         </div>
                         <div class="col-md-2">
-                            Thành tiền(VAT)
+                            Tiền VAT
+                            @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
+                            @Html.TextBoxFor(model => model.TienThueVAT, null, new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.TienThueVAT, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-2">
+                            Tổng tiền
                             @*@Html.TextBoxFor(model => model.ThanhTienVAT, "{0:N0}", new { @class = "form-control txtThanhTienVAT ", @readonly = "true" })*@
                             @Html.TextBoxFor(model => model.ThanhTienVAT, null, new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.ThanhTienVAT, "", new { @class = "text-danger" })
@@ -128,12 +140,12 @@
                         </div>*@
                 </fieldset>
 
-                <fieldset class="groupbox-border rounded ">
+                <fieldset class="groupbox-border ">
                     <legend class="groupbox-border">Thông tin khách hàng </legend>
-                    
+
                     <div class="form-group row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             Mã KH
                             <div class="input-group input-group">
                                 @Html.TextBoxFor(model => model.KhachHang.MaKH, null, new { @class = "form-control " })
@@ -145,35 +157,13 @@
                             </div>
 
                         </div>
-                        
+
                         <div class="col-md-3">
                             Họ tên
                             @Html.TextBoxFor(model => model.KhachHang.TenKH, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.TenKH, "", new { @class = "text-danger" })
                         </div>
-
-                        <div class="col-md-3">
-                            Địa chỉ
-                            @Html.TextAreaFor(model => model.KhachHang.DiaChi, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-md-3">
-                            Tên đơn vị
-                            @Html.TextAreaFor(model => model.KhachHang.TenDonVi, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
-                        </div>
-
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-3">
-                            MST
-                            @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
-                        </div>
-
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             Giới tính <br />
                             @Html.TextBoxFor(model => model.KhachHang.GioiTinh, null, new { @class = "form-control " })
                         </div>
@@ -184,11 +174,30 @@
                             @Html.ValidationMessageFor(model => model.KhachHang.Email, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             Phone
                             @Html.TextBoxFor(model => model.KhachHang.Phone, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.KhachHang.Phone, "", new { @class = "text-danger" })
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-2">
+                            MST
+                            @Html.TextBoxFor(model => model.KhachHang.MaSoThue, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.KhachHang.MaSoThue, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-5">
+                            Địa chỉ
+                            @Html.TextBoxFor(model => model.KhachHang.DiaChi, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.KhachHang.DiaChi, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-5">
+                            Tên đơn vị
+                            @Html.TextBoxFor(model => model.KhachHang.TenDonVi, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.KhachHang.TenDonVi, "", new { @class = "text-danger" })
+                        </div>
+
                     </div>
 
                 </fieldset>
@@ -272,7 +281,7 @@
             "info": true,
             "autoWidth": false,
         });
-                                //"iDisplayLength": 5
+                                    //"iDisplayLength": 5
     </script>
     <style>
         .cursor-pointer:hover {

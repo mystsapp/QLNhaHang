@@ -75,6 +75,10 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Thành tiền VAT")]
         public decimal? ThanhTienVAT { get; set; }
 
+        [StringLength(200)]
+        [MaxLength(200), Column(TypeName = "nvarchar")]
+        public string SoTienBangChu { get; set; }
+        
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string NumberId { get; set; }
@@ -130,7 +134,6 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Số tiền")]
         public decimal? SoTien { get; set; }
-        [DisplayName("Thành tiền VAT")]
-        public decimal? ThanhTienTay { get; set; }
+        
     }
 }

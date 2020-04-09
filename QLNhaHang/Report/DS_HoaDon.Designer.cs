@@ -345,6 +345,10 @@ namespace QLNhaHang.Report {
             
             private global::System.Data.DataColumn columnThanhTienHH;
             
+            private global::System.Data.DataColumn columnDonViTinh;
+            
+            private global::System.Data.DataColumn columnSoTienBangChu;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public HoaDonDataTable() {
@@ -644,6 +648,22 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn DonViTinhColumn {
+                get {
+                    return this.columnDonViTinh;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn SoTienBangChuColumn {
+                get {
+                    return this.columnSoTienBangChu;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -694,25 +714,27 @@ namespace QLNhaHang.Report {
                         string HoTenNV, 
                         string TenBan, 
                         string HTTThanhToan, 
-                        string NgayTao, 
+                        System.DateTime NgayTao, 
                         string GhiChu, 
-                        string ThanhTienHD, 
-                        string TyLePPV, 
-                        string PhiPhucVu, 
-                        string TongTienSauPPV, 
-                        string VAT, 
-                        string TienThueVAT, 
-                        string ThanhTienVAT, 
+                        decimal ThanhTienHD, 
+                        int TyLePPV, 
+                        decimal PhiPhucVu, 
+                        decimal TongTienSauPPV, 
+                        int VAT, 
+                        decimal TienThueVAT, 
+                        decimal ThanhTienVAT, 
                         string TenKH, 
                         string DienThoaiKH, 
                         string DiaChiKH, 
                         string TenDonViKH, 
                         string MstKH, 
-                        string SoTien, 
+                        decimal SoTien, 
                         string TenMon, 
-                        string DonGia, 
-                        string SoLuong, 
-                        string ThanhTienHH) {
+                        decimal DonGia, 
+                        int SoLuong, 
+                        decimal ThanhTienHH, 
+                        string DonViTinh, 
+                        string SoTienBangChu) {
                 HoaDonRow rowHoaDonRow = ((HoaDonRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MaHD,
@@ -747,7 +769,9 @@ namespace QLNhaHang.Report {
                         TenMon,
                         DonGia,
                         SoLuong,
-                        ThanhTienHH};
+                        ThanhTienHH,
+                        DonViTinh,
+                        SoTienBangChu};
                 rowHoaDonRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowHoaDonRow);
                 return rowHoaDonRow;
@@ -803,6 +827,8 @@ namespace QLNhaHang.Report {
                 this.columnDonGia = base.Columns["DonGia"];
                 this.columnSoLuong = base.Columns["SoLuong"];
                 this.columnThanhTienHH = base.Columns["ThanhTienHH"];
+                this.columnDonViTinh = base.Columns["DonViTinh"];
+                this.columnSoTienBangChu = base.Columns["SoTienBangChu"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -836,23 +862,23 @@ namespace QLNhaHang.Report {
                 base.Columns.Add(this.columnTenBan);
                 this.columnHTTThanhToan = new global::System.Data.DataColumn("HTTThanhToan", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHTTThanhToan);
-                this.columnNgayTao = new global::System.Data.DataColumn("NgayTao", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnNgayTao = new global::System.Data.DataColumn("NgayTao", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNgayTao);
                 this.columnGhiChu = new global::System.Data.DataColumn("GhiChu", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGhiChu);
-                this.columnThanhTienHD = new global::System.Data.DataColumn("ThanhTienHD", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnThanhTienHD = new global::System.Data.DataColumn("ThanhTienHD", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnThanhTienHD);
-                this.columnTyLePPV = new global::System.Data.DataColumn("TyLePPV", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTyLePPV = new global::System.Data.DataColumn("TyLePPV", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTyLePPV);
-                this.columnPhiPhucVu = new global::System.Data.DataColumn("PhiPhucVu", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnPhiPhucVu = new global::System.Data.DataColumn("PhiPhucVu", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPhiPhucVu);
-                this.columnTongTienSauPPV = new global::System.Data.DataColumn("TongTienSauPPV", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTongTienSauPPV = new global::System.Data.DataColumn("TongTienSauPPV", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTongTienSauPPV);
-                this.columnVAT = new global::System.Data.DataColumn("VAT", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnVAT = new global::System.Data.DataColumn("VAT", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVAT);
-                this.columnTienThueVAT = new global::System.Data.DataColumn("TienThueVAT", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTienThueVAT = new global::System.Data.DataColumn("TienThueVAT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTienThueVAT);
-                this.columnThanhTienVAT = new global::System.Data.DataColumn("ThanhTienVAT", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnThanhTienVAT = new global::System.Data.DataColumn("ThanhTienVAT", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnThanhTienVAT);
                 this.columnTenKH = new global::System.Data.DataColumn("TenKH", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTenKH);
@@ -864,16 +890,20 @@ namespace QLNhaHang.Report {
                 base.Columns.Add(this.columnTenDonViKH);
                 this.columnMstKH = new global::System.Data.DataColumn("MstKH", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnMstKH);
-                this.columnSoTien = new global::System.Data.DataColumn("SoTien", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnSoTien = new global::System.Data.DataColumn("SoTien", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSoTien);
                 this.columnTenMon = new global::System.Data.DataColumn("TenMon", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTenMon);
-                this.columnDonGia = new global::System.Data.DataColumn("DonGia", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDonGia = new global::System.Data.DataColumn("DonGia", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDonGia);
-                this.columnSoLuong = new global::System.Data.DataColumn("SoLuong", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnSoLuong = new global::System.Data.DataColumn("SoLuong", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSoLuong);
-                this.columnThanhTienHH = new global::System.Data.DataColumn("ThanhTienHH", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnThanhTienHH = new global::System.Data.DataColumn("ThanhTienHH", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnThanhTienHH);
+                this.columnDonViTinh = new global::System.Data.DataColumn("DonViTinh", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDonViTinh);
+                this.columnSoTienBangChu = new global::System.Data.DataColumn("SoTienBangChu", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSoTienBangChu);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1240,10 +1270,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string NgayTao {
+            public System.DateTime NgayTao {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.NgayTaoColumn]));
+                        return ((global::System.DateTime)(this[this.tableHoaDon.NgayTaoColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'NgayTao\' in table \'HoaDon\' is DBNull.", e);
@@ -1272,10 +1302,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ThanhTienHD {
+            public decimal ThanhTienHD {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.ThanhTienHDColumn]));
+                        return ((decimal)(this[this.tableHoaDon.ThanhTienHDColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ThanhTienHD\' in table \'HoaDon\' is DBNull.", e);
@@ -1288,10 +1318,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TyLePPV {
+            public int TyLePPV {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.TyLePPVColumn]));
+                        return ((int)(this[this.tableHoaDon.TyLePPVColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TyLePPV\' in table \'HoaDon\' is DBNull.", e);
@@ -1304,10 +1334,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string PhiPhucVu {
+            public decimal PhiPhucVu {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.PhiPhucVuColumn]));
+                        return ((decimal)(this[this.tableHoaDon.PhiPhucVuColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'PhiPhucVu\' in table \'HoaDon\' is DBNull.", e);
@@ -1320,10 +1350,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TongTienSauPPV {
+            public decimal TongTienSauPPV {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.TongTienSauPPVColumn]));
+                        return ((decimal)(this[this.tableHoaDon.TongTienSauPPVColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TongTienSauPPV\' in table \'HoaDon\' is DBNull.", e);
@@ -1336,10 +1366,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string VAT {
+            public int VAT {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.VATColumn]));
+                        return ((int)(this[this.tableHoaDon.VATColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'VAT\' in table \'HoaDon\' is DBNull.", e);
@@ -1352,10 +1382,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string TienThueVAT {
+            public decimal TienThueVAT {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.TienThueVATColumn]));
+                        return ((decimal)(this[this.tableHoaDon.TienThueVATColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'TienThueVAT\' in table \'HoaDon\' is DBNull.", e);
@@ -1368,10 +1398,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ThanhTienVAT {
+            public decimal ThanhTienVAT {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.ThanhTienVATColumn]));
+                        return ((decimal)(this[this.tableHoaDon.ThanhTienVATColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ThanhTienVAT\' in table \'HoaDon\' is DBNull.", e);
@@ -1464,10 +1494,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string SoTien {
+            public decimal SoTien {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.SoTienColumn]));
+                        return ((decimal)(this[this.tableHoaDon.SoTienColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'SoTien\' in table \'HoaDon\' is DBNull.", e);
@@ -1496,10 +1526,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string DonGia {
+            public decimal DonGia {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.DonGiaColumn]));
+                        return ((decimal)(this[this.tableHoaDon.DonGiaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DonGia\' in table \'HoaDon\' is DBNull.", e);
@@ -1512,10 +1542,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string SoLuong {
+            public int SoLuong {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.SoLuongColumn]));
+                        return ((int)(this[this.tableHoaDon.SoLuongColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'SoLuong\' in table \'HoaDon\' is DBNull.", e);
@@ -1528,10 +1558,10 @@ namespace QLNhaHang.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string ThanhTienHH {
+            public decimal ThanhTienHH {
                 get {
                     try {
-                        return ((string)(this[this.tableHoaDon.ThanhTienHHColumn]));
+                        return ((decimal)(this[this.tableHoaDon.ThanhTienHHColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'ThanhTienHH\' in table \'HoaDon\' is DBNull.", e);
@@ -1539,6 +1569,38 @@ namespace QLNhaHang.Report {
                 }
                 set {
                     this[this.tableHoaDon.ThanhTienHHColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string DonViTinh {
+                get {
+                    try {
+                        return ((string)(this[this.tableHoaDon.DonViTinhColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DonViTinh\' in table \'HoaDon\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHoaDon.DonViTinhColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string SoTienBangChu {
+                get {
+                    try {
+                        return ((string)(this[this.tableHoaDon.SoTienBangChuColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SoTienBangChu\' in table \'HoaDon\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableHoaDon.SoTienBangChuColumn] = value;
                 }
             }
             
@@ -1936,6 +1998,30 @@ namespace QLNhaHang.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetThanhTienHHNull() {
                 this[this.tableHoaDon.ThanhTienHHColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDonViTinhNull() {
+                return this.IsNull(this.tableHoaDon.DonViTinhColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDonViTinhNull() {
+                this[this.tableHoaDon.DonViTinhColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSoTienBangChuNull() {
+                return this.IsNull(this.tableHoaDon.SoTienBangChuColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSoTienBangChuNull() {
+                this[this.tableHoaDon.SoTienBangChuColumn] = global::System.Convert.DBNull;
             }
         }
         

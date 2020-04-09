@@ -1,5 +1,6 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using Newtonsoft.Json;
+using NumToWords;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
@@ -86,36 +87,39 @@ namespace QLNhaHang.Controllers
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
             if(ppv != 0)
             {
-                HoaDonVM.ThanhTienSauPPV = (ppv / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                 HoaDonVM.TyLePPV = ppv;
+                HoaDonVM.TienPPV = (ppv / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                HoaDonVM.ThanhTienSauPPV = ( decimal.Parse(HoaDonVM.TienPPV) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                
                 if (vat == 0)
                 {
-
-                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + HoaDonVM.ThanhTienSauPPV).ToString().Split('.')[0];
-                    HoaDonVM.VAT = HoaDonVM.VAT;
+                    HoaDonVM.TienThueVAT = (HoaDonVM.VAT / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.ThanhTienSauPPV).ToString().Split('.')[0];
+                    //HoaDonVM.VAT = HoaDonVM.VAT;
 
                 }
                 else
                 {
-                    HoaDonVM.ThanhTienVAT = (vat / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
                     HoaDonVM.VAT = vat;
-
+                    HoaDonVM.TienThueVAT = (vat / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    
                 }
             }
             else
             {
                 if (vat == 0)
                 {
-
-                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
-                    HoaDonVM.VAT = HoaDonVM.VAT;
+                    HoaDonVM.TienThueVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    //HoaDonVM.VAT = HoaDonVM.VAT;
 
                 }
                 else
                 {
-                    HoaDonVM.ThanhTienVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     HoaDonVM.VAT = vat;
-
+                    HoaDonVM.TienThueVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                 }
             }
             
@@ -161,6 +165,11 @@ namespace QLNhaHang.Controllers
             hoaDon.VAT = model.VAT;
             hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
             hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+            ///// Currency to money
+            string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
+            string c = AmountToWords.changeCurrencyToWords(hoaDon.ThanhTienVAT.ToString().ToLower());
+            //string t = String.IsNullOrEmpty(loaitien) ? "" : " Exchange rate USD/VND";
+            hoaDon.SoTienBangChu =  char.ToUpper(s[0]) + s.Substring(1) + " đồng " + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + " Exchange rate USD/VND";
 
             hoaDon.NgayIn = DateTime.Now;
             hoaDon.DaIn = true;
@@ -213,6 +222,7 @@ namespace QLNhaHang.Controllers
                 x.HoaDon.VAT,                
                 x.HoaDon.TienThueVAT,
                 x.HoaDon.ThanhTienVAT,
+                x.HoaDon.SoTienBangChu,
                 TenKH = x.HoaDon.TenKH,
                 DienThoaiKH = x.HoaDon.Phone,
                 DiaChiKH = x.HoaDon.DiaChi,
@@ -221,6 +231,7 @@ namespace QLNhaHang.Controllers
                 x.HoaDon.SoTien,
                 x.ThucDon.TenMon,
                 x.DonGia,
+                x.ThucDon.DonViTinh,
                 x.SoLuong,
                 ThanhTienHH = x.DonGia * x.SoLuong
 
@@ -239,19 +250,21 @@ namespace QLNhaHang.Controllers
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
             if (ppv != 0)
             {
-                HoaDonVM.ThanhTienSauPPV = (ppv / 100 * decimal.Parse(soTien) + decimal.Parse(soTien)).ToString().Split('.')[0];
                 HoaDonVM.TyLePPV = ppv;
+                HoaDonVM.TienPPV = (ppv / 100 * decimal.Parse(soTien)).ToString().Split('.')[0];
+                HoaDonVM.ThanhTienSauPPV = (decimal.Parse(HoaDonVM.TienPPV) + decimal.Parse(soTien)).ToString().Split('.')[0];
                 if (vat == 0)
                 {
-
-                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.TienThueVAT = (HoaDonVM.VAT / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
                     //HoaDonVM.VAT = HoaDonVM.VAT;
                     HoaDonVM.SoTien = soTien;
                 }
                 else
                 {
-                    HoaDonVM.ThanhTienVAT = (vat / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
                     HoaDonVM.VAT = vat;
+                    HoaDonVM.TienThueVAT = (vat / 100 * decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + decimal.Parse(HoaDonVM.ThanhTienSauPPV)).ToString().Split('.')[0];
                     HoaDonVM.SoTien = soTien;
                 }
             }
@@ -259,15 +272,16 @@ namespace QLNhaHang.Controllers
             {
                 if (vat == 0)
                 {
-
-                    HoaDonVM.ThanhTienVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.TienThueVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     //HoaDonVM.VAT = HoaDonVM.VAT;
                     HoaDonVM.SoTien = soTien;
                 }
                 else
                 {
-                    HoaDonVM.ThanhTienVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     HoaDonVM.VAT = vat;
+                    HoaDonVM.TienThueVAT = (vat / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
+                    HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     HoaDonVM.SoTien = soTien;
 
                 }
@@ -326,6 +340,13 @@ namespace QLNhaHang.Controllers
 
             hoaDon.VAT = model.VAT;
             hoaDon.ThanhTienVAT = decimal.Parse(model.ThanhTienVAT);
+
+            ///// Currency to money
+            string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
+            string c = AmountToWords.changeCurrencyToWords(hoaDon.ThanhTienVAT.ToString().ToLower());
+            //string t = String.IsNullOrEmpty(loaitien) ? "" : " Exchange rate USD/VND";
+            hoaDon.SoTienBangChu = char.ToUpper(s[0]) + s.Substring(1) + " đồng " + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + " Exchange rate USD/VND";
+
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
@@ -364,6 +385,7 @@ namespace QLNhaHang.Controllers
                 x.VAT,
                 x.TienThueVAT,
                 x.ThanhTienVAT,
+                x.SoTienBangChu,
                 TenKH = x.TenKH,
                 DienThoaiKH = x.Phone,
                 DiaChiKH = x.DiaChi,

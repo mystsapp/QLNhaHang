@@ -203,6 +203,9 @@
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.1\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
     </Reference>
+    <Reference Include="NumToWords">
+      <HintPath>E:\MS\Tools\NumToWords.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -396,6 +399,10 @@
     <Compile Include="Migrations\202004071251146_addTongTienSauPPV.designer.cs">
       <DependentUpon>202004071251146_addTongTienSauPPV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004090830542_HDNumToWord.cs" />
+    <Compile Include="Migrations\202004090830542_HDNumToWord.designer.cs">
+      <DependentUpon>202004090830542_HDNumToWord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -430,10 +437,10 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Report\DS_HoaDon_Report.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>DS_HoaDon_Report.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Report\ListMon.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2076,6 +2083,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004071251146_addTongTienSauPPV.resx">
       <DependentUpon>202004071251146_addTongTienSauPPV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004090830542_HDNumToWord.resx">
+      <DependentUpon>202004090830542_HDNumToWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
