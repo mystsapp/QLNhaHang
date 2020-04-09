@@ -68,6 +68,29 @@ var hoaDonTayController = {
 
         });
 
+        $('.txtSoTien').off('blur').on('blur', function () {
+            //hoaDonTuDongController.loadThanhTienVAT();
+            var ppv = $('.txtPPV').val();
+            var sotien = $('.txtSoTien').val();
+            if (sotien === "") {
+                bootbox.alert({
+                    size: "small",
+                    title: "Information",
+                    message: "Bạn chưa nhập <b>số tiền</b>!",
+                    callback: function () {
+                        //e.preventDefault();
+
+                    }
+                });
+            }
+            else {
+                $('#hidPPV').val(ppv);
+                $('#soTien').val(sotien);
+                $('#frmPPV').submit();
+            }
+
+        });
+
         $('input.numbers').val(function (index, value) {
             return addCommas(value);
         });
