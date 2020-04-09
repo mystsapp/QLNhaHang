@@ -158,13 +158,25 @@ namespace QLNhaHang.Controllers
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
 
-            hoaDon.TyLePPV = model.TyLePPV;
-            hoaDon.PhiPhucvu = model.TyLePPV / 100 * hoaDon.ThanhTienHD;
-            hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
-
-            hoaDon.VAT = model.VAT;
-            hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
-            hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+            if (!string.IsNullOrEmpty(model.ThanhTienSauPPV))
+            {
+                hoaDon.TyLePPV = model.TyLePPV;
+                hoaDon.PhiPhucvu = model.TyLePPV / 100 * hoaDon.ThanhTienHD;
+                hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
+                hoaDon.VAT = model.VAT;
+                hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
+                hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+            }
+            else
+            {
+                hoaDon.TyLePPV = 0;
+                hoaDon.PhiPhucvu = 0;
+                hoaDon.TongTienSauPPV = 0;
+                hoaDon.VAT = model.VAT;
+                hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.ThanhTienHD;
+                hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.ThanhTienHD; // Or == model.ThanhTienVAT
+            }
+            
             ///// Currency to money
             string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
             string c = AmountToWords.changeCurrencyToWords(hoaDon.ThanhTienVAT.ToString().ToLower());
@@ -325,21 +337,38 @@ namespace QLNhaHang.Controllers
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
 
-            hoaDon.TyLePPV = model.TyLePPV;
-            hoaDon.PhiPhucvu = model.TyLePPV / 100 * decimal.Parse(model.SoTien);
-            hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
+            //hoaDon.TyLePPV = model.TyLePPV;
+            //hoaDon.PhiPhucvu = model.TyLePPV / 100 * decimal.Parse(model.SoTien);
+            //hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
 
-            hoaDon.VAT = model.VAT;
-            hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
-            hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+            //hoaDon.VAT = model.VAT;
+            //hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
+            //hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+
+            if (!string.IsNullOrEmpty(model.ThanhTienSauPPV))
+            {
+                hoaDon.TyLePPV = model.TyLePPV;
+                hoaDon.PhiPhucvu = model.TyLePPV / 100 * decimal.Parse(model.SoTien);
+                hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
+                hoaDon.VAT = model.VAT;
+                hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
+                hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
+            }
+            else
+            {
+                hoaDon.TyLePPV = 0;
+                hoaDon.PhiPhucvu = 0;
+                hoaDon.TongTienSauPPV = 0;
+                hoaDon.VAT = model.VAT;
+                hoaDon.TienThueVAT = model.VAT / 100 * decimal.Parse(model.SoTien);
+                hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + decimal.Parse(model.SoTien); // Or == model.ThanhTienVAT
+            }
 
             hoaDon.NgayIn = DateTime.Now;
             hoaDon.DaIn = true;
             hoaDon.SoTien = decimal.Parse(model.SoTien);
             hoaDon.NoiDung = model.NoiDung;
 
-            hoaDon.VAT = model.VAT;
-            hoaDon.ThanhTienVAT = decimal.Parse(model.ThanhTienVAT);
 
             ///// Currency to money
             string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
