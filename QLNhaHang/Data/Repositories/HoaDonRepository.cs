@@ -12,7 +12,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IHoaDonRepository : IRepository<HoaDon>
     {
-        IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int? page);
+        IPagedList<HoaDon> ListHoaDon(string role, string roleVP, string searchString, string searchFromDate, string searchToDate, int? page);
         List<HoaDon> FindIncludeThree(string name);
     }
     public class HoaDonRepository : Repository<HoaDon>, IHoaDonRepository
@@ -21,7 +21,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<HoaDon> ListHoaDon(string searchString, string searchFromDate, string searchToDate, int? page)
+        public IPagedList<HoaDon> ListHoaDon(string role, string roleVP, string searchString, string searchFromDate, string searchToDate, int? page)
         {
 
             // return a 404 if user browses to before the first page
@@ -31,6 +31,10 @@ namespace QLNhaHang.Data.Repositories
             // retrieve list from database/whereverand
 
             var list = GetAllInclude(x => x.Ban, y => y.NhanVien).AsQueryable();
+            if (role != "Admins")
+            {
+                list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
+            }
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))
             {

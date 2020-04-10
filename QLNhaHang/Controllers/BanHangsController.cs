@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class BanHangsController : Controller
+    public class BanHangsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
 

@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class MonDaGoisController : Controller
+    public class MonDaGoisController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -135,6 +135,7 @@ namespace QLNhaHang.Controllers
         /// tinh tien
         public ActionResult TinhTien(string maBan = null, string strUrl = null)
         {
+            var user = (NhanVien)Session["UserSession"];
             MonDaGoiVM.StrUrl = strUrl;
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
@@ -143,18 +144,40 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.TongTien = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             // get last numberId in HD table find next  here
-            // prefix in VPandYear
-            var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
-                                                            .OrderByDescending(x => x.NumberId)
-                                                            .FirstOrDefault();
-            if (hoaDon != null)
+            var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+
+            var hoaDon = _unitOfWork.hoaDonRepository.GetAll().OrderByDescending(x => x.NumberId);
+            var listOldHDTrung = new List<HoaDon>();
+            foreach (var hd in hoaDon)
             {
-                MonDaGoiVM.NumberId = GetNextId.NextID(hoaDon.NumberId, "00120");
+                var oldPrefix = hd.NumberId.Substring(0, 5);
+                if (currentPrefix == oldPrefix)
+                {
+                    listOldHDTrung.Add(hd);
+                }
+            }
+            if (listOldHDTrung.Count() != 0)
+            {
+                var lastNumId = listOldHDTrung.OrderByDescending(x => x.NumberId).FirstOrDefault();
+                MonDaGoiVM.NumberId = GetNextId.NextID(lastNumId.NumberId, currentPrefix);
             }
             else
             {
-                MonDaGoiVM.NumberId = GetNextId.NextID("", "00120");
+                MonDaGoiVM.NumberId = GetNextId.NextID("", currentPrefix);
             }
+            // prefix in VPandYear
+            //var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
+            //                                                .OrderByDescending(x => x.NumberId)
+            //                                                .FirstOrDefault();
+            //if (hoaDon != null)
+            //{
+            //    MonDaGoiVM.NumberId = GetNextId.NextID(hoaDon.NumberId, "00120");
+            //}
+            //else
+            //{
+            //    MonDaGoiVM.NumberId = GetNextId.NextID("", "00120");
+            //}
 
             return View(MonDaGoiVM);
         }
@@ -163,52 +186,56 @@ namespace QLNhaHang.Controllers
         public ActionResult TinhTienPost(string strUrl, string maBan, string numberId)
         {
             //var user = Session[]
+            var user = (NhanVien)Session["UserSession"];
+
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             //////////// add to HD, CTHD ///////////////
             /////maHD
+            var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
 
-            //var lastMaHD = _unitOfWork.hoaDonRepository
-            //                          .Find(x => x.MaNV.Equals(user.HoTen))
-            //                          .OrderByDescending(x => x.MaHD).FirstOrDefault().MaHD;
-            //var lastMaCTPrefix = lastMaHD.Split('/')[0];
-
-            //var maVP = _unitOfWork.vanPhongRepository.Find(x => x.Name == user.VanPhong).SingleOrDefault().MaVP;
-            //var namTao = DateTime.Now.Year.ToString().Substring(2);
-            //var nowPrefixMaCT = maVP + namTao;
-
-            //if (lastMaCTPrefix == nowPrefixMaCT)
-            //{
-            //    var prefixMaCT = lastMaCTPrefix + "/";
-            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(lastMaHD, prefixMaCT);
-            //}
-            //else
-            //{
-            //    var prefixMaCT = nowPrefixMaCT + "/";
-            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", prefixMaCT);
-            //}
-
-            var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
-                                                            .OrderByDescending(x => x.MaHD)
-                                                            .FirstOrDefault();
-            if (hoaDon != null)
+            var hoaDon = _unitOfWork.hoaDonRepository.GetAll().OrderByDescending(x => x.MaHD);
+            var listOldHDTrung = new List<HoaDon>();
+            foreach (var hd in hoaDon)
             {
-                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(hoaDon.MaHD, "00120");
+                var oldPrefix = hd.NumberId.Substring(0, 5);
+                if (currentPrefix == oldPrefix)
+                {
+                    listOldHDTrung.Add(hd);
+                }
+            }
+            if (listOldHDTrung.Count() != 0)
+            {
+                var lastMaHD = listOldHDTrung.OrderByDescending(x => x.MaHD).FirstOrDefault();
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(lastMaHD.MaHD, currentPrefix);
             }
             else
             {
-                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", "00120");
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", currentPrefix);
             }
+
+            //var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
+            //                                                .OrderByDescending(x => x.MaHD)
+            //                                                .FirstOrDefault();
+            //if (hoaDon != null)
+            //{
+            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(hoaDon.MaHD, "00120");
+            //}
+            //else
+            //{
+            //    MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", "00120");
+            //}
             MonDaGoiVM.HoaDon.NumberId = numberId;
-            MonDaGoiVM.HoaDon.MaNV = "001200001";
+            MonDaGoiVM.HoaDon.MaNV = user.MaNV;
             //MonDaGoiVM.HoaDon.MaKH = "001200001";
             MonDaGoiVM.HoaDon.TenKH = "Khách Lẽ";
             MonDaGoiVM.HoaDon.MaBan = maBan;
             MonDaGoiVM.HoaDon.NgayTao = DateTime.Now;
             MonDaGoiVM.HoaDon.HTThanhToan = "TM/CK";
-            MonDaGoiVM.HoaDon.VanPhongId = 3;
+            MonDaGoiVM.HoaDon.VanPhongId = user.VanPhongId;
             MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             _unitOfWork.hoaDonRepository.Create(MonDaGoiVM.HoaDon);
@@ -236,70 +263,30 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        //public ActionResult InHoaDon(string maBan, string strUrl)
+
+        //public CrystalReportPdfResult InHoaDon(string maBan, string strUrl)
         //{
-        //    ReportDocument rd = new ReportDocument();
-        //    rd.Load(Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt"));
         //    var listMonInBan = _unitOfWork.monDaGoiRepository
-        //                                      .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
-        //                                      .ToList();
-        //    var dt = EntityToTable.ToDataTable(listMonInBan);
-        //    rd.SetDataSource(dt);
-        //    Response.Buffer = false;
-        //    Response.ClearContent();
-        //    Response.ClearHeaders();
-        //    try
+        //                                  .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+        //                                  .ToList();
+        //    //var listMonInBan = _unitOfWork.monDaGoiRepository
+        //    //                              .Find(x => x.MaBan.Equals(maBan));
+        //    var items = listMonInBan.Select(x => new
         //    {
-        //        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        //        stream.Seek(0, SeekOrigin.Begin);
-        //        return File(stream, "application/pdf", "mon" + DateTime.Now + ".pdf");
-        //    }
-        //    catch (Exception)
-        //    {
+        //        x.Id,
+        //        x.SoLuong,
+        //        x.ThanhTien,
+        //        x.GiaTien,
+        //        x.PhuPhi,
+        //        x.PhiPhucVu,
+        //        x.ThucDon.TenMon
 
-        //        throw;
-        //    }
-
+        //    }).ToList();
+        //    var dt = EntityToTable.ToDataTable(items);
+        //    ReportDocument rd = new ReportDocument();
+        //    string reportPath = Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt");
+        //    return new CrystalReportPdfResult(reportPath, dt);
         //}
-
-        public CrystalReportPdfResult InHoaDon(string maBan, string strUrl)
-        {
-            var listMonInBan = _unitOfWork.monDaGoiRepository
-                                          .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
-                                          .ToList();
-            //var listMonInBan = _unitOfWork.monDaGoiRepository
-            //                              .Find(x => x.MaBan.Equals(maBan));
-            var items = listMonInBan.Select(x => new
-            {
-                x.Id,
-                x.SoLuong,
-                x.ThanhTien,
-                x.GiaTien,
-                x.PhuPhi,
-                x.PhiPhucVu,
-                x.ThucDon.TenMon
-
-            }).ToList();
-            var dt = EntityToTable.ToDataTable(items);
-            ReportDocument rd = new ReportDocument();
-            string reportPath = Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt");
-            return new CrystalReportPdfResult(reportPath, dt);
-        }
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
+        
     }
 }

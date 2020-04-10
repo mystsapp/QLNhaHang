@@ -1,6 +1,7 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using Newtonsoft.Json;
 using NumToWords;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
@@ -13,7 +14,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class HoaDonsController : Controller
+    public class HoaDonsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public HoaDonViewModel HoaDonVM { get; set; }
@@ -34,6 +35,7 @@ namespace QLNhaHang.Controllers
                                   string searchFromDate = null, string searchToDate = null,
                                   int page = 1)
         {
+            var user = (NhanVien)Session["UserSession"];
             HoaDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             //////////////////// for delete
             if (!string.IsNullOrEmpty(maHD))
@@ -59,10 +61,10 @@ namespace QLNhaHang.Controllers
                                              .FindIncludeTwo(x => x.HoaDon, y => y.ThucDon, z => z.MaHD.Equals(maHD));
             HoaDonVM.TongTien = HoaDonVM.ChiTietHDs.Sum(x => (x.DonGia * x.SoLuong));
 
-            HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(searchString, searchFromDate, searchToDate, page);
+            HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role.Name, user.VanPhong.Name, searchString, searchFromDate, searchToDate, page);
             if (HoaDonVM.HoaDons == null)
             {
-                HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon("", "", "", 1);
+                HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role.Name, user.VanPhong.Name, "", "", "", 1);
                 SetAlert("Lỗi định dạng ngày tháng.", "error");
             }
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
@@ -441,21 +443,5 @@ namespace QLNhaHang.Controllers
             return Json(JsonConvert.SerializeObject(_unitOfWork.thongTinHDRepository.GetById(id)), JsonRequestBehavior.AllowGet);
         }
 
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }
