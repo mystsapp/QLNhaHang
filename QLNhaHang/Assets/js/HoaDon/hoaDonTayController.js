@@ -72,22 +72,25 @@ var hoaDonTayController = {
             //hoaDonTuDongController.loadThanhTienVAT();
             var ppv = $('.txtPPV').val();
             var sotien = $('.txtSoTien').val();
-            if (sotien === "") {
-                bootbox.alert({
-                    size: "small",
-                    title: "Information",
-                    message: "Bạn chưa nhập <b>số tiền</b>!",
-                    callback: function () {
-                        //e.preventDefault();
+            $('#hidPPV').val(ppv);
+            $('#soTien').val(sotien);
+            $('#frmPPV').submit();
+            //if (sotien === "") {
+            //    bootbox.alert({
+            //        size: "small",
+            //        title: "Information",
+            //        message: "Bạn chưa nhập <b>số tiền</b>!",
+            //        callback: function () {
+            //            //e.preventDefault();
 
-                    }
-                });
-            }
-            else {
-                $('#hidPPV').val(ppv);
-                $('#soTien').val(sotien);
-                $('#frmPPV').submit();
-            }
+            //        }
+            //    });
+            //}
+            //else {
+            //    $('#hidPPV').val(ppv);
+            //    $('#soTien').val(sotien);
+            //    $('#frmPPV').submit();
+            //}
 
         });
 

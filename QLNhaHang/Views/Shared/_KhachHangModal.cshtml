@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Nập thông tin xuất hóa đơn</h4>
+                <h4 class="modal-title">Nhập thông tin khách hàng</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -56,7 +56,7 @@
             <div class="modal-footer ">
                 @*justify-content-between*@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="btnSaveHDModal"><i class="fas fa-save"></i></button>
+                @*<button type="button" class="btn btn-primary" id="btnSaveHDModal"><i class="fas fa-save"></i></button>*@
             </div>
         </div>
         <!-- /.modal-content -->
@@ -64,16 +64,16 @@
     <!-- /.modal-dialog -->
 </div>
 
-<form method="get" action="/HoaDons/ExportList" id="frmExportAll">
+@*<form method="get" action="/HoaDons/ExportList" id="frmExportAll">*@
 
 
     @*<a asp-action="ExportList" asp-controller="BanGiaos" id="btnExportAll"><i class="fas fa-file-word"></i></a>*@
-    <input type="hidden" name="stringId" id="stringId" />
-    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+    @*<input type="hidden" name="stringId" id="stringId" />
+    <input type="hidden" name="strUrl" value="@Model.StrUrl" />*@
 
-</form>
+@*</form>*@
 
-@section Scripts{
+@*@section Scripts{
     <script>
         $('#btnSaveHDModal').off('click').on('click', function () {
 
@@ -105,4 +105,4 @@
 
         });
     </script>
-}
+}*@

@@ -21,6 +21,7 @@ namespace QLNhaHang.Data.Models
         public long So { get; set; }
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
+        [Required(ErrorMessage = "Trường này không được để trống.")]
         public string SoThuTu { get; set; }
     }
 }

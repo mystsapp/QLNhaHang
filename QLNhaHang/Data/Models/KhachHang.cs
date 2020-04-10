@@ -14,7 +14,7 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã KH")]
         [StringLength(50)]
         [MaxLength(50), Column(TypeName = "varchar")]
-        [Required]
+        [Required(ErrorMessage = "Trường này không được để trống.")]
         public string MaKH { get; set; }
 
         [StringLength(100)]
