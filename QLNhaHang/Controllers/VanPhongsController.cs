@@ -28,7 +28,11 @@ namespace QLNhaHang.Controllers
         // GET: VanPhongs
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
-           
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name != "Admins")
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             VanPhongVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
             if (id != 0)
@@ -58,6 +62,8 @@ namespace QLNhaHang.Controllers
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
+            ///// MaVP
+            
             var vanPhong = _unitOfWork.vanPhongRepository.GetAll().OrderByDescending(x => x.MaVP).FirstOrDefault();
             if (vanPhong == null)
             {

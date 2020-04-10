@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class LoaiThucDonsController : Controller
+    public class LoaiThucDonsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public LoaiThucDonViewModel LoaiVM { get; set; }
@@ -138,21 +138,5 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
         
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }

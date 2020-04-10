@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
 using System;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class KhachHangsController : Controller
+    public class KhachHangsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public KhachHangViewModel KhachHangVM { get; set; }
@@ -49,17 +50,41 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Create(string strUrl)
         {
-            var khachHang = _unitOfWork.khachHangRepository.GetAll()
-                                                            .OrderByDescending(x => x.MaKH)
-                                                            .FirstOrDefault();
-            if (khachHang != null)
+            //// MaKH
+            var user = (NhanVien)Session["UserSession"];
+            var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
+            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+
+            var khachHangs = _unitOfWork.khachHangRepository.GetAll().OrderByDescending(x => x.MaKH);
+            var listOldKHTrung = new List<KhachHang>();
+            foreach (var kh in khachHangs)
             {
-                KhachHangVM.KhachHang.MaKH = GetNextId.NextID(khachHang.MaKH, "00120");
+                var oldPrefix = kh.MaKH.Substring(0, 5);
+                if (currentPrefix == oldPrefix)
+                {
+                    listOldKHTrung.Add(kh);
+                }
+            }
+            if (listOldKHTrung.Count() != 0)
+            {
+                var lastMaKH = listOldKHTrung.OrderByDescending(x => x.MaKH).FirstOrDefault();
+                KhachHangVM.KhachHang.MaKH = GetNextId.NextID(lastMaKH.MaKH, currentPrefix);
             }
             else
             {
-                KhachHangVM.KhachHang.MaKH = GetNextId.NextID("", "00120");
+                KhachHangVM.KhachHang.MaKH = GetNextId.NextID("", currentPrefix);
             }
+            //var khachHang = _unitOfWork.khachHangRepository.GetAll()
+            //                                                .OrderByDescending(x => x.MaKH)
+            //                                                .FirstOrDefault();
+            //if (khachHang != null)
+            //{
+            //    KhachHangVM.KhachHang.MaKH = GetNextId.NextID(khachHang.MaKH, "00120");
+            //}
+            //else
+            //{
+            //    KhachHangVM.KhachHang.MaKH = GetNextId.NextID("", "00120");
+            //}
             TempData["gioiTinh"] = ListGioiTinh();
             KhachHangVM.StrUrl = strUrl;
             return View(KhachHangVM);
@@ -151,21 +176,6 @@ namespace QLNhaHang.Controllers
             };
         }
 
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
+        
     }
 }

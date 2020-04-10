@@ -166,19 +166,20 @@
                             </a>
 
                         </li>
+                        @if (Session["Role"].ToString() == "Admins")
+                        {
+                            <li class="nav-item has-treeview">
+                                <a href="/VanPhongs/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Văn phòng
 
-                        <li class="nav-item has-treeview">
-                            <a href="/VanPhongs/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Văn phòng
+                                    </p>
+                                </a>
 
-                                </p>
-                            </a>
-
-                        </li>
-
-                    </ul>
+                            </li>
+                        }
+                        </ul>
                 </li>
 
                 <li class="nav-item has-treeview">

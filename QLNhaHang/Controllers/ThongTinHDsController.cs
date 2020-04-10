@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace QLNhaHang.Controllers
 {
-    public class ThongTinHDsController : Controller
+    public class ThongTinHDsController : BaseController
     {
         private readonly IUnitOfWork _unitOfWork;
         public ThongTinHDViewModel ThongTinHDVM { get; set; }
@@ -105,21 +105,5 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
         
-        protected void SetAlert(string message, string type)
-        {
-            TempData["AlertMessage"] = message;
-            if (type == "success")
-            {
-                TempData["AlertType"] = "alert-success";
-            }
-            else if (type == "waring")
-            {
-                TempData["AlertType"] = "alert-warning";
-            }
-            else if (type == "error")
-            {
-                TempData["AlertType"] = "alert-danger";
-            }
-        }
     }
 }

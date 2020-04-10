@@ -4,45 +4,13 @@
     },
 
     registerEvent: function () {
-
-        ///////// change table image
-        //$.ajax({
-        //        url: '/CapThes/Index',
-        //        data: {
-        //            maCT: id
-        //        },
-        //        dataType: 'json',
-        //        type: 'GET',
-        //        success: function (response) {
-
-        //        }
-        //    });
-        //$.each($('.cursor-pointer'), function (i, item) {
-        //    if ($(this).prop('checked')) {
-        //        idList.push({
-        //            Id: $(item).data('id')
-        //        });
-        //    }
-
-        //});
-
-        //if (idList.length !== 0) {
-        //    $('#stringId').val(JSON.stringify(idList));
-        //    $('#frmExportAll').submit();
-        //}
-        //else {
-        //    bootbox.alert({
-        //        size: "small",
-        //        title: "Information",
-        //        message: "Bạn chưa chọn bàn giao!",
-        //        callback: function () {
-        //            //e.preventDefault();
-
-        //        }
-        //    });
-        //}
-        ///////// change table image
-
+        shortcut.add("F1", function () {
+            indexController.goiMon();
+        });
+        shortcut.add("F2", function () {
+            indexController.tinhTien();
+        });
+        
         $('.cursor-pointer').off('click').on('click', function () {
             id = $(this).data('id');
 
@@ -67,65 +35,12 @@
 
         $('#btnGoiMon').off('click').on('click', function () {
 
-            var id = $('#hidMaBanGoiMon').val();
-            if (id === '') {
-                bootbox.alert({
-                    size: "small",
-                    title: "Information",
-                    message: "Bạn chưa chọn <b> bàn </b> nào !",
-                    callback: function () {
-                        //e.preventDefault();
-                    }
-                });
-
-            }
-            else {
-                $('#frmGoiMon').submit();
-            }
+            indexController.goiMon();
         });
 
         $('#btnTinhTien').off('click').on('click', function () {
 
-            var id = $('#hidMaBanTinhTien').val();
-            if (id === '') {
-                bootbox.alert({
-                    size: "small",
-                    title: "Information",
-                    message: "Bạn chưa chọn <b> bàn </b> nào !",
-                    callback: function () {
-                        //e.preventDefault();
-                    }
-                });
-
-            }
-            else {
-                $.ajax({
-                    url: '/BanHangs/MonInBan',
-                    data: {
-                        maBan: id
-                    },
-                    dataType: 'json',
-                    type: 'POST',
-                    success: function (response) {
-                        if (response.status) {
-                            $('#frmTinhTien').submit();
-                        }
-                        else {
-                            bootbox.alert({
-                                size: "small",
-                                title: "Information",
-                                message: "Bàn này <b> chưa gọi món <b/> nào !",
-                                callback: function () {
-                                    //e.preventDefault();
-                                }
-                            });
-                        }
-                    }
-                });
-
-            }
-
-
+            indexController.tinhTien();
         });
 
         $('#btnInHoaDon').off('click').on('click', function () {
@@ -171,6 +86,65 @@
 
         });
 
+    },
+
+    goiMon: function () {
+        var id = $('#hidMaBanGoiMon').val();
+        if (id === '') {
+            bootbox.alert({
+                size: "small",
+                title: "Information",
+                message: "Bạn chưa chọn <b> bàn </b> nào !",
+                callback: function () {
+                    //e.preventDefault();
+                }
+            });
+
+        }
+        else {
+            $('#frmGoiMon').submit();
+        }
+    },
+
+    tinhTien: function () {
+        var id = $('#hidMaBanTinhTien').val();
+        if (id === '') {
+            bootbox.alert({
+                size: "small",
+                title: "Information",
+                message: "Bạn chưa chọn <b> bàn </b> nào !",
+                callback: function () {
+                    //e.preventDefault();
+                }
+            });
+
+        }
+        else {
+            $.ajax({
+                url: '/BanHangs/MonInBan',
+                data: {
+                    maBan: id
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function (response) {
+                    if (response.status) {
+                        $('#frmTinhTien').submit();
+                    }
+                    else {
+                        bootbox.alert({
+                            size: "small",
+                            title: "Information",
+                            message: "Bàn này <b> chưa gọi món <b/> nào !",
+                            callback: function () {
+                                //e.preventDefault();
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
     }
 };
 indexController.init();
