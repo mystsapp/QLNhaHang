@@ -181,7 +181,7 @@ namespace QLNhaHang.Controllers
             string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
             string c = AmountToWords.changeCurrencyToWords(hoaDon.ThanhTienVAT.ToString().ToLower());
             //string t = String.IsNullOrEmpty(loaitien) ? "" : " Exchange rate USD/VND";
-            hoaDon.SoTienBangChu = char.ToUpper(s[0]) + s.Substring(1) + " đồng " + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + " Exchange rate USD/VND";
+            hoaDon.SoTienBangChu = char.ToUpper(s[0]) + s.Substring(1) + " đồng " + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + "vnd";
 
             hoaDon.NgayIn = DateTime.Now;
             hoaDon.DaIn = true;
@@ -380,7 +380,7 @@ namespace QLNhaHang.Controllers
             string s = SoSangChu.DoiSoSangChu(model.ThanhTienVAT);
             string c = AmountToWords.changeCurrencyToWords(hoaDon.ThanhTienVAT.ToString().ToLower());
             //string t = String.IsNullOrEmpty(loaitien) ? "" : " Exchange rate USD/VND";
-            hoaDon.SoTienBangChu = char.ToUpper(s[0]) + s.Substring(1) + " đồng " + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + " Exchange rate USD/VND";
+            hoaDon.SoTienBangChu = char.ToUpper(s[0]) + s.Substring(1) + " đồng" + " / " + char.ToUpper(c[0]) + c.Substring(1).ToLower() + "vnd";
 
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);

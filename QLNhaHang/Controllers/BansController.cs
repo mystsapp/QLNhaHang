@@ -48,7 +48,7 @@ namespace QLNhaHang.Controllers
                 
             }
 
-            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, searchString, page);
+            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, user.VanPhong.Name, searchString, page);
             
             return View(BanVM);
         }
@@ -60,17 +60,21 @@ namespace QLNhaHang.Controllers
             {
                 BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)).ToList();
             }
+            if (user.Role.Name.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             var ban = _unitOfWork.banRepository.GetAllIncludeOne(x => x.VanPhong)
                                                 .OrderByDescending(x => x.MaBan)
                                                 .FirstOrDefault();
-            if (ban != null)
-            {
-                BanVM.Ban.MaBan = GetNextId.NextID(ban.MaBan, "00120");
-            }
-            else
-            {
-                BanVM.Ban.MaBan = GetNextId.NextID("", "00120");
-            }
+            //if (ban != null)
+            //{
+            //    BanVM.Ban.MaBan = GetNextId.NextID(ban.MaBan, "00120");
+            //}
+            //else
+            //{
+            //    BanVM.Ban.MaBan = GetNextId.NextID("", "00120");
+            //}
             
             BanVM.StrUrl = strUrl;
             return View(BanVM);
@@ -104,6 +108,15 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, string maBan)
         {
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
+            if (user.Role.Name != "Admins")
+            {
+                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)).ToList();
+            }
             BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             if (BanVM.Ban == null)
             {
@@ -134,6 +147,11 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeletePost(string strUrl, string maBan)
         {
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Name.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             var ban = _unitOfWork.banRepository.GetByStringId(maBan);
             _unitOfWork.banRepository.Delete(ban);
             _unitOfWork.Complete();

@@ -11,7 +11,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IBanRepository : IRepository<Ban>
     {
-        IPagedList<Ban> ListBan(string role, string searchString, int? page);
+        IPagedList<Ban> ListBan(string role, string roleVP, string searchString, int? page);
     }
     public class BanRepository : Repository<Ban>, IBanRepository
     {
@@ -19,7 +19,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<Ban> ListBan(string role, string searchString, int? page)
+        public IPagedList<Ban> ListBan(string role, string roleVP, string searchString, int? page)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -30,7 +30,7 @@ namespace QLNhaHang.Data.Repositories
             var list = GetAllIncludeOne(x => x.VanPhong).AsQueryable();
             if (role != "Admins")
             {
-                list = list.Where(x => x.VanPhong.Role.Equals(role));
+                list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
             }
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))

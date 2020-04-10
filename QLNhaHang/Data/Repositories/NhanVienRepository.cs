@@ -11,7 +11,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface INhanVienRepository : IRepository<NhanVien>
     {
-        IPagedList<NhanVien> ListNhanVien(string role, string gioiTinh, string searchString, int? page);
+        IPagedList<NhanVien> ListNhanVien(string role, string roleVP, string gioiTinh, string searchString, int? page);
         int Login(string username, string password);
         int Changepass(string username, string newpass);
     }
@@ -21,7 +21,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<NhanVien> ListNhanVien(string role, string gioiTinh, string searchString, int? page)
+        public IPagedList<NhanVien> ListNhanVien(string role, string roleVP, string gioiTinh, string searchString, int? page)
         {
             
             // return a 404 if user browses to before the first page
@@ -32,7 +32,7 @@ namespace QLNhaHang.Data.Repositories
             var list = GetAllInclude(x => x.Role, y => y.VanPhong).AsQueryable();
             if (role != "Admins")
             {
-                list = list.Where(x => x.VanPhong.Role.Equals(role));
+                list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
             }
             
             //list = list.Where(x => x.NguoiCap == hoTen);

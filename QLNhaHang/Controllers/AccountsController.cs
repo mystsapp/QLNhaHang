@@ -50,7 +50,7 @@ namespace QLNhaHang.Controllers
 
             }
             
-            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, gioiTinh, searchString, page);
+            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, user.VanPhong.Name, gioiTinh, searchString, page);
             /////// for delete //////
             return View(NhanVienVM);
         }
@@ -179,6 +179,10 @@ namespace QLNhaHang.Controllers
             if (user.Role.Name.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
+            }
+            if (user.Role.Name != "Admins")
+            {
+                NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role.Name)).ToList();
             }
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
 

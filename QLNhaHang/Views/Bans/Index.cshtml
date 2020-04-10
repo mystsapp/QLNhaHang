@@ -32,7 +32,10 @@
             </h3>
 
             <div class="card-tools">
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "Bans", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                @if (Session["Role"].ToString() != "Users")
+                {
+                    <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "Bans", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                }
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -154,7 +157,10 @@
             }
 
             <div class="card-tools">
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Bans", new { strUrl = Model.StrUrl, maBan = Model.Ban.MaBan })"><i class="fas fa-edit"></i> Cập nhật</a>
+                @if (Session["Role"].ToString() != "Users")
+                {
+                    <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Bans", new { strUrl = Model.StrUrl, maBan = Model.Ban.MaBan })"><i class="fas fa-edit"></i> Cập nhật</a>
+                }
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>

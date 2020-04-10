@@ -56,7 +56,7 @@
 
                         <div class="col-6">
                             Mã bàn
-                            @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control ", @readonly = "true" })
+                            @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control txtMaBan", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger" })
                         </div>
 
@@ -64,7 +64,7 @@
                             Văn phòng
                             @Html.DropDownListFor(model => model.Ban.VanPhongId,
                                          new SelectList(Model.VanPhongs, "Id", "Name"),
-                                         htmlAttributes: new { @class = "form-control border-input " })
+                                         htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
                         </div>
 
                     </div>
@@ -111,3 +111,8 @@
     <!-- /.card -->
 </section>
 <!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/Ban/editController.js"></script>
+}

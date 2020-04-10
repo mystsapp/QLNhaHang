@@ -4,11 +4,11 @@
     return parts.join(".");
 }
 
-var createController = {
+var editController = {
     init: function () {
         var optionValue = $('.ddlVanPhong').val();
-        createController.loadMaBan(optionValue);
-        createController.registerEvent();
+        editController.loadMaBan(optionValue);
+        editController.registerEvent();
     },
 
     registerEvent: function () {
@@ -16,7 +16,7 @@ var createController = {
         $('.ddlVanPhong').off('change').on('change', function () {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
-            createController.loadMaBan(optionValue);
+            editController.loadMaBan(optionValue);
         });
 
         //var inputNumberVal = $('input.numbers').val();
@@ -51,4 +51,4 @@ var createController = {
         });
     }
 };
-createController.init();
+editController.init();
