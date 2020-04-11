@@ -1,5 +1,6 @@
 ﻿var indexController = {
     init: function () {
+        
         indexController.registerEvent();
     },
 
@@ -9,6 +10,13 @@
         });
         shortcut.add("F2", function () {
             indexController.tinhTien();
+        });
+        shortcut.add("F3", function () {
+            $('#modal-MayTinh').modal('show');
+            $('#modal-MayTinh').on('shown.bs.modal', function () {
+                $('#txtTongTien').focus();
+            });
+            
         });
         
         $('.cursor-pointer').off('click').on('click', function () {

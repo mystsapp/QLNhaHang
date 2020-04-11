@@ -509,7 +509,7 @@
     <Content Include="Assets\js\HoaDon\indexController.js" />
     <Content Include="Assets\js\MonDaChon\createController.js" />
     <Content Include="Assets\js\MonDaChon\goiMonController.js" />
-    <Content Include="Assets\js\BanHang\createController.js" />
+    <Content Include="Assets\js\BanHang\mayTinhController.js" />
     <Content Include="Assets\js\BanHang\indexController.js" />
     <Content Include="Assets\lib\angular-chart.js\angular-chart.js" />
     <Content Include="Assets\lib\angular-chart.js\angular-chart.min.js" />
@@ -2066,6 +2066,7 @@
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Shared\_MayTinhModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

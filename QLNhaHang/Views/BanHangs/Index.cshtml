@@ -221,7 +221,7 @@
 
                     <div class="mb-1">
 
-                        <button class="btn btn-outline-warning btn-block">
+                        <button class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#modal-MayTinh">
                             <div class="float-left mr-1">
                                 <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/maytinh.png" alt="Card image" />
                             </div>
@@ -237,6 +237,7 @@
     </div>
     <!-- /.card -->
 </section>
+@Html.Partial("~/Views/Shared/_MayTinhModal.cshtml", Model)
 
 @section Scripts{
     <script>
@@ -295,4 +296,5 @@
         }
     </style>
     <script src="~/Assets/js/BanHang/indexController.js"></script>
+    <script src="~/Assets/js/BanHang/mayTinhController.js"></script>
 }
