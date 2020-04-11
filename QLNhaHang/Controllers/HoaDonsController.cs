@@ -159,6 +159,7 @@ namespace QLNhaHang.Controllers
             hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
+            
 
             if (!string.IsNullOrEmpty(model.ThanhTienSauPPV))
             {

@@ -111,12 +111,20 @@
                         @foreach (var item in Model.HoaDons)
                         {
 
-                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
-                                <td align="center">
+                            <tr class="cursor-pointer" data-daIn="@item.DaIn" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                                <td align="center" >
                                     <div class="btn-group-sm">
+                                        @if (item.DaIn == true)
+                                        {
+                                            <button disabled class="btn btn-outline-success" title="HD tự động"><i class="fas fa-file-alt"></i></button>
+                                            <button disabled class="btn btn-outline-info" title="HD tay"><i class="far fa-file-alt"></i></button>
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-outline-success" title="HD tự động" href="@Url.Action("HoaDonTudong", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-file-alt"></i></a>
+                                            <a class="btn btn-outline-info" title="HD tay" href="@Url.Action("HoaDonTay", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="far fa-file-alt"></i></a>
+                                        }
 
-                                        <a class="btn btn-outline-success" title="HD tự động" href="@Url.Action("HoaDonTudong", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-file-alt"></i></a>
-                                        <a class="btn btn-outline-info" title="HD tay" href="@Url.Action("HoaDonTay", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="far fa-file-alt"></i></a>
                                         @*<button class="btn btn-outline-info" title="HD tay" data-toggle="modal" data-target="#modal-HDTay"><i class="far fa-file-alt"></i></button>*@
                                     </div>
                                 </td>
