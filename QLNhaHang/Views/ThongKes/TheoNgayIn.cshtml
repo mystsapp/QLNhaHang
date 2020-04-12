@@ -1,7 +1,7 @@
 ﻿@model QLNhaHang.Models.ThongKeViewModel
 
 @{
-    ViewBag.Title = "TheoNgay";
+    ViewBag.Title = "TheoNgayIn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -69,13 +69,13 @@
                                                     new SelectList(Model.VanPhongs, "Id", "Name", @ViewBag.vanPhong),
                                                     htmlAttributes: new { @class = "form-control border-input " })
                         </div>
-                        
-                        <div class="col-md-2">
+
+                        @*<div class="col-md-2">
                             @Html.LabelFor(model => model.DaIn, htmlAttributes: new { @class = "control-label" })
                             @Html.DropDownListFor(model => model.DaIn,
                                                     new SelectList(Model.DaInModels, "Id", "Name", @ViewBag.daIn),
                                                     htmlAttributes: new { @class = "form-control border-input " })
-                        </div>
+                        </div>*@
                         <div class="form-group">
 
                             <div class="col-md-offset-2 col-md-10">

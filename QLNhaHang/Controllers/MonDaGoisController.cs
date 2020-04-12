@@ -25,7 +25,9 @@ namespace QLNhaHang.Controllers
                 Ban = new Data.Models.Ban(),
                 MonDaGoi = new Data.Models.MonDaGoi(),
                 HoaDon = new HoaDon(),
-                ChiTietHD = new ChiTietHD()
+                ChiTietHD = new ChiTietHD(),
+                VanPhong = new VanPhong(),
+                NhanVien = new NhanVien()
             };
         }
         // GET: MonDaGois
@@ -141,6 +143,8 @@ namespace QLNhaHang.Controllers
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            MonDaGoiVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(user.VanPhongId);
+            MonDaGoiVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(user.MaNV);
             MonDaGoiVM.TongTien = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             // get last numberId in HD table find next  here

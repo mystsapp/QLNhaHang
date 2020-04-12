@@ -12,6 +12,7 @@ namespace QLNhaHang.Data.Repositories
     {
         IEnumerable<HoaDon> ListHoaDonTheoNgayIn(int vanPhongId, string searchFromDate, string searchToDate);
         IEnumerable<HoaDon> ListHoaDonTheoNgayTao(int vanPhongId, string tinhTrang, string searchFromDate, string searchToDate);
+        IEnumerable<HoaDon> ListSevenDay();
     }
     public class ThongKeRepository : Repository<HoaDon>, IThongKeRepository
     {
@@ -159,6 +160,11 @@ namespace QLNhaHang.Data.Repositories
 
             count = list.Count();
             return list;
+        }
+
+        public IEnumerable<HoaDon> ListSevenDay()
+        {
+            return GetAll().OrderByDescending(x => x.NgayTao);
         }
     }
 }

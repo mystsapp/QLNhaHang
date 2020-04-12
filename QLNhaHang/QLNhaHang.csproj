@@ -64,8 +64,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=5.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.5.1.0\lib\net45\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Antiforgery, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Antiforgery.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Antiforgery.dll</HintPath>
@@ -418,10 +418,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
+    <Compile Include="Models\ChartPieModel.cs" />
     <Compile Include="Models\DaInModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
     <Compile Include="Models\BanViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\LoaiThucDonViewModel.cs" />
     <Compile Include="Models\LoginController.cs" />
@@ -477,6 +479,7 @@
     <Content Include="Assets\css\MyCss.css" />
     <Content Include="Assets\css\site.css" />
     <Content Include="Assets\Images\arr.png" />
+    <Content Include="Assets\Images\binhquoi.jfif" />
     <Content Include="Assets\Images\Desk.jpg" />
     <Content Include="Assets\Images\Empty_Desk.jpg" />
     <Content Include="Assets\Images\favicon.ico" />
@@ -1827,6 +1830,43 @@
     <Content Include="Assets\lib\jquery\dist\jquery.js" />
     <Content Include="Assets\lib\jquery\dist\jquery.min.js" />
     <Content Include="Assets\lib\jquery\LICENSE.txt" />
+    <Content Include="Assets\lib\numeral.js\locales.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\be-nl.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\bg.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\chs.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\cs.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\da-dk.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\de-ch.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\de.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\en-au.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\en-gb.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\en-za.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\es-es.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\es.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\et.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\fi.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\fr-ca.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\fr-ch.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\fr.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\hu.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\it.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\ja.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\lv.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\nl-be.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\nl-nl.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\no.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\pl.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\pt-br.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\pt-pt.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\ru-ua.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\ru.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\sk.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\sl.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\th.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\tr.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\uk-ua.min.js" />
+    <Content Include="Assets\lib\numeral.js\locales\vi.min.js" />
+    <Content Include="Assets\lib\numeral.js\numeral.min.js" />
     <Content Include="Assets\lib\plugins\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\lib\plugins\chart.js\Chart.min.js" />
     <Content Include="Assets\lib\plugins\datatables-bs4\css\dataTables.bootstrap4.css" />
@@ -2078,6 +2118,7 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Shared\_MayTinhModal.cshtml" />
     <Content Include="Views\ThongKes\TheoNgay.cshtml" />
+    <Content Include="Views\ThongKes\TheoNgayIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

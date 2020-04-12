@@ -44,8 +44,19 @@
                     <div class="form-group row">
 
                         <div class="col-4">
-                            <p class="lead">Amount Due 2/22/2014</p>
-                            <p class="lead">Number ID: @Model.NumberId</p>
+                            <div class="col-4">
+                                    <img class="float-left" src="~/Assets/Images/binhquoi.jfif" width="50" />
+                                    <span class="float-left" style="font-size:12px; font-weight:bold">Làng du lịch bình quới </span>
+                                </div>
+                            <div class="text-center">
+                                <div class="text-bold">@Model.VanPhong.Name</div>
+                                <div>@Model.VanPhong.DiaChi</div>
+                                <div>@Model.VanPhong.MaSoThue</div>
+                            </div>
+                            <div>Number ID: @Model.NumberId</div>
+                            <div>Ngày: @DateTime.Now</div>
+                            <div>Nhân viên: @Model.NhanVien.HoTen</div>
+                            <div>Mô tả:</div>
 
                             <div class="table-responsive">
                                 <table class="table mytable text-nowrap" id="listAll">
@@ -75,7 +86,8 @@
                                         }
                                     </tbody>
                                 </table>
-                                <span> Tổng tiền: @Html.Raw(Model.TongTien.Value.ToString("N0")) VND</span>
+                                <div> Tổng số lượng: @Model.MonDaGois.Select(x => x.SoLuong).Sum()</div>
+                                <div> Tổng tiền: @Html.Raw(Model.TongTien.Value.ToString("N0")) VND</div>
 
                             </div>
                         </div>
@@ -138,8 +150,20 @@
 
             ////Print ele2 with default options
             $("#invoice").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: null,
+                noPrintSelector: ".no-print",
+                iframe: true,
+                append: null,
+                prepend: null,
+                manuallyCopyFormValues: true,
+                deferred: $.Deferred(),
+                timeout: 750,
+                title: null,
+                doctype: '<!doctype html>',
                 //Use Global styles
-                globalStyles: false,
+                //globalStyles: false,
                 //Add link with attrbute media=print
                 //mediaPrint: false,
                 //Custom stylesheet

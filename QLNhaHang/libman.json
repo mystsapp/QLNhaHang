@@ -17,6 +17,10 @@
     {
       "library": "Chart.js@2.9.3",
       "destination": "Assets/lib/Chart.js/"
+    },
+    {
+      "library": "numeral.js@2.0.6",
+      "destination": "Assets/lib/numeral.js/"
     }
   ]
 }

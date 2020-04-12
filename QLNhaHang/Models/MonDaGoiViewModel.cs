@@ -17,6 +17,8 @@ namespace QLNhaHang.Models
         public Ban Ban { get; set; }
         public HoaDon HoaDon { get; set; }
         public ChiTietHD ChiTietHD { get; set; }
+        public VanPhong VanPhong { get; set; }
+        public NhanVien NhanVien { get; set; }
         public string StrUrl { get; set; }
         public string MaBan { get; set; }
         public decimal PhuPhi { get; set; }

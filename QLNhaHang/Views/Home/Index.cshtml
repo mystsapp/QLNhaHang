@@ -1,14 +1,101 @@
-﻿@{
+﻿@model QLNhaHang.Models.HomeViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
-<body ng-app="app">
-    <div ng-controller="PieCtrl">
-        <canvas id="pie" class="chart chart-pie"
-                chart-data="data" chart-labels="labels" chart-options="options">
-        </canvas>
 
-    </div>
+<body ng-app="app">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row ">
+                <div class="col-sm-6">
+                    @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+                </div>
+                <div class="col-sm-6">
+                    @*<ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Danh sách khách hàng</li>
+                        </ol>*@
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-list-alt text-warning"></i> Doanh thu 7 ngày gần nhất
+                </h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card-body">
+
+                <div class="col-8 float-left">
+                    <div ng-controller="PieCtrl">
+                        <canvas id="pie" class="chart chart-pie"
+                                chart-data="data" chart-labels="labels" chart-options="optionsPie"
+                                chart-colors="colorsPie" 
+                                chart-click="clickme" chart-hover="hoverme" 
+                                chart-dataset-override="PieDataSetOverride"
+                                >
+                        </canvas>
+
+                    </div>
+                </div>
+                <div style="overflow-x:auto;" class="col-4 float-left">
+                    @if (Model.ChartPieMs != null)
+                    {
+                        <table class="table mytable text-nowrap" id="listAll">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>@Html.DisplayNameFor(m => m.ChartPieMs.FirstOrDefault().NgayBan)</th>
+                                    <th>@Html.DisplayNameFor(m => m.ChartPieMs.FirstOrDefault().TongTien)</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int i = 1;}
+                                @foreach (var item in Model.ChartPieMs)
+                                {
+
+                                    <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                        <td>@i</td>
+                                        <td>@Html.DisplayFor(m => item.NgayBan)</td>
+                                        <td>@string.Format("{0:0,0}", item.TongTien)</td>
+
+                                    </tr>
+                                    i++;
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <span> Không có dử liệu trong bảng. </span>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+
 </body>
 @section Scripts{
     @*<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
@@ -21,36 +108,53 @@
     <script src="~/Assets/lib/angular-chart.js/angular-chart.js"></script>
     <script src="~/Assets/js/Home/homeController.js"></script>
     <script>
-                            //angular.module("app", ["chart.js"]).controller("PieCtrl", function ($scope) {
-                            //    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-                            //    $scope.data = [300, 500, 100];
+                                                //angular.module("app", ["chart.js"]).controller("PieCtrl", function ($scope) {
+                                                //    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+                                                //    $scope.data = [300, 500, 100];
 
-                            //});
-                            //angular.element(document).ready(function () {
-                            //    angular.bootstrap(document, ['app']);
-                            //});
-                                                                //angular.module('app', ['chart.js']);
+                                                //});
+                                                //angular.element(document).ready(function () {
+                                                //    angular.bootstrap(document, ['app']);
+                                                //});
+                                                                                    //angular.module('app', ['chart.js']);
 
-                                                                //angular.module('app')
-                                                                //    .controller('PieCtrl', function ($scope) {
-                                                                //        $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-                                                                //        //$scope.series = ['Series A', 'Series B'];
-                                                                //        $scope.data = [300, 500, 100];
-                                                                //        //$scope.onClick = function (points, evt) {
-                                                                //        //    console.log(points, evt);
-                                                                //        //};
+                                                                                    //angular.module('app')
+                                                                                    //    .controller('PieCtrl', function ($scope) {
+                                                                                    //        $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+                                                                                    //        //$scope.series = ['Series A', 'Series B'];
+                                                                                    //        $scope.data = [300, 500, 100];
+                                                                                    //        //$scope.onClick = function (points, evt) {
+                                                                                    //        //    console.log(points, evt);
+                                                                                    //        //};
 
-                                                                //        //// Simulate async data update
-                                                                //        //$timeout(function () {
-                                                                //        //    $scope.data = [
-                                                                //        //        [28, 48, 40, 19, 86, 27, 90],
-                                                                //        //        [65, 59, 80, 81, 56, 55, 40]
-                                                                //        //    ];
-                                                                //        //}, 3000);
-                                                                //    });
+                                                                                    //        //// Simulate async data update
+                                                                                    //        //$timeout(function () {
+                                                                                    //        //    $scope.data = [
+                                                                                    //        //        [28, 48, 40, 19, 86, 27, 90],
+                                                                                    //        //        [65, 59, 80, 81, 56, 55, 40]
+                                                                                    //        //    ];
+                                                                                    //        //}, 3000);
+                                                                                    //    });
 
-                                                                //angular.element(document).ready(function () {
-                                                                //    angular.bootstrap(document, ['app']);
-                                                                //});
+                                                                                    //angular.element(document).ready(function () {
+                                                                                    //    angular.bootstrap(document, ['app']);
+                                                                                    //});
     </script>
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+    </style>
 }
