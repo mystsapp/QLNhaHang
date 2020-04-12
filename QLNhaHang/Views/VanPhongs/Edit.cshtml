@@ -61,7 +61,7 @@
 
                         <div class="col-6">
                             Mã VP
-                            @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control " })
+                            @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control ", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.VanPhong.MaVP, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -79,6 +79,11 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <div class="col-6">
+                            MST
+                            @Html.TextBoxFor(model => model.VanPhong.MaSoThue, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.MaSoThue, "", new { @class = "text-danger" })
+                        </div>
                         <div class="col-6">
                             Role
                             @Html.DropDownListFor(model => model.VanPhong.Role,

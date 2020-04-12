@@ -43,6 +43,10 @@ namespace QLNhaHang.Controllers
                 var hd = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
                 if (hd == null)
                 {
+                    if (!_unitOfWork.hoaDonRepository.GetAll().Any())
+                    {
+                        return View();
+                    }
                     var lastMaHD = _unitOfWork.hoaDonRepository
                                           .GetAllInclude(x => x.NhanVien, y => y.Ban)
                                           .OrderByDescending(x => x.MaHD).FirstOrDefault().MaHD;

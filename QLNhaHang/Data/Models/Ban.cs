@@ -46,5 +46,11 @@ namespace QLNhaHang.Data.Models
         [StringLength(50)]
         public string NguoiTao { get; set; }
 
+        [Required]
+        [MaxLength(10), Column(TypeName = "varchar")]
+        [StringLength(10)]
+        [DisplayName("Mã Số")]
+        public string MaSo { get; set; }
+
     }
 }

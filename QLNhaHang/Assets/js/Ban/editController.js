@@ -7,7 +7,7 @@
 var editController = {
     init: function () {
         var optionValue = $('.ddlVanPhong').val();
-        editController.loadMaBan(optionValue);
+        //editController.loadMaBan(optionValue);
         editController.registerEvent();
     },
 

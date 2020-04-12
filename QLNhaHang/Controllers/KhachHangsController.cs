@@ -68,11 +68,11 @@ namespace QLNhaHang.Controllers
             if (listOldKHTrung.Count() != 0)
             {
                 var lastMaKH = listOldKHTrung.OrderByDescending(x => x.MaKH).FirstOrDefault();
-                KhachHangVM.KhachHang.MaKH = GetNextId.NextID(lastMaKH.MaKH, currentPrefix);
+                KhachHangVM.KhachHang.MaKH = GetNextId.NextNumID(lastMaKH.MaKH.Substring(5, 7), currentPrefix);
             }
             else
             {
-                KhachHangVM.KhachHang.MaKH = GetNextId.NextID("", currentPrefix);
+                KhachHangVM.KhachHang.MaKH = GetNextId.NextNumID("", currentPrefix);
             }
             //var khachHang = _unitOfWork.khachHangRepository.GetAll()
             //                                                .OrderByDescending(x => x.MaKH)

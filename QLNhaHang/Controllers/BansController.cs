@@ -22,14 +22,14 @@ namespace QLNhaHang.Controllers
             {
                 Ban = new Data.Models.Ban(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
-                
+
             };
         }
         // GET: Bans
         public ActionResult Index(string maBan = null, string searchString = null, int page = 1)
         {
             var user = (NhanVien)Session["UserSession"];
-            
+
             BanVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
             if (!string.IsNullOrEmpty(maBan))
@@ -45,11 +45,11 @@ namespace QLNhaHang.Controllers
 
                 }
                 BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
-                
+
             }
 
             BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, user.VanPhong.Name, searchString, page);
-            
+
             return View(BanVM);
         }
 
@@ -75,7 +75,7 @@ namespace QLNhaHang.Controllers
             //{
             //    BanVM.Ban.MaBan = GetNextId.NextID("", "00120");
             //}
-            
+
             BanVM.StrUrl = strUrl;
             return View(BanVM);
         }
@@ -125,7 +125,7 @@ namespace QLNhaHang.Controllers
             }
 
             BanVM.StrUrl = strUrl;
-            
+
             return View(BanVM);
         }
 
@@ -137,7 +137,7 @@ namespace QLNhaHang.Controllers
                 ViewBag.ErrorMessage = "Bàn này không tồn tại";
                 return View("~/Views/Shared/NotFound.cshtml");
             }
-            
+
             _unitOfWork.banRepository.Update(model.Ban);
             _unitOfWork.Complete();
             SetAlert("Cập nhật thành công", "success");
@@ -174,22 +174,41 @@ namespace QLNhaHang.Controllers
                     listOldBanTrung.Add(ban);
                 }
             }
+            int a = 1;
             if (listOldBanTrung.Count() != 0)
             {
                 var lastMaBan = listOldBanTrung.OrderByDescending(x => x.MaBan).FirstOrDefault();
+                var maBan = GetNextId.NextID(lastMaBan.MaBan.Substring(5, 4), currentPrefix);
+                var lastMaSo = _unitOfWork.banRepository.GetAll().OrderByDescending(x => x.MaSo).FirstOrDefault();
+
+                var maSo = GetNextId.NextID(lastMaSo.MaSo, "");
+
                 return Json(new
                 {
                     status = true,
-                    data = GetNextId.NextID(lastMaBan.MaBan, currentPrefix)
+                    data = maBan,
+                    maSo = maSo
                 }, JsonRequestBehavior.AllowGet);
 
             }
             else
             {
+                var maBan = GetNextId.NextID("", currentPrefix);
+                var lastMaSo = _unitOfWork.banRepository.GetAll().OrderByDescending(x => x.MaSo).FirstOrDefault();
+                string maSo;
+                if (lastMaSo == null)
+                {
+                    maSo = GetNextId.NextID("", "");
+                }
+                else
+                {
+                    maSo = GetNextId.NextID(lastMaSo.MaSo, "");
+                }
                 return Json(new
                 {
                     status = true,
-                    data = GetNextId.NextID("", currentPrefix)
+                    data = maBan,
+                    maSo = maSo
                 }, JsonRequestBehavior.AllowGet);
             }
         }

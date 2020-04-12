@@ -149,7 +149,7 @@ namespace QLNhaHang.Controllers
 
             // get last numberId in HD table find next  here
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+            var currentPrefix = user.VanPhong.MaVP + yearPrefix + MonDaGoiVM.Ban.MaSo;
 
             var hoaDon = _unitOfWork.hoaDonRepository.GetAll().OrderByDescending(x => x.NumberId);
             var listOldHDTrung = new List<HoaDon>();
@@ -164,11 +164,12 @@ namespace QLNhaHang.Controllers
             if (listOldHDTrung.Count() != 0)
             {
                 var lastNumId = listOldHDTrung.OrderByDescending(x => x.NumberId).FirstOrDefault();
-                MonDaGoiVM.NumberId = GetNextId.NextID(lastNumId.NumberId, currentPrefix);
+                var lastId = lastNumId.NumberId.Substring(5, 7);
+                MonDaGoiVM.NumberId = GetNextId.NextNumID(lastId, currentPrefix);
             }
             else
             {
-                MonDaGoiVM.NumberId = GetNextId.NextID("", currentPrefix);
+                MonDaGoiVM.NumberId = GetNextId.NextNumID("", currentPrefix);
             }
             // prefix in VPandYear
             //var hoaDon = _unitOfWork.hoaDonRepository.GetAll()
@@ -195,6 +196,11 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
+            // đã có người tính trước đó rồi
+            if(MonDaGoiVM.MonDaGois == null)
+            {
+                return Redirect(strUrl);
+            }
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             //////////// add to HD, CTHD ///////////////
             /////maHD
@@ -214,11 +220,11 @@ namespace QLNhaHang.Controllers
             if (listOldHDTrung.Count() != 0)
             {
                 var lastMaHD = listOldHDTrung.OrderByDescending(x => x.MaHD).FirstOrDefault();
-                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID(lastMaHD.MaHD, currentPrefix);
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextNumID(lastMaHD.MaHD.Substring(5, 7), currentPrefix);
             }
             else
             {
-                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextID("", currentPrefix);
+                MonDaGoiVM.HoaDon.MaHD = GetNextId.NextNumID("", currentPrefix);
             }
 
             //var hoaDon = _unitOfWork.hoaDonRepository.GetAll()

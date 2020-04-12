@@ -86,6 +86,11 @@
                             @Html.TextAreaFor(model => model.Ban.GhiChu, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.Ban.GhiChu, "", new { @class = "text-danger" })
                         </div>
+                        <div class="col-6">
+                            Mã số
+                            @Html.TextBoxFor(model => model.Ban.MaSo, null, new { @class = "form-control txtMaSo", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.Ban.MaSo, "", new { @class = "text-danger" })
+                        </div>
 
                     </div>
 

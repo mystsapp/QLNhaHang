@@ -46,6 +46,7 @@ var createController = {
             success: function (response) {
                 if (response.status) {
                     $('.txtMaBan').val(response.data);
+                    $('.txtMaSo').val(response.maSo);
                 }
             }
         });

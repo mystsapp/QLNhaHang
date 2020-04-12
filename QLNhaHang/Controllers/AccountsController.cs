@@ -84,7 +84,7 @@ namespace QLNhaHang.Controllers
                     if (listOldNVTrung.Count() != 0)
                     {
                         var lastMaNV = listOldNVTrung.OrderByDescending(x => x.MaNV).FirstOrDefault();
-                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV, currentPrefix);
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV.Substring(5, 4), currentPrefix);
                     }
                     else
                     {
@@ -113,7 +113,7 @@ namespace QLNhaHang.Controllers
                     if (listOldNVTrung.Count() != 0)
                     {
                         var lastMaNV = listOldNVTrung.OrderByDescending(x => x.MaNV).FirstOrDefault();
-                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV, currentPrefix);
+                        NhanVienVM.NhanVien.MaNV = GetNextId.NextID(lastMaNV.MaNV.Substring(5, 4), currentPrefix);
                     }
                     else
                     {

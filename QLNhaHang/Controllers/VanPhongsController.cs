@@ -67,6 +67,10 @@ namespace QLNhaHang.Controllers
             var vanPhong = _unitOfWork.vanPhongRepository.GetAll().OrderByDescending(x => x.MaVP).FirstOrDefault();
             if (vanPhong == null)
             {
+                if (!_unitOfWork.vanPhongRepository.GetAll().Any())
+                {
+                    return View();
+                }
                 VanPhongVM.VanPhong.MaVP = GetNextId.NextVPID("", "");
             }
             else
