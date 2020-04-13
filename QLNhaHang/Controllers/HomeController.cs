@@ -79,14 +79,14 @@ namespace QLNhaHang.Controllers
             }
         }
 
-        public ActionResult About()
+        public ActionResult Aboutt()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contactt()
         {
             ViewBag.Message = "Your contact page.";
 

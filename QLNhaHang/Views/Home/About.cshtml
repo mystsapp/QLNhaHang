@@ -4,4 +4,105 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<!doctype html>
+<html lang="en">
+<head>
+
+    <style>
+        #draggable {
+            width: 150px;
+            height: 150px;
+            padding: 0.5em;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="list" @*ondrop="drop(event)"*@ data-id="abcd" draggable="true">
+        <p @*ondragstart="dragStart(event)" ondrag="dragging(event)"*@>Drag me around</p>
+    </div>
+    <br />
+    <div id="container" @*ondrop="drop(event)"*@ >
+        <input droppable="true" />
+    </div>
+
+    <p id="demo"></p>
+</body>
+</html>
+
+@section Scripts{
+
+    <script>
+
+        var dragItem = document.getElementById('list');
+        var dropZone = document.getElementById('container');
+
+        dragItem.addEventListener('dragstart', function (event) {
+            event.dataTransfer.setData('text/plain', $(this).data('id'));
+        });
+        dropZone.addEventListener('drop', function (event) {
+            console.log(event.dataTransfer.getData('text/plain'));
+
+        });
+        //function dragStart(event) {
+        //    event.dataTransfer.setData("Text", event.target.id);
+
+        //}
+        //function dragging(event) {
+        //    document.getElementById("demo").innerHTML = "The p element is being dragged";
+        //}
+        //function drop(event) {
+        //    event.preventDefault();
+        //    var data = event.dataTransfer.getData("Text");
+        //    event.target.appendChild(document.getElementById(data));
+        //    document.getElementById("demo").innerHTML = "The p element was dropped";
+        //}
+
+        //$("#list").draggable({
+        //    scroll: true,
+        //    //axis: "x",
+        //    containment: "body",
+        //    revert: true,
+        //    helper: "clone",
+        //    disable: false,
+        //    start: function (event, ui) {
+        //        $(ui.item).addClass("active-draggable");
+
+        //    },
+        //    drag: function (event, ui) {
+
+        //    },
+        //    stop: function (event, ui) {
+        //        $(ui.item).removeClass("active-draggable");
+        //    }
+        //});
+
+        //$("#container").droppable({
+        //    accept: "#list",
+        //    class: {
+        //        'ui-droppable-active': 'ac',
+        //        'ui-droppable-hover': 'hv'
+        //    },
+        //    acivate: function (event, ui) {
+        //        $(this).css('background', 'red');
+
+        //    },
+        //    over: function (event, ui) {
+        //        $(this).css('background', 'yellow');
+
+        //    },
+        //    out: function (event, ui) {
+        //        $(this).css('background', 'blue');
+
+        //    },
+        //    drop: function (event, ui) {
+        //        $(this).css('background', 'white');
+
+        //    },
+        //    deactivate: function (event, ui) {
+        //        $(ui.item).css('background', 'green');
+        //    },
+        //});
+    </script>
+
+}

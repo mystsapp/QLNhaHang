@@ -1,17 +1,63 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    
+    <script>
+        function onLoad() {
+            var dragItem = document.getElementById('drag-item');
+            var dropZone = document.getElementById('drop-zone');
+            var dataTransferObject;
+            var someObj = {
+                asd: 'something',
+            };
+            
+            dragItem.addEventListener('dragstart', function (event) {
+                event.dataTransfer.setData('text/plain', $(this).data('id'));
+                dataTransferObject = event.dataTransfer;
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+                //setTimeout(function () {
+                //    console.log('attempt to set data asynchonrously after drag start');
+                //    //event.dataTransfer.setData("text/plain","asynchonrously set data");
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+                //    someObj.asd = 'asynchonrously';
+                //    //looks like failed, the console output is empty
+                //    console.log(event.dataTransfer.getData('text/plain'));
+                //}, 100);
+            });
+
+            //dropZone.addEventListener('dragenter', function (event) {
+            //    console.log('attempt to set data on dragenter');
+
+            //    event.dataTransfer.setData('text/plain', 'set data when drag enter');
+
+            //    //no luck, empty
+            //    console.log(event.dataTransfer.getData('text/plain'));
+            //});
+
+            dropZone.addEventListener('drop', function (event) {
+                //console.log('attempt to set data on drop');
+
+                event.dataTransfer.setData('text/plain', 'set data on drop');
+
+                //still cannot change it;
+                //console.log(someObj.asd);
+
+                //They are NOT the same object
+                console.log(dataTransferObject == event.dataTransfer);
+                $(this).val(event.dataTransfer.getData('text/plain'));
+            });
+        }
+    </script>
+</head>
+
+<body onload="onLoad()">
+    <div style="background:#ccc;padding:20px" id="drag-item" draggable="true" data-id="abc">
+        Drag me!
+    </div>
+
+    <textarea droppable="true"
+              id="drop-zone"
+              style="width:300px;height:200px;border:1px solid red"
+              placeholder="Drop here!"></textarea>
+</body>
+</html>
