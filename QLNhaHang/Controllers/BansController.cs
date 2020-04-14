@@ -153,8 +153,17 @@ namespace QLNhaHang.Controllers
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
             var ban = _unitOfWork.banRepository.GetByStringId(maBan);
-            _unitOfWork.banRepository.Delete(ban);
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.banRepository.Delete(ban);
+                _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+                SetAlert("Xóa không thành công.", "error");
+                return Redirect(strUrl);
+            }
+            
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }

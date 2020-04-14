@@ -155,7 +155,7 @@ namespace QLNhaHang.Controllers
             var listOldHDTrung = new List<HoaDon>();
             foreach (var hd in hoaDon)
             {
-                var oldPrefix = hd.NumberId.Substring(0, 5);
+                var oldPrefix = hd.NumberId.Substring(0, 9);
                 if (currentPrefix == oldPrefix)
                 {
                     listOldHDTrung.Add(hd);
@@ -164,7 +164,7 @@ namespace QLNhaHang.Controllers
             if (listOldHDTrung.Count() != 0)
             {
                 var lastNumId = listOldHDTrung.OrderByDescending(x => x.NumberId).FirstOrDefault();
-                var lastId = lastNumId.NumberId.Substring(5, 7);
+                var lastId = lastNumId.NumberId.Substring(9, 7);
                 MonDaGoiVM.NumberId = GetNextId.NextNumID(lastId, currentPrefix);
             }
             else

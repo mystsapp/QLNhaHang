@@ -60,7 +60,7 @@ namespace QLNhaHang.Utilities
             {
                 return prefixID + "0000001";  // fixwidth default
             }
-            int nextID = int.Parse(lastID.Remove(0, prefixID.Length)) + 1;
+            int nextID = int.Parse(lastID/*.Remove(0, prefixID.Length)*/) + 1;
             int lengthNumerID = lastID.Length;// - prefixID.Length;
             string zeroNumber = "";
             for (int i = 1; i <= lengthNumerID; i++)
