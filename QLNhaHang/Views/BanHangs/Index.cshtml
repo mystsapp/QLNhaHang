@@ -38,23 +38,23 @@
                 </button>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body list">
             @foreach (var ban in Model.Bans)
             {
 
-                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer" style="max-width: 12rem;" data-id="@ban.MaBan">
+                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer box" style="max-width: 12rem;" data-id="@ban.MaBan">
                     <div class="card-header">@ban.TenBan</div>
-                    <div class="card-body text-warning">
+                    <div class="card-body text-warning " draggable="true">
                         @*<h5 class="card-title">Warning card title</h5>*@
                         @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
                         <p>
                             @if (ban.Flag)
                             {
-                                <img class="imgBan" width="70" src="~/Assets/Images/Desk.jpg" />
+                                <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="70" src="~/Assets/Images/Desk.jpg" draggable="true" />
                             }
                             else
                             {
-                                <img class="imgBan" width="70" src="~/Assets/Images/Empty_Desk.jpg" />
+                                <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="70" src="~/Assets/Images/Empty_Desk.jpg" draggable="true" />
                             }
 
                         </p>
@@ -70,6 +70,12 @@
     </div>
     <!-- /.card -->
 </section>
+
+<form id="frmNhapBan" action="/BanHangs/Index">
+    <input type="hidden" name="maBan" value="@Model.Ban.MaBan"/>
+    <input type="hidden" name="maBanFrom" id="hidMaBanFrom"/>
+    <input type="hidden" name="maBanTo" id="hidMaBanTo"/>
+</form>
 
 <section class="content">
 
@@ -114,7 +120,7 @@
                             @foreach (var item in Model.MonDaGois)
                             {
 
-                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                                <tr class="cursor-pointerMon" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
                                     <td>@i</td>
                                     <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
@@ -258,6 +264,23 @@
             }
 
         });
+        $('.cursor-pointerMon').click(function () {
+            //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
+            //$(".imgBan").click(function () {
+            //    // Change src attribute of image
+            //    $(this).attr("src", "Assets/Images/Desk.jpg");
+            //});
+            if ($(this).hasClass("bg-warning")) {
+                $(this).removeClass("bg-warning");
+
+            }
+            else {
+                $('.card.bg-warning').removeClass("bg-warning");
+                $('.card-body').removeClass("text-warning");
+                $(this).addClass("bg-warning");
+            }
+
+        });
 
         $('.listAllTab').DataTable({
             "paging": true,
@@ -269,7 +292,13 @@
         });
     </script>
     <style>
-        .cursor-pointer:hover {
+        .cursor-pointer :hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+        .cursor-pointerMon :hover {
             /*background-color: #3E5C9A;*/
             background-color: #ffc107 !important;
             cursor: pointer;
@@ -277,6 +306,9 @@
         }
 
         .cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .cursor-pointerMon {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 
@@ -297,4 +329,77 @@
     </style>
     <script src="~/Assets/js/BanHang/indexController.js"></script>
     <script src="~/Assets/js/BanHang/mayTinhController.js"></script>
+    <script>
+
+        var dropTarget = document.querySelector(".list");
+        var draggables = document.querySelectorAll(".task");
+        for (let i = 0; i < draggables.length; i++) {
+
+            draggables[i].addEventListener("dragstart", function (ev, ui) {
+                let target = ev.target;
+                let droppable = target.classList.contains("task");
+                const id = target.getAttribute('data-id');
+
+                if (droppable) {
+                    ev.dataTransfer.setData("srcId", id);
+                }
+            });
+        }
+
+        dropTarget.addEventListener('dragover', function (ev) {
+            ev.preventDefault();
+        });
+
+        dropTarget.addEventListener('drop', function (ev) {
+            ev.preventDefault();
+            let target = ev.target;
+            let droppable = target.classList.contains('box');
+            let srcId = ev.dataTransfer.getData("srcId");
+            //console.log(srcId);
+            const desId = target.getAttribute('data-id');            
+
+            $.ajax({
+                url: '/BanHangs/MonInBan',
+                data: {
+                    maBan: srcId
+                },
+                dataType: 'json',
+                type: 'POST',
+                success: function (response) {
+                    if (response.status) {
+                        if (desId == null) {
+                            return;
+                        }
+                        console.log(desId);
+                        //console.log('source Id' + srcId);
+                        bootbox.confirm("Bạn có mưốn nhập bàn không!", function (result) {
+                            if (result) {
+                                $('#hidMaBanFrom').val(srcId);
+                                $('#hidMaBanTo').val(desId);
+                                $('#frmNhapBan').submit();
+                            }
+                        });
+                    }
+                    else {
+                        bootbox.alert({
+                            size: "small",
+                            title: "Information",
+                            message: "Bàn này <b> chưa gọi món <b/> nào !",
+                            callback: function () {
+                                //e.preventDefault();
+                            }
+                        });
+                    }
+                }
+            });
+
+
+            //console.log(target);
+            if (droppable) {
+                ev.target.appendChild(document.getElementById(srcId));
+
+            }
+        });
+
+    </script>
 }
