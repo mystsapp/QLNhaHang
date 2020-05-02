@@ -151,7 +151,10 @@ namespace QLNhaHang.Controllers
             model.NhanVien.Username = model.UsernameCreate;
             //model.NhanVien.NguoiTao = user.Username;            
             model.NhanVien.NguoiTao = "Admin";
-            model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);
+            if (!string.IsNullOrEmpty(model.NgaySinh))
+            {
+                model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);
+            }
 
             _unitOfWork.nhanVienRepository.Create(model.NhanVien);
             _unitOfWork.Complete();
@@ -290,7 +293,7 @@ namespace QLNhaHang.Controllers
                 return Json(new
                 {
                     status = true,
-                    data = GetNextId.NextID(lastMaNV.MaNV, currentPrefix)
+                    data = GetNextId.NextNVID(lastMaNV.MaNV, currentPrefix)
                 }, JsonRequestBehavior.AllowGet);
 
             }
@@ -299,7 +302,7 @@ namespace QLNhaHang.Controllers
                 return Json(new
                 {
                     status = true,
-                    data = GetNextId.NextID("", currentPrefix)
+                    data = GetNextId.NextNVID("", currentPrefix)
                 }, JsonRequestBehavior.AllowGet);
             }
         }

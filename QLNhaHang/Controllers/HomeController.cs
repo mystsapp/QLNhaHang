@@ -48,7 +48,7 @@ namespace QLNhaHang.Controllers
 
         public void ListSevenDays()
         {
-            var listHD = _unitOfWork.thongKeRepository.ListSevenDay().ToList();
+            var listHD = _unitOfWork.thongKeRepository.ListSevenDay().ToList().Take(7);
             var arrayListHD = listHD.ToArray();
 
         quaylai:
