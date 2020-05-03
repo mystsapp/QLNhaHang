@@ -20,6 +20,7 @@ namespace QLNhaHang.Data
         public DbSet<ThucDon> ThucDons { get; set; }
         public DbSet<VanPhong> VanPhongs { get; set; }
         public DbSet<ThongTinHD> ThongTinHDs { get; set; }
+        public DbSet<KhuVuc> KhuVucs { get; set; }
 
     }
 }

@@ -41,19 +41,19 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-    with font-awesome or any other icon font library -->
+                with font-awesome or any other icon font library -->
                 @*@if (user.Nhom == "Admins")
-        {*@
+                    {*@
                 @*<li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>
-                    Tài khoản
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Tài khoản
 
-                </p>
-            </a>
+                            </p>
+                        </a>
 
-        </li>*@
+                    </li>*@
 
                 <li class="nav-item has-treeview">
                     <a href="/HoaDons/Index" class="nav-link">
@@ -66,51 +66,43 @@
 
                 </li>
                 @*}
-        @if (user.Nhom != "KDO")
-        {*@
+                    @if (user.Nhom != "KDO")
+                    {*@
                 @* Danh muc báo cáo *@
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Quản trị
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item has-treeview">
-                            <a href="/Accounts/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Nhân viên
+                @if (Session["Role"].ToString() == "Admins")
+                {
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Quản trị
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item has-treeview">
+                                <a href="/Accounts/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Nhân viên
 
-                                </p>
-                            </a>
+                                    </p>
+                                </a>
 
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="/KhachHangs/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Khách hảng
+                            </li>
 
-                                </p>
-                            </a>
 
-                        </li>
+                            @*<li class="nav-item has-treeview">
+            <a href="/ThongTinHDs/Index" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Thông tin HD
 
-                        <li class="nav-item has-treeview">
-                            <a href="/ThongTinHDs/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Thông tin HD
+                </p>
+            </a>
 
-                                </p>
-                            </a>
+        </li>*@
 
-                        </li>
-                        @if (Session["Role"].ToString() == "Admins")
-                        {
                             <li class="nav-item has-treeview">
                                 <a href="/Roles/Index" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -120,11 +112,21 @@
                                 </a>
 
                             </li>
-                        }
 
+                            <li class="nav-item has-treeview">
+                                <a href="/VanPhongs/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Cơ sở
 
-                    </ul>
-                </li>
+                                    </p>
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </li>
+                }
                 @* Danh muc báo cáo *@
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -166,19 +168,18 @@
                             </a>
 
                         </li>
-                        @if (Session["Role"].ToString() == "Admins")
-                        {
-                            <li class="nav-item has-treeview">
-                                <a href="/VanPhongs/Index" class="nav-link">
-                                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                                    <p>
-                                        Văn phòng
 
-                                    </p>
-                                </a>
+                        <li class="nav-item has-treeview">
+                            <a href="/KhachHangs/Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Khách hảng
 
-                            </li>
-                        }
+                                </p>
+                            </a>
+
+                        </li>
+                       
                     </ul>
                 </li>
                 @if (Session["Role"].ToString() != "Users")
@@ -208,7 +209,7 @@
                         </ul>
                     </li>
                 }
-                </ul>
+            </ul>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

@@ -78,7 +78,7 @@
                             <tr>
                                 <th>STT</th>
                                 <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().TenLoai)</th>
-                                <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().PhuPhi)</th>
+                                @*<th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().PhuPhi)</th>*@
                                 <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().MoTa)</th>
                                 <th>@Html.DisplayNameFor(m => m.LoaiThucDons.FirstOrDefault().GhiChu)</th>
                                 <th>#</th>
@@ -93,7 +93,7 @@
 
                                     <td class="tdVal" data-id="@item.Id">@i</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.TenLoai)</td>
-                                    <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}", item.PhuPhi)</td>
+                                    @*<td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}", item.PhuPhi)</td>*@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.MoTa)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
 

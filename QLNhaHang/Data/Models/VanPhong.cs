@@ -14,12 +14,12 @@ namespace QLNhaHang.Data.Models
         [Required]
         [MaxLength(10), Column(TypeName = "varchar")]
         [StringLength(10)]
-        [DisplayName("Mã VP")]
+        [DisplayName("Mã")]
         public string MaVP { get; set; }
         [Required]
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]
-        [DisplayName("Văn phòng")]
+        [DisplayName("Cơ sở")]
         public string Name { get; set; }
 
         [MaxLength(250), Column(TypeName = "nvarchar")]

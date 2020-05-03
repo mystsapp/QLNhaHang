@@ -4,6 +4,13 @@
     },
 
     registerEvent: function () {
+
+        $('.ddlLoai').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            $('#hidDdlLoai').val(optionValue);
+            $('#btnSubmit').click();
+        });
+
         $('.tdVal').click(function () {
             id = $(this).data('id');
             $('#hidId').val(id);

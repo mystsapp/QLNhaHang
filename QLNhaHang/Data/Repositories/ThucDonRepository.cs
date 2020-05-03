@@ -10,7 +10,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IThucDonRepository : IRepository<ThucDon>
     {
-        IPagedList<ThucDon> ListThucDon(string searchString, int? page);
+        IPagedList<ThucDon> ListThucDon(string searchString, int? page, int ddlLoai);
     }
     public class ThucDonRepository : Repository<ThucDon>, IThucDonRepository
     {
@@ -18,7 +18,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<ThucDon> ListThucDon(string searchString, int? page)
+        public IPagedList<ThucDon> ListThucDon(string searchString, int? page, int ddlLoai)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -28,6 +28,10 @@ namespace QLNhaHang.Data.Repositories
 
             var list = GetAllIncludeOne(x => x.LoaiThucDon).AsQueryable();
             //list = list.Where(x => x.NguoiCap == hoTen);
+            if(ddlLoai != 0)
+            {
+                list = list.Where(x => x.MaLoaiId == ddlLoai);
+            }
             if (!string.IsNullOrEmpty(searchString))
             {
                 list = list.Where(x => x.TenMon.ToLower().Contains(searchString.ToLower()) ||
@@ -43,7 +47,7 @@ namespace QLNhaHang.Data.Repositories
             var count = list.Count();
 
             // page the list
-            const int pageSize = 2;
+            const int pageSize = 10;
             decimal aa = (decimal)list.Count() / (decimal)pageSize;
             var bb = Math.Ceiling(aa);
             if (page > bb)

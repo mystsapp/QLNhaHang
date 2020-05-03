@@ -23,10 +23,15 @@ namespace QLNhaHang.Controllers
             };
         }
         // GET: KhachHangs
-        public ActionResult Index(int id = 0, string searchString = null, int page = 1)
+        public ActionResult Index(int id = 0, string searchString = null, int page = 1, int ddlLoai = 0)
         {
             ThucDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
+            if(ddlLoai != 0)
+            {
+                ViewBag.idLoai = ddlLoai;
+            }
+            
             if (id != 0)
             {
 
@@ -43,7 +48,8 @@ namespace QLNhaHang.Controllers
                 
             }
 
-            ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(searchString, page);
+            ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(searchString, page, ddlLoai);
+           
             return View(ThucDonVM);
         }
 

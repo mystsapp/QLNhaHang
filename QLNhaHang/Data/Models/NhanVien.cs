@@ -58,7 +58,7 @@ namespace QLNhaHang.Data.Models
         [StringLength(50), Column(TypeName = "varchar")]
         public string Password { get; set; }
 
-        [DisplayName("Trạng thái")]
+        [DisplayName("Tình trạng")]
         public bool TrangThai { get; set; }
         
         [DisplayName("Người tạo")]
@@ -81,14 +81,14 @@ namespace QLNhaHang.Data.Models
 
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
-        [DisplayName("Phòng ban")]
+        [DisplayName("VP làng")]
         public string PhongBan { get; set; }
 
         //[MaxLength(50), Column(TypeName = "nvarchar(50)")]
         //[DisplayName("Văn phòng")]
         //public string VanPhong { get; set; }
 
-        [DisplayName("Văn phòng")]
+        [DisplayName("Cơ sở")]
         public int VanPhongId { get; set; }
 
         [ForeignKey("VanPhongId")]

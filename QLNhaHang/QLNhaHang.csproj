@@ -374,6 +374,7 @@
     <Compile Include="Data\Models\ChiTietHD.cs" />
     <Compile Include="Data\Models\HoaDon.cs" />
     <Compile Include="Data\Models\KhachHang.cs" />
+    <Compile Include="Data\Models\KhuVuc.cs" />
     <Compile Include="Data\Models\LoaiThucDon.cs" />
     <Compile Include="Data\Models\MonDaGoi.cs" />
     <Compile Include="Data\Models\NhanVien.cs" />
@@ -418,6 +419,10 @@
     <Compile Include="Migrations\202004121219412_addMaSoBan.cs" />
     <Compile Include="Migrations\202004121219412_addMaSoBan.designer.cs">
       <DependentUpon>202004121219412_addMaSoBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005031042595_addKVTbl.cs" />
+    <Compile Include="Migrations\202005031042595_addKVTbl.designer.cs">
+      <DependentUpon>202005031042595_addKVTbl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
@@ -2156,6 +2161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004121219412_addMaSoBan.resx">
       <DependentUpon>202004121219412_addMaSoBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005031042595_addKVTbl.resx">
+      <DependentUpon>202005031042595_addKVTbl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
