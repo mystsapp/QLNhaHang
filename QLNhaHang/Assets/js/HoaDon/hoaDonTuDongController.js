@@ -38,14 +38,15 @@ var hoaDonTuDongController = {
         });
 
         $('.txtVAT').off('blur').on('blur', function () {
-            //hoaDonTuDongController.loadThanhTienVAT();
+            
             id = $(this).val();
             $('#hidVAT').val(id);
             $('#frmVAT').submit();
+            
         });
 
         $('.txtPPV').off('blur').on('blur', function () {
-            //hoaDonTuDongController.loadThanhTienVAT();
+            
             id = $(this).val();
             $('#hidPPV').val(id);
             $('#frmPPV').submit();

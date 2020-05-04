@@ -105,7 +105,7 @@ namespace QLNhaHang.Data.Repositories
 
             count = list.Count();
             // page the list
-            const int pageSize = 4;
+            const int pageSize = 10;
             decimal aa = (decimal)list.Count() / (decimal)pageSize;
             var bb = Math.Ceiling(aa);
             if (page > bb)
