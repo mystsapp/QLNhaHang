@@ -20,7 +20,7 @@ namespace QLNhaHang.Data.Models
 
         [ForeignKey("MaNV")]
         public virtual NhanVien NhanVien { get; set; }
-        
+
         [DisplayName("Văn phòng")]
         public int VanPhongId { get; set; }
 
@@ -57,7 +57,6 @@ namespace QLNhaHang.Data.Models
         public DateTime? NgayTao { get; set; }
         public DateTime? NgayGiao { get; set; }
 
-
         [MaxLength(300), Column(TypeName = "nvarchar")]
         [StringLength(300)]
         [DisplayName("Ghi chú")]
@@ -65,34 +64,45 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Thành tiền HD")]
         public decimal? ThanhTienHD { get; set; }
+
         public decimal? TyLePPV { get; set; }
         public decimal? PhiPhucvu { get; set; }
         public decimal? TongTienSauPPV { get; set; }
         public decimal? VAT { get; set; }
+
         [DisplayName("Tiền thuế GTGT")]
         public decimal? TienThueVAT { get; set; }
-        
+
         [DisplayName("Thành tiền VAT")]
         public decimal? ThanhTienVAT { get; set; }
 
         [StringLength(200)]
         [MaxLength(200), Column(TypeName = "nvarchar")]
         public string SoTienBangChu { get; set; }
-        
+
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string NumberId { get; set; }
+
         /// <summary>
         /// for ThongTinHD
         /// </summary>
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string MauSo { get; set; }
+
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string KyHieu { get; set; }
-        public int? QuyenSo { get; set; }
-        public long? So { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string QuyenSo { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string So { get; set; }
+
         [StringLength(20)]
         [MaxLength(20), Column(TypeName = "varchar")]
         public string SoThuTu { get; set; }
@@ -134,6 +144,5 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Số tiền")]
         public decimal? SoTien { get; set; }
-        
     }
 }

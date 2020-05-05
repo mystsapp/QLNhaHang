@@ -84,10 +84,10 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePost(VanPhongViewModel model)
         {
-            
-            
+            var user = (NhanVien)Session["UserSession"];
+
             model.VanPhong.NgayTao = DateTime.Now;
-            model.VanPhong.NguoiTao = "Admin";
+            model.VanPhong.NguoiTao = user.Username;
             model.VanPhong.Name = model.TenVPCreate;
             _unitOfWork.vanPhongRepository.Create(model.VanPhong);
             _unitOfWork.Complete();
@@ -131,6 +131,7 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Edit")]
         public ActionResult EditPost(string strUrl, int id, VanPhongViewModel model)
         {
+            
             if (id != model.VanPhong.Id)
             {
                 ViewBag.ErrorMessage = "Tên này không tồn tại";

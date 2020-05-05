@@ -1,6 +1,8 @@
 ﻿@model QLNhaHang.Models.HoaDonViewModel
 @{
     ViewBag.Title = "Hoa Don Tu dong";
+
+    //var roleName = Session["role"].ToString();
 }
 
 
@@ -53,39 +55,40 @@
 
                     <div class="form-group row">
 
-                        <div class="col-md-2">
-                            Số thứ tự
-                            <div class="input-group input-group">
-                                @Html.TextBoxFor(model => model.ThongTinHD.SoThuTu, null, new { @class = "form-control txtSTT" })
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#modal-ThongTinHD"><i class="fas fa-search"></i></button>
-                                </span>
-                                @Html.ValidationMessageFor(model => model.ThongTinHD.SoThuTu, "", new { @class = "text-danger" })
+                        @*<div class="col-md-2">
+                                Số thứ tự
+                                <div class="input-group input-group">
+                                    @Html.TextBoxFor(model => model.VanPhong.SoThuTu, null, new { @class = "form-control txtSTT" })
+                                    <span class="input-group-append">
+                                        <button type="button" class="btn btn-secondary btn-flat" data-toggle="modal" data-target="#modal-ThongTinHD"><i class="fas fa-search"></i></button>
+                                    </span>
+                                    @Html.ValidationMessageFor(model => model.VanPhong.SoThuTu, "", new { @class = "text-danger" })
 
-                            </div>
+                                </div>
 
-                        </div>
+                            </div>*@
+
                         <div class="col-md-2">
                             Số hóa đơn
-                            @Html.TextBoxFor(model => model.ThongTinHD.So, new { @class = "form-control txtSoHD" })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.So, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.VanPhong.So, new { @class = "form-control txtSoHD" })
+                            @Html.ValidationMessageFor(model => model.VanPhong.So, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-2">
                             Ký hiệu
-                            @Html.TextBoxFor(model => model.ThongTinHD.KyHieu, null, new { @class = "form-control txtKyHieu" })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.KyHieu, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.VanPhong.KyHieu, null, new { @class = "form-control txtKyHieu" })
+                            @Html.ValidationMessageFor(model => model.VanPhong.KyHieu, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-2">
                             Quyển số
-                            @Html.TextBoxFor(model => model.ThongTinHD.QuyenSo, new { @class = "form-control txtQuyenSo" })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.QuyenSo, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.VanPhong.QuyenSo, new { @class = "form-control txtQuyenSo" })
+                            @Html.ValidationMessageFor(model => model.VanPhong.QuyenSo, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-2">
                             Mẫu số
-                            @Html.TextBoxFor(model => model.ThongTinHD.MauSo, null, new { @class = "form-control txtMauSo" })
-                            @Html.ValidationMessageFor(model => model.ThongTinHD.MauSo, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.VanPhong.MauSo, null, new { @class = "form-control txtMauSo" })
+                            @Html.ValidationMessageFor(model => model.VanPhong.MauSo, "", new { @class = "text-danger" })
 
                         </div>
 
@@ -250,7 +253,7 @@
     <input type="hidden" id="hidPPV" name="ppv" />
     <input type="hidden" id="hidSoTien" name="sotien" />
 </form>
-@Html.Partial("~/Views/Shared/_ThongTinHDModal.cshtml", Model)
+@*@Html.Partial("~/Views/Shared/_ThongTinHDInVPModal.cshtml", Model)*@
 @Html.Partial("~/Views/Shared/_KhachHangModal.cshtml", Model)
 
 @section Scripts{
@@ -281,7 +284,7 @@
             "info": true,
             "autoWidth": false,
         });
-                                    //"iDisplayLength": 5
+                                                //"iDisplayLength": 5
     </script>
     <style>
         .cursor-pointer:hover {

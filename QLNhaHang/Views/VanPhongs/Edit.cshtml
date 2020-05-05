@@ -92,6 +92,36 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+
+                        <div class="col-6">
+                            Mẫu số
+                            @Html.TextBoxFor(model => model.VanPhong.MauSo, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.MauSo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-6">
+                            Ký hiệu
+                            @Html.TextBoxFor(model => model.VanPhong.KyHieu, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.KyHieu, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-6">
+                            Quyển số
+                            @Html.TextBoxFor(model => model.VanPhong.QuyenSo, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.QuyenSo, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-6">
+                            Số
+                            @Html.TextBoxFor(model => model.VanPhong.So, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.VanPhong.So, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
                     <div class="form-group ">
 
                         <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>

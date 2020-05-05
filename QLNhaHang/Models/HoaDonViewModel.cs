@@ -23,6 +23,7 @@ namespace QLNhaHang.Models
         public IEnumerable<KhachHang> KhachHangs { get; set; }
         public IEnumerable<ThongTinHD> ThongTinHDs { get; set; }
         public ThongTinHD ThongTinHD { get; set; }
+        public VanPhong VanPhong { get; set; }
 
         [Required(ErrorMessage = "Bạn chưa nhập số tiền.")]
         public string SoTien { get; set; }

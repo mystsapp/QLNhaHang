@@ -26,6 +26,7 @@ namespace QLNhaHang.Controllers
             {
                 HoaDon = new Data.Models.HoaDon(),
                 ThongTinHD = new Data.Models.ThongTinHD(),
+                VanPhong = new VanPhong(),
                 KhachHang = new Data.Models.KhachHang(),
                 VAT = 10,
                 TyLePPV = 5
@@ -87,11 +88,17 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        public ActionResult HoaDonTuDong(decimal ppv = 1, decimal vat = 0, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
+        public ActionResult HoaDonTuDong(decimal ppv = 1, decimal vat = 0, string maHD = null, string strUrl = null, /*int maThongTinHDId = 0,*/ string maKH = null)
         {
-
+            
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+
+            ////////////get TTHD - So HD tu dong tang 1 //////////////////////
+            HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
+            HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            /////////////// So HD tu dong tang 1 //////////////////////
+            
             if (ppv != 1 && ppv != 0)
             {
                 HoaDonVM.TyLePPV = ppv;
@@ -159,10 +166,10 @@ namespace QLNhaHang.Controllers
 
             HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
             HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
-            if (maThongTinHDId != 0)
-            {
-                HoaDonVM.ThongTinHD = _unitOfWork.thongTinHDRepository.GetById(maThongTinHDId);
-            }
+            //if (maThongTinHDId != 0)
+            //{
+            //    HoaDonVM.ThongTinHD = _unitOfWork.thongTinHDRepository.GetById(maThongTinHDId);
+            //}
             if (!string.IsNullOrEmpty(maKH))
             {
                 HoaDonVM.KhachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);
@@ -183,11 +190,11 @@ namespace QLNhaHang.Controllers
             hoaDon.TenDonVi = model.KhachHang.TenDonVi;
             hoaDon.MaSoThue = model.KhachHang.MaSoThue;
             //// thong tin HD
-            hoaDon.MauSo = model.ThongTinHD.MauSo;
-            hoaDon.KyHieu = model.ThongTinHD.KyHieu;
-            hoaDon.QuyenSo = model.ThongTinHD.QuyenSo;
-            hoaDon.So = model.ThongTinHD.So;
-            hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
+            hoaDon.MauSo = model.VanPhong.MauSo;
+            hoaDon.KyHieu = model.VanPhong.KyHieu;
+            hoaDon.QuyenSo = model.VanPhong.QuyenSo;
+            hoaDon.So = model.VanPhong.So;
+            //hoaDon.SoThuTu = model.VanPhong.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
 
@@ -222,6 +229,14 @@ namespace QLNhaHang.Controllers
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
+
+            //////////// So HD trong VP tu dong tang 1 //////////////////////
+            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            vanPhong.So = model.VanPhong.So;
+            _unitOfWork.vanPhongRepository.Update(vanPhong);
+            _unitOfWork.Complete();
+            //////////// So HD trong VP tu dong tang 1 //////////////////////
+            
             return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 
@@ -288,12 +303,18 @@ namespace QLNhaHang.Controllers
             return new CrystalReportPdfResult(reportPath, dt);
         }
 
-        public ActionResult HoaDonTay(string soTien, decimal ppv = 0, decimal vat = 0, string maHD = null, string strUrl = null, int maThongTinHDId = 0, string maKH = null)
+        public ActionResult HoaDonTay(string soTien, decimal ppv = 0, decimal vat = 0, string maHD = null, string strUrl = null, /*int maThongTinHDId = 0,*/ string maKH = null)
         {
-
-            //HoaDonVM.VAT = 0;
+           
+            
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+
+            ////////////get TTHD - So HD tu dong tang 1 //////////////////////
+            HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
+            HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            ///////////////get TTHD - So HD tu dong tang 1 //////////////////////
+
             if (ppv != 0)
             {
                 HoaDonVM.TyLePPV = ppv;
@@ -344,12 +365,12 @@ namespace QLNhaHang.Controllers
             //    HoaDonVM.ThanhTienVAT = (vat / 100 * decimal.Parse(sotien) + decimal.Parse(sotien)).ToString().Split('.')[0];
             //    HoaDonVM.VAT = vat;
             //}
-            HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
+            //HoaDonVM.ThongTinHDs = _unitOfWork.thongTinHDRepository.GetAll();
             HoaDonVM.KhachHangs = _unitOfWork.khachHangRepository.GetAll();
-            if (maThongTinHDId != 0)
-            {
-                HoaDonVM.ThongTinHD = _unitOfWork.thongTinHDRepository.GetById(maThongTinHDId);
-            }
+            //if (maThongTinHDId != 0)
+            //{
+            //    HoaDonVM.ThongTinHD = _unitOfWork.thongTinHDRepository.GetById(maThongTinHDId);
+            //}
             if (!string.IsNullOrEmpty(maKH))
             {
                 HoaDonVM.KhachHang = _unitOfWork.khachHangRepository.GetByStringId(maKH);
@@ -370,21 +391,14 @@ namespace QLNhaHang.Controllers
             hoaDon.TenDonVi = model.KhachHang.TenDonVi;
             hoaDon.MaSoThue = model.KhachHang.MaSoThue;
             //// thong tin HD
-            hoaDon.MauSo = model.ThongTinHD.MauSo;
-            hoaDon.KyHieu = model.ThongTinHD.KyHieu;
-            hoaDon.QuyenSo = model.ThongTinHD.QuyenSo;
-            hoaDon.So = model.ThongTinHD.So;
-            hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
+            hoaDon.MauSo = model.VanPhong.MauSo;
+            hoaDon.KyHieu = model.VanPhong.KyHieu;
+            hoaDon.QuyenSo = model.VanPhong.QuyenSo;
+            hoaDon.So = model.VanPhong.So;
+            //hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
 
-            //hoaDon.TyLePPV = model.TyLePPV;
-            //hoaDon.PhiPhucvu = model.TyLePPV / 100 * decimal.Parse(model.SoTien);
-            //hoaDon.TongTienSauPPV = decimal.Parse(model.ThanhTienSauPPV);
-
-            //hoaDon.VAT = model.VAT;
-            //hoaDon.TienThueVAT = model.VAT / 100 * hoaDon.TongTienSauPPV;
-            //hoaDon.ThanhTienVAT = hoaDon.TienThueVAT + hoaDon.TongTienSauPPV; // Or == model.ThanhTienVAT
 
             if (!string.IsNullOrEmpty(model.ThanhTienSauPPV))
             {
@@ -420,6 +434,15 @@ namespace QLNhaHang.Controllers
             ////// update hoa don
             _unitOfWork.hoaDonRepository.Update(hoaDon);
             _unitOfWork.Complete();
+
+
+            //////////// So HD tu dong tang 1 //////////////////////
+            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            vanPhong.So = model.VanPhong.So;
+            _unitOfWork.vanPhongRepository.Update(vanPhong);
+            _unitOfWork.Complete();
+            //////////// So HD tu dong tang 1 //////////////////////
+            ///
             return RedirectToAction(nameof(ExportHDTay), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 

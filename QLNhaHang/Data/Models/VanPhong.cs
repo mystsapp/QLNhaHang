@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace QLNhaHang.Data.Models
 {
@@ -16,6 +14,7 @@ namespace QLNhaHang.Data.Models
         [StringLength(10)]
         [DisplayName("Mã")]
         public string MaVP { get; set; }
+
         [Required]
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]
@@ -54,5 +53,26 @@ namespace QLNhaHang.Data.Models
         [StringLength(20)]
         [DisplayName("Mã số thuế")]
         public string MaSoThue { get; set; }
+
+        // thong tin HD
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string MauSo { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string KyHieu { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string QuyenSo { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string So { get; set; }
+
+        [StringLength(20)]
+        [MaxLength(20), Column(TypeName = "varchar")]
+        public string SoThuTu { get; set; }
     }
 }

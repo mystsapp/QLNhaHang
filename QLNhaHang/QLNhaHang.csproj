@@ -424,6 +424,18 @@
     <Compile Include="Migrations\202005031042595_addKVTbl.designer.cs">
       <DependentUpon>202005031042595_addKVTbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005050155075_addTTHDToVP.cs" />
+    <Compile Include="Migrations\202005050155075_addTTHDToVP.designer.cs">
+      <DependentUpon>202005050155075_addTTHDToVP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005050321204_fixMauSoKyHieu.cs" />
+    <Compile Include="Migrations\202005050321204_fixMauSoKyHieu.designer.cs">
+      <DependentUpon>202005050321204_fixMauSoKyHieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005050658268_fixMauSoKyHieuHDToString.cs" />
+    <Compile Include="Migrations\202005050658268_fixMauSoKyHieuHDToString.designer.cs">
+      <DependentUpon>202005050658268_fixMauSoKyHieuHDToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -2100,7 +2112,7 @@
     <Content Include="Views\ThongTinHDs\Create.cshtml" />
     <Content Include="Views\ThongTinHDs\Edit.cshtml" />
     <Content Include="Views\ThongTinHDs\Index.cshtml" />
-    <Content Include="Views\Shared\_ThongTinHDModal.cshtml" />
+    <Content Include="Views\Shared\_ThongTinHDInVPModal.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTuDong.cshtml" />
     <Content Include="Views\HoaDons\HoaDonTay.cshtml" />
     <Content Include="Views\ThucDons\Create.cshtml" />
@@ -2164,6 +2176,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005031042595_addKVTbl.resx">
       <DependentUpon>202005031042595_addKVTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005050155075_addTTHDToVP.resx">
+      <DependentUpon>202005050155075_addTTHDToVP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005050321204_fixMauSoKyHieu.resx">
+      <DependentUpon>202005050321204_fixMauSoKyHieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005050658268_fixMauSoKyHieuHDToString.resx">
+      <DependentUpon>202005050658268_fixMauSoKyHieuHDToString.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
