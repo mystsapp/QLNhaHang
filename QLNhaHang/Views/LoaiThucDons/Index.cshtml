@@ -42,7 +42,8 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/LoaiThucDons/Index" method="get" autocomplete="off" hidden> @* HIDDEN *@
+            <form action="/LoaiThucDons/Index" method="get" autocomplete="off" hidden>
+                @* HIDDEN *@
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
 
@@ -98,22 +99,24 @@
 
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <form action="/LoaiThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                        <div class="btn-group">
+                                            <form action="/LoaiThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                            <input type="hidden" name="id" value="@item.Id" />
-                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
-                                                <span class="text-dark text-bold">Xóa?</span>
-                                                <button type="submit" class="btn btn-danger">Yes</button>
-                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
-                                            </span>
+                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                    <span class="text-dark text-bold">Xóa?</span>
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                                </span>
 
-                                            <span id="deleteSpan_@item.Id">
-                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
-                                            </span>
-                                        </form>
+                                                <span id="deleteSpan_@item.Id">
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                                </span>
+                                            </form>
 
-                                        <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "LoaiThucDons", new { strUrl = Model.StrUrl, id = item.Id })"><i class="fas fa-edit"></i> Cập nhật</a>
+                                            <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "LoaiThucDons", new { strUrl = Model.StrUrl, id = item.Id })" title="Cập nhật"><i class="fas fa-edit"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 i++;
@@ -140,6 +143,7 @@
 
 <!-- Main content -->
 <section class="content" hidden>
+    @* hidden *@
 
     <!-- Default box -->
     <div class="card">

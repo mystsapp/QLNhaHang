@@ -71,12 +71,12 @@
                             <div class="col-4">
                                 <br />
                                 <div class="btn-group">
-                                    <button type="submit" class="btn btn-primary form-control" id="btnSubmit">
+                                    <button type="submit" class="btn btn-primary" id="btnSubmit">
                                         <i class="fas fa-search"></i>
                                     </button>
                                     <a href="/ThucDons/Index" class="btn btn-secondary"><i class="fas fa-sync"></i></a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -114,20 +114,24 @@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <form action="/ThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                        <div class="btn-group">
+                                            <form action="/ThucDons/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                            <input type="hidden" name="id" value="@item.Id" />
-                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
-                                                <span class="text-dark text-bold">Xóa?</span>
-                                                <button type="submit" class="btn btn-danger">Yes</button>
-                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
-                                            </span>
+                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                <input type="hidden" name="id" value="@item.Id" />
+                                                <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                    <span class="text-dark text-bold">Xóa?</span>
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                                </span>
 
-                                            <span id="deleteSpan_@item.Id">
-                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
-                                            </span>
-                                        </form>
+                                                <span id="deleteSpan_@item.Id">
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                                </span>
+                                            </form>
+
+                                            <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "ThucDons", new { strUrl = Model.StrUrl, id = item.Id })" title="Cập nhật"><i class="fas fa-edit"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 i++;
@@ -153,7 +157,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" hidden>
 
     <!-- Default box -->
     <div class="card">

@@ -4,31 +4,38 @@
     },
 
     registerEvent: function () {
-        $('.gioiTinh').off('change').on('change', function () {
-            //var optionValue = $(this).val();
-            //$('#hidGioiTinh').val(optionValue);
+        //$('.gioiTinh').off('change').on('change', function () {
+        //    //var optionValue = $(this).val();
+        //    //$('#hidGioiTinh').val(optionValue);
+        //    $('#btnSubmit').click();
+        //});
+
+        $('.ddlVP').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            $('#hidVPId').val(optionValue);
             $('#btnSubmit').click();
         });
-        $('.tdVal').click(function () {
-            id = $(this).data('id');
-            $('#hidMaNV').val(id);
-            //var page = $('.active .page-link').text();
-            var page = $('.active a').text();
-            $('#hidPage').val(page);
-            //$.ajax({
-            //    url: '/CapThes/Index',
-            //    data: {
-            //        maCT: id
-            //    },
-            //    dataType: 'json',
-            //    type: 'GET',
-            //    success: function (response) {
 
-            //    }
-            //});
+        //$('.tdVal').click(function () {
+        //    id = $(this).data('id');
+        //    $('#hidMaNV').val(id);
+        //    //var page = $('.active .page-link').text();
+        //    var page = $('.active a').text();
+        //    $('#hidPage').val(page);
+        //    //$.ajax({
+        //    //    url: '/CapThes/Index',
+        //    //    data: {
+        //    //        maCT: id
+        //    //    },
+        //    //    dataType: 'json',
+        //    //    type: 'GET',
+        //    //    success: function (response) {
 
-            $('#btnSubmit').click();
-        });
+        //    //    }
+        //    //});
+
+        //    $('#btnSubmit').click();
+        //});
 
         //$('#btnExportAll').off('click').on('click', function () {
 

@@ -28,10 +28,11 @@ namespace QLNhaHang.Controllers
             };
         }
         // GET: Accounts
-        public ActionResult Index(string maNV = null, string gioiTinh = null, string searchString = null, int page = 1)
+        public ActionResult Index(string maNV = null, string gioiTinh = null, string searchString = null, int page = 1, int idVP = 0)
         {
             NhanVienVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
+
             var user = (NhanVien)Session["UserSession"];
             /////// for delete //////
             if (!string.IsNullOrEmpty(maNV))
@@ -50,7 +51,7 @@ namespace QLNhaHang.Controllers
 
             }
             
-            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, user.VanPhong.Name, gioiTinh, searchString, page);
+            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, user.VanPhong.Name, gioiTinh, searchString, page, idVP);
             /////// for delete //////
             return View(NhanVienVM);
         }

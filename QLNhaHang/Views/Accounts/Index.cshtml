@@ -53,26 +53,37 @@
                         <div class="row" style="padding-top: 10px;">
 
                             <div class="col-3">
+                                Cơ sở
+                                @Html.DropDownList("idVP",
+                                        new SelectList(Model.VanPhongs, "Id", "Name", ViewBag.idVP),
+                                        htmlAttributes: new { @class = "form-control border-input ddlVP" })
+                            </div>
+
+                            <div class="col-3">
                                 Nhập thông tin
                                 @*@Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control", @value="@ViewData["currentFilter"]" } })*@
                                 <input class="form-control" placeholder="Type name, Id..." name="searchString" value="@ViewBag.searchString" />
                             </div>
 
-                            <div class="col-3">
-                                Giới tính
-                                @Html.DropDownList("gioiTinh",
-                                         new SelectList(Model.GioiTinhs, "Id", "Name"),
-                                         htmlAttributes: new { @class = "form-control border-input gioiTinh" })
-                            </div>
+                            @*<div class="col-3">
+                                    Giới tính
+                                    @Html.DropDownList("gioiTinh",
+                                             new SelectList(Model.GioiTinhs, "Id", "Name"),
+                                             htmlAttributes: new { @class = "form-control border-input gioiTinh" })
+                                </div>*@
 
                             @*<input type="hidden" name="gioiTinh" id="hidGioiTinh" />*@
                             <input type="hidden" name="maNV" id="hidMaNV" />
+                            <input type="hidden" name="idVP" id="hidVPId" />
                             <input type="hidden" name="page" id="hidPage" />
                             <div class="col-3">
                                 <br />
-                                <button type="submit" class="btn btn-primary form-control" id="btnSubmit">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-primary" id="btnSubmit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <a href="/Accounts/Index" class="btn btn-secondary"><i class="fas fa-sync"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,31 +126,34 @@
                                     <td class="tdVal" data-id="@item.MaNV">
                                         @if (item.TrangThai)
                                         {
-                                            <span class="label label-success">Kích hoạt</span>
+                                            <span class="badge badge-success">Kích hoạt</span>
                                         }
                                         else
                                         {
-                                            <span class="label label-danger">Kích hoạt</span>
+                                            <span class="badge badge-danger">Khóa</span>
                                         }
                                     </td>
                                     @if (Session["role"].ToString() != "Users")
                                     {
                                         <td>
                                             @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                            <form action="/Accounts/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                            <div class="btn-group">
+                                                <form action="/Accounts/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                                <input type="hidden" name="maNV" value="@item.MaNV" />
-                                                <span id="confirmDeleteSpan_@item.MaNV" style="display: none">
-                                                    <span class="text-dark text-bold">Xóa?</span>
-                                                    <button type="submit" class="btn btn-danger">Yes</button>
-                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaNV', false)">No</a>
-                                                </span>
+                                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                    <input type="hidden" name="maNV" value="@item.MaNV" />
+                                                    <span id="confirmDeleteSpan_@item.MaNV" style="display: none">
+                                                        <span class="text-dark text-bold">Xóa?</span>
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaNV', false)">No</a>
+                                                    </span>
 
-                                                <span id="deleteSpan_@item.MaNV">
-                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaNV', true)"><i class="fas fa-trash-alt"></i></a>
-                                                </span>
-                                            </form>
+                                                    <span id="deleteSpan_@item.MaNV">
+                                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaNV', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                                    </span>
+                                                </form>
+                                                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Accounts", new { strUrl = Model.StrUrl, maNV = item.MaNV })" title="Cập nhật"><i class="fas fa-edit"></i></a>
+                                            </div>
                                         </td>
                                     }
                                 </tr>
@@ -166,7 +180,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" hidden>
 
     <!-- Default box -->
     <div class="card">

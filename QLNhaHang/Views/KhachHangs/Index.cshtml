@@ -42,7 +42,8 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/KhachHangs/Index" method="get" autocomplete="off">
+            <form action="/KhachHangs/Index" method="get" autocomplete="off" hidden>
+                @* HIDDEN *@
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -68,7 +69,7 @@
                     </div>
                 </div>
             </form>
-            <br />
+            @*<br />*@
 
             <div style="overflow-x:auto;">
                 @if (Model.KhachHangs.Count != 0)
@@ -107,20 +108,24 @@
                                     <td class="tdVal" data-id="@item.MaKH">@Html.DisplayFor(m => item.DiaChi)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <form action="/KhachHangs/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                        <div class="btn-group">
+                                            <form action="/KhachHangs/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                            <input type="hidden" name="maKH" value="@item.MaKH" />
-                                            <span id="confirmDeleteSpan_@item.MaKH" style="display: none">
-                                                <span class="text-dark text-bold">Xóa?</span>
-                                                <button type="submit" class="btn btn-danger">Yes</button>
-                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaKH', false)">No</a>
-                                            </span>
+                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                <input type="hidden" name="maKH" value="@item.MaKH" />
+                                                <span id="confirmDeleteSpan_@item.MaKH" style="display: none">
+                                                    <span class="text-dark text-bold">Xóa?</span>
+                                                    <button type="submit" class="btn btn-danger">Yes</button>
+                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaKH', false)">No</a>
+                                                </span>
 
-                                            <span id="deleteSpan_@item.MaKH">
-                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaKH', true)"><i class="fas fa-trash-alt"></i></a>
-                                            </span>
-                                        </form>
+                                                <span id="deleteSpan_@item.MaKH">
+                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaKH', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                                </span>
+                                            </form>
+
+                                            <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "KhachHangs", new { strUrl = Model.StrUrl, maKH = item.MaKH })" title="Cập nhật"><i class="fas fa-edit"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 i++;
@@ -146,7 +151,7 @@
 </section>
 
 <!-- Main content -->
-<section class="content">
+<section class="content" hidden>
 
     <!-- Default box -->
     <div class="card">
@@ -255,6 +260,18 @@
             }
         }
     </script>
+
+    <script>
+        $('#listAll').DataTable({
+            "paging": false,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    </script>
+
     <style>
         .cursor-pointer:hover {
             /*background-color: #3E5C9A;*/
