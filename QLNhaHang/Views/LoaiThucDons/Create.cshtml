@@ -47,7 +47,7 @@
 
                     @Html.HiddenFor(model => model.StrUrl)
                     @*@Html.HiddenFor(model => model.KhachHang.NgayTao)
-                        @Html.HiddenFor(model => model.KhachHang.NguoiTao)*@
+        @Html.HiddenFor(model => model.KhachHang.NguoiTao)*@
 
                     <div class="form-group row">
 
@@ -56,11 +56,11 @@
                             @Html.TextBoxFor(model => model.TenLoaiCreate, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.TenLoaiCreate, "", new { @class = "text-danger" })
                         </div>
-                        <div class="col-6">
-                            Phụ phí
-                            @Html.TextBoxFor(model => model.PhuPhi, null, new { @class = "form-control numbers" })
-                            @Html.ValidationMessageFor(model => model.PhuPhi, "", new { @class = "text-danger" })
-                        </div>
+                        @*<div class="col-6">
+                Phụ phí
+                @Html.TextBoxFor(model => model.PhuPhi, null, new { @class = "form-control numbers" })
+                @Html.ValidationMessageFor(model => model.PhuPhi, "", new { @class = "text-danger" })
+            </div>*@
                     </div>
 
 
@@ -70,7 +70,8 @@
                             @Html.TextAreaFor(model => model.LoaiThucDon.MoTa, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.LoaiThucDon.MoTa, "", new { @class = "text-danger" })
                         </div>
-
+                    </div>
+                    <div class="form-group row">
                         <div class="col-6">
                             Ghi chú
                             @Html.TextAreaFor(model => model.LoaiThucDon.GhiChu, new { @class = "form-control " })

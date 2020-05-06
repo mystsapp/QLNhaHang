@@ -24,6 +24,7 @@ namespace QLNhaHang.Controllers
             {
                 Ban = new Data.Models.Ban(),
                 MonDaGoi = new Data.Models.MonDaGoi(),
+                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll(),
                 HoaDon = new HoaDon(),
                 ChiTietHD = new ChiTietHD(),
                 VanPhong = new VanPhong(),
@@ -31,9 +32,25 @@ namespace QLNhaHang.Controllers
             };
         }
         // GET: MonDaGois
-        public ActionResult GoiMon(string maBan = null, string strUrl = null, int maTD = 0, int soLuong = 0)
+        public ActionResult GoiMon(string maBan = null, string strUrl = null, int maTD = 0, int soLuong = 0, int ddlLoai = 0)
         {
+
             MonDaGoiVM.ThucDons = _unitOfWork.thucDonRepository.GetAll().OrderBy(x => x.Id).ToList();
+
+            if (ddlLoai != 0)
+            {
+                ViewBag.idLoai = ddlLoai;
+                var listTD = MonDaGoiVM.ThucDons.Where(x => x.MaLoaiId == ddlLoai).ToList();
+                if (listTD.Count != 0)
+                {
+                    MonDaGoiVM.ThucDons = listTD;
+                }
+                else
+                {
+                    MonDaGoiVM.thucDonListIsNull = "Loại này chưa có thực đơn nào";
+                }
+            }
+
             TempData["thucDon"] = MonDaGoiVM.ThucDons;
             MonDaGoiVM.StrUrl = strUrl;
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository

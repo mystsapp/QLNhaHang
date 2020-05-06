@@ -436,6 +436,10 @@
     <Compile Include="Migrations\202005050658268_fixMauSoKyHieuHDToString.designer.cs">
       <DependentUpon>202005050658268_fixMauSoKyHieuHDToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005060900519_fixTenLoai.cs" />
+    <Compile Include="Migrations\202005060900519_fixTenLoai.designer.cs">
+      <DependentUpon>202005060900519_fixTenLoai.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -2185,6 +2189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005050658268_fixMauSoKyHieuHDToString.resx">
       <DependentUpon>202005050658268_fixMauSoKyHieuHDToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005060900519_fixTenLoai.resx">
+      <DependentUpon>202005060900519_fixTenLoai.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

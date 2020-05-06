@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Goi Mon";
 }
-
+@*<meta http-equiv="refresh" content="3">*@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -52,29 +52,42 @@
                     @Html.HiddenFor(model => model.MonDaGoi.GiaTien)
                     @Html.HiddenFor(model => model.MonDaGoi.ThanhTien)
                     @Html.HiddenFor(model => model.MonDaGoi.PhuPhi)
+                    @if (!string.IsNullOrEmpty(Model.thucDonListIsNull))
+                    {
+                        <span class="text-danger">@Model.thucDonListIsNull</span>
+                    }
+
                     <div class="form-group row">
+
+                        <div class="col-3">
+                            Theo loại
+                            @Html.DropDownList("idLoai",
+                                    new SelectList(Model.LoaiThucDons, "Id", "TenLoai", ViewBag.idLoai),
+                                    htmlAttributes: new { @class = "form-control border-input ddlLoai" })
+                        </div>
 
                         <div class="col-3">
                             Tên món
                             @Html.DropDownListFor(model => model.MonDaGoi.ThucDonId,
                                          new SelectList((List<ThucDon>)TempData["thucDon"], "Id", "TenMon"),
-                                         htmlAttributes: new { @class = "form-control border-input tenMon" })
+                                         htmlAttributes: new { @class = "form-control border-input tenMon ", @id = "dropDown" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThucDonId, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             Giá tiền
                             @Html.TextBoxFor(model => model.MonDaGoi.GiaTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             Số lượng
                             @Html.TextBoxFor(model => model.MonDaGoi.SoLuong,
                                      new { @class = "form-control txtSoLuong" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.SoLuong, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             Thành tiền
                             @Html.TextBoxFor(model => model.MonDaGoi.ThanhTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger" })
@@ -94,6 +107,7 @@
             </form>
             <form>
                 <input id="hidMaTD" type="hidden" name="maTD" />
+                <input id="hidMaLoai" type="hidden" name="ddlLoai" />
                 <input type="hidden" value="@Model.StrUrl" name="strUrl" />
                 <input type="hidden" value="@Model.Ban.MaBan" name="maBan" />
                 <input id="hidSoLuong" type="hidden" name="soLuong" />
@@ -204,6 +218,15 @@
             }
         }
     </script>
+
+    @*<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>*@
+    <script>
+        $(function () {
+            $('#dropDown').select2();
+        });
+    </script>
+
     <style>
         .cursor-pointer:hover {
             /*background-color: #3E5C9A;*/
@@ -219,6 +242,10 @@
         .hoverClass {
             background-color: #3E5C9A;
             color: white;
+        }
+
+        .select2 {
+            width: 100%;
         }
     </style>
 }

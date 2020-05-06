@@ -2,6 +2,7 @@
 using QLNhaHang.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace QLNhaHang.Models
         public string StrUrl { get; set; }
 
         [Remote("IsStringNameAvailable", "LoaiThucDons", ErrorMessage = "Loại này đã tồn tại")]
+        [Required(ErrorMessage = "Tên không được để trống")]
         public string TenLoaiCreate { get; set; }
         public string PhuPhi { get; set; }
     }

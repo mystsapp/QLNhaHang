@@ -11,6 +11,7 @@ namespace QLNhaHang.Models
     public class MonDaGoiViewModel
     {
         public List<ThucDon> ThucDons { get; set; }
+        public IEnumerable<LoaiThucDon> LoaiThucDons { get; set; }
         public List<MonDaGoi> MonDaGois { get; set; }
         public MonDaGoi MonDaGoi { get; set; }
         public ThucDon ThucDon { get; set; }
@@ -24,6 +25,8 @@ namespace QLNhaHang.Models
         public decimal PhuPhi { get; set; }
         public decimal? TongTien { get; set; }
         public string NumberId { get; set; }
+
+        public string thucDonListIsNull { get; set; }
 
     }
 }

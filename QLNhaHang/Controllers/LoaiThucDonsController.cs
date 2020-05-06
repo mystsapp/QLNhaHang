@@ -28,6 +28,7 @@ namespace QLNhaHang.Controllers
         {
             LoaiVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
+
             if (id != 0)
             {
 

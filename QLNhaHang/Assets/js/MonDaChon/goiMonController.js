@@ -11,7 +11,21 @@ var goiMonController = {
     },
 
     registerEvent: function () {
-        $('.tenMon').off('change').on('change', function () {
+        $('.ddlLoai').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            $('#hidMaLoai').val(optionValue);
+            $('#hidSubmit').click();
+        });
+
+        //$('.tenMon').off('change').on('change', function () {
+        //    var optionValue = $(this).val();
+        //    $('#hidMaTD').val(optionValue);
+        //    $('#hidSubmit').click();
+        //});
+
+        // setInterval : time
+        $('#dropDown').off('change').on('change', function () {
+            
             var optionValue = $(this).val();
             $('#hidMaTD').val(optionValue);
             $('#hidSubmit').click();

@@ -15,6 +15,7 @@ namespace QLNhaHang.Data.Models
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]
         [DisplayName("Tên loại")]
+        [Required(ErrorMessage = "Tên không được để trống")]
         public string TenLoai { get; set; }
 
         [DisplayName("Phụ phí")]
