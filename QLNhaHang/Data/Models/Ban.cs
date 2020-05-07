@@ -52,5 +52,11 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã Số")]
         public string MaSo { get; set; }
 
+        //[DisplayName("Khu vực")]
+        //public int KhuVucId { get; set; }
+
+        //[ForeignKey("KhuVucId")]
+        //public virtual KhuVuc KhuVuc { get; set; }
+
     }
 }

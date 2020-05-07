@@ -51,6 +51,13 @@ namespace QLNhaHang.Controllers
                 RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(RoleVM.Role.Name)).ToList();
                 RoleVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.RoleId.Equals(id)).ToList();
 
+                if (RoleVM.Role.Name == "Admins")
+                {
+                    RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList();
+                    RoleVM.NhanViens = _unitOfWork.nhanVienRepository.GetAll().ToList();
+                }
+                    
+
             }
 
             RoleVM.Roles = _unitOfWork.roleRepository.ListRole(searchString, page);
