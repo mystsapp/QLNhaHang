@@ -64,7 +64,7 @@ namespace QLNhaHang.Controllers
         {
             model.ThucDon.GiaTien = decimal.Parse(model.GiaTien);
             model.ThucDon.NgayTao = DateTime.Now;
-            model.ThucDon.NguoiTao = "Admin";
+            model.ThucDon.NguoiTao = Session["username"].ToString();
             model.ThucDon.TenMon = model.TenMonCreate;
             _unitOfWork.thucDonRepository.Create(model.ThucDon);
             _unitOfWork.Complete();

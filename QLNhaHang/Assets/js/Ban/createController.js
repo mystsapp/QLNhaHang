@@ -17,6 +17,7 @@ var createController = {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
             createController.loadMaBan(optionValue);
+            createController.loadKhuVuc(optionValue);
         });
 
         //var inputNumberVal = $('input.numbers').val();
@@ -40,7 +41,7 @@ var createController = {
             url: '/Bans/GetNextMaBan',
             type: 'GET',
             data: {
-                vanPhongId: optionValue
+                vpName: optionValue
             },
             dataType: 'json',
             success: function (response) {
@@ -50,6 +51,12 @@ var createController = {
                 }
             }
         });
+    },
+
+    loadKhuVuc: function (option) {
+
+        $('#hidVpName').val(option)
+        $('#frmVpName').submit();
     }
 };
 createController.init();

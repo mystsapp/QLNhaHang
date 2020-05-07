@@ -17,6 +17,7 @@ var editController = {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
             editController.loadMaBan(optionValue);
+            editController.loadKhuVuc(optionValue);
         });
 
         //var inputNumberVal = $('input.numbers').val();
@@ -40,13 +41,39 @@ var editController = {
             url: '/Bans/GetNextMaBan',
             type: 'GET',
             data: {
-                vanPhongId: optionValue
+                vpName: optionValue
             },
             dataType: 'json',
             success: function (response) {
                 if (response.status) {
                     $('.txtMaBan').val(response.data);
                 }
+            }
+        });
+    },
+
+    loadKhuVuc: function (optionValue) {
+
+        $('.ddlKhuVuc').html('');
+        var option = '';
+
+        $.ajax({
+            url: '/Bans/GetKVByVP',
+            type: 'GET',
+            data: {
+                vpName: optionValue
+            },
+            dataType: 'json',
+            success: function (response) {
+                
+                var data = JSON.parse(response.data);
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.Id + '">' + item.Name + '</option>'; //chinhanh1
+
+                });
+                $('.ddlKhuVuc').html(option);
+                
             }
         });
     }

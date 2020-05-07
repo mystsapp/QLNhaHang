@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Models;
+﻿using Newtonsoft.Json;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using System;
@@ -20,11 +21,12 @@ namespace QLNhaHang.Controllers
             BanHangVM = new BanHangViewModel()
             {
                 Ban = new Data.Models.Ban(),
-                MonDaGoi = new Data.Models.MonDaGoi()
+                MonDaGoi = new Data.Models.MonDaGoi(),
+                KhuVucs = _unitOfWork.khuVucRepository.GetAll()
             };
         }
         // GET: BanHangs
-        public ActionResult Index(string maBan = null, string maBanFrom = null, string maBanTo = null)
+        public ActionResult Index(string maBan = null, string maBanFrom = null, string maBanTo = null, string idKhuVuc = null)
         {
             var user = (NhanVien)Session["UserSession"];
 
@@ -34,11 +36,19 @@ namespace QLNhaHang.Controllers
             //BanHangVM.StrUrl = UriHelper.GetDisplayUrl(Request);
             ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
 
-            BanHangVM.Bans = _unitOfWork.banRepository.GetAllIncludeOne(x => x.VanPhong).ToList();
+            BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();
 
             if (user.Role.Name != "Admins")
             {
-                BanHangVM.Bans = BanHangVM.Bans.Where(x => x.VanPhong.Name.Equals(user.VanPhong.Name)).ToList();
+                if (user.Role.Name != "Users")
+                {
+                    BanHangVM.KhuVucs = BanHangVM.KhuVucs.Where(x => x.VanPhongId == (int)Session["VPId"]);
+                }
+                else
+                {
+                    BanHangVM.KhuVucs = JsonConvert.DeserializeObject<List<KhuVuc>>(Session["listKV"].ToString());
+                }
+                    BanHangVM.Bans = BanHangVM.Bans.Where(x => x.TenVP.Equals(user.VanPhong.Name)).ToList();
             }
 
             if (!string.IsNullOrEmpty(maBan))

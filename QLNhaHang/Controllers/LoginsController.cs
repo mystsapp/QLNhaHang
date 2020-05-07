@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Models;
+﻿using Newtonsoft.Json;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
@@ -46,8 +47,11 @@ namespace QLNhaHang.Controllers
 
                     Session["username"] = userInfo.Username;
                     Session["hoten"] = userInfo.HoTen;
-                    Session["chinhanh"] = userInfo.VanPhong.Name;
+                    Session["TenVP"] = userInfo.VanPhong.Name;
+                    Session["VPId"] = userInfo.VanPhongId;
                     Session["role"] = userInfo.Role.Name;
+
+                    Session["listKV"] = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == userInfo.VanPhongId));
 
                     return RedirectToAction("Index", "Home");
                 }

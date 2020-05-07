@@ -1,4 +1,5 @@
 ﻿using Data.Interfaces;
+using Newtonsoft.Json;
 using PagedList;
 using QLNhaHang.Data.Models;
 using System;
@@ -11,7 +12,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IBanRepository : IRepository<Ban>
     {
-        IPagedList<Ban> ListBan(string role, string roleVP, string searchString, int? page);
+        IPagedList<Ban> ListBan(string role, string roleVP, string vanPhongByRoles, string searchString, int? page);
     }
     public class BanRepository : Repository<Ban>, IBanRepository
     {
@@ -19,7 +20,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<Ban> ListBan(string role, string roleVP, string searchString, int? page)
+        public IPagedList<Ban> ListBan(string role, string roleVP, string vanPhongByRoles, string searchString, int? page)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -27,19 +28,41 @@ namespace QLNhaHang.Data.Repositories
 
             // retrieve list from database/whereverand
 
-            var list = GetAllIncludeOne(x => x.VanPhong).AsQueryable();
+            var list = GetAll().AsQueryable();
             if (role != "Admins")
             {
-                list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
+                if (role == "Users")
+                {
+                    list = list.Where(x => x.TenVP.Equals(roleVP));
+                }
+                else
+                {
+                    //// get all ban in VP by role
+                    //var vanPhongs = _context.VanPhongs.Where(x => x.Role.Equals(role));
+                    var vanPhongs = JsonConvert.DeserializeObject<List<VanPhong>>(vanPhongByRoles);
+                    var banList = new List<Ban>();
+                    foreach(var vanPhong in vanPhongs)
+                    {
+                        var bans = Find(x => x.TenVP.Equals(vanPhong.Name));
+                        if(bans != null)
+                        {
+                            banList.AddRange(bans);
+                        }
+                        
+                    }
+                    list = banList.AsQueryable();
+                    //list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
+                }
+                
             }
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))
             {
                 list = list.Where(x => x.MaBan.ToLower().Contains(searchString.ToLower()) ||
                                        x.TenBan.ToLower().Contains(searchString.ToLower()) ||
-                                       x.VanPhong.Name.ToLower().Contains(searchString.ToLower())||
+                                       x.TenVP.ToLower().Contains(searchString.ToLower()) ||
                                        x.SoLuongKhach.ToString().ToLower().Contains(searchString.ToLower()));
-                
+
             }
 
             var count = list.Count();

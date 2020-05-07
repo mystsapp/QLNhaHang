@@ -21,6 +21,7 @@ namespace QLNhaHang.Data.Repositories
         IRoleRepository roleRepository { get; }
         INhanVienRepository nhanVienRepository { get; }
         IThongKeRepository thongKeRepository { get; }
+        IKhuVucRepository khuVucRepository { get; }
         int Complete();
     }
     public class UnitOfWork : IUnitOfWork
@@ -42,6 +43,7 @@ namespace QLNhaHang.Data.Repositories
             roleRepository = new RoleRepository(_context);
             nhanVienRepository = new NhanVienRepository(_context);
             thongKeRepository = new ThongKeRepository(_context);
+            khuVucRepository = new KhuVucRepository(_context);
         }
 
         public IBanRepository banRepository { get; }
@@ -67,6 +69,8 @@ namespace QLNhaHang.Data.Repositories
         public INhanVienRepository nhanVienRepository { get; }
 
         public IThongKeRepository thongKeRepository { get; }
+
+        public IKhuVucRepository khuVucRepository { get; }
 
         public int Complete()
         {

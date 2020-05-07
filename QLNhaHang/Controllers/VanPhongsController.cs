@@ -48,7 +48,10 @@ namespace QLNhaHang.Controllers
 
                 }
                 VanPhongVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(id);
+                // DS NV
                 VanPhongVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.VanPhongId == id).ToList();
+                // DS KV
+                VanPhongVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == id).ToList();
             }
 
             VanPhongVM.VanPhongs = _unitOfWork.vanPhongRepository.ListVanPhong(searchString, page);

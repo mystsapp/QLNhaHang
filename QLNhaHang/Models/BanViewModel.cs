@@ -10,6 +10,7 @@ namespace QLNhaHang.Models
         public Ban Ban { get; set; }
         public IPagedList<Ban> Bans { get; set; }
         public List<VanPhong> VanPhongs { get; set; }
+        public IEnumerable<KhuVuc> KhuVucs { get; set; }
         public string StrUrl { get; set; }
         [Remote("IsStringNameAvailable", "Bans", ErrorMessage = "Bàn này đã tồn tại")]
         public string TenBanCreate { get; set; }

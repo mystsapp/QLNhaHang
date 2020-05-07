@@ -33,9 +33,9 @@
             <div class="card-tools">
                 @if (Session["role"].ToString() == "Admins")
                 {
-                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "VanPhongs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
+                    <a class="btn btn-sm btn-outline-info" href="@Url.Action("Create", "VanPhongs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>Thêm Mới</a>
                 }
-                
+
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
@@ -150,7 +150,7 @@
     <!-- /.card -->
 </section>
 
-<!-- Main content -->
+<!-- DS NV -->
 <section class="content">
 
     <!-- Default box -->
@@ -176,37 +176,6 @@
         </div>
         <div class="card-body">
 
-
-            @*<div class="col-2">
-                    Tên VP
-                    @Html.TextBoxFor(model => model.VanPhong.Name, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.Name, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-2">
-                    Mã VP
-                    @Html.TextBoxFor(model => model.VanPhong.MaVP, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.MaVP, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-2">
-                    Địa chỉ
-                    @Html.TextBoxFor(model => model.VanPhong.DiaChi, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.DiaChi, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-2">
-                    Điện thoại
-                    @Html.TextBoxFor(model => model.VanPhong.DienThoai, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.DienThoai, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="col-4">
-                    Role
-                    @Html.TextBoxFor(model => model.VanPhong.Role, null, new { @class = "form-control ", @readonly = "true" })
-                    @Html.ValidationMessageFor(model => model.VanPhong.Role, "", new { @class = "text-danger" })
-                </div>*@
-
             <div style="overflow-x:auto;">
                 @if (Model.NhanViens.Count() != 0)
                 {
@@ -229,13 +198,13 @@
 
                                 <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td class="tdVal" data-id="@item.MaNV">@i</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.HoTen)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.Username)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.Role.Name)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.PhongBan)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">@Html.DisplayFor(m => item.VanPhong.Name)</td>
-                                    <td class="tdVal" data-id="@item.MaNV">
+                                    <td >@i</td>
+                                    <td >@Html.DisplayFor(m => item.HoTen)</td>
+                                    <td >@Html.DisplayFor(m => item.Username)</td>
+                                    <td >@Html.DisplayFor(m => item.Role.Name)</td>
+                                    <td >@Html.DisplayFor(m => item.PhongBan)</td>
+                                    <td >@Html.DisplayFor(m => item.VanPhong.Name)</td>
+                                    <td >
                                         @if (item.TrangThai)
                                         {
                                             <span class="label label-success">Kích hoạt</span>
@@ -263,7 +232,72 @@
     </div>
     <!-- /.card -->
 </section>
-<!-- /.content -->
+<!-- DS NV -->
+
+<!-- DS KV -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @if (Model.VanPhong.Name != null)
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách KV -<b> @Model.VanPhong.Name</b></h3>
+            }
+            else
+            {
+                <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Danh sách KV </h3>
+            }
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;">
+                @if (Model.KhuVucs != null)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.KhuVucs.FirstOrDefault().Name)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.KhuVucs)
+                            {
+
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.Name)</td>
+
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <span> Không có dử liệu trong bảng. </span>
+                }
+
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- DS KV -->
 
 @section Scripts{
 

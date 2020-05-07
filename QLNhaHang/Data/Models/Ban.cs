@@ -32,11 +32,17 @@ namespace QLNhaHang.Data.Models
 
         public bool Flag { get; set; }
 
-        [DisplayName("Văn phòng")]
-        public int VanPhongId { get; set; }
+        //[DisplayName("Văn phòng")]
+        //public int VanPhongId { get; set; }
 
-        [ForeignKey("VanPhongId")]
-        public virtual VanPhong VanPhong { get; set; }
+        //[ForeignKey("VanPhongId")]
+        //public virtual VanPhong VanPhong { get; set; }
+
+        [Required(ErrorMessage = "Tên cơ sở không được để trống")]
+        [MaxLength(100), Column(TypeName = "nvarchar")]
+        [StringLength(100)]
+        [DisplayName("Cơ sở")]
+        public string TenVP { get; set; }
 
         [DisplayName("Ngày tạo")]
         public DateTime NgayTao { get; set; }
@@ -52,11 +58,12 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã Số")]
         public string MaSo { get; set; }
 
-        //[DisplayName("Khu vực")]
-        //public int KhuVucId { get; set; }
+        [DisplayName("Khu vực")]
+        [Required(ErrorMessage = "KV cơ sở không được để trống")]
+        public int KhuVucId { get; set; }
 
-        //[ForeignKey("KhuVucId")]
-        //public virtual KhuVuc KhuVuc { get; set; }
+        [ForeignKey("KhuVucId")]
+        public virtual KhuVuc KhuVuc { get; set; }
 
     }
 }

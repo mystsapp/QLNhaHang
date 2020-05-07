@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Models;
+﻿using Newtonsoft.Json;
+using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using QLNhaHang.Utilities;
@@ -21,8 +22,8 @@ namespace QLNhaHang.Controllers
             BanVM = new BanViewModel()
             {
                 Ban = new Data.Models.Ban(),
-                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
-
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().OrderBy(x => x.Name).ToList(),
+                KhuVucs = _unitOfWork.khuVucRepository.GetAll()
             };
         }
         // GET: Bans
@@ -47,34 +48,37 @@ namespace QLNhaHang.Controllers
                 BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
 
             }
-
-            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, user.VanPhong.Name, searchString, page);
+            string vanPhongByRoles = JsonConvert.SerializeObject(_unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)));
+            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, user.VanPhong.Name, vanPhongByRoles, searchString, page);
 
             return View(BanVM);
         }
 
-        public ActionResult Create(string strUrl)
+        public ActionResult Create(string strUrl, string vpName)
         {
             var user = (NhanVien)Session["UserSession"];
             if (user.Role.Name != "Admins")
             {
-                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)).ToList();
+                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name))
+                                                                .OrderBy(x => x.Name).ToList();
             }
             if (user.Role.Name.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            var ban = _unitOfWork.banRepository.GetAllIncludeOne(x => x.VanPhong)
-                                                .OrderByDescending(x => x.MaBan)
-                                                .FirstOrDefault();
-            //if (ban != null)
-            //{
-            //    BanVM.Ban.MaBan = GetNextId.NextID(ban.MaBan, "00120");
-            //}
-            //else
-            //{
-            //    BanVM.Ban.MaBan = GetNextId.NextID("", "00120");
-            //}
+            /////// load KV
+            if (!string.IsNullOrEmpty(vpName))
+            {
+                ViewBag.vPName = vpName;
+                var vpId = _unitOfWork.vanPhongRepository.Find(x => x.Name.Equals(vpName)).FirstOrDefault().Id;
+                BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vpId);
+            }
+            ////// moi load vo
+            else
+            {
+                var vpId = BanVM.VanPhongs.FirstOrDefault().Id;
+                BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vpId);
+            }
 
             BanVM.StrUrl = strUrl;
             return View(BanVM);
@@ -84,7 +88,7 @@ namespace QLNhaHang.Controllers
         public ActionResult CreatePost(BanViewModel model)
         {
             model.Ban.NgayTao = DateTime.Now;
-            model.Ban.NguoiTao = "Admin";
+            model.Ban.NguoiTao = Session["username"].ToString();
             model.Ban.TenBan = model.TenBanCreate;
             _unitOfWork.banRepository.Create(model.Ban);
             _unitOfWork.Complete();
@@ -106,7 +110,7 @@ namespace QLNhaHang.Controllers
         }
 
 
-        public ActionResult Edit(string strUrl, string maBan)
+        public ActionResult Edit(string strUrl, string maBan/*, string vpName*/)
         {
             var user = (NhanVien)Session["UserSession"];
             if (user.Role.Name.Equals("Users"))
@@ -125,6 +129,19 @@ namespace QLNhaHang.Controllers
             }
 
             BanVM.StrUrl = strUrl;
+
+            /////// load KV
+            //if (!string.IsNullOrEmpty(vpName))
+            //{
+            //    ViewBag.vPName = vpName;
+            //    var vpId = _unitOfWork.vanPhongRepository.Find(x => x.Name.Equals(vpName)).FirstOrDefault().Id;
+            //    BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vpId).ToList();
+            //    var aaaa = BanVM.KhuVucs.Count();
+            //}
+
+            // moi load vao
+
+            BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhong.Name.Equals(BanVM.Ban.TenVP));
 
             return View(BanVM);
         }
@@ -163,15 +180,16 @@ namespace QLNhaHang.Controllers
                 SetAlert("Xóa không thành công.", "error");
                 return Redirect(strUrl);
             }
-            
+
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
 
-        public JsonResult GetNextMaBan(int vanPhongId)
+        public JsonResult GetNextMaBan(string vpName)
         {
+            var vp = _unitOfWork.vanPhongRepository.Find(x => x.Name.Equals(vpName)).FirstOrDefault();
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-            var currentPrefix = _unitOfWork.vanPhongRepository.GetById(vanPhongId).MaVP + yearPrefix;
+            var currentPrefix = vp.MaVP + yearPrefix;
 
             var bans = _unitOfWork.banRepository.GetAll().OrderByDescending(x => x.MaBan);
             var listOldBanTrung = new List<Ban>();
@@ -183,7 +201,7 @@ namespace QLNhaHang.Controllers
                     listOldBanTrung.Add(ban);
                 }
             }
-            int a = 1;
+            //int a = 1;
             if (listOldBanTrung.Count() != 0)
             {
                 var lastMaBan = listOldBanTrung.OrderByDescending(x => x.MaBan).FirstOrDefault();
@@ -220,6 +238,14 @@ namespace QLNhaHang.Controllers
                     maSo = maSo
                 }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        public JsonResult GetKVByVP(string vpName)
+        {
+            return Json(new
+            {
+                data = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhong.Name.Equals(vpName)))
+            }, JsonRequestBehavior.AllowGet);
         }
 
     }

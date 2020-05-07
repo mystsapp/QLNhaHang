@@ -15,6 +15,7 @@ namespace QLNhaHang.Models
         public ThucDon ThucDon { get; set; }
         public MonDaGoi MonDaGoi { get; set; }
         public Ban Ban { get; set; }
+        public IEnumerable<KhuVuc> KhuVucs { get; set; }
         public string StrUrl { get; set; }
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public decimal? TongTien { get; set; }

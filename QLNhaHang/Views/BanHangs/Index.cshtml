@@ -39,6 +39,41 @@
             </div>
         </div>
         <div class="card-body list">
+
+            <form action="/BanHangs/Index" method="get" >
+
+                <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
+                    @* we will add search criteria *@
+
+                    <div class="col-12">
+                        <div class="row" style="padding-top: 10px;">
+
+                            <div class="col-3">
+                                Khu vực
+                                @Html.DropDownList("idKhuVuc",
+                                        new SelectList(Model.KhuVucs, "Id", "Name", ViewBag.idKhuVuc),
+                                        htmlAttributes: new { @class = "form-control border-input ddlKhuVuc" })
+                            </div>
+
+                            <input type="hidden" name="id" id="hidId" />
+                            <input type="hidden" name="page" id="hidPage" />
+
+                            <div class="col-4">
+                                <br />
+                                <div class="btn-group">
+                                    <button type="submit" class="btn btn-primary" id="btnSubmit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                    <a href="/BanHangs/Index" class="btn btn-secondary"><i class="fas fa-sync"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br />
+
             @foreach (var ban in Model.Bans)
             {
 

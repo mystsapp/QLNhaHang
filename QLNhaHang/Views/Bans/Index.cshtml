@@ -83,9 +83,12 @@
                                 <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().MaBan)</th>
                                 <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().TenBan)</th>
                                 <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().SoLuongKhach)</th>
-                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().VanPhongId)</th>
+                                <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().TenVP)</th>
                                 <th>@Html.DisplayNameFor(m => m.Bans.FirstOrDefault().GhiChu)</th>
-                                <th>#</th>
+                                @if (Session["role"].ToString() != "Users")
+                                {
+                                    <th>#</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
@@ -99,28 +102,31 @@
                                     <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.MaBan)</td>
                                     <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.TenBan)</td>
                                     <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.SoLuongKhach)</td>
-                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.VanPhong.Name)</td>
+                                    <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.TenVP)</td>
                                     <td class="tdVal" data-id="@item.MaBan">@Html.DisplayFor(m => item.GhiChu)</td>
-                                    <td>
-                                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
-                                        <div class="btn-group">
-                                            <form action="/Bans/Delete" @*asp-route-id="@item.Id"*@ method="post">
+                                    @if (Session["role"].ToString() != "Users")
+                                    {
+                                        <td>
+                                            @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
+                                            <div class="btn-group">
+                                                <form action="/Bans/Delete" @*asp-route-id="@item.Id"*@ method="post">
 
-                                                <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                                <input type="hidden" name="maBan" value="@item.MaBan" />
-                                                <span id="confirmDeleteSpan_@item.MaBan" style="display: none">
-                                                    <span class="text-dark text-bold">Xóa?</span>
-                                                    <button type="submit" class="btn btn-danger">Yes</button>
-                                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaBan', false)">No</a>
-                                                </span>
+                                                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                                    <input type="hidden" name="maBan" value="@item.MaBan" />
+                                                    <span id="confirmDeleteSpan_@item.MaBan" style="display: none">
+                                                        <span class="text-dark text-bold">Xóa?</span>
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                        <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.MaBan', false)">No</a>
+                                                    </span>
 
-                                                <span id="deleteSpan_@item.MaBan">
-                                                    <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaBan', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
-                                                </span>
-                                            </form>
-                                            <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Bans", new { strUrl = Model.StrUrl, maBan = item.MaBan })" title="Cập nhật"><i class="fas fa-edit"></i></a>
-                                        </div>
-                                    </td>
+                                                    <span id="deleteSpan_@item.MaBan">
+                                                        <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.MaBan', true)" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                                    </span>
+                                                </form>
+                                                <a class="btn btn-sm btn-outline-info" href="@Url.Action("Edit", "Bans", new { strUrl = Model.StrUrl, maBan = item.MaBan })" title="Cập nhật"><i class="fas fa-edit"></i></a>
+                                            </div>
+                                        </td>
+                                    }
                                 </tr>
                                 i++;
                             }
@@ -197,8 +203,8 @@
 
                     <div class="col-2">
                         Văn phòng
-                        @Html.TextBoxFor(model => model.Ban.VanPhong.Name, null, new { @class = "form-control ", @readonly = "true" })
-                        @Html.ValidationMessageFor(model => model.Ban.VanPhong.Name, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Ban.TenVP, null, new { @class = "form-control ", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.Ban.TenVP, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-4">

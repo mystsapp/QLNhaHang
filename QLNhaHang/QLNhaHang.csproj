@@ -387,6 +387,7 @@
     <Compile Include="Data\Repositories\ChiTietHDRepository.cs" />
     <Compile Include="Data\Repositories\HoaDonRepository.cs" />
     <Compile Include="Data\Repositories\KhachHangRepository.cs" />
+    <Compile Include="Data\Repositories\KhuVucRepository.cs" />
     <Compile Include="Data\Repositories\LoaiThucDonRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\NhanVienRepository.cs" />
@@ -439,6 +440,14 @@
     <Compile Include="Migrations\202005060900519_fixTenLoai.cs" />
     <Compile Include="Migrations\202005060900519_fixTenLoai.designer.cs">
       <DependentUpon>202005060900519_fixTenLoai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005070403502_fixBan.cs" />
+    <Compile Include="Migrations\202005070403502_fixBan.designer.cs">
+      <DependentUpon>202005070403502_fixBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005070404499_fixBan2.cs" />
+    <Compile Include="Migrations\202005070404499_fixBan2.designer.cs">
+      <DependentUpon>202005070404499_fixBan2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
@@ -2192,6 +2201,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005060900519_fixTenLoai.resx">
       <DependentUpon>202005060900519_fixTenLoai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005070403502_fixBan.resx">
+      <DependentUpon>202005070403502_fixBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005070404499_fixBan2.resx">
+      <DependentUpon>202005070404499_fixBan2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

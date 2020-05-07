@@ -57,45 +57,52 @@
                         <div class="col-6">
                             Mã bàn
                             @Html.TextBoxFor(model => model.Ban.MaBan, null, new { @class = "form-control txtMaBan", @readonly = "true" })
-                            @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Ban.MaBan, "", new { @class = "text-danger " })
                         </div>
-
-                        <div class="col-6">
-                            Văn phòng
-                            @Html.DropDownListFor(model => model.Ban.VanPhongId,
-                                         new SelectList(Model.VanPhongs, "Id", "Name"),
-                                         htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group row">
 
                         <div class="col-6">
                             Tên bàn
                             @Html.TextBoxFor(model => model.Ban.TenBan, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.Ban.TenBan, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.TenBanCreate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-6">
+                            Văn phòng
+                            @Html.DropDownListFor(model => model.Ban.TenVP,
+                                         new SelectList(Model.VanPhongs, "Name", "Name", ViewBag.vPName),
+                                         htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
                         </div>
 
+                        <div class="col-6">
+                            Khu vực
+                            @Html.DropDownListFor(model => model.Ban.KhuVucId,
+                                         new SelectList(Model.KhuVucs, "Id", "Name"),
+                                         htmlAttributes: new { @class = "form-control border-input ddlKhuVuc" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-6">
                             Số lượng khách
                             @Html.TextBoxFor(model => model.Ban.SoLuongKhach, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.Ban.SoLuongKhach, "", new { @class = "text-danger" })
                         </div>
 
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-6">
-                            Ghi chú
-                            @Html.TextAreaFor(model => model.Ban.GhiChu, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.Ban.GhiChu, "", new { @class = "text-danger" })
-                        </div>
                         <div class="col-6">
                             Mã số
                             @Html.TextBoxFor(model => model.Ban.MaSo, null, new { @class = "form-control txtMaSo", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.Ban.MaSo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            Ghi chú
+                            @Html.TextBoxFor(model => model.Ban.GhiChu, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.Ban.GhiChu, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -111,6 +118,12 @@
 
         </div>
         <!-- /.card-body -->
+
+        <form action="/Bans/Edit" method="get" id="frmVpName">
+            <input type="hidden" name="vpName" id="hidVpName" />
+            <input type="hidden" name="maBan" value="@Model.Ban.MaBan" />
+
+        </form>
     </div>
     <!-- /.card -->
 </section>
