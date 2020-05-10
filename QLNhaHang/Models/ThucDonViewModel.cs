@@ -18,5 +18,7 @@ namespace QLNhaHang.Models
         public string TenMonCreate { get; set; }
         public string GiaTien { get; set; }
         public decimal GiaTienD { get; set; }
+
+        public List<LoaiThucDonListViewModel> LoaiThucDonListViewModels { get; set; }
     }
 }

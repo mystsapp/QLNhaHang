@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Web.Infrastructure.DynamicValidationHelper;
+using Newtonsoft.Json;
 using QLNhaHang.Data.Models;
 using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
@@ -38,20 +39,20 @@ namespace QLNhaHang.Controllers
                 else if (result == 1)
                 {
                     var userInfo = _unitOfWork.nhanVienRepository
-                                              .FindIncludeTwo(a => a.VanPhong,
-                                                              b => b.Role,
+                                              .FindIncludeOne(a => a.KhuVuc,
                                                               x => x.Username.ToLower()
                                                               .Equals(model.Username.ToLower()))
                                               .FirstOrDefault();
+
                     Session["UserSession"] = userInfo;
 
                     Session["username"] = userInfo.Username;
                     Session["hoten"] = userInfo.HoTen;
-                    Session["TenVP"] = userInfo.VanPhong.Name;
-                    Session["VPId"] = userInfo.VanPhongId;
-                    Session["role"] = userInfo.Role.Name;
+                    Session["TenVP"] = userInfo.KhuVuc.VanPhong.Name;
+                    Session["VPId"] = userInfo.KhuVuc.VanPhongId;
+                    Session["role"] = userInfo.Role;
 
-                    Session["listKV"] = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == userInfo.VanPhongId));
+                    Session["listKV"] = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == userInfo.KhuVuc.VanPhongId));
 
                     return RedirectToAction("Index", "Home");
                 }

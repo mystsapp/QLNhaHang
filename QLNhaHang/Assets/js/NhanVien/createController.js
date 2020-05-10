@@ -13,9 +13,9 @@ var createController = {
     registerEvent: function () {
         $('.ddlRole').off('change').on('change', function () {
             var roleId = $(this).val();
-                createController.loadVPByRole(roleId);
+            createController.loadKVByRole(roleId);
         });
-        $('.ddlVanPhong').off('change').on('change', function () {
+        $('.ddlKV').off('change').on('change', function () {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
             createController.loadMaNV(optionValue);
@@ -36,15 +36,15 @@ var createController = {
             });
         });
     },
-    loadVPByRole: function (optionValue) {
-        $('.ddlVanPhong').html('');
+    loadKVByRole: function (optionValue) {
+        $('.ddlKV').html('');
         var option = '';
 
         $.ajax({
-            url: '/Accounts/GetVPByRole',
+            url: '/Accounts/GetKVByRole',
             type: 'GET',
             data: {
-                roleId: optionValue
+                roleName: optionValue
             },
             dataType: 'json',
             success: function (response) {
@@ -55,9 +55,9 @@ var createController = {
                     option = option + '<option value="' + item.Id + '">' + item.Name + '</option>'; //chinhanh1
 
                 });
-                $('.ddlVanPhong').html(option);
+                $('.ddlKV').html(option);
                 //// load MaNV again
-                var optionValue = $('.ddlVanPhong').val();
+                var optionValue = $('.ddlKV').val();
                 createController.loadMaNV(optionValue);
             }
         });
@@ -67,7 +67,7 @@ var createController = {
             url: '/Accounts/GetNextMaNV',
             type: 'GET',
             data: {
-                vanPhongId: optionValue
+                idKV: optionValue
             },
             dataType: 'json',
             success: function (response) {

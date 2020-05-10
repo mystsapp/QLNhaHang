@@ -7,20 +7,22 @@
 var editController = {
     init: function () {
         var roleId = $('.ddlRole').val();
-        editController.loadVPByRole(roleId);
+        editController.loadKVByRole(roleId);
         editController.registerEvent();
     },
 
     registerEvent: function () {
         $('.ddlRole').off('change').on('change', function () {
             var roleId = $(this).val();
-            editController.loadVPByRole(roleId);
+            editController.loadKVByRole(roleId);
         });
-        $('.ddlVanPhong').off('change').on('change', function () {
+        
+        $('.ddlKV').off('change').on('change', function () {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
-            editController.loadMaNV(optionValue);
+            createController.loadMaNV(optionValue);
         });
+
         //var inputNumberVal = $('input.numbers').val();
         $('input.numbers').val(function (index, value) {
             return addCommas(value);
@@ -36,15 +38,15 @@ var editController = {
             });
         });
     },
-    loadVPByRole: function (optionValue) {
-        $('.ddlVanPhong').html('');
+    loadKVByRole: function (optionValue) {
+        $('.ddlKV').html('');
         var option = '';
 
         $.ajax({
-            url: '/Accounts/GetVPByRole',
+            url: '/Accounts/GetKVByRole',
             type: 'GET',
             data: {
-                roleId: optionValue
+                roleName: optionValue
             },
             dataType: 'json',
             success: function (response) {
@@ -55,9 +57,9 @@ var editController = {
                     option = option + '<option value="' + item.Id + '">' + item.Name + '</option>'; //chinhanh1
 
                 });
-                $('.ddlVanPhong').html(option);
+                $('.ddlKV').html(option);
                 //// load MaNV again
-                var optionValue = $('.ddlVanPhong').val();
+                var optionValue = $('.ddlKV').val();
                 editController.loadMaNV(optionValue);
             }
         });

@@ -160,13 +160,13 @@ namespace QLNhaHang.Controllers
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
-            MonDaGoiVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(user.VanPhongId);
+            MonDaGoiVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(user.KhuVuc.VanPhongId);
             MonDaGoiVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(user.MaNV);
             MonDaGoiVM.TongTien = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             // get last numberId in HD table find next  here
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-            var currentPrefix = user.VanPhong.MaVP + yearPrefix + MonDaGoiVM.Ban.MaSo;
+            var currentPrefix = user.KhuVuc.VanPhong.MaVP + yearPrefix + MonDaGoiVM.Ban.MaSo;
 
             var hoaDon = _unitOfWork.hoaDonRepository.GetAll().OrderByDescending(x => x.NumberId);
             var listOldHDTrung = new List<HoaDon>();
@@ -222,7 +222,7 @@ namespace QLNhaHang.Controllers
             //////////// add to HD, CTHD ///////////////
             /////maHD
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+            var currentPrefix = user.KhuVuc.VanPhong.MaVP + yearPrefix;
 
             var hoaDon = _unitOfWork.hoaDonRepository.GetAll().OrderByDescending(x => x.MaHD);
             var listOldHDTrung = new List<HoaDon>();
@@ -262,7 +262,7 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.HoaDon.MaBan = maBan;
             MonDaGoiVM.HoaDon.NgayTao = DateTime.Now;
             MonDaGoiVM.HoaDon.HTThanhToan = "TM/CK";
-            MonDaGoiVM.HoaDon.VanPhongId = user.VanPhongId;
+            MonDaGoiVM.HoaDon.VanPhongId = user.KhuVuc.VanPhongId;
             MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
             _unitOfWork.hoaDonRepository.Create(MonDaGoiVM.HoaDon);

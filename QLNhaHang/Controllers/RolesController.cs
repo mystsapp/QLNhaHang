@@ -20,15 +20,16 @@ namespace QLNhaHang.Controllers
             RoleVM = new RoleViewModel()
             {
                 Role = new Data.Models.Role(),
-                VanPhongs = new List<VanPhong>(),
-                NhanViens = new List<NhanVien>()
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
+                NhanViens = _unitOfWork.nhanVienRepository.GetAll().ToList(),
+                KhuVucs = _unitOfWork.khuVucRepository.GetAll()
             };
         }
         // GET: Roles
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -46,17 +47,20 @@ namespace QLNhaHang.Controllers
                     id = lastId;
 
                 }
+
                 RoleVM.Role = _unitOfWork.roleRepository.GetById(id);
-
-                RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(RoleVM.Role.Name)).ToList();
-                RoleVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.RoleId.Equals(id)).ToList();
-
-                if (RoleVM.Role.Name == "Admins")
+                if(RoleVM.Role.Name != "Admins")
                 {
-                    RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList();
-                    RoleVM.NhanViens = _unitOfWork.nhanVienRepository.GetAll().ToList();
+                    RoleVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(RoleVM.Role.Name)).ToList();
+                    RoleVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.Role.Equals(RoleVM.Role.Name)).ToList();
+                    List<KhuVuc> khuVucs = new List<KhuVuc>();
+                    foreach (var vanPhong in RoleVM.VanPhongs)
+                    {
+                        khuVucs.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vanPhong.Id));
+                    }
+                    RoleVM.KhuVucs = khuVucs;
+
                 }
-                    
 
             }
 
@@ -67,7 +71,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Create(string strUrl)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -107,7 +111,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Edit(string strUrl, int id)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }

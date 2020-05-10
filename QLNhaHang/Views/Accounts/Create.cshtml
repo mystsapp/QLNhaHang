@@ -80,8 +80,8 @@
 
                         <div class="col-6">
                             Role
-                            @Html.DropDownListFor(model => model.NhanVien.RoleId,
-                                        new SelectList(Model.Roles, "Id", "Name"),
+                            @Html.DropDownListFor(model => model.NhanVien.Role,
+                                        new SelectList(Model.Roles, "Name", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input ddlRole" })
                         </div>
                         <div class="col-6">
@@ -92,10 +92,10 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-6">
-                            Văn phòng
-                            @Html.DropDownListFor(model => model.NhanVien.VanPhongId,
-                                        new SelectList(Model.VanPhongs, "Id", "Name"),
-                                        htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
+                            Khu vực
+                            @Html.DropDownListFor(model => model.NhanVien.KhuVucId,
+                                        new SelectList(Model.LoaiViewModels, "Id", "Name"),
+                                        htmlAttributes: new { @class = "form-control border-input ddlKV" })
                         </div>
 
                         <div class="col-6">

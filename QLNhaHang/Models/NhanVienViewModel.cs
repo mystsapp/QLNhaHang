@@ -15,6 +15,7 @@ namespace QLNhaHang.Models
         public IPagedList<NhanVien> NhanViens { get; set; }
         public List<Role> Roles { get; set; }
         public List<VanPhong> VanPhongs { get; set; }
+        public List<KhuVuc> KhuVucs { get; set; }
         public List<GioiTinhViewModel> GioiTinhs { get; set; }
         public string StrUrl { get; set; }
         [Remote("IsStringNameAvailable", "Accounts", ErrorMessage = "Username đã tồn tại")]
@@ -27,6 +28,6 @@ namespace QLNhaHang.Models
         [Display(Name = "Password")]
         public string EditPassword { get; set; }
 
-        
+        public List<LoaiThucDonListViewModel> LoaiViewModels { get; set; }
     }
 }

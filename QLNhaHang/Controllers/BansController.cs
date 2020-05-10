@@ -23,33 +23,54 @@ namespace QLNhaHang.Controllers
             {
                 Ban = new Data.Models.Ban(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().OrderBy(x => x.Name).ToList(),
-                KhuVucs = _unitOfWork.khuVucRepository.GetAll()
+                KhuVucs = _unitOfWork.khuVucRepository.GetAll(),
+                LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
             };
         }
         // GET: Bans
-        public ActionResult Index(string maBan = null, string searchString = null, int page = 1)
+        public ActionResult Index(/*string maBan = null,*/ string searchString = null, int page = 1, int ddlKV = 0)
         {
             var user = (NhanVien)Session["UserSession"];
+            ////// moi load vao
+
+            ViewBag.ddlKV = ddlKV;
+            if(user.Role != "Admins")
+            {
+                if(user.Role == "Users")
+                {
+                    BanVM.KhuVucs = BanVM.KhuVucs.Where(x => x.VanPhongId == user.KhuVuc.VanPhongId).ToList();
+                }
+                else
+                {
+                    BanVM.KhuVucs = BanVM.KhuVucs.Where(x => x.VanPhong.Role == user.Role).ToList();
+                }
+                
+            }
+            
+            foreach (var KhuVuc in BanVM.KhuVucs)
+            {
+                BanVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = KhuVuc.Id, Name = KhuVuc.Name + " - " + KhuVuc.VanPhong.Name});
+            }
 
             BanVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
-            if (!string.IsNullOrEmpty(maBan))
-            {
+            //if (!string.IsNullOrEmpty(maBan))
+            //{
 
-                var ban = _unitOfWork.banRepository.GetByStringId(maBan);
-                if (ban == null)
-                {
-                    var lastMaBan = _unitOfWork.banRepository
-                                               .GetAll().OrderByDescending(x => x.MaBan)
-                                               .FirstOrDefault().MaBan;
-                    maBan = lastMaBan;
+            //    var ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            //    if (ban == null)
+            //    {
+            //        var lastMaBan = _unitOfWork.banRepository
+            //                                   .GetAll().OrderByDescending(x => x.MaBan)
+            //                                   .FirstOrDefault().MaBan;
+            //        maBan = lastMaBan;
 
-                }
-                BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            //    }
+            //    BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
 
-            }
-            string vanPhongByRoles = JsonConvert.SerializeObject(_unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)));
-            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role.Name, user.VanPhong.Name, vanPhongByRoles, searchString, page);
+            //}
+            string vanPhongByRoles = JsonConvert.SerializeObject(_unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role)));
+            BanVM.Bans = _unitOfWork.banRepository.ListBan(user.Role, user.KhuVucId, vanPhongByRoles, ddlKV, searchString, page);
 
             return View(BanVM);
         }
@@ -57,12 +78,12 @@ namespace QLNhaHang.Controllers
         public ActionResult Create(string strUrl, string vpName)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
-                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name))
+                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role))
                                                                 .OrderBy(x => x.Name).ToList();
             }
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -113,13 +134,13 @@ namespace QLNhaHang.Controllers
         public ActionResult Edit(string strUrl, string maBan/*, string vpName*/)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
-                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)).ToList();
+                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role)).ToList();
             }
             BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             if (BanVM.Ban == null)
@@ -165,7 +186,7 @@ namespace QLNhaHang.Controllers
         public ActionResult DeletePost(string strUrl, string maBan)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }

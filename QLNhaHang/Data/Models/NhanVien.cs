@@ -73,26 +73,35 @@ namespace QLNhaHang.Data.Models
         public string NguoiCapNhat { get; set; }
         public DateTime? NgayCapNhat { get; set; }
 
-        [DisplayName("Role")]
-        public int RoleId { get; set; }
+        //[DisplayName("Role")]
+        //public int RoleId { get; set; }
 
-        [ForeignKey("RoleId")]
-        public virtual Role Role { get; set; }
+        //[ForeignKey("RoleId")]
+        //public virtual Role Role { get; set; }
+
+        [MaxLength(15), Column(TypeName = "varchar")]
+        [StringLength(15)]
+        public string Role { get; set; }
 
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         [DisplayName("VP làng")]
         public string PhongBan { get; set; }
 
-        //[MaxLength(50), Column(TypeName = "nvarchar(50)")]
-        //[DisplayName("Văn phòng")]
-        //public string VanPhong { get; set; }
 
-        [DisplayName("Cơ sở")]
-        public int VanPhongId { get; set; }
+        //[DisplayName("Cơ sở")]
+        //public int VanPhongId { get; set; }
 
-        [ForeignKey("VanPhongId")]
-        public virtual VanPhong VanPhong { get; set; }
+        //[ForeignKey("VanPhongId")]
+        //public virtual VanPhong VanPhong { get; set; }
+
+
+        [DisplayName("Khu vực")]
+        [Required(ErrorMessage = "KV cơ sở không được để trống")]
+        public int KhuVucId { get; set; }
+
+        [ForeignKey("KhuVucId")]
+        public virtual KhuVuc KhuVuc { get; set; }
 
     }
 }

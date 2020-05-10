@@ -16,5 +16,7 @@ namespace QLNhaHang.Models
         public string TenBanCreate { get; set; }
         //[Remote("IsStringNameEditAvailable", "KhachHangs", ErrorMessage = "Tên KH đã tồn tại")]
         //public string TenKHEdit { get; set; }
+
+        public List<LoaiThucDonListViewModel> LoaiViewModels { get; set; }
     }
 }

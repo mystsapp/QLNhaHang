@@ -1,0 +1,83 @@
+﻿@model QLNhaHang.Models.KhuVucViewModel
+@using QLNhaHang.Models
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Cập nhật khu vực - @Model.KhuVuc.Name</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Cập nhật khu vực - <b>@Model.KhuVuc.Name</b></h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <form method="post" autocomplete="off">
+                <div class="p-4 border rounded">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.StrUrl)
+                    @Html.HiddenFor(model => model.KhuVuc.Id)
+
+                    <div class="form-group row">
+
+                        <div class="col-6">
+                            Tên KV
+                            @Html.TextBoxFor(model => model.KhuVuc.Name, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.KhuVuc.Name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-6">
+                            Cơ sở
+
+                            @Html.DropDownListFor(model => model.KhuVuc.VanPhongId,
+                                        new SelectList(Model.VanPhongs, "Id", "Name"),
+                                        htmlAttributes: new { @class = "form-control border-input " })
+                        </div>
+                    </div>
+                    <div class="form-group ">
+
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
+                        <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->

@@ -51,12 +51,12 @@
                             <div class="col-3">
                                 Khu vực
                                 @Html.DropDownList("idKhuVuc",
-                                        new SelectList(Model.KhuVucs, "Id", "Name", ViewBag.idKhuVuc),
+                                        new SelectList(Model.LoaiViewModels, "Id", "Name", ViewBag.idKhuVuc),
                                         htmlAttributes: new { @class = "form-control border-input ddlKhuVuc" })
                             </div>
 
-                            <input type="hidden" name="id" id="hidId" />
-                            <input type="hidden" name="page" id="hidPage" />
+                            <input type="hidden" name="idKhuVuc" id="hidIdKhuVuc" />
+                            @*<input type="hidden" name="page" id="hidPage" />*@
 
                             <div class="col-4">
                                 <br />

@@ -19,37 +19,52 @@ namespace QLNhaHang.Controllers
             ThucDonVM = new ThucDonViewModel()
             {
                 ThucDon = new Data.Models.ThucDon(),
-                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll().ToList()
+                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll().ToList(),
+                LoaiThucDonListViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --"} }
             };
         }
         // GET: KhachHangs
-        public ActionResult Index(int id = 0, string searchString = null, int page = 1, int ddlLoai = 0)
+        public ActionResult Index(/*int id = 0, */string searchString = null, int page = 1, int ddlLoai = 0)
         {
-            ThucDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
-            ViewBag.searchString = searchString;
-            if(ddlLoai != 0)
+            ////// moi load vao
+            if(ddlLoai == 0)
+            {
+                ViewBag.idLoai = 0;
+            }
+            else
             {
                 ViewBag.idLoai = ddlLoai;
             }
             
-            if (id != 0)
+            foreach (var loaiTD in ThucDonVM.LoaiThucDons)
             {
-
-                var thucDon = _unitOfWork.thucDonRepository.GetById(id);
-                if (thucDon == null)
-                {
-                    var lastId = _unitOfWork.thucDonRepository
-                                            .GetAll().OrderByDescending(x => x.Id)
-                                            .FirstOrDefault().Id;
-                    id = lastId;
-
-                }
-                ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
-                
+                ThucDonVM.LoaiThucDonListViewModels.Add(new LoaiThucDonListViewModel() { Id = loaiTD.Id, Name = loaiTD.TenLoai });
             }
+            
+            //ViewBag.idLoai = ThucDonVM.LoaiThucDons.FirstOrDefault().Id;
+
+            ThucDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
+            ViewBag.searchString = searchString;
+
+
+            //if (id != 0)
+            //{
+
+            //    var thucDon = _unitOfWork.thucDonRepository.GetById(id);
+            //    if (thucDon == null)
+            //    {
+            //        var lastId = _unitOfWork.thucDonRepository
+            //                                .GetAll().OrderByDescending(x => x.Id)
+            //                                .FirstOrDefault().Id;
+            //        id = lastId;
+
+            //    }
+            //    ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
+
+            //}
 
             ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(searchString, page, ddlLoai);
-           
+
             return View(ThucDonVM);
         }
 
@@ -88,7 +103,7 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, int id)
         {
-            
+
             ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
             if (ThucDonVM.ThucDon == null)
             {
@@ -127,6 +142,6 @@ namespace QLNhaHang.Controllers
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-        
+
     }
 }

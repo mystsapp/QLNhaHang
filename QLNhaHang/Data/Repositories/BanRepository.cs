@@ -12,7 +12,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IBanRepository : IRepository<Ban>
     {
-        IPagedList<Ban> ListBan(string role, string roleVP, string vanPhongByRoles, string searchString, int? page);
+        IPagedList<Ban> ListBan(string role, int khuVucId, string vanPhongByRoles, int ddlKV, string searchString, int? page);
     }
     public class BanRepository : Repository<Ban>, IBanRepository
     {
@@ -20,7 +20,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<Ban> ListBan(string role, string roleVP, string vanPhongByRoles, string searchString, int? page)
+        public IPagedList<Ban> ListBan(string role, int khuVucId, string vanPhongByRoles, int ddlKV, string searchString, int? page)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -29,11 +29,12 @@ namespace QLNhaHang.Data.Repositories
             // retrieve list from database/whereverand
 
             var list = GetAll().AsQueryable();
+            
             if (role != "Admins")
             {
                 if (role == "Users")
                 {
-                    list = list.Where(x => x.TenVP.Equals(roleVP));
+                    list = list.Where(x => x.KhuVucId == khuVucId);
                 }
                 else
                 {
@@ -44,6 +45,7 @@ namespace QLNhaHang.Data.Repositories
                     foreach(var vanPhong in vanPhongs)
                     {
                         var bans = Find(x => x.TenVP.Equals(vanPhong.Name));
+                        
                         if(bans != null)
                         {
                             banList.AddRange(bans);
@@ -54,6 +56,11 @@ namespace QLNhaHang.Data.Repositories
                     //list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
                 }
                 
+            }
+
+            if (ddlKV != 0)
+            {
+                list = list.Where(x => x.KhuVucId == ddlKV);
             }
             //list = list.Where(x => x.NguoiCap == hoTen);
             if (!string.IsNullOrEmpty(searchString))

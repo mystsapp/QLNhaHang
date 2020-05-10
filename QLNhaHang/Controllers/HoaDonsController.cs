@@ -67,10 +67,10 @@ namespace QLNhaHang.Controllers
                                              .FindIncludeTwo(x => x.HoaDon, y => y.ThucDon, z => z.MaHD.Equals(maHD));
             HoaDonVM.TongTien = HoaDonVM.ChiTietHDs.Sum(x => (x.DonGia * x.SoLuong));
 
-            HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role.Name, user.VanPhong.Name, searchString, searchFromDate, searchToDate, page);
+            HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role, user.KhuVuc.VanPhong.Name, searchString, searchFromDate, searchToDate, page);
             if (HoaDonVM.HoaDons == null)
             {
-                HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role.Name, user.VanPhong.Name, "", "", "", 1);
+                HoaDonVM.HoaDons = _unitOfWork.hoaDonRepository.ListHoaDon(user.Role, user.KhuVuc.VanPhong.Name, "", "", "", 1);
                 SetAlert("Lỗi định dạng ngày tháng.", "error");
             }
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);

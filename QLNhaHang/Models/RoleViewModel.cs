@@ -14,6 +14,7 @@ namespace QLNhaHang.Models
         public Role Role { get; set; }
         public List<VanPhong> VanPhongs { get; set; }
         public List<NhanVien> NhanViens { get; set; }
+        public IEnumerable<KhuVuc> KhuVucs { get; set; }
         public string StrUrl { get; set; }
         [Remote("IsStringNameAvailable", "Roles", ErrorMessage = "Role đã tồn tại")]
         public string TenRoleCreate { get; set; }

@@ -21,6 +21,7 @@ namespace QLNhaHang.Data
         public DbSet<VanPhong> VanPhongs { get; set; }
         public DbSet<ThongTinHD> ThongTinHDs { get; set; }
         public DbSet<KhuVuc> KhuVucs { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
     }
 }

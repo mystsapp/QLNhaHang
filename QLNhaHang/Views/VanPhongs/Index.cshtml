@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="/VanPhongs/Index" method="get" autocomplete="off">
+            <form action="/VanPhongs/Index" method="get" autocomplete="off" hidden>
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -71,7 +71,7 @@
                     </div>
                 </div>
             </form>
-            <br />
+            @*<br />*@
 
             <div style="overflow-x:auto;">
                 @if (Model.VanPhongs.Count() != 0)
@@ -185,9 +185,9 @@
                                 <th>STT</th>
                                 <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().HoTen)</th>
                                 <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().Username)</th>
-                                <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().Role.Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().Role)</th>
                                 <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().PhongBan)</th>
-                                <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().VanPhong.Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().KhuVuc.VanPhong.Name)</th>
                                 <th>@Html.DisplayNameFor(m => m.NhanViens.FirstOrDefault().TrangThai)</th>
                             </tr>
                         </thead>
@@ -198,13 +198,13 @@
 
                                 <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td >@i</td>
-                                    <td >@Html.DisplayFor(m => item.HoTen)</td>
-                                    <td >@Html.DisplayFor(m => item.Username)</td>
-                                    <td >@Html.DisplayFor(m => item.Role.Name)</td>
-                                    <td >@Html.DisplayFor(m => item.PhongBan)</td>
-                                    <td >@Html.DisplayFor(m => item.VanPhong.Name)</td>
-                                    <td >
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.HoTen)</td>
+                                    <td>@Html.DisplayFor(m => item.Username)</td>
+                                    <td>@Html.DisplayFor(m => item.Role)</td>
+                                    <td>@Html.DisplayFor(m => item.PhongBan)</td>
+                                    <td>@Html.DisplayFor(m => item.KhuVuc.VanPhong.Name)</td>
+                                    <td>
                                         @if (item.TrangThai)
                                         {
                                             <span class="label label-success">Kích hoạt</span>
@@ -233,7 +233,6 @@
     <!-- /.card -->
 </section>
 <!-- DS NV -->
-
 <!-- DS KV -->
 <section class="content">
 
@@ -316,6 +315,16 @@
             }
         }
     </script>
+    <script>
+        $('#listAll').DataTable({
+            "paging": false,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    </script>
     <style>
         .cursor-pointer:hover {
             /*background-color: #3E5C9A;*/
@@ -324,7 +333,11 @@
             color: white;
         }
 
-        .cursor-pointer {
+        /*.cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+
+        #listAll {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 

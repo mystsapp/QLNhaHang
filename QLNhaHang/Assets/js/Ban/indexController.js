@@ -4,6 +4,13 @@
     },
 
     registerEvent: function () {
+
+        $('.ddlKV').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            $('#hidDdlKV').val(optionValue);
+            $('#btnSubmit').click();
+        });
+
         //$('.tdVal').click(function () {
         //    id = $(this).data('id');
         //    $('#hidMaBan').val(id);

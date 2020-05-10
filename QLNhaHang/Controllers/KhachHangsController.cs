@@ -53,7 +53,7 @@ namespace QLNhaHang.Controllers
             //// MaKH
             var user = (NhanVien)Session["UserSession"];
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-            var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+            var currentPrefix = user.KhuVuc.VanPhong.MaVP + yearPrefix;
 
             var khachHangs = _unitOfWork.khachHangRepository.GetAll().OrderByDescending(x => x.MaKH);
             var listOldKHTrung = new List<KhachHang>();

@@ -360,6 +360,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KhuVucsController.cs" />
     <Compile Include="Controllers\LoaiThucDonsController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -449,6 +450,14 @@
     <Compile Include="Migrations\202005070404499_fixBan2.designer.cs">
       <DependentUpon>202005070404499_fixBan2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005090632470_delVPInNV.cs" />
+    <Compile Include="Migrations\202005090632470_delVPInNV.designer.cs">
+      <DependentUpon>202005090632470_delVPInNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005090700489_roleTble.cs" />
+    <Compile Include="Migrations\202005090700489_roleTble.designer.cs">
+      <DependentUpon>202005090700489_roleTble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -459,6 +468,8 @@
     <Compile Include="Models\BanViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
+    <Compile Include="Models\KhuVucViewModel.cs" />
+    <Compile Include="Models\LoaiThucDonListViewModel.cs" />
     <Compile Include="Models\LoaiThucDonViewModel.cs" />
     <Compile Include="Models\LoginController.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -545,6 +556,9 @@
     <Content Include="Assets\js\Role\editController.js" />
     <Content Include="Assets\js\Role\indexController.js" />
     <Content Include="Assets\js\ThongKe\theoNgayController.js" />
+    <Content Include="Assets\js\KhuVuc\createController.js" />
+    <Content Include="Assets\js\KhuVuc\editController.js" />
+    <Content Include="Assets\js\KhuVuc\indexController.js" />
     <Content Include="Assets\js\VanPhong\createController.js" />
     <Content Include="Assets\js\VanPhong\editController.js" />
     <Content Include="Assets\js\VanPhong\indexController.js" />
@@ -2153,6 +2167,9 @@
     <Content Include="Views\Shared\_MayTinhModal.cshtml" />
     <Content Include="Views\ThongKes\TheoNgay.cshtml" />
     <Content Include="Views\ThongKes\TheoNgayIn.cshtml" />
+    <Content Include="Views\KhuVucs\Create.cshtml" />
+    <Content Include="Views\KhuVucs\Edit.cshtml" />
+    <Content Include="Views\KhuVucs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2207,6 +2224,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005070404499_fixBan2.resx">
       <DependentUpon>202005070404499_fixBan2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005090632470_delVPInNV.resx">
+      <DependentUpon>202005090632470_delVPInNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005090700489_roleTble.resx">
+      <DependentUpon>202005090700489_roleTble.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

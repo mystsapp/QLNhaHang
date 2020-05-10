@@ -24,7 +24,10 @@ namespace QLNhaHang.Controllers
                 NhanVien = new Data.Models.NhanVien(),
                 Roles = _unitOfWork.roleRepository.GetAll().ToList(),
                 GioiTinhs = ListGioiTinh(),
-                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
+                KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList(),
+                //LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
+                LoaiViewModels = new List<LoaiThucDonListViewModel>()
             };
         }
         // GET: Accounts
@@ -51,7 +54,7 @@ namespace QLNhaHang.Controllers
 
             }
             
-            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role.Name, user.VanPhong.Name, gioiTinh, searchString, page, idVP);
+            NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role, user.KhuVuc.VanPhong.Name, gioiTinh, searchString, page, idVP);
             /////// for delete //////
             return View(NhanVienVM);
         }
@@ -60,17 +63,21 @@ namespace QLNhaHang.Controllers
         {
             NhanVienVM.StrUrl = strUrl;
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
             else
             {
-                if (user.Role.Name.Equals("Admins"))
+                if (user.Role.Equals("Admins"))
                 {
+                    foreach(var khuVuc in NhanVienVM.KhuVucs)
+                    {
+                        NhanVienVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
+                    }
 
                     var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-                    var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+                    var currentPrefix = user.KhuVuc.VanPhong.MaVP + yearPrefix;
 
                     var nhanViens = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV);
                     var listOldNVTrung = new List<NhanVien>();
@@ -95,11 +102,18 @@ namespace QLNhaHang.Controllers
                 }
                 else
                 {
-                    NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role.Name).ToList();
-                    NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name == user.Role.Name).ToList();
+                    
+                    NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+                    List<KhuVuc> listKv = new List<KhuVuc>();
+                    foreach(var vanPhong in NhanVienVM.VanPhongs)
+                    {
+                        listKv.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vanPhong.Id));
+                    }
+                    NhanVienVM.KhuVucs = listKv;
+                    NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name == user.Role).ToList();
                     NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
                     var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
-                    var currentPrefix = user.VanPhong.MaVP + yearPrefix;
+                    var currentPrefix = user.KhuVuc.VanPhong.MaVP + yearPrefix;
 
                     var nhanViens = _unitOfWork.nhanVienRepository.GetAll().OrderByDescending(x => x.MaNV);
                     var listOldNVTrung = new List<NhanVien>();
@@ -180,13 +194,14 @@ namespace QLNhaHang.Controllers
         public ActionResult Edit(string strUrl, string maNV)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name.Equals("Users"))
+            if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
-                NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role.Name)).ToList();
+                NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role)).ToList();
+                NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
             }
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
 
@@ -243,38 +258,69 @@ namespace QLNhaHang.Controllers
             return Redirect(strUrl);
         }
 
-        public JsonResult GetVPByRole(int roleId)
+        public JsonResult GetKVByRole(string roleName)
         {
             var user = (NhanVien)Session["UserSession"];
-            var roleName = _unitOfWork.roleRepository.GetById(roleId).Name;
 
             if (roleName == "Users" || roleName == "Admins")
             {
-                if(user.Role.Name != "Admins")
+                if(user.Role != "Admins")
                 {
+                    // admin khu vuc , chac chan khong phai Users vi Users da duoc redirect Diny View
+                    
+                        var vanPhongByRoles = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role));
+                        var khuVucByVanPhongs = new List<KhuVuc>();
+                        foreach (var vanPhong in vanPhongByRoles)
+                        {
+                            var khuVuc = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
+                            if (khuVuc.Count > 0)
+                            {
+                                khuVucByVanPhongs.AddRange(khuVuc);
+                            }
+
+                        }
+                        return Json(new
+                        {
+                            data = JsonConvert.SerializeObject(khuVucByVanPhongs)
+                        }, JsonRequestBehavior.AllowGet);
+                    
+                    // admin khu vuc
+                    // Users khong duoc quyen tao moi NV
+                }
+                else
+                {
+                    var listKVs = NhanVienVM.KhuVucs;
                     return Json(new
                     {
-                        data = JsonConvert.SerializeObject(_unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role.Name)))
+                        data = JsonConvert.SerializeObject(listKVs)
                     }, JsonRequestBehavior.AllowGet);
                 }
-                var listVPs = _unitOfWork.vanPhongRepository.GetAll();
-                return Json(new
-                {
-                    data = JsonConvert.SerializeObject(listVPs)
-                }, JsonRequestBehavior.AllowGet);
+                
             }
             else
             {
-                var listVP = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
+                var vanPhongByRoles = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
+                var khuVucByVanPhongs = new List<KhuVuc>();
+                foreach (var vanPhong in vanPhongByRoles)
+                {
+                    var khuVuc = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
+                    if (khuVuc.Count > 0)
+                    {
+                        khuVucByVanPhongs.AddRange(khuVuc);
+                    }
+
+                }
                 return Json(new
                 {
-                    data = JsonConvert.SerializeObject(listVP)
+                    data = JsonConvert.SerializeObject(khuVucByVanPhongs)
                 }, JsonRequestBehavior.AllowGet);
+
             }
 
         }
-        public JsonResult GetNextMaNV(int vanPhongId)
+        public JsonResult GetNextMaNV(int idKV)
         {
+            var vanPhongId = _unitOfWork.khuVucRepository.GetById(idKV).VanPhongId;
             var yearPrefix = DateTime.Now.Year.ToString().Substring(2, 2);
             var currentPrefix = _unitOfWork.vanPhongRepository.GetById(vanPhongId).MaVP + yearPrefix;
 

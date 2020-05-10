@@ -29,7 +29,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Index(int id = 0, string searchString = null, int page = 1)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -48,8 +48,13 @@ namespace QLNhaHang.Controllers
 
                 }
                 VanPhongVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(id);
+                var khuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == id).ToList();
                 // DS NV
-                VanPhongVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.VanPhongId == id).ToList();
+                foreach (var khuVuc in khuVucs)
+                {
+                    VanPhongVM.NhanViens.AddRange(_unitOfWork.nhanVienRepository.Find(x => x.KhuVucId == khuVuc.Id));
+                }
+                // VanPhongVM.NhanViens = _unitOfWork.nhanVienRepository.Find(x => x.KhuVuc.VanPhongId == VanPhongVM.VanPhong.Id).ToList();
                 // DS KV
                 VanPhongVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == id).ToList();
             }
@@ -61,7 +66,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Create(string strUrl)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -115,7 +120,7 @@ namespace QLNhaHang.Controllers
         public ActionResult Edit(string strUrl, int id)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
@@ -151,7 +156,7 @@ namespace QLNhaHang.Controllers
         public ActionResult DeletePost(string strUrl, int id)
         {
             var user = (NhanVien)Session["UserSession"];
-            if (user.Role.Name != "Admins")
+            if (user.Role != "Admins")
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }

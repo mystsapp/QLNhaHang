@@ -5,6 +5,13 @@
     },
 
     registerEvent: function () {
+
+        $('.ddlKhuVuc').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            $('#hidDdlLoai').val(optionValue);
+            $('#btnSubmit').click();
+        });
+
         shortcut.add("F1", function () {
             indexController.goiMon();
         });

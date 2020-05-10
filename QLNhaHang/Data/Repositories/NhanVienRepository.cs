@@ -29,10 +29,10 @@ namespace QLNhaHang.Data.Repositories
                 return null;
 
             // retrieve list from database/whereverand
-            var list = GetAllInclude(x => x.Role, y => y.VanPhong).AsQueryable();
+            var list = GetAllIncludeOne( y => y.KhuVuc).AsQueryable();
             if (role != "Admins")
             {
-                list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));
+                list = list.Where(x => x.Role.Equals(role) || x.KhuVuc.VanPhong.Name.Equals(roleVP));
             }
             
             //list = list.Where(x => x.NguoiCap == hoTen);
@@ -47,7 +47,7 @@ namespace QLNhaHang.Data.Repositories
 
             if(idVP != 0)
             {
-                list = list.Where(x => x.VanPhongId == idVP);
+                list = list.Where(x => x.KhuVuc.VanPhongId == idVP);
             }
             
             if (!string.IsNullOrEmpty(searchString))
