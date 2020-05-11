@@ -127,5 +127,6 @@ namespace QLNhaHang.Utilities
             return prefixID + nextID;
         }
 
+
     }
 }

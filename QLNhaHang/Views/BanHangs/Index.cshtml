@@ -65,6 +65,7 @@
                                         <i class="fas fa-search"></i>
                                     </button>
                                     <a href="/BanHangs/Index" class="btn btn-secondary"><i class="fas fa-sync"></i></a>
+                                    @*<a href="mailto:vanhong@saigontourist.net" class="btn btn-secondary"><i class="fas fa-sync"></i></a>*@
                                 </div>
 
                             </div>
@@ -97,10 +98,11 @@
                 </div>
 
             }
-            <form>
-                <input id="hidMaBan" type="hidden" name="maBan" />
-                <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
-            </form>
+        <form>
+            <input id="hidMaBan" type="hidden" name="maBan" />
+            <input type="hidden" name="idKhuVuc" value="@ViewBag.idKhuVuc" />
+            <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
+        </form>
         </div>
     </div>
     <!-- /.card -->
@@ -148,6 +150,10 @@
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
                                 @*<th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().PhuPhi)</th>*@
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaGui)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaLam)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().LanGui)</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -155,14 +161,35 @@
                             @foreach (var item in Model.MonDaGois)
                             {
 
-                                <tr class="cursor-pointerMon" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                            <tr @*class="cursor-hover"*@ @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td>@i</td>
-                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
-                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
-                                    @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
-                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
-                                </tr>
+                                <td>@i</td>
+                                <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                <td>
+                                    @if (item.DaGui)
+                                    {
+                                        <span class="badge badge-success">Đã gửi</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Chưa gửi</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.DaLam)
+                                    {
+                                        <span class="badge badge-success">Đã làm</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Chưa làm</span>
+                                    }
+                                </td>
+                                <td>@Html.DisplayFor(m => item.LanGui)</td>
+                            </tr>
                                 i++;
                             }
                         </tbody>
@@ -299,23 +326,19 @@
             }
 
         });
-        $('.cursor-pointerMon').click(function () {
-            //$(".imgBan").src("~/Assets/Images/Empty_Desk.jpg");
-            //$(".imgBan").click(function () {
-            //    // Change src attribute of image
-            //    $(this).attr("src", "Assets/Images/Desk.jpg");
-            //});
-            if ($(this).hasClass("bg-warning")) {
-                $(this).removeClass("bg-warning");
+        //$('.cursor-pointerMon').click(function () {
+            
+        //    if ($(this).hasClass("bg-warning")) {
+        //        $(this).removeClass("bg-warning");
 
-            }
-            else {
-                $('.card.bg-warning').removeClass("bg-warning");
-                $('.card-body').removeClass("text-warning");
-                $(this).addClass("bg-warning");
-            }
+        //    }
+        //    else {
+        //        $('.card.bg-warning').removeClass("bg-warning");
+        //        $('.card-body').removeClass("text-warning");
+        //        $(this).addClass("bg-warning");
+        //    }
 
-        });
+        //});
 
         $('.listAllTab').DataTable({
             "paging": true,
@@ -333,17 +356,19 @@
             cursor: pointer;
             color: white;
         }
-        .cursor-pointerMon :hover {
-            /*background-color: #3E5C9A;*/
+        /*#listAll tr :hover {
             background-color: #ffc107 !important;
             cursor: pointer;
             color: white;
-        }
+        }*/
 
         .cursor-pointer {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
-        .cursor-pointerMon {
+        /*.cursor-pointerMon {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+        #listAll {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 

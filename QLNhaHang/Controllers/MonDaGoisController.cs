@@ -103,8 +103,9 @@ namespace QLNhaHang.Controllers
         public ActionResult GoiMon(MonDaGoiViewModel model, string maBan = null, string strUrl = null)
         {
             var monDaGoi = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan))
-                                                         .Where(x => x.ThucDonId.Equals(model.MonDaGoi.ThucDonId))
+                                                         .Where(x => x.ThucDonId.Equals(model.MonDaGoi.ThucDonId) && !x.DaGui)
                                                          .FirstOrDefault();
+
             /////////////// update mon if exist ///////////
             if (monDaGoi != null)
             {
@@ -214,7 +215,7 @@ namespace QLNhaHang.Controllers
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
             // đã có người tính trước đó rồi
-            if(MonDaGoiVM.MonDaGois == null)
+            if (MonDaGoiVM.MonDaGois == null)
             {
                 return Redirect(strUrl);
             }
@@ -291,29 +292,34 @@ namespace QLNhaHang.Controllers
         }
 
 
-        //public CrystalReportPdfResult InHoaDon(string maBan, string strUrl)
-        //{
-        //    var listMonInBan = _unitOfWork.monDaGoiRepository
-        //                                  .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
-        //                                  .ToList();
-        //    //var listMonInBan = _unitOfWork.monDaGoiRepository
-        //    //                              .Find(x => x.MaBan.Equals(maBan));
-        //    var items = listMonInBan.Select(x => new
-        //    {
-        //        x.Id,
-        //        x.SoLuong,
-        //        x.ThanhTien,
-        //        x.GiaTien,
-        //        x.PhuPhi,
-        //        x.PhiPhucVu,
-        //        x.ThucDon.TenMon
+        public ActionResult GuiYeuCau(string strUrl, string maBan)
+        {
+            var monDaGois = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && !x.DaGui).ToList();
 
-        //    }).ToList();
-        //    var dt = EntityToTable.ToDataTable(items);
-        //    ReportDocument rd = new ReportDocument();
-        //    string reportPath = Path.Combine(Server.MapPath("~/Report"), "ReportInHoaDon.rpt");
-        //    return new CrystalReportPdfResult(reportPath, dt);
-        //}
-        
+            ///// tim kiem xem truoc do' da gui lan nao chua
+            var lanGuiSau = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && x.DaGui).OrderByDescending(x => x.LanGui).FirstOrDefault().LanGui;
+            foreach (var mon in monDaGois)
+            {
+                mon.DaGui = true;
+
+                // chua gui
+                if (lanGuiSau == 0)
+                {
+                    mon.LanGui = 1;
+                }
+                // gui roi
+                else
+                {
+                    mon.LanGui = lanGuiSau + 1; 
+                }
+
+                _unitOfWork.monDaGoiRepository.Update(mon);
+                _unitOfWork.Complete();
+            }
+
+            return Redirect(strUrl);
+        }
+
+
     }
 }

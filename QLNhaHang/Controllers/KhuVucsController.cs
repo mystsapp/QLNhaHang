@@ -77,6 +77,13 @@ namespace QLNhaHang.Controllers
                 //}
 
             }
+            else
+            {
+                foreach (var vanPhong in KhuVucVM.VanPhongs)
+                {
+                    KhuVucVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = vanPhong.Id, Name = vanPhong.Name });
+                }
+            }
 
             ///// for delete
             if (id != 0)

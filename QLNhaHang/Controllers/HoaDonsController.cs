@@ -494,6 +494,19 @@ namespace QLNhaHang.Controllers
             return new CrystalReportPdfResult(reportPath, dt);
         }
 
+        public ActionResult InLai(string maHD = null, string strUrl = null)
+        {
+            var hoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            ////// sotien != null --> HDTay
+            if (hoaDon.SoTien.HasValue)
+            {
+                return RedirectToAction(nameof(ExportHDTay), new { id = hoaDon.MaHD, strUrl = strUrl });
+            }
+            else
+            {
+                return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = strUrl });
+            }
+        }
         public JsonResult GetByTTHDId(int id)
         {
             return Json(JsonConvert.SerializeObject(_unitOfWork.thongTinHDRepository.GetById(id)), JsonRequestBehavior.AllowGet);

@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Goi Mon";
+    
 }
 @*<meta http-equiv="refresh" content="3">*@
 <!-- Content Header (Page header) -->
@@ -59,14 +60,14 @@
 
                     <div class="form-group row">
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Theo loại
                             @Html.DropDownList("idLoai",
                                     new SelectList(Model.LoaiThucDons, "Id", "TenLoai", ViewBag.idLoai),
                                     htmlAttributes: new { @class = "form-control border-input ddlLoai" })
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                             Tên món
                             @Html.DropDownListFor(model => model.MonDaGoi.ThucDonId,
                                          new SelectList((List<ThucDon>)TempData["thucDon"], "Id", "TenMon"),
@@ -74,20 +75,20 @@
                             @Html.ValidationMessageFor(model => model.MonDaGoi.ThucDonId, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-md-2">
                             Giá tiền
                             @Html.TextBoxFor(model => model.MonDaGoi.GiaTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-md-2">
                             Số lượng
                             @Html.TextBoxFor(model => model.MonDaGoi.SoLuong,
                                      new { @class = "form-control txtSoLuong" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.SoLuong, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-md-2">
                             Thành tiền
                             @Html.TextBoxFor(model => model.MonDaGoi.ThanhTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger" })
@@ -146,8 +147,11 @@
                                 <th>STT</th>
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.TenMon)</th>
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
-                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().PhuPhi)</th>
+                                @*<th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().PhuPhi)</th>*@
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaGui)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaLam)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().LanGui)</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -156,34 +160,70 @@
                             @foreach (var item in Model.MonDaGois)
                             {
 
-                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                            <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                    <td>@i</td>
-                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
-                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
-                                    <td>@Html.DisplayFor(m => item.PhuPhi)</td>
-                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
-                                    <td>
-                                        <form action="/MonDaGois/Delete?id=@item.Id" @*asp-route-id="@item.Id"*@ method="post">
+                                <td>@i</td>
+                                <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                <td>
+                                    @if (item.DaGui)
+                                    {
+                                        <span class="badge badge-success">Đã gửi</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Chưa gửi</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.DaLam)
+                                    {
+                                        <span class="badge badge-success">Đã làm</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-warning">Chưa làm</span>
+                                    }
+                                </td>
+                                <td>@Html.DisplayFor(m => item.LanGui)</td>
+                                <td>
+                                    <form action="/MonDaGois/Delete?id=@item.Id" @*asp-route-id="@item.Id"*@ method="post">
 
-                                            <input type="hidden" name="strUrl" value="@Model.StrUrl" />
-                                            <input type="hidden" name="maBan" value="@Model.MonDaGoi.MaBan" />
-                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
-                                                <span class="text-dark">Xóa?</span>
-                                                <button type="submit" class="btn btn-danger">Yes</button>
-                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
-                                            </span>
+                                        <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+                                        <input type="hidden" name="maBan" value="@Model.MonDaGoi.MaBan" />
+                                        <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                            <span class="text-dark">Xóa?</span>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                        </span>
 
-                                            <span id="deleteSpan_@item.Id">
-                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
-                                            </span>
-                                        </form>
-                                    </td>
-                                </tr>
+                                        <span id="deleteSpan_@item.Id">
+                                            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                        </span>
+                                    </form>
+                                </td>
+                            </tr>
+                               
+
                                 i++;
                             }
+
+
                         </tbody>
                     </table>
+                    <div>
+                        <form>
+                            <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                            <input type="hidden" value="@Model.Ban.MaBan" name="maBan" />
+                            @if (Model.MonDaGois.Exists(x => !x.DaGui))
+                            {
+                                <button type="submit" class="btn btn-primary" title="Gửi" formaction="/MonDaGois/GuiYeuCau" formmethod="post"><i class="fas fa-share-square"></i></button>
+                            }
+
+                        </form>
+                    </div>
                 }
                 else
                 {
@@ -235,7 +275,11 @@
             color: white;
         }
 
-        .cursor-pointer {
+        /*.cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+
+        #listAll {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 

@@ -118,6 +118,8 @@
                                         {
                                             <button disabled class="btn btn-outline-success" title="HD tự động"><i class="fas fa-file-alt"></i></button>
                                             <button disabled class="btn btn-outline-info" title="HD tay"><i class="far fa-file-alt"></i></button>
+                                            
+                                            <a class="btn btn-outline-success" title="In lại" href="@Url.Action("InLai", "HoaDons", new { maHD = item.MaHD, strUrl = Model.StrUrl})"><i class="fas fa-print"></i></a>
                                         }
                                         else
                                         {
@@ -295,7 +297,10 @@
             color: white;
         }
 
-        .cursor-pointer {
+        /*.cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+        #listAll {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         }
 

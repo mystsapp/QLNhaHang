@@ -44,7 +44,9 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("ThucDonId")]
         public virtual ThucDon ThucDon { get; set; }
 
-        
+        public int LanGui { get; set; }
+        public bool DaGui { get; set; }
+        public bool DaLam { get; set; }
 
     }
 }

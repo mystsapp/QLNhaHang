@@ -458,6 +458,10 @@
     <Compile Include="Migrations\202005090700489_roleTble.designer.cs">
       <DependentUpon>202005090700489_roleTble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005110247406_modifyMonDaGoi.cs" />
+    <Compile Include="Migrations\202005110247406_modifyMonDaGoi.designer.cs">
+      <DependentUpon>202005110247406_modifyMonDaGoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -2230,6 +2234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005090700489_roleTble.resx">
       <DependentUpon>202005090700489_roleTble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005110247406_modifyMonDaGoi.resx">
+      <DependentUpon>202005110247406_modifyMonDaGoi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
