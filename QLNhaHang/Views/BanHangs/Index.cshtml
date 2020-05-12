@@ -161,7 +161,7 @@
                             @foreach (var item in Model.MonDaGois)
                             {
 
-                            <tr @*class="cursor-hover"*@ @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                            <tr class="cursor-pointerMon" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
                                 <td>@i</td>
                                 <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
@@ -356,6 +356,7 @@
             cursor: pointer;
             color: white;
         }
+        
         /*#listAll tr :hover {
             background-color: #ffc107 !important;
             cursor: pointer;

@@ -363,6 +363,7 @@
     <Compile Include="Controllers\KhuVucsController.cs" />
     <Compile Include="Controllers\LoaiThucDonsController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\PhaChesController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\ThongKesController.cs" />
     <Compile Include="Controllers\ThongTinHDsController.cs" />
@@ -462,6 +463,10 @@
     <Compile Include="Migrations\202005110247406_modifyMonDaGoi.designer.cs">
       <DependentUpon>202005110247406_modifyMonDaGoi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005120203597_addNoiLamViec.cs" />
+    <Compile Include="Migrations\202005120203597_addNoiLamViec.designer.cs">
+      <DependentUpon>202005120203597_addNoiLamViec.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
@@ -479,6 +484,7 @@
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\NhanVienViewModel.cs" />
+    <Compile Include="Models\NoiLamViecViewModel.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -556,6 +562,7 @@
     <Content Include="Assets\js\NhanVien\createController.js" />
     <Content Include="Assets\js\NhanVien\editController.js" />
     <Content Include="Assets\js\NhanVien\indexController.js" />
+    <Content Include="Assets\js\PhaChe\indexController.js" />
     <Content Include="Assets\js\Role\createController.js" />
     <Content Include="Assets\js\Role\editController.js" />
     <Content Include="Assets\js\Role\indexController.js" />
@@ -1882,6 +1889,8 @@
     <Content Include="Assets\lib\jquery\dist\jquery.js" />
     <Content Include="Assets\lib\jquery\dist\jquery.min.js" />
     <Content Include="Assets\lib\jquery\LICENSE.txt" />
+    <Content Include="Assets\lib\mustache.js\mustache.js" />
+    <Content Include="Assets\lib\mustache.js\mustache.min.js" />
     <Content Include="Assets\lib\numeral.js\locales.min.js" />
     <Content Include="Assets\lib\numeral.js\locales\be-nl.min.js" />
     <Content Include="Assets\lib\numeral.js\locales\bg.min.js" />
@@ -2174,6 +2183,8 @@
     <Content Include="Views\KhuVucs\Create.cshtml" />
     <Content Include="Views\KhuVucs\Edit.cshtml" />
     <Content Include="Views\KhuVucs\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage_HauCan.cshtml" />
+    <Content Include="Views\PhaChes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2237,6 +2248,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005110247406_modifyMonDaGoi.resx">
       <DependentUpon>202005110247406_modifyMonDaGoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005120203597_addNoiLamViec.resx">
+      <DependentUpon>202005120203597_addNoiLamViec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

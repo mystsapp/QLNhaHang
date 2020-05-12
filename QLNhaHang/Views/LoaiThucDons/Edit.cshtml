@@ -60,10 +60,16 @@
                             @Html.ValidationMessageFor(model => model.LoaiThucDon.TenLoai, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-6">
-                            Phụ phí
-                            @Html.TextBoxFor(model => model.PhuPhi, null, new { @class = "form-control numbers" })
-                            @Html.ValidationMessageFor(model => model.PhuPhi, "", new { @class = "text-danger" })
+                            Nơi làm việc
+                            @Html.DropDownListFor(model => model.LoaiThucDon.NoiLamViec,
+                                        new SelectList(Model.NoiLamViecs, "Name", "Name"),
+                                        htmlAttributes: new { @class = "form-control border-input " })
                         </div>
+                        @*<div class="col-6">
+                                Phụ phí
+                                @Html.TextBoxFor(model => model.PhuPhi, null, new { @class = "form-control numbers" })
+                                @Html.ValidationMessageFor(model => model.PhuPhi, "", new { @class = "text-danger" })
+                            </div>*@
                     </div>
 
 

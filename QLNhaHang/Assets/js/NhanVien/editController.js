@@ -9,18 +9,21 @@ var editController = {
         var roleId = $('.ddlRole').val();
         editController.loadKVByRole(roleId);
         editController.registerEvent();
+        ////// check role selected
+        editController.onOffDdlNoiLamViec(roleId);
     },
 
     registerEvent: function () {
         $('.ddlRole').off('change').on('change', function () {
             var roleId = $(this).val();
             editController.loadKVByRole(roleId);
+            editController.onOffDdlNoiLamViec(roleId);
         });
         
         $('.ddlKV').off('change').on('change', function () {
             var optionValue = $(this).val();
             //$('#hidMaTD').val(optionValue);
-            createController.loadMaNV(optionValue);
+            editController.loadMaNV(optionValue);
         });
 
         //var inputNumberVal = $('input.numbers').val();
@@ -69,7 +72,7 @@ var editController = {
             url: '/Accounts/GetNextMaNV',
             type: 'GET',
             data: {
-                vanPhongId: optionValue
+                idKV: optionValue
             },
             dataType: 'json',
             success: function (response) {
@@ -78,6 +81,15 @@ var editController = {
                 }
             }
         });
+    },
+
+    onOffDdlNoiLamViec: function (optionValue) {
+        if (optionValue !== "Users") {
+            $('.ddlNoiLamViec').prop('disabled', true);
+        }
+        else {
+            $('.ddlNoiLamViec').prop('disabled', false);
+        }
     }
 };
 editController.init();

@@ -8,12 +8,17 @@ var createController = {
     init: function () {
 
         createController.registerEvent();
+        ////// check role selected
+        var roleId = $('.ddlRole').val();
+        createController.onOffDdlNoiLamViec(roleId);
     },
 
     registerEvent: function () {
         $('.ddlRole').off('change').on('change', function () {
             var roleId = $(this).val();
             createController.loadKVByRole(roleId);
+            createController.onOffDdlNoiLamViec(roleId);
+            
         });
         $('.ddlKV').off('change').on('change', function () {
             var optionValue = $(this).val();
@@ -76,6 +81,15 @@ var createController = {
                 }
             }
         });
+    },
+
+    onOffDdlNoiLamViec: function (optionValue) {
+        if (optionValue !== "Users") {
+            $('.ddlNoiLamViec').prop('disabled', true);
+        }
+        else {
+            $('.ddlNoiLamViec').prop('disabled', false);
+        }
     }
 };
 createController.init();

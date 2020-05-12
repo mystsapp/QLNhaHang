@@ -103,7 +103,7 @@ namespace QLNhaHang.Controllers
                 BanHangVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
                 BanHangVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                                   .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
-                                                  .OrderBy(x => x.ThucDon.TenMon)
+                                                  .OrderBy(x => x.LanGui)
                                                   .ToList();
 
                 var listDecimal = BanHangVM.MonDaGois.Select(x => x.ThanhTien).ToList();
@@ -147,7 +147,7 @@ namespace QLNhaHang.Controllers
                     BanHangVM.Ban = _unitOfWork.banRepository.GetByStringId(maBanTo);
                     BanHangVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                                   .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBanTo))
-                                                  .OrderBy(x => x.ThucDon.TenMon)
+                                                  .OrderBy(x => x.LanGui)
                                                   .ToList();
                     var listDecimal = BanHangVM.MonDaGois.Select(x => x.ThanhTien).ToList();
                     BanHangVM.TongTien = listDecimal.Sum();
@@ -203,7 +203,7 @@ namespace QLNhaHang.Controllers
                     BanHangVM.Ban = _unitOfWork.banRepository.GetByStringId(maBanTo);
                     BanHangVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                                   .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBanTo))
-                                                  .OrderBy(x => x.ThucDon.TenMon)
+                                                  .OrderBy(x => x.LanGui)
                                                   .ToList();
                     var listDecimal = BanHangVM.MonDaGois.Select(x => x.ThanhTien).ToList();
                     BanHangVM.TongTien = listDecimal.Sum();

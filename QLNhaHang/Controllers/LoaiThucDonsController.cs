@@ -20,6 +20,7 @@ namespace QLNhaHang.Controllers
             LoaiVM = new LoaiThucDonViewModel()
             {
                 LoaiThucDon = new Data.Models.LoaiThucDon(),
+                NoiLamViecs = ListNoiLamViec(),
                 ThucDons = new List<Data.Models.ThucDon>()
             };
         }
@@ -138,6 +139,16 @@ namespace QLNhaHang.Controllers
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-        
+
+        private List<NoiLamViecViewModel> ListNoiLamViec()
+        {
+            return new List<NoiLamViecViewModel>()
+            {
+                new NoiLamViecViewModel() { Id = 0, Name = "--None--" },
+                new NoiLamViecViewModel() { Id = 1, Name = "Bếp" },
+                new NoiLamViecViewModel() { Id = 2, Name = "Pha chế" }
+            };
+        }
+
     }
 }

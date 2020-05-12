@@ -18,7 +18,7 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Thành tiền")]
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public decimal? ThanhTien { get; set; }
-        
+
         [DisplayName("Giá tiền")]
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public decimal? GiaTien { get; set; }
@@ -26,7 +26,7 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Phụ phí")]
         [DisplayFormat(DataFormatString = "{0:N0}", ApplyFormatInEditMode = true)]
         public decimal? PhuPhi { get; set; }
-        
+
         [DisplayName("Phí phục vụ")]
         public bool PhiPhucVu { get; set; }
 
@@ -44,8 +44,11 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("ThucDonId")]
         public virtual ThucDon ThucDon { get; set; }
 
+        [DisplayName("Lần gửi")]
         public int LanGui { get; set; }
+        [DisplayName("Đã gửi")]
         public bool DaGui { get; set; }
+        [DisplayName("Đã làm")]
         public bool DaLam { get; set; }
 
     }

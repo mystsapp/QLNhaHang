@@ -103,5 +103,10 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("KhuVucId")]
         public virtual KhuVuc KhuVuc { get; set; }
 
+        [DisplayName("Nơi làm việc")]
+        [MaxLength(50), Column(TypeName = "nvarchar")]
+        [StringLength(50)]
+        public string NoiLamViec { get; set; }
+
     }
 }

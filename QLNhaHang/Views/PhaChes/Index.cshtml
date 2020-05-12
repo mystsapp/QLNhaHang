@@ -1,0 +1,114 @@
+﻿
+
+@{
+    ViewBag.Title = "Pha che";
+    Layout = "~/Views/Shared/_LayoutPage_HauCan.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" href="@Url.Action("Create", "KhachHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                @*<ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách khách hàng</li>
+                    </ol>*@
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <i class="fas fa-list-alt text-warning"></i> Danh sách đồ uống
+            </h3>
+
+            <div class="card-tools">
+
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;">
+
+                <table class="table mytable text-nowrap" id="listAll">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên bàn</th>
+                            <th>Tên món</th>
+                            <th>Giá tiền</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Lần gửi</th>
+                            <th>Đã gửi</th>
+                            <th>Đã làm</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tblData" class="table"></tbody>
+                </table>
+
+            </div>
+            <script id="data-template" type="x-tmpl-mustache">
+
+                <tr class="cursor-pointer">
+                    <td>{{sTT}}</td>
+                    <td>{{tenBan}}</td>
+                    <td>{{tenMon}}</td>
+                    <td>{{giaTien}}</td>
+                    <td>{{soLuong}}</td>
+                    <td>{{thanhTien}}</td>
+                    <td>{{lanGui}}</td>
+                    <td>{{{daGui}}}</td>
+                    <td>{{{daLam}}}</td>
+
+                </tr>
+            </script>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+@section Scripts{
+
+    <script src="~/Assets/lib/bootbox.js/bootbox.min.js"></script>
+    <script src="~/Assets/lib/mustache.js/mustache.min.js"></script>
+    <script src="~/Assets/js/PhaChe/indexController.js"></script>
+
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        /*.cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+
+        #listAll {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+    </style>
+}

@@ -53,7 +53,10 @@ namespace QLNhaHang.Controllers
                     Session["role"] = userInfo.Role;
 
                     Session["listKV"] = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == userInfo.KhuVuc.VanPhongId));
-
+                    if(userInfo.NoiLamViec == "Pha chế")
+                    {
+                        return RedirectToAction("Index", "PhaChes");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == -1)

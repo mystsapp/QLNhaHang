@@ -38,5 +38,10 @@ namespace QLNhaHang.Data.Models
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         public string NguoiTao { get; set; }
+        
+        [DisplayName("Nơi làm việc")]
+        [MaxLength(50), Column(TypeName = "nvarchar")]
+        [StringLength(50)]
+        public string NoiLamViec { get; set; }
     }
 }

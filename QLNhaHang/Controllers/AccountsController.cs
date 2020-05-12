@@ -24,6 +24,7 @@ namespace QLNhaHang.Controllers
                 NhanVien = new Data.Models.NhanVien(),
                 Roles = _unitOfWork.roleRepository.GetAll().ToList(),
                 GioiTinhs = ListGioiTinh(),
+                NoiLamViecs = ListNoiLamViec(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
                 KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList(),
                 //LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
@@ -361,6 +362,16 @@ namespace QLNhaHang.Controllers
                 new GioiTinhViewModel() { Id = "None", Name = "--None--" },
                 new GioiTinhViewModel() { Id = "Nam", Name = "Nam" },
                 new GioiTinhViewModel() { Id = "Nử", Name = "Nử" }
+            };
+        }
+        
+        private List<NoiLamViecViewModel> ListNoiLamViec()
+        {
+            return new List<NoiLamViecViewModel>()
+            {
+                new NoiLamViecViewModel() { Id = 0, Name = "--None--" },
+                new NoiLamViecViewModel() { Id = 1, Name = "Bếp" },
+                new NoiLamViecViewModel() { Id = 2, Name = "Pha chế" }
             };
         }
 

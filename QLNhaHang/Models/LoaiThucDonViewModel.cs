@@ -20,5 +20,7 @@ namespace QLNhaHang.Models
         [Required(ErrorMessage = "Tên không được để trống")]
         public string TenLoaiCreate { get; set; }
         public string PhuPhi { get; set; }
+
+        public List<NoiLamViecViewModel> NoiLamViecs { get; set; }
     }
 }

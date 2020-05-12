@@ -56,7 +56,7 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .GetAllInclude(x => x.Ban, y => y.ThucDon)
                                               .Where(x => x.MaBan.Equals(maBan))
-                                              .OrderBy(x => x.ThucDon.TenMon)
+                                              .OrderBy(x => x.LanGui)
                                               .ToList();
 
             if (!string.IsNullOrEmpty(maBan))
@@ -294,11 +294,17 @@ namespace QLNhaHang.Controllers
 
         public ActionResult GuiYeuCau(string strUrl, string maBan)
         {
-            var monDaGois = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && !x.DaGui).ToList();
+            var monChuaGois = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && !x.DaGui).ToList();
 
             ///// tim kiem xem truoc do' da gui lan nao chua
-            var lanGuiSau = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && x.DaGui).OrderByDescending(x => x.LanGui).FirstOrDefault().LanGui;
-            foreach (var mon in monDaGois)
+            var monDaGuis = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan) && x.DaGui);
+            int lanGuiSau = 0;
+            if (monDaGuis.Count() != 0)
+            {
+                lanGuiSau = monDaGuis.OrderByDescending(x => x.LanGui).FirstOrDefault().LanGui;
+            }
+                
+            foreach (var mon in monChuaGois)
             {
                 mon.DaGui = true;
 

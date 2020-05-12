@@ -93,6 +93,7 @@
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().TenMon)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().GiaTien)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().DonViTinh)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().LoaiThucDon.NoiLamViec)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().LoaiThucDon.TenLoai)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().GhiChu)</th>
                                 <th>#</th>
@@ -109,6 +110,7 @@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.TenMon)</td>
                                     <td class="tdVal" data-id="@item.Id">@string.Format("{0:0,0}", item.GiaTien)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DonViTinh)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.LoaiThucDon.NoiLamViec)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.LoaiThucDon.TenLoai)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
                                     <td>
