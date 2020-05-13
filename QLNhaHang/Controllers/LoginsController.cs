@@ -57,6 +57,10 @@ namespace QLNhaHang.Controllers
                     {
                         return RedirectToAction("Index", "PhaChes");
                     }
+                    if(userInfo.NoiLamViec == "Bếp")
+                    {
+                        return RedirectToAction("Index", "Beps");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 else if (result == -1)

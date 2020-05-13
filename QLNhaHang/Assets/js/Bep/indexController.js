@@ -28,7 +28,7 @@ $.stringToDate = function (_date, _format, _delimiter) {
 var indexController = {
     init: function () {
         indexController.LoadData();
-        setInterval(function () { indexController.LoadData(); }, 10000);
+        //setInterval(function () { indexController.LoadData(); }, 10000);
     },
 
     registerEvent: function () {
@@ -39,7 +39,7 @@ var indexController = {
             if (daLam === true) {
                 $(this).css("background-color", "#6c757d").css("color", "white");
                 //$(this).addClass("bg-info");
-
+                
             }
 
         });
@@ -47,13 +47,14 @@ var indexController = {
             indexController.printList();
         });
 
-        $('.btnConfirm').off('click').on('click', function () {
-            //alert($(this).data('id'));
+        $('.btnConfirmBep').off('click').on('click', function () {
+            var idMon = $(this).data('idmon');
             if ($(this).data('id')) {
                 return;
             }
             else {
-                $('.frmDaLam').submit();
+                $('.idMon').val(idMon)
+               $('.frmDaLam').submit();
             }
         });
         //$('.modal-dialog').draggable();
@@ -70,7 +71,7 @@ var indexController = {
     LoadData: function () {
 
         $.ajax({
-            url: '/PhaChes/LoadData',
+            url: '/Beps/LoadData',
             type: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -87,7 +88,7 @@ var indexController = {
                     for (var i = 0; i < data.length; i++) {
                         html += Mustache.render(template, {
                             sTT: stt,
-                            idMon: data[i].Id,
+                            idMonBep: data[i].Id,
                             tenBan: data[i].Ban.TenBan,
                             tenMon: data[i].ThucDon.TenMon,
                             giaTien: numeral(data[i].GiaTien).format('0,0'),

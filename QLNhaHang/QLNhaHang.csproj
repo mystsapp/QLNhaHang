@@ -358,6 +358,7 @@
     <Compile Include="Controllers\BanHangsController.cs" />
     <Compile Include="Controllers\BansController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BepsController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhuVucsController.cs" />
@@ -469,6 +470,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
+    <Compile Include="Models\BepViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
     <Compile Include="Models\ChartPieModel.cs" />
     <Compile Include="Models\DaInModel.cs" />
@@ -485,6 +487,7 @@
     <Compile Include="Models\MonDaGoiViewModel.cs" />
     <Compile Include="Models\NhanVienViewModel.cs" />
     <Compile Include="Models\NoiLamViecViewModel.cs" />
+    <Compile Include="Models\PhaCheViewModel.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
     <Compile Include="Models\ThongTinHDViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -562,6 +565,7 @@
     <Content Include="Assets\js\NhanVien\createController.js" />
     <Content Include="Assets\js\NhanVien\editController.js" />
     <Content Include="Assets\js\NhanVien\indexController.js" />
+    <Content Include="Assets\js\Bep\indexController.js" />
     <Content Include="Assets\js\PhaChe\indexController.js" />
     <Content Include="Assets\js\Role\createController.js" />
     <Content Include="Assets\js\Role\editController.js" />
@@ -2185,6 +2189,9 @@
     <Content Include="Views\KhuVucs\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage_HauCan.cshtml" />
     <Content Include="Views\PhaChes\Index.cshtml" />
+    <Content Include="Views\PhaChes\PrintListMon.cshtml" />
+    <Content Include="Views\Beps\Index.cshtml" />
+    <Content Include="Views\Beps\PrintListMon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

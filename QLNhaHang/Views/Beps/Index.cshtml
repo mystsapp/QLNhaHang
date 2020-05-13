@@ -1,7 +1,7 @@
 ﻿
 
 @{
-    ViewBag.Title = "Pha che";
+    ViewBag.Title = "Bep";
     Layout = "~/Views/Shared/_LayoutPage_HauCan.cshtml";
 }
 
@@ -67,7 +67,7 @@
             </div>
             <script id="data-template" type="x-tmpl-mustache">
 
-                <tr class="cursor-pointer" data-id="{{lamRoi}}" >
+                <tr class="cursor-pointer" data-id="{{lamRoi}}">
                     <td>{{sTT}}</td>
                     <td>{{tenBan}}</td>
                     <td>{{tenMon}}</td>
@@ -76,26 +76,26 @@
                     <td>{{thanhTien}}</td>
                     <td>{{lanGui}}</td>
                     <td>{{{daGui}}}</td>
-                    <td >{{{daLam}}}</td>
+                    <td>{{{daLam}}}</td>
                     <td>
-                        <form action="/PhaChes/Confirm" method="post" class="frmDaLam">
-                            <input type="hidden" name="idMon" value="{{idMon}}" />
-                            <button  type="button" class="btn btn-primary btn-sm btnConfirm" data-id="{{lamRoi}}"  title="Confirm"><i class="fas fa-share-square"></i></button>
+                        <form action="/Beps/Confirm" method="post" class="frmDaLam">
+                            <input type="hidden" class="idMon" name="idMon" />
+                            <button type="button" class="btn btn-primary btn-sm btnConfirmBep" data-idMon="{{idMonBep}}" data-id="{{lamRoi}}" title="Confirm"><i class="fas fa-share-square"></i></button>
                         </form>
                     </td>
                     <td align="center">
                         @*<input type="checkbox" class="custom-control-input" />*@
-                        
-                            <input type="checkbox" class="ckId" data-id="{{idMon}}" />
-                            
-                        
+
+                        <input type="checkbox" class="ckId" data-id="{{idMonBep}}" />
+
+
                     </td>
                 </tr>
             </script>
         </div>
     </div>
     <!-- /.card -->
-    <form id="frmPrintListId" action="/PhaChes/PrintListMon">
+    <form id="frmPrintListId" action="/Beps/PrintListMon">
         <input type="hidden" id="stringId" name="listIdMon" />
     </form>
 </section>
@@ -104,7 +104,7 @@
 
     <script src="~/Assets/lib/bootbox.js/bootbox.min.js"></script>
     <script src="~/Assets/lib/mustache.js/mustache.min.js"></script>
-    <script src="~/Assets/js/PhaChe/indexController.js"></script>
+    <script src="~/Assets/js/Bep/indexController.js"></script>
 
     <style>
         .cursor-pointer:hover {
