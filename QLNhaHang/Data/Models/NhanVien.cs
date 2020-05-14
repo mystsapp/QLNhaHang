@@ -79,7 +79,7 @@ namespace QLNhaHang.Data.Models
         //[ForeignKey("RoleId")]
         //public virtual Role Role { get; set; }
 
-        [MaxLength(15), Column(TypeName = "varchar")]
+        [MaxLength(15), Column(TypeName = "nvarchar")]
         [StringLength(15)]
         public string Role { get; set; }
 

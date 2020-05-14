@@ -39,7 +39,7 @@
         </div>
         <div class="card-body">
 
-            <form autocomplete="off" >
+            <form autocomplete="off">
                 <div class="p-4 border rounded">
 
                     @Html.AntiForgeryToken()
@@ -50,91 +50,128 @@
 
                     <div class="form-group row">
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Mã NV
                             @Html.TextBoxFor(model => model.NhanVien.MaNV, null, new { @class = "form-control txtMaNV", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.NhanVien.MaNV, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Họ tên
                             @Html.TextBoxFor(model => model.NhanVien.HoTen, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NhanVien.HoTen, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-6">
+
+                        <div class="col-md-3">
                             Username
                             @Html.TextBoxFor(model => model.UsernameCreate, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.UsernameCreate, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Password
                             @Html.TextBoxFor(model => model.NhanVien.Password, null, new { @class = "form-control ", @type = "password" })
                             @Html.ValidationMessageFor(model => model.NhanVien.Password, "", new { @class = "text-danger" })
                         </div>
-
                     </div>
+                    @*<div class="form-group row">
+                            <div class="col-md-3">
+                                Username
+                                @Html.TextBoxFor(model => model.UsernameCreate, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.UsernameCreate, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="col-md-3">
+                                Password
+                                @Html.TextBoxFor(model => model.NhanVien.Password, null, new { @class = "form-control ", @type = "password" })
+                                @Html.ValidationMessageFor(model => model.NhanVien.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>*@
                     <div class="form-group row">
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Role
                             @Html.DropDownListFor(model => model.NhanVien.Role,
                                         new SelectList(Model.Roles, "Name", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input ddlRole" })
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Phòng ban
                             @Html.TextBoxFor(model => model.NhanVien.PhongBan, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NhanVien.PhongBan, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Khu vực
                             @Html.DropDownListFor(model => model.NhanVien.KhuVucId,
                                         new SelectList(Model.LoaiViewModels, "Id", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input ddlKV" })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Chức vụ
                             @Html.TextBoxFor(model => model.NhanVien.ChucVu, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NhanVien.ChucVu, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    @*<div class="form-group row">
+                            <div class="col-md-3">
+                                Khu vực
+                                @Html.DropDownListFor(model => model.NhanVien.KhuVucId,
+                                            new SelectList(Model.LoaiViewModels, "Id", "Name"),
+                                            htmlAttributes: new { @class = "form-control border-input ddlKV" })
+                            </div>
+
+                            <div class="col-md-3">
+                                Chức vụ
+                                @Html.TextBoxFor(model => model.NhanVien.ChucVu, null, new { @class = "form-control " })
+                                @Html.ValidationMessageFor(model => model.NhanVien.ChucVu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
                     <div class="form-group row">
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Địa chỉ
                             @Html.TextBoxFor(model => model.NhanVien.DiaChi, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NhanVien.DiaChi, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Điện thoại
                             @Html.TextBoxFor(model => model.NhanVien.DienThoai, null, new { @class = "form-control " })
                             @Html.ValidationMessageFor(model => model.NhanVien.DienThoai, "", new { @class = "text-danger" })
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-6">
+
+                        <div class="col-md-3">
                             Giới tính
                             @Html.DropDownListFor(model => model.NhanVien.GioiTinh,
                                         new SelectList(Model.GioiTinhs, "Id", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input " })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Ngày sinh
                             @Html.TextBoxFor(model => model.NgaySinh, null, new { @class = "form-control maskInput" })
                             @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                    @*<div class="form-group row">
+                        <div class="col-md-3">
+                            Giới tính
+                            @Html.DropDownListFor(model => model.NhanVien.GioiTinh,
+                                        new SelectList(Model.GioiTinhs, "Id", "Name"),
+                                        htmlAttributes: new { @class = "form-control border-input " })
+                        </div>
+
+                        <div class="col-md-3">
+                            Ngày sinh
+                            @Html.TextBoxFor(model => model.NgaySinh, null, new { @class = "form-control maskInput" })
+                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
                     <div class="form-group row">
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Trạng thái
                             <div class="custom-control custom-checkbox">
                                 @Html.CheckBoxFor(model => model.NhanVien.TrangThai, new { @class = "custom-control-input", @id = "customCheckbox1" })
@@ -143,7 +180,7 @@
                             @Html.ValidationMessageFor(model => model.NhanVien.TrangThai, "", new { @class = "text-danger" })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-md-3">
                             Nơi làm việc
                             @Html.DropDownListFor(model => model.NhanVien.NoiLamViec,
                                         new SelectList(Model.NoiLamViecs, "Name", "Name"),
@@ -154,7 +191,7 @@
                     <div class="form-group ">
 
                         <button type="submit" formaction="/Accounts/Create" formmethod="post" class="btn btn-primary"><i class="fas fa-save"></i></button>
-                        <input type="submit" formaction="/Accounts/Create" formmethod="get" hidden id="frmCreateNhanVienGet"/>
+                        <input type="submit" formaction="/Accounts/Create" formmethod="get" hidden id="frmCreateNhanVienGet" />
                         @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
                         <a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>
                     </div>

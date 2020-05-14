@@ -38,6 +38,10 @@ namespace QLNhaHang.Controllers
             ViewBag.searchString = searchString;
 
             var user = (NhanVien)Session["UserSession"];
+            if (user.Role.Equals("Users"))
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             /////// for delete //////
             if (!string.IsNullOrEmpty(maNV))
             {
@@ -153,6 +157,8 @@ namespace QLNhaHang.Controllers
             //{
             //    NhanVienVM.NhanVien.MaNV = GetNextId.NextID("", "00120");
             //}
+
+            //NhanVienVM.NoiLamViecs = new List<NoiLamViecViewModel>() { new NoiLamViecViewModel() { Id = 0, Name = "--None--" } };
             return View(NhanVienVM);
         }
 
@@ -192,7 +198,7 @@ namespace QLNhaHang.Controllers
         }
 
 
-        public ActionResult Edit(string strUrl, string maNV)
+        public ActionResult Edit(string strUrl, string maNV, string roleName)
         {
             var user = (NhanVien)Session["UserSession"];
             if (user.Role.Equals("Users"))
@@ -215,6 +221,11 @@ namespace QLNhaHang.Controllers
             NhanVienVM.OldPass = NhanVienVM.NhanVien.Password;
             NhanVienVM.NhanVien.Password = "";
             NhanVienVM.StrUrl = strUrl;
+
+            if (!string.IsNullOrEmpty(roleName))
+            {
+                NhanVienVM.NoiLamViecs = new List<NoiLamViecViewModel>() { new NoiLamViecViewModel() { Id = 0, Name = "--None--" } };
+            }
 
             return View(NhanVienVM);
         }
@@ -374,7 +385,6 @@ namespace QLNhaHang.Controllers
                 new NoiLamViecViewModel() { Id = 2, Name = "Pha chế" }
             };
         }
-
 
     }
 }

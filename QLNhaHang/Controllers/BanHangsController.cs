@@ -36,11 +36,14 @@ namespace QLNhaHang.Controllers
             //}
             //else
             //{
-                ViewBag.idKhuVuc = idKhuVuc;
+            ViewBag.idKhuVuc = idKhuVuc;
             //}
 
             var user = (NhanVien)Session["UserSession"];
-
+            if (user.NoiLamViec == "Bếp" || user.NoiLamViec == "Pha chế")
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             ///////////////////// load Ban by flag /////////////////////
             //var banByFlags = _unitOfWork.banRepository.Find(x => x.Flag);
             ///////////////////// load Ban by flag /////////////////////
@@ -215,20 +218,22 @@ namespace QLNhaHang.Controllers
 
         public JsonResult MonInBan(string maBan)
         {
-            var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan));
+            var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan)).ToList();
+            
             if (mons.Count() > 0)
             {
                 return Json(new
                 {
-                    status = true
-                });
+                    status = true,
+                    data = JsonConvert.SerializeObject(mons)
+                }, JsonRequestBehavior.AllowGet);
             }
             else
             {
                 return Json(new
                 {
                     status = false
-                });
+                }, JsonRequestBehavior.AllowGet);
             }
         }
 

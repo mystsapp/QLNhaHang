@@ -141,10 +141,36 @@
                     maBan: id
                 },
                 dataType: 'json',
-                type: 'POST',
+                type: 'GET',
                 success: function (response) {
+                    var data = JSON.parse(response.data);
+
                     if (response.status) {
-                        $('#frmTinhTien').submit();
+                        var j = 0;
+                        var tenMonChuaLam = '';
+                        $.each(data, function (i, item) {
+                            if (!item.DaLam) {
+                                j++;
+                                tenMonChuaLam += item.ThucDon.TenMon + ', '
+                            }
+                        });
+                        
+                        var tenMonString = tenMonChuaLam.substring(0, tenMonChuaLam.length - 2);
+                        if (j !== 0) {
+                            bootbox.alert({
+                                size: "small",
+                                title: "Information",
+                                message: tenMonString + " <b> chưa làm <b/> !",
+                                callback: function () {
+                                    //e.preventDefault();
+
+                                }
+                            });
+                        }
+                        else {
+                            $('#frmTinhTien').submit();
+                        }
+                        
                     }
                     else {
                         bootbox.alert({

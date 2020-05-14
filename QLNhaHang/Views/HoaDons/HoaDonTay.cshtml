@@ -70,31 +70,31 @@
                         </div>*@
                         <div class="col-md-2">
                             Số hóa đơn
-                            @Html.TextBoxFor(model => model.VanPhong.So, new { @class = "form-control txtSoHD", @type = "number" })
+                            @Html.TextBoxFor(model => model.VanPhong.So, new { @class = "form-control txtSoHD", @type = "number", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.VanPhong.So, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-2">
                             Ký hiệu
-                            @Html.TextBoxFor(model => model.VanPhong.KyHieu, null, new { @class = "form-control txtKyHieu" })
+                            @Html.TextBoxFor(model => model.VanPhong.KyHieu, null, new { @class = "form-control txtKyHieu", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.VanPhong.KyHieu, "", new { @class = "text-danger" })
                         </div>
                         <div class="col-md-2">
                             Quyển số
-                            @Html.TextBoxFor(model => model.VanPhong.QuyenSo, new { @class = "form-control txtQuyenSo" , @type = "number" })
+                            @Html.TextBoxFor(model => model.VanPhong.QuyenSo, new { @class = "form-control txtQuyenSo" , @type = "number", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.VanPhong.QuyenSo, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-2">
                             Mẫu số
-                            @Html.TextBoxFor(model => model.VanPhong.MauSo, null, new { @class = "form-control txtMauSo" })
+                            @Html.TextBoxFor(model => model.VanPhong.MauSo, null, new { @class = "form-control txtMauSo", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.VanPhong.MauSo, "", new { @class = "text-danger" })
 
                         </div>
 
                         <div class="col-md-2">
                             HTTT
-                            @Html.TextBoxFor(model => model.HoaDon.HTThanhToan, null, new { @class = "form-control txtHTTT" })
+                            @Html.TextBoxFor(model => model.HoaDon.HTThanhToan, null, new { @class = "form-control txtHTTT", @readonly = "true" })
                             @Html.ValidationMessageFor(model => model.HoaDon.HTThanhToan, "", new { @class = "text-danger" })
 
                         </div>

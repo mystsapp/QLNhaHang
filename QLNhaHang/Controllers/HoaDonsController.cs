@@ -96,7 +96,7 @@ namespace QLNhaHang.Controllers
 
             ////////////get TTHD - So HD tu dong tang 1 //////////////////////
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
-            HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            // HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
             /////////////// So HD tu dong tang 1 //////////////////////
             
             if (ppv != 1 && ppv != 0)
@@ -193,7 +193,24 @@ namespace QLNhaHang.Controllers
             hoaDon.MauSo = model.VanPhong.MauSo;
             hoaDon.KyHieu = model.VanPhong.KyHieu;
             hoaDon.QuyenSo = model.VanPhong.QuyenSo;
-            hoaDon.So = model.VanPhong.So;
+            //hoaDon.So = model.VanPhong.So;
+            ////////////get TTHD - So HD tu dong tang 1 //////////////////////
+            HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
+            hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            if (string.IsNullOrEmpty(HoaDonVM.VanPhong.So))
+            {
+                hoaDon.So = GetNextId.NextSoHD("", "");
+            }
+
+            //////////// update - So HD tu dong tang 1 //////////////////////
+            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            vanPhong.So = hoaDon.So;
+            _unitOfWork.vanPhongRepository.Update(vanPhong);
+            _unitOfWork.Complete();
+            //////////// update - So HD tu dong tang 1 //////////////////////
+            ///////////////get TTHD - So HD tu dong tang 1 //////////////////////
+            
             //hoaDon.SoThuTu = model.VanPhong.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
@@ -231,10 +248,10 @@ namespace QLNhaHang.Controllers
             _unitOfWork.Complete();
 
             //////////// So HD trong VP tu dong tang 1 //////////////////////
-            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
-            vanPhong.So = model.VanPhong.So;
-            _unitOfWork.vanPhongRepository.Update(vanPhong);
-            _unitOfWork.Complete();
+            //var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            //vanPhong.So = model.VanPhong.So;
+            //_unitOfWork.vanPhongRepository.Update(vanPhong);
+            //_unitOfWork.Complete();
             //////////// So HD trong VP tu dong tang 1 //////////////////////
             
             return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
@@ -312,7 +329,7 @@ namespace QLNhaHang.Controllers
 
             ////////////get TTHD - So HD tu dong tang 1 //////////////////////
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
-            HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            //HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
             ///////////////get TTHD - So HD tu dong tang 1 //////////////////////
 
             if (ppv != 0)
@@ -394,7 +411,24 @@ namespace QLNhaHang.Controllers
             hoaDon.MauSo = model.VanPhong.MauSo;
             hoaDon.KyHieu = model.VanPhong.KyHieu;
             hoaDon.QuyenSo = model.VanPhong.QuyenSo;
-            hoaDon.So = model.VanPhong.So;
+            //hoaDon.So = model.VanPhong.So;
+
+            ////////////get TTHD - So HD tu dong tang 1 //////////////////////
+            HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
+            HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
+            hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            if (string.IsNullOrEmpty(HoaDonVM.VanPhong.So))
+            {
+                hoaDon.So = GetNextId.NextSoHD("", "");
+            }
+
+            //////////// update - So HD tu dong tang 1 //////////////////////
+            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            vanPhong.So = hoaDon.So;
+            _unitOfWork.vanPhongRepository.Update(vanPhong);
+            _unitOfWork.Complete();
+            //////////// update - So HD tu dong tang 1 //////////////////////
+            ///////////////get TTHD - So HD tu dong tang 1 //////////////////////
             //hoaDon.SoThuTu = model.ThongTinHD.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
@@ -437,12 +471,12 @@ namespace QLNhaHang.Controllers
 
 
             //////////// So HD tu dong tang 1 //////////////////////
-            var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
-            vanPhong.So = model.VanPhong.So;
-            _unitOfWork.vanPhongRepository.Update(vanPhong);
-            _unitOfWork.Complete();
+            //var vanPhong = _unitOfWork.vanPhongRepository.GetById(hoaDon.VanPhongId);
+            //vanPhong.So = model.VanPhong.So;
+            //_unitOfWork.vanPhongRepository.Update(vanPhong);
+            //_unitOfWork.Complete();
             //////////// So HD tu dong tang 1 //////////////////////
-            ///
+            
             return RedirectToAction(nameof(ExportHDTay), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 

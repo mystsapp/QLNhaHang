@@ -40,7 +40,7 @@
         </div>
         <div class="card-body">
 
-            <form method="post" autocomplete="off">
+            <form method="post" autocomplete="off" id="frmNVEdit">
                 <div class="p-4 border rounded">
 
                     @Html.AntiForgeryToken()
@@ -52,6 +52,7 @@
                     @Html.HiddenFor(model => model.NhanVien.NguoiTao)
                     @Html.HiddenFor(model => model.OldPass)
 
+                    <input type="hidden" name="roleName" id="hidNVEdit" />
                     <div class="form-group row">
 
                         <div class="col-6">

@@ -28,7 +28,7 @@ $.stringToDate = function (_date, _format, _delimiter) {
 var indexController = {
     init: function () {
         indexController.LoadData();
-        //setInterval(function () { indexController.LoadData(); }, 10000);
+        setInterval(function () { indexController.LoadData(); }, 10000);
     },
 
     registerEvent: function () {
@@ -75,7 +75,7 @@ var indexController = {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                console.log(response.data);
+                
                 if (response.status) {
                     //console.log(response.data);
                     var data = response.data;

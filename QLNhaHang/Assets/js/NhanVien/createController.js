@@ -67,6 +67,33 @@ var createController = {
             }
         });
     },
+
+    loadNoiLamViecByRole: function (optionValue) {
+        $('.ddlKV').html('');
+        var option = '';
+
+        $.ajax({
+            url: '/Accounts/GetNoiLamViecByRole',
+            type: 'POST',
+            data: {
+                roleName: optionValue
+            },
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response);
+                //var data = JSON.parse(response.data);
+                
+                //$.each(data, function (i, item) {
+                //    option = option + '<option value="' + item.Id + '">' + item.Name + '</option>'; //chinhanh1
+
+                //});
+                //$('.ddlKV').html(option);
+                ////// load MaNV again
+                //var optionValue = $('.ddlKV').val();
+                //createController.loadMaNV(optionValue);
+            }
+        });
+    },
     loadMaNV: function (optionValue) {
         $.ajax({
             url: '/Accounts/GetNextMaNV',

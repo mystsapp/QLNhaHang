@@ -37,7 +37,7 @@ namespace QLNhaHang.Data.Models
         //[ForeignKey("ChiNhanhId")]
         //public virtual ChiNhanh ChiNhanh { get; set; }
 
-        [MaxLength(15), Column(TypeName = "varchar")]
+        [MaxLength(15), Column(TypeName = "nvarchar")]
         [StringLength(15)]
         public string Role { get; set; }
 

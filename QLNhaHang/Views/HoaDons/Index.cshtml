@@ -95,7 +95,8 @@
                                 @*</form>*@
                             </th>
                             <th>STT</th>
-                            <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().MaHD)</th>
+                            @*<th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().MaHD)</th>*@
+                            <th>Số HD</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().TenKH)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().Ban.TenBan)</th>
                             <th>@Html.DisplayNameFor(m => m.HoaDons.FirstOrDefault().NgayTao)</th>
@@ -132,7 +133,8 @@
                                 </td>
                                 <td class="tdVal" data-id="@item.MaHD">@i</td>
 
-                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>
+                                @*<td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.MaHD)</td>*@
+                                <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.So)</td>
                                 <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.TenKH)</td>
                                 <td class="tdVal" data-id="@item.MaHD">@Html.DisplayFor(m => item.Ban.TenBan)</td>
                                 <td class="tdVal" data-id="@item.MaHD">@Html.Raw(item.NgayTao.Value.ToString("dd/MM/yyyy"))</td>

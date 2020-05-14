@@ -468,6 +468,14 @@
     <Compile Include="Migrations\202005120203597_addNoiLamViec.designer.cs">
       <DependentUpon>202005120203597_addNoiLamViec.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005141151590_roleNvarchar.cs" />
+    <Compile Include="Migrations\202005141151590_roleNvarchar.designer.cs">
+      <DependentUpon>202005141151590_roleNvarchar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005141200542_roleNvarcharNV.cs" />
+    <Compile Include="Migrations\202005141200542_roleNvarcharNV.designer.cs">
+      <DependentUpon>202005141200542_roleNvarcharNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
@@ -2258,6 +2266,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005120203597_addNoiLamViec.resx">
       <DependentUpon>202005120203597_addNoiLamViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005141151590_roleNvarchar.resx">
+      <DependentUpon>202005141151590_roleNvarchar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005141200542_roleNvarcharNV.resx">
+      <DependentUpon>202005141200542_roleNvarcharNV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

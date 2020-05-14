@@ -18,6 +18,7 @@ var editController = {
             var roleId = $(this).val();
             editController.loadKVByRole(roleId);
             editController.onOffDdlNoiLamViec(roleId);
+            
         });
         
         $('.ddlKV').off('change').on('change', function () {
@@ -85,6 +86,7 @@ var editController = {
 
     onOffDdlNoiLamViec: function (optionValue) {
         if (optionValue !== "Users") {
+            
             $('.ddlNoiLamViec').prop('disabled', true);
         }
         else {
