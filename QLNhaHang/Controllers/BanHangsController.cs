@@ -58,7 +58,7 @@ namespace QLNhaHang.Controllers
                 if (user.Role != "Users")
                 {
                     var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
-                    foreach(var vanPhong in vanPhongs)
+                    foreach (var vanPhong in vanPhongs)
                     {
                         var khuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vanPhong.Id).ToList();
                         if (khuVucs.Any())
@@ -66,33 +66,33 @@ namespace QLNhaHang.Controllers
                             BanHangVM.KhuVucs.AddRange(khuVucs);
                         }
                     }
-                    
+
                     foreach (var khuVuc in BanHangVM.KhuVucs)
                     {
-                        BanHangVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name});
+                        BanHangVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
                     }
                     BanHangVM.Bans = BanHangVM.Bans.Where(x => x.TenVP.Equals(user.KhuVuc.VanPhong.Name)).ToList();
                 }
                 else
                 {
                     BanHangVM.KhuVucs = JsonConvert.DeserializeObject<List<KhuVuc>>(Session["listKV"].ToString());
-                    foreach(var khuVuc in BanHangVM.KhuVucs)
+                    foreach (var khuVuc in BanHangVM.KhuVucs)
                     {
                         bans.AddRange(_unitOfWork.banRepository.Find(x => x.KhuVucId == khuVuc.Id));
                     }
-                    if(bans.Count != 0)
+                    if (bans.Count != 0)
                     {
                         BanHangVM.Bans = bans;
                     }
-                    
+
                 }
-                    
+
             }
             else
             {
                 foreach (var khuVuc in _unitOfWork.khuVucRepository.GetAll().ToList())
                 {
-                    BanHangVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name});
+                    BanHangVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
                 }
             }
             // sau khi chon khu vuc
@@ -119,12 +119,17 @@ namespace QLNhaHang.Controllers
                                                   .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBanFrom))
                                                   .OrderBy(x => x.ThucDon.TenMon)
                                                   .ToList();
-                
+
                 var monInBanTo = _unitOfWork.monDaGoiRepository
                                                   .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBanTo))
                                                   .OrderBy(x => x.ThucDon.TenMon)
                                                   .ToList();
-                if(monInBanTo.Count == 0)
+                if (monInBanFrom.Any(x => !x.DaLam) || monInBanTo.Any(x => !x.DaLam))
+                {
+                    SetAlert("Còn món nào đó chưa làm", "error");
+                    return RedirectToAction(nameof(Index)/*, new { idKhuVuc = 0}*/);
+                }
+                if (monInBanTo.Count == 0)
                 {
                     var banTo = _unitOfWork.banRepository.GetByStringId(maBanTo);
                     banTo.Flag = true;
@@ -132,8 +137,8 @@ namespace QLNhaHang.Controllers
                     banFrom.Flag = false;
                     _unitOfWork.banRepository.Update(banTo);
                     _unitOfWork.banRepository.Update(banFrom);
-                    
-                    foreach(var item in monInBanFrom)
+
+                    foreach (var item in monInBanFrom)
                     {
                         item.MaBan = maBanTo;
                     }
@@ -157,42 +162,54 @@ namespace QLNhaHang.Controllers
                 }
                 else
                 {
-                    
-                    foreach(var itemFrom in monInBanFrom)
-                    {
-                        foreach (var itemTo in monInBanTo)
-                        {
-                            if(itemFrom.ThucDonId == itemTo.ThucDonId)
-                            {
-                                itemTo.SoLuong += itemFrom.SoLuong;
-                                itemTo.PhuPhi += itemFrom.PhuPhi;
-                                itemTo.ThanhTien += itemFrom.ThanhTien;
-                                _unitOfWork.monDaGoiRepository.Update(itemTo);
-                            }
-                            else
-                            {
-                                var mon = new MonDaGoi()
-                                {
-                                    SoLuong = itemFrom.SoLuong,
-                                    ThanhTien = itemFrom.ThanhTien,
-                                    GiaTien = itemFrom.GiaTien,
-                                    PhuPhi = itemFrom.PhuPhi,
-                                    PhiPhucVu = itemFrom.PhiPhucVu,
-                                    MaBan = maBanTo,
-                                    ThucDonId = itemFrom.ThucDonId
-                                };
-                                // kt tenmon xem co trong ds mon cua banTo ko
-                                if(!_unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBanTo)).Any(x => x.ThucDonId == mon.ThucDonId))
-                                {
-                                    _unitOfWork.monDaGoiRepository.Create(mon);
-                                    _unitOfWork.Complete();
-                                }
-                                
-                            }
-                        }
-                       
-                    }
+                    List<MonDaGoi> listMonDaGoiFrom = monInBanFrom;
                     _unitOfWork.monDaGoiRepository.DeleteRange(monInBanFrom);
+                    _unitOfWork.Complete();
+                    // cong don monInBanFrom to monInBanTo
+                    foreach (var itemFrom in listMonDaGoiFrom)
+                    {
+                     
+                        itemFrom.MaBan = monInBanTo.FirstOrDefault().MaBan;
+                        _unitOfWork.monDaGoiRepository.Create(itemFrom);
+                        _unitOfWork.Complete();
+                    }
+
+                    //foreach (var itemFrom in monInBanFrom)
+                    //{
+                    //    foreach (var itemTo in monInBanTo)
+                    //    {
+                    //        if (itemFrom.ThucDonId == itemTo.ThucDonId)
+                    //        {
+                    //            itemTo.SoLuong += itemFrom.SoLuong;
+                    //            itemTo.PhuPhi += itemFrom.PhuPhi;
+                    //            itemTo.ThanhTien += itemFrom.ThanhTien;
+                    //            _unitOfWork.monDaGoiRepository.Update(itemTo);
+                    //        }
+                    //        else
+                    //        {
+                    //            var mon = new MonDaGoi()
+                    //            {
+                    //                SoLuong = itemFrom.SoLuong,
+                    //                ThanhTien = itemFrom.ThanhTien,
+                    //                GiaTien = itemFrom.GiaTien,
+                    //                PhuPhi = itemFrom.PhuPhi,
+                    //                PhiPhucVu = itemFrom.PhiPhucVu,
+                    //                MaBan = maBanTo,
+                    //                ThucDonId = itemFrom.ThucDonId
+                    //            };
+                    //            // kt tenmon xem co trong ds mon cua banTo ko
+                    //            if (!_unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBanTo)).Any(x => x.ThucDonId == mon.ThucDonId))
+                    //            {
+                    //                _unitOfWork.monDaGoiRepository.Create(mon);
+                    //                _unitOfWork.Complete();
+                    //            }
+
+                    //        }
+                    //    }
+
+                    //}
+                    
+                   
                     //////////// update flag ///////
                     var banFrom = _unitOfWork.banRepository.GetByStringId(maBanFrom);
                     banFrom.Flag = false;
@@ -219,7 +236,7 @@ namespace QLNhaHang.Controllers
         public JsonResult MonInBan(string maBan)
         {
             var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan)).ToList();
-            
+
             if (mons.Count() > 0)
             {
                 return Json(new

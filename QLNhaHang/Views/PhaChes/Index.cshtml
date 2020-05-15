@@ -67,7 +67,7 @@
             </div>
             <script id="data-template" type="x-tmpl-mustache">
 
-                <tr class="cursor-pointer" data-id="{{lamRoi}}" >
+                <tr class="cursor-pointer" data-id="{{lamRoi}}">
                     <td>{{sTT}}</td>
                     <td>{{tenBan}}</td>
                     <td>{{tenMon}}</td>
@@ -76,19 +76,19 @@
                     <td>{{thanhTien}}</td>
                     <td>{{lanGui}}</td>
                     <td>{{{daGui}}}</td>
-                    <td >{{{daLam}}}</td>
+                    <td>{{{daLam}}}</td>
                     <td>
                         <form action="/PhaChes/Confirm" method="post" class="frmDaLam">
-                            <input type="hidden" name="idMon" value="{{idMon}}" />
-                            <button  type="button" class="btn btn-primary btn-sm btnConfirm" data-id="{{lamRoi}}"  title="Confirm"><i class="fas fa-share-square"></i></button>
+                            <input type="hidden" name="idMon" class="class1" value="{{idMon}}" />
+                            <button type="button" class="btn btn-primary btn-sm btnConfirm" data-abc="{{idMon}}" data-id="{{lamRoi}}" title="Confirm"><i class="fas fa-share-square"></i></button>
                         </form>
                     </td>
                     <td align="center">
                         @*<input type="checkbox" class="custom-control-input" />*@
-                        
-                            <input type="checkbox" class="ckId" data-id="{{idMon}}" />
-                            
-                        
+
+                        <input type="checkbox" class="ckId" data-id="{{idMon}}" />
+
+
                     </td>
                 </tr>
             </script>

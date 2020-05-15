@@ -1903,6 +1903,7 @@
     <Content Include="Assets\lib\jquery\LICENSE.txt" />
     <Content Include="Assets\lib\mustache.js\mustache.js" />
     <Content Include="Assets\lib\mustache.js\mustache.min.js" />
+    <Content Include="Assets\lib\mustache.min.js" />
     <Content Include="Assets\lib\numeral.js\locales.min.js" />
     <Content Include="Assets\lib\numeral.js\locales\be-nl.min.js" />
     <Content Include="Assets\lib\numeral.js\locales\bg.min.js" />

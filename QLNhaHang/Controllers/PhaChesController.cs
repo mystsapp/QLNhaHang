@@ -26,7 +26,11 @@ namespace QLNhaHang.Controllers
         // GET: PhaChes
         public ActionResult Index()
         {
-
+            var user = (NhanVien)Session["UserSession"];
+            if (user.NoiLamViec == "Bếp")
+            {
+                return View("~/Views/Shared/AccessDeny.cshtml");
+            }
             return View();
         }
 

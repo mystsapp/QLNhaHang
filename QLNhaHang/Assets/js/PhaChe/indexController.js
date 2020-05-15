@@ -49,10 +49,12 @@ var indexController = {
 
         $('.btnConfirm').off('click').on('click', function () {
             //alert($(this).data('id'));
+            
             if ($(this).data('id')) {
                 return;
             }
             else {
+                $('.class1').val($(this).data('abc'));
                 $('.frmDaLam').submit();
             }
         });

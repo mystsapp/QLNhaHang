@@ -58,7 +58,7 @@ namespace QLNhaHang.Controllers
                 NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
 
             }
-            
+
             NhanVienVM.NhanViens = _unitOfWork.nhanVienRepository.ListNhanVien(user.Role, user.KhuVuc.VanPhong.Name, gioiTinh, searchString, page, idVP);
             /////// for delete //////
             return View(NhanVienVM);
@@ -76,7 +76,7 @@ namespace QLNhaHang.Controllers
             {
                 if (user.Role.Equals("Admins"))
                 {
-                    foreach(var khuVuc in NhanVienVM.KhuVucs)
+                    foreach (var khuVuc in NhanVienVM.KhuVucs)
                     {
                         NhanVienVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
                     }
@@ -107,10 +107,10 @@ namespace QLNhaHang.Controllers
                 }
                 else
                 {
-                    
+
                     NhanVienVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
                     List<KhuVuc> listKv = new List<KhuVuc>();
-                    foreach(var vanPhong in NhanVienVM.VanPhongs)
+                    foreach (var vanPhong in NhanVienVM.VanPhongs)
                     {
                         listKv.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == vanPhong.Id));
                     }
@@ -276,49 +276,69 @@ namespace QLNhaHang.Controllers
 
             if (roleName == "Users" || roleName == "Admins")
             {
-                if(user.Role != "Admins")
+                if (user.Role != "Admins")
                 {
                     // admin khu vuc , chac chan khong phai Users vi Users da duoc redirect Diny View
-                    
-                        var vanPhongByRoles = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role));
-                        var khuVucByVanPhongs = new List<KhuVuc>();
-                        foreach (var vanPhong in vanPhongByRoles)
-                        {
-                            var khuVuc = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
-                            if (khuVuc.Count > 0)
-                            {
-                                khuVucByVanPhongs.AddRange(khuVuc);
-                            }
 
-                        }
-                        return Json(new
+                    var vanPhongByRoles = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role));
+                    //var khuVucByVanPhongs = new List<KhuVuc>();
+
+                    var khuVucByVanPhongs = new List<LoaiThucDonListViewModel>();
+                    foreach (var vanPhong in vanPhongByRoles)
+                    {
+                        var khuVucs = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
+                        if (khuVucs.Count > 0)
                         {
-                            data = JsonConvert.SerializeObject(khuVucByVanPhongs)
-                        }, JsonRequestBehavior.AllowGet);
-                    
+                            //khuVucByVanPhongs.AddRange(khuVuc);
+                            foreach (var khuVuc in khuVucs)
+                            {
+                                khuVucByVanPhongs.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
+                            }
+                        }
+
+                    }
+                    return Json(new
+                    {
+                        data = JsonConvert.SerializeObject(khuVucByVanPhongs)
+                    }, JsonRequestBehavior.AllowGet);
+
                     // admin khu vuc
                     // Users khong duoc quyen tao moi NV
                 }
                 else
                 {
                     var listKVs = NhanVienVM.KhuVucs;
+                    var khuVucByVanPhongs = new List<LoaiThucDonListViewModel>();
+                    if (listKVs.Count > 0)
+                    {
+                        //khuVucByVanPhongs.AddRange(khuVuc);
+                        foreach (var khuVuc in listKVs)
+                        {
+                            khuVucByVanPhongs.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
+                        }
+                    }
                     return Json(new
                     {
-                        data = JsonConvert.SerializeObject(listKVs)
+                        data = JsonConvert.SerializeObject(khuVucByVanPhongs)
                     }, JsonRequestBehavior.AllowGet);
                 }
-                
+
             }
             else
             {
                 var vanPhongByRoles = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(roleName));
-                var khuVucByVanPhongs = new List<KhuVuc>();
+                //var khuVucByVanPhongs = new List<KhuVuc>();
+                var khuVucByVanPhongs = new List<LoaiThucDonListViewModel>();
                 foreach (var vanPhong in vanPhongByRoles)
                 {
-                    var khuVuc = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
-                    if (khuVuc.Count > 0)
+                    var khuVucs = NhanVienVM.KhuVucs.Where(x => x.VanPhongId == vanPhong.Id).ToList();
+                    if (khuVucs.Count > 0)
                     {
-                        khuVucByVanPhongs.AddRange(khuVuc);
+                        //khuVucByVanPhongs.AddRange(khuVuc);
+                        foreach (var khuVuc in khuVucs)
+                        {
+                            khuVucByVanPhongs.Add(new LoaiThucDonListViewModel() { Id = khuVuc.Id, Name = khuVuc.Name + " - " + khuVuc.VanPhong.Name });
+                        }
                     }
 
                 }
@@ -375,7 +395,7 @@ namespace QLNhaHang.Controllers
                 new GioiTinhViewModel() { Id = "Nử", Name = "Nử" }
             };
         }
-        
+
         private List<NoiLamViecViewModel> ListNoiLamViec()
         {
             return new List<NoiLamViecViewModel>()

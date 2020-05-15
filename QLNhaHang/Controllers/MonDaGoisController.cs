@@ -160,6 +160,29 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
                                               .ToList();
+
+            /////// cong don /////////////
+            var arrayList = MonDaGoiVM.MonDaGois.ToArray();
+        quaylai:
+            for (int i = 0; i < arrayList.Length; i++)
+            {
+                if (i < arrayList.Length - 1)
+                {
+                    if (arrayList[i].ThucDonId == arrayList[i + 1].ThucDonId)
+                    {
+                        arrayList[i].SoLuong = arrayList[i].SoLuong + arrayList[i + 1].SoLuong;
+                        arrayList[i].PhuPhi = arrayList[i].PhuPhi + arrayList[i + 1].PhuPhi;
+                        arrayList[i].ThanhTien = arrayList[i].ThanhTien + arrayList[i + 1].ThanhTien;
+                        arrayList = arrayList.Where(val => val != arrayList[i + 1]).ToArray();
+                        goto quaylai;
+
+                    }
+
+                }
+            }
+            MonDaGoiVM.MonDaGois = arrayList.ToList();
+            /////// cong don /////////////
+
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             MonDaGoiVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(user.KhuVuc.VanPhongId);
             MonDaGoiVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(user.MaNV);
@@ -219,6 +242,28 @@ namespace QLNhaHang.Controllers
             {
                 return Redirect(strUrl);
             }
+            /////// cong don /////////////
+            var arrayList = MonDaGoiVM.MonDaGois.ToArray();
+        quaylai:
+            for (int i = 0; i < arrayList.Length; i++)
+            {
+                if (i < arrayList.Length - 1)
+                {
+                    if (arrayList[i].ThucDonId == arrayList[i + 1].ThucDonId)
+                    {
+                        arrayList[i].SoLuong = arrayList[i].SoLuong + arrayList[i + 1].SoLuong;
+                        arrayList[i].PhuPhi = arrayList[i].PhuPhi + arrayList[i + 1].PhuPhi;
+                        arrayList[i].ThanhTien = arrayList[i].ThanhTien + arrayList[i + 1].ThanhTien;
+                        arrayList = arrayList.Where(val => val != arrayList[i + 1]).ToArray();
+                        goto quaylai;
+
+                    }
+
+                }
+            }
+            MonDaGoiVM.MonDaGois = arrayList.ToList();
+            /////// cong don /////////////
+            
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             //////////// add to HD, CTHD ///////////////
             /////maHD
@@ -303,7 +348,7 @@ namespace QLNhaHang.Controllers
             {
                 lanGuiSau = monDaGuis.OrderByDescending(x => x.LanGui).FirstOrDefault().LanGui;
             }
-                
+
             foreach (var mon in monChuaGois)
             {
                 mon.DaGui = true;
@@ -316,7 +361,7 @@ namespace QLNhaHang.Controllers
                 // gui roi
                 else
                 {
-                    mon.LanGui = lanGuiSau + 1; 
+                    mon.LanGui = lanGuiSau + 1;
                 }
 
                 _unitOfWork.monDaGoiRepository.Update(mon);
