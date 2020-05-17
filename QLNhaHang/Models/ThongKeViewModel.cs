@@ -19,6 +19,10 @@ namespace QLNhaHang.Models
         public string DaIn { get; set; }
         public List<DaInModel> DaInModels { get; set; }
         public List<VanPhong> VanPhongs { get; set; }
+        public List<KhuVuc> KhuVucs { get; set; }
+        public List<ThucDon> ThucDons { get; set; }
         public int VanPhongId { get; set; }
+        public int KhuVucId { get; set; }
+        public int ThucDonId { get; set; }
     }
 }

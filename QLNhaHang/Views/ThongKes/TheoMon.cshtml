@@ -1,9 +1,10 @@
 ﻿@model QLNhaHang.Models.ThongKeViewModel
-
 @{
-    ViewBag.Title = "TheoNgay";
+    ViewBag.Title = "TheoMon";
+    //Layout = "~/Views/Shared/_LayoutPage_HauCan.cshtml";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -28,7 +29,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thống kê theo ngày</h3>
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Thống kê theo món</h3>
 
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -52,30 +53,40 @@
 
                         <div class="col-md-2">
                             @Html.LabelFor(model => model.TuNgay, htmlAttributes: new { @class = "control-label" })
-                            @Html.TextBoxFor(model => model.TuNgay, null, new { @class = "form-control maskInput", @value = ViewBag.searchFromDate })
+                            @Html.TextBoxFor(model => model.TuNgay, null, new { @class = "form-control maskInput txtTuNgay", @value = ViewBag.searchFromDate })
                             @Html.ValidationMessageFor(model => model.TuNgay, "", new { @class = "text-danger" })
                         </div>
 
 
                         <div class="col-md-2">
                             @Html.LabelFor(model => model.DenNgay, htmlAttributes: new { @class = "control-label" })
-                            @Html.TextBoxFor(model => model.DenNgay, null, new { @class = "form-control maskInput", @value = ViewBag.searchToDate })
+                            @Html.TextBoxFor(model => model.DenNgay, null, new { @class = "form-control maskInput txtDenNgay", @value = ViewBag.searchToDate })
                             @Html.ValidationMessageFor(model => model.DenNgay, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-2">
+                            @*@Html.LabelFor(model => model.VanPhongId, htmlAttributes: new { @class = "control-label" })*@
                             <label class="control-label">Cơ sở</label>
                             @Html.DropDownListFor(model => model.VanPhongId,
                                                     new SelectList(Model.VanPhongs, "Id", "Name", @ViewBag.vanPhong),
-                                                    htmlAttributes: new { @class = "form-control border-input " })
+                                                    htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
                         </div>
-                        
+
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.DaIn, htmlAttributes: new { @class = "control-label" })
-                            @Html.DropDownListFor(model => model.DaIn,
-                                                    new SelectList(Model.DaInModels, "Id", "Name", @ViewBag.daIn),
+                            <label class="control-label">Khu vực</label>
+                            @Html.DropDownListFor(model => model.KhuVucId,
+                                                    new SelectList(Model.KhuVucs, "Id", "Name", @ViewBag.khuVuc),
+                                                    htmlAttributes: new { @class = "form-control border-input ddlKhuVuc" })
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="control-label">Buffet</label>
+                            @Html.DropDownListFor(model => model.ThucDonId,
+                                                    new SelectList(Model.ThucDons, "Id", "TenMon", @ViewBag.thucDon),
                                                     htmlAttributes: new { @class = "form-control border-input " })
                         </div>
+
+
                         <div class="form-group">
 
                             <div class="col-md-offset-2 col-md-10">
@@ -89,9 +100,19 @@
                 </div>
             }
 
+            <form action="/ThongKes/TheoMon" id="frmTheoMon">
+                <input type="hidden" name="tuNgay" id="hidTuNgay" />
+                <input type="hidden" name="denNgay" id="hidDenNgay" />
+                <input type="hidden" name="vanPhongId" id="hidVanPhongId" />
+                <input type="hidden" name="khuVucId" id="hidKhuVucId" />
+            </form>
+
         </div>
     </div>
     <!-- /.card -->
 </section>
 
+@section Scripts{
 
+    <script src="~/Assets/js/ThongKe/theoMonController.js"></script>
+}

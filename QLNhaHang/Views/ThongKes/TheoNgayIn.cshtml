@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="col-md-2">
-                            @Html.LabelFor(model => model.VanPhongId, htmlAttributes: new { @class = "control-label" })
+                            <label class="control-label">Cơ sở</label>
                             @Html.DropDownListFor(model => model.VanPhongId,
                                                     new SelectList(Model.VanPhongs, "Id", "Name", @ViewBag.vanPhong),
                                                     htmlAttributes: new { @class = "form-control border-input " })

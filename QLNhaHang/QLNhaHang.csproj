@@ -578,6 +578,7 @@
     <Content Include="Assets\js\Role\createController.js" />
     <Content Include="Assets\js\Role\editController.js" />
     <Content Include="Assets\js\Role\indexController.js" />
+    <Content Include="Assets\js\ThongKe\theoMonController.js" />
     <Content Include="Assets\js\ThongKe\theoNgayController.js" />
     <Content Include="Assets\js\KhuVuc\createController.js" />
     <Content Include="Assets\js\KhuVuc\editController.js" />
@@ -2201,6 +2202,7 @@
     <Content Include="Views\PhaChes\PrintListMon.cshtml" />
     <Content Include="Views\Beps\Index.cshtml" />
     <Content Include="Views\Beps\PrintListMon.cshtml" />
+    <Content Include="Views\ThongKes\TheoMon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

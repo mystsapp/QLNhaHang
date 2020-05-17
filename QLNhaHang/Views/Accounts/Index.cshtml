@@ -66,11 +66,11 @@
                             </div>
 
                             @*<div class="col-3">
-            Giới tính
-            @Html.DropDownList("gioiTinh",
-                     new SelectList(Model.GioiTinhs, "Id", "Name"),
-                     htmlAttributes: new { @class = "form-control border-input gioiTinh" })
-        </div>*@
+                                    Giới tính
+                                    @Html.DropDownList("gioiTinh",
+                                             new SelectList(Model.GioiTinhs, "Id", "Name"),
+                                             htmlAttributes: new { @class = "form-control border-input gioiTinh" })
+                                </div>*@
 
                             @*<input type="hidden" name="gioiTinh" id="hidGioiTinh" />*@
                             <input type="hidden" name="maNV" id="hidMaNV" />
@@ -377,6 +377,18 @@
             }
         }
     </script>
+
+    <script>
+        $('#listAll').DataTable({
+            "paging": false,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    </script>
+
     <style>
         .cursor-pointer:hover {
             /*background-color: #3E5C9A;*/
