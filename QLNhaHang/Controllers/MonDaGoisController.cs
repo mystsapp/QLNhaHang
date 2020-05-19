@@ -159,6 +159,7 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.StrUrl = strUrl;
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+                                              .OrderBy(x => x.ThucDon.TenMon)
                                               .ToList();
 
             /////// cong don /////////////
