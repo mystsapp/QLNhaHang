@@ -51,7 +51,7 @@ namespace QLNhaHang.Controllers
             ViewBag.strUrl = Request.Url.AbsoluteUri.ToString();
 
             BanHangVM.Bans = _unitOfWork.banRepository.GetAll().ToList();
-            ///// ly KhuVuc va ban
+            ///// lay KhuVuc va ban
             if (user.Role != "Admins")
             {
                 List<Ban> bans = new List<Ban>();
@@ -75,15 +75,11 @@ namespace QLNhaHang.Controllers
                 }
                 else
                 {
-                    BanHangVM.KhuVucs = JsonConvert.DeserializeObject<List<KhuVuc>>(Session["listKV"].ToString());
-                    foreach (var khuVuc in BanHangVM.KhuVucs)
-                    {
-                        bans.AddRange(_unitOfWork.banRepository.Find(x => x.KhuVucId == khuVuc.Id));
-                    }
-                    if (bans.Count != 0)
-                    {
-                        BanHangVM.Bans = bans;
-                    }
+                    var kv = _unitOfWork.khuVucRepository.GetById(user.KhuVucId);
+                    BanHangVM.LoaiViewModels.Add(new LoaiThucDonListViewModel() { Id = kv.Id, Name = kv.Name });
+
+                    BanHangVM.Bans = _unitOfWork.banRepository.Find(x => x.KhuVucId == user.KhuVucId).ToList();
+
 
                 }
 
@@ -168,7 +164,7 @@ namespace QLNhaHang.Controllers
                     // cong don monInBanFrom to monInBanTo
                     foreach (var itemFrom in listMonDaGoiFrom)
                     {
-                     
+
                         itemFrom.MaBan = monInBanTo.FirstOrDefault().MaBan;
                         _unitOfWork.monDaGoiRepository.Create(itemFrom);
                         _unitOfWork.Complete();
@@ -208,8 +204,8 @@ namespace QLNhaHang.Controllers
                     //    }
 
                     //}
-                    
-                   
+
+
                     //////////// update flag ///////
                     var banFrom = _unitOfWork.banRepository.GetByStringId(maBanFrom);
                     banFrom.Flag = false;

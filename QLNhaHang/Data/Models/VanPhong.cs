@@ -15,7 +15,7 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Mã")]
         public string MaVP { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên cơ sở không được để trống.")]
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]
         [DisplayName("Cơ sở")]

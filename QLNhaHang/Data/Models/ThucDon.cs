@@ -42,5 +42,11 @@ namespace QLNhaHang.Data.Models
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
         public string NguoiTao { get; set; }
+
+        [Required(ErrorMessage = "Tên cơ sở không được để trống.")]
+        [MaxLength(100), Column(TypeName = "nvarchar")]
+        [StringLength(100)]
+        [DisplayName("Cơ sở")]
+        public string VanPhong { get; set; }
     }
 }

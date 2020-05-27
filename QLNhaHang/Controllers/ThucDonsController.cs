@@ -1,4 +1,5 @@
-﻿using QLNhaHang.Data.Repositories;
+﻿using QLNhaHang.Data.Models;
+using QLNhaHang.Data.Repositories;
 using QLNhaHang.Models;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,16 @@ namespace QLNhaHang.Controllers
             {
                 ThucDon = new Data.Models.ThucDon(),
                 LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll().ToList(),
-                LoaiThucDonListViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --"} }
+                LoaiThucDonListViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } },
+                VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
             };
         }
         // GET: KhachHangs
         public ActionResult Index(/*int id = 0, */string searchString = null, int page = 1, int ddlLoai = 0)
         {
+            var user = (NhanVien)Session["UserSession"];
             ////// moi load vao
-            if(ddlLoai == 0)
+            if (ddlLoai == 0)
             {
                 ViewBag.idLoai = 0;
             }
@@ -63,13 +66,27 @@ namespace QLNhaHang.Controllers
 
             //}
 
-            ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(searchString, page, ddlLoai);
+            ThucDonVM.ThucDons = _unitOfWork.thucDonRepository.ListThucDon(user.Role, user.KhuVuc.VanPhong.Name, searchString, page, ddlLoai);
 
             return View(ThucDonVM);
         }
 
         public ActionResult Create(string strUrl)
         {
+            ////////// add VP /////////////////
+            var user = (NhanVien)Session["UserSession"];
+            if (user.Role != "Admins")
+            {
+                if (user.Role != "Users")
+                {
+                    ThucDonVM.VanPhongs = ThucDonVM.VanPhongs.Where(x => x.Role == user.Role).ToList();
+                }
+                else
+                {
+                    ThucDonVM.VanPhongs = ThucDonVM.VanPhongs.Where(x => x.Id == user.KhuVuc.VanPhongId).ToList();
+                }
+            }
+            ////////// add VP /////////////////
             ThucDonVM.StrUrl = strUrl;
             return View(ThucDonVM);
         }
@@ -103,6 +120,21 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, int id)
         {
+            ////////// add VP /////////////////
+            var user = (NhanVien)Session["UserSession"];
+
+            if (user.Role != "Admins")
+            {
+                if (user.Role != "Users")
+                {
+                    ThucDonVM.VanPhongs = ThucDonVM.VanPhongs.Where(x => x.Role == user.Role).ToList();
+                }
+                else
+                {
+                    ThucDonVM.VanPhongs = ThucDonVM.VanPhongs.Where(x => x.Id == user.KhuVuc.VanPhongId).ToList();
+                }
+            }
+            ////////// add VP /////////////////
 
             ThucDonVM.ThucDon = _unitOfWork.thucDonRepository.GetById(id);
             if (ThucDonVM.ThucDon == null)
@@ -113,6 +145,7 @@ namespace QLNhaHang.Controllers
 
             ThucDonVM.StrUrl = strUrl;
             ThucDonVM.GiaTien = ThucDonVM.ThucDon.GiaTien.ToString().Split('.')[0];
+
 
             return View(ThucDonVM);
         }

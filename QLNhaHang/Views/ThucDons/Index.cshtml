@@ -95,7 +95,7 @@
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().DonViTinh)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().LoaiThucDon.NoiLamViec)</th>
                                 <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().LoaiThucDon.TenLoai)</th>
-                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().GhiChu)</th>
+                                <th>@Html.DisplayNameFor(m => m.ThucDons.FirstOrDefault().VanPhong)</th>
                                 <th>#</th>
                             </tr>
                         </thead>
@@ -112,7 +112,7 @@
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.DonViTinh)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.LoaiThucDon.NoiLamViec)</td>
                                     <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.LoaiThucDon.TenLoai)</td>
-                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.GhiChu)</td>
+                                    <td class="tdVal" data-id="@item.Id">@Html.DisplayFor(m => item.VanPhong)</td>
                                     <td>
                                         @*<a class="btn btn-primary" href="@Url.Action("Edit", "KhachHangs", new { maKH = item.MaKH, strUrl = Model.StrUrl })"><i class="fas fa-edit"></i></a>*@
                                         <div class="btn-group">

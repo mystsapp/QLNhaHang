@@ -20,5 +20,6 @@ namespace QLNhaHang.Models
         public decimal GiaTienD { get; set; }
 
         public List<LoaiThucDonListViewModel> LoaiThucDonListViewModels { get; set; }
+        public List<VanPhong> VanPhongs { get; set; }
     }
 }

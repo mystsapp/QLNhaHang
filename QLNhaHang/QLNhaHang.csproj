@@ -476,6 +476,14 @@
     <Compile Include="Migrations\202005141200542_roleNvarcharNV.designer.cs">
       <DependentUpon>202005141200542_roleNvarcharNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005270420136_addVPToMenu.cs" />
+    <Compile Include="Migrations\202005270420136_addVPToMenu.designer.cs">
+      <DependentUpon>202005270420136_addVPToMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005270433410_fixVPToMenu.cs" />
+    <Compile Include="Migrations\202005270433410_fixVPToMenu.designer.cs">
+      <DependentUpon>202005270433410_fixVPToMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
@@ -2275,6 +2283,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005141200542_roleNvarcharNV.resx">
       <DependentUpon>202005141200542_roleNvarcharNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005270420136_addVPToMenu.resx">
+      <DependentUpon>202005270420136_addVPToMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005270433410_fixVPToMenu.resx">
+      <DependentUpon>202005270433410_fixVPToMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

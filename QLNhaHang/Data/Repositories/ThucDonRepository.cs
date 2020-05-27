@@ -1,5 +1,6 @@
 ﻿using Data.Interfaces;
 using PagedList;
+using QLNhaHang.Controllers;
 using QLNhaHang.Data.Models;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace QLNhaHang.Data.Repositories
 {
     public interface IThucDonRepository : IRepository<ThucDon>
     {
-        IPagedList<ThucDon> ListThucDon(string searchString, int? page, int ddlLoai);
+        IPagedList<ThucDon> ListThucDon(string role, string roleVP, string searchString, int? page, int ddlLoai);
     }
     public class ThucDonRepository : Repository<ThucDon>, IThucDonRepository
     {
@@ -18,7 +19,7 @@ namespace QLNhaHang.Data.Repositories
         {
         }
 
-        public IPagedList<ThucDon> ListThucDon(string searchString, int? page, int ddlLoai)
+        public IPagedList<ThucDon> ListThucDon(string role, string roleVP, string searchString, int? page, int ddlLoai)
         {
             // return a 404 if user browses to before the first page
             if (page != 0 && page < 1)
@@ -27,19 +28,37 @@ namespace QLNhaHang.Data.Repositories
             // retrieve list from database/whereverand
 
             var list = GetAllIncludeOne(x => x.LoaiThucDon).AsQueryable();
+
+            if (role != "Admins")
+            {
+                if (role == "Users")
+                {
+                    list = list.Where(x => x.VanPhong == roleVP);
+                }
+                else
+                {
+                    var vanPhongs = _context.VanPhongs.Where(x => x.Role == role).ToList();
+                    List<ThucDon> thucDons = new List<ThucDon>();
+                    foreach(var item in vanPhongs)
+                    {
+                        thucDons.AddRange(_context.ThucDons.Where(x => x.VanPhong == item.Name));
+                    }
+                    list = thucDons.AsQueryable();
+                }
+            }
             //list = list.Where(x => x.NguoiCap == hoTen);
-            if(ddlLoai != 0)
+            if (ddlLoai != 0)
             {
                 list = list.Where(x => x.MaLoaiId == ddlLoai);
             }
             if (!string.IsNullOrEmpty(searchString))
             {
                 list = list.Where(x => x.TenMon.ToLower().Contains(searchString.ToLower()) ||
-                                       x.LoaiThucDon.TenLoai.ToLower().Contains(searchString.ToLower()) || 
+                                       x.LoaiThucDon.TenLoai.ToLower().Contains(searchString.ToLower()) ||
                                        x.DonViTinh.ToLower().Contains(searchString.ToLower()));
             }
             decimal donGia;
-            if(decimal.TryParse(searchString, out donGia))
+            if (decimal.TryParse(searchString, out donGia))
             {
                 list = list.Where(x => x.GiaTien == donGia);
             }

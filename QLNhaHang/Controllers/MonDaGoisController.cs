@@ -34,9 +34,28 @@ namespace QLNhaHang.Controllers
         // GET: MonDaGois
         public ActionResult GoiMon(string maBan = null, string strUrl = null, int maTD = 0, int soLuong = 0, int ddlLoai = 0)
         {
-
+            var user = (NhanVien)Session["UserSession"];
             MonDaGoiVM.ThucDons = _unitOfWork.thucDonRepository.GetAll().OrderBy(x => x.Id).ToList();
-
+            ////////////// theo Role ////////////////
+            if(user.Role != "Admins")
+            {
+                if(user.Role == "Users")
+                {
+                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name).ToList();
+                }
+                else
+                {
+                    var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+                    List<ThucDon> thucDons = new List<ThucDon>();
+                    foreach (var item in vanPhongs)
+                    {
+                        thucDons.AddRange(_unitOfWork.thucDonRepository.Find(x => x.VanPhong == item.Name));
+                    }
+                    MonDaGoiVM.ThucDons = thucDons;
+                }
+            }
+            ////////////// theo Role ////////////////
+            ///////////////// theo Loai ////////////////
             if (ddlLoai != 0)
             {
                 ViewBag.idLoai = ddlLoai;
@@ -50,7 +69,7 @@ namespace QLNhaHang.Controllers
                     MonDaGoiVM.thucDonListIsNull = "Loại này chưa có thực đơn nào";
                 }
             }
-
+            ///////////////// theo Loai ////////////////
             TempData["thucDon"] = MonDaGoiVM.ThucDons;
             MonDaGoiVM.StrUrl = strUrl;
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
