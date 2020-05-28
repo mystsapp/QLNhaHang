@@ -37,11 +37,15 @@ namespace QLNhaHang.Controllers
             var user = (NhanVien)Session["UserSession"];
             MonDaGoiVM.ThucDons = _unitOfWork.thucDonRepository.GetAll().OrderBy(x => x.Id).ToList();
             ////////////// theo Role ////////////////
-            if(user.Role != "Admins")
+            if (user.Role != "Admins")
             {
-                if(user.Role == "Users")
+                if (user.Role == "Users")
                 {
                     MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name).ToList();
+                    if (MonDaGoiVM.ThucDons.Count == 0)
+                    {
+                        MonDaGoiVM.ThucDons.Add(new ThucDon { Id = 0, TenMon = "Chưa có món nào." });
+                    }
                 }
                 else
                 {
@@ -52,6 +56,10 @@ namespace QLNhaHang.Controllers
                         thucDons.AddRange(_unitOfWork.thucDonRepository.Find(x => x.VanPhong == item.Name));
                     }
                     MonDaGoiVM.ThucDons = thucDons;
+                    if (MonDaGoiVM.ThucDons.Count == 0)
+                    {
+                        MonDaGoiVM.ThucDons = new List<ThucDon>();
+                    }
                 }
             }
             ////////////// theo Role ////////////////
@@ -67,6 +75,7 @@ namespace QLNhaHang.Controllers
                 else
                 {
                     MonDaGoiVM.thucDonListIsNull = "Loại này chưa có thực đơn nào";
+                    MonDaGoiVM.ThucDons = new List<ThucDon>() { new ThucDon { Id = 0, TenMon = "Chưa có món nào." } } ;
                 }
             }
             ///////////////// theo Loai ////////////////
@@ -102,16 +111,21 @@ namespace QLNhaHang.Controllers
             }
             if (soLuong != 0)
             {
-                var loaiTD = _unitOfWork.thucDonRepository.GetById(maTD).LoaiThucDon;
+                if(maTD != 0)
+                {
+                    var loaiTD = _unitOfWork.thucDonRepository.GetById(maTD).LoaiThucDon;
+                    if (loaiTD.PhuPhi != null)
+                    {
+                        MonDaGoiVM.MonDaGoi.PhuPhi = loaiTD.PhuPhi * soLuong;
+                    }
+                    else
+                    {
+                        MonDaGoiVM.MonDaGoi.PhuPhi = 0;
+                    }
+                }                
+
                 MonDaGoiVM.MonDaGoi.ThanhTien = MonDaGoiVM.MonDaGoi.GiaTien * soLuong;
-                if (loaiTD.PhuPhi != null)
-                {
-                    MonDaGoiVM.MonDaGoi.PhuPhi = loaiTD.PhuPhi * soLuong;
-                }
-                else
-                {
-                    MonDaGoiVM.MonDaGoi.PhuPhi = 0;
-                }
+
                 MonDaGoiVM.MonDaGoi.SoLuong = soLuong;
 
             }
@@ -283,7 +297,7 @@ namespace QLNhaHang.Controllers
             }
             MonDaGoiVM.MonDaGois = arrayList.ToList();
             /////// cong don /////////////
-            
+
             MonDaGoiVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
             //////////// add to HD, CTHD ///////////////
             /////maHD

@@ -58,19 +58,21 @@
                         </div>
 
                         <div class="col-6">
-                            Tên bàn
-                            @Html.TextBoxFor(model => model.TenBanCreate, null, new { @class = "form-control " })
-                            @Html.ValidationMessageFor(model => model.TenBanCreate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-
-                        <div class="col-6">
                             Văn phòng
                             @Html.DropDownListFor(model => model.Ban.TenVP,
                                          new SelectList(Model.VanPhongs, "Name", "Name", ViewBag.vPName),
                                          htmlAttributes: new { @class = "form-control border-input ddlVanPhong" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+
+                        <div class="col-6">
+                            Tên bàn
+                            @Html.TextBoxFor(model => model.TenBanCreate, null, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(model => model.TenBanCreate, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-6">
