@@ -51,5 +51,10 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Đã làm")]
         public bool DaLam { get; set; }
 
+        [MaxLength(100), Column(TypeName = "nvarchar")]
+        [StringLength(100)]
+        [DisplayName("Cơ sở")]
+        public string VanPhong { get; set; }
+
     }
 }

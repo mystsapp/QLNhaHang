@@ -21,8 +21,10 @@ namespace QLNhaHang.Models
         public List<VanPhong> VanPhongs { get; set; }
         public List<KhuVuc> KhuVucs { get; set; }
         public List<ThucDon> ThucDons { get; set; }
+        public List<NhanVien> NhanViens { get; set; }
         public int VanPhongId { get; set; }
         public int KhuVucId { get; set; }
         public int ThucDonId { get; set; }
+        public string NhanVienId { get; set; }
     }
 }

@@ -1,0 +1,326 @@
+﻿@model QLNhaHang.Models.MonDaGoiViewModel
+@using QLNhaHang.Data.Models
+
+@{
+    ViewBag.Title = "TiecBuffet";
+
+}
+@*<meta http-equiv="refresh" content="3">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                @*<a class="btn btn-outline-info" asp-action="Create" asp-route-strUrl="#"><i class="fas fa-plus"></i>&nbsp; Thêm Mới</a>*@
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Gọi món - buffet</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Buffet - @Model.VPName</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @*@using (Html.BeginForm())*@
+
+            <form method="post" autocomplete="off">
+                <div class="p-4 border rounded">
+
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    @Html.HiddenFor(model => model.MonDaGoi.GiaTien)
+                    @Html.HiddenFor(model => model.MonDaGoi.ThanhTien)
+                    @Html.HiddenFor(model => model.VPName)
+
+
+                    <div class="form-group row">
+
+                        <div class="col-md-3">
+                            Theo cơ sở
+                            @Html.DropDownList("vanPhongName",
+                                    new SelectList(Model.VanPhongs, "Name", "Name", ViewBag.vanPhongName),
+                                    htmlAttributes: new { @class = "form-control border-input ddlVP" })
+                        </div>
+
+                        <div class="col-md-3">
+                            Buffet
+                            <br />
+                            @Html.DropDownListFor(model => model.MonDaGoi.ThucDonId,
+                                         new SelectList((List<ThucDon>)TempData["thucDon"], "Id", "TenMon"),
+                                         htmlAttributes: new { @class = "form-control border-input tenMon ", @id = "dropDown" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThucDonId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-2">
+                            Giá tiền
+                            @Html.TextBoxFor(model => model.MonDaGoi.GiaTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.GiaTien, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-2">
+                            Số lượng
+                            @Html.TextBoxFor(model => model.MonDaGoi.SoLuong,
+                                     new { @class = "form-control txtSoLuong" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.SoLuong, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-2">
+                            Thành tiền
+                            @Html.TextBoxFor(model => model.MonDaGoi.ThanhTien, "{0:N0}", new { @class = "form-control numbers", @readonly = "true" })
+                            @Html.ValidationMessageFor(model => model.MonDaGoi.ThanhTien, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="form-group ">
+
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                        @*<a class="btn btn-success" asp-action="DetailsRedirect" asp-route-strUrl="@Model.StrUrl"><i class="fas fa-backward"></i></a>*@
+                        @*<a class="btn btn-success" href="@Url.Action("DetailsRedirect", "BanHangs", new { strUrl = Model.StrUrl })"><i class="fas fa-backward"></i></a>*@
+                    </div>
+
+                </div>
+                @*}*@
+            </form>
+            <form>
+                @* dropdown thucdon thay doi *@
+                <input id="hidMaTD" type="hidden" name="maTD" />
+                @* dropdown VP thay doi *@
+                <input id="hidVPName" type="hidden" name="vanPhongName" />
+                @* soluong thay doi *@
+                <input id="hidSoLuong" type="hidden" name="soLuong" />
+                <input type="submit" hidden formaction="/MonDaGois/TiecBuffet" formmethod="get" id="hidSubmit" />
+            </form>
+        </div>
+    </div>
+    <!-- /.card -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fas fa-list-alt text-warning"></i> Buffets</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div style="overflow-x:auto;">
+                @if (Model.MonDaGois != null)
+                {
+                    <table class="table mytable text-nowrap" id="listAll">
+                        <thead>
+                            <tr class="table-info">
+                                <th>STT</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThucDon.TenMon)</th>
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().SoLuong)</th>
+                                @*<th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().PhuPhi)</th>*@
+                                <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().ThanhTien)</th>
+                                @*<th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaGui)</th>
+                                    <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaLam)</th>
+                                    <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().LanGui)</th>*@
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{int i = 1;}
+                            @foreach (var item in Model.MonDaGois)
+                            {
+
+                                <tr class="cursor-pointer" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                    @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                    @*<td>
+                                            @if (item.DaGui)
+                                            {
+                                                <span class="badge badge-success">Đã gửi</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning">Chưa gửi</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.DaLam)
+                                            {
+                                                <span class="badge badge-success">Đã làm</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-warning">Chưa làm</span>
+                                            }
+                                        </td>
+                                        <td>@Html.DisplayFor(m => item.LanGui)</td>*@
+                                    <td>
+                                        <form action="/MonDaGois/DeleteBuffet?id=@item.Id" method="post">
+
+                                            <input type="hidden" name="vanPhongName" value="@Model.VPName" />
+                                            <span id="confirmDeleteSpan_@item.Id" style="display: none">
+                                                <span class="text-dark">Xóa?</span>
+                                                <button type="submit" class="btn btn-danger">Yes</button>
+                                                <a href="#" class="btn btn-primary" onclick="confirmDelete('@item.Id', false)">No</a>
+                                            </span>
+
+                                            <span id="deleteSpan_@item.Id">
+                                                <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete('@item.Id', true)"><i class="fas fa-trash-alt"></i></a>
+                                            </span>
+                                        </form>
+                                    </td>
+                                </tr>
+
+
+                                i++;
+                            }
+
+
+                        </tbody>
+                    </table>
+                    @*<div>
+                            <form>
+                                <input type="hidden" value="@Model.StrUrl" name="strUrl" />
+                                <input type="hidden" value="@Model.Ban.MaBan" name="maBan" />
+                                @if (Model.MonDaGois.Exists(x => !x.DaGui))
+                                {
+                                    <button type="submit" class="btn btn-primary" title="Gửi" formaction="/MonDaGois/GuiYeuCau" formmethod="post"><i class="fas fa-share-square"></i></button>
+                                }
+
+                            </form>
+                        </div>*@
+                }
+                else
+                {
+                    <span> No data. </span>
+                }
+
+            </div>
+
+
+            @*////////////// tinh tien //////////////////////////////////////*@
+
+            <div class="float-left col-md-2">
+                <form action="/MonDaGois/TinhTienBuffet" id="frmTinhTien">
+
+                    <input type="hidden" name="vanPhongName" id="hidVPTinhTien" value="@Model.VPName" />
+                    <input type="hidden" name="strUrl" value="@Model.StrUrl" />
+
+                    <button type="submit" class="btn btn-outline-warning btn-block" id="btnTinhTien">
+                        <div class="float-left mr-1">
+                            <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/tinhtien.jfif" alt="Card image" />
+                        </div>
+                        @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                        <div class="float-left font-weight-bold mt-1">
+                            &nbsp; Tính tiền<br />(F2)
+                        </div>
+                    </button>
+                </form>
+            </div>
+            <div class="float-left col-md-2">
+
+                <button class="btn btn-outline-warning btn-block" data-toggle="modal" data-target="#modal-MayTinh">
+                    <div class="float-left mr-1">
+                        <img class="card-img-top toolImage" style="height: 50px; width: 50px" src="/Assets/Images/maytinh.png" alt="Card image" />
+                    </div>
+                    @*<label class="text-center" style="font-size:16px; color: steelblue;">name</label>*@
+                    <div class="float-left font-weight-bold mt-1">
+                        &nbsp; Máy tính <br /> (F3)
+                    </div>
+                </button>
+            </div>
+
+            @*////////////// tinh tien //////////////////////////////////////*@
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+
+@section Scripts{
+
+    <script src="~/Assets/js/MonDaChon/tiecBuffetController.js"></script>
+    <script>
+        function confirmDelete(uniqueId, isDeleteClicked) {
+            var deleteSpan = 'deleteSpan_' + uniqueId;
+            var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+            if (isDeleteClicked) {
+                $('#' + deleteSpan).hide();
+                $('#' + confirmDeleteSpan).show();
+            } else {
+                $('#' + deleteSpan).show();
+                $('#' + confirmDeleteSpan).hide();
+            }
+        }
+    </script>
+
+    @*<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>*@
+    <script>
+        $(function () {
+            $('#dropDown').select2();
+        });
+    </script>
+
+    <style>
+        .cursor-pointer:hover {
+            /*background-color: #3E5C9A;*/
+            background-color: #ffc107 !important;
+            cursor: pointer;
+            color: white;
+        }
+
+        /*.cursor-pointer {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }*/
+
+        #listAll {
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+            color: white;
+        }
+
+        .select2 {
+            width: 100%;
+        }
+    </style>
+}

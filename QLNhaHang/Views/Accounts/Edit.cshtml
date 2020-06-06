@@ -101,7 +101,7 @@
                         <div class="col-6">
                             Khu vực
                             @Html.DropDownListFor(model => model.NhanVien.KhuVucId,
-                                        new SelectList(Model.LoaiViewModels, "Id", "Name"),
+                                        new SelectList(Model.KhuVucs, "Id", "Name"),
                                         htmlAttributes: new { @class = "form-control border-input ddlKV" })
                         </div>
 

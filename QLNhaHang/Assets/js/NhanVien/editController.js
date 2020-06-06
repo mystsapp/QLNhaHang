@@ -7,7 +7,7 @@
 var editController = {
     init: function () {
         var roleId = $('.ddlRole').val();
-        editController.loadKVByRole(roleId);
+       // editController.loadKVByRole(roleId);
         editController.registerEvent();
         ////// check role selected
         editController.onOffDdlNoiLamViec(roleId);

@@ -200,6 +200,7 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Edit(string strUrl, string maNV, string roleName)
         {
+
             var user = (NhanVien)Session["UserSession"];
             if (user.Role.Equals("Users"))
             {
@@ -209,9 +210,25 @@ namespace QLNhaHang.Controllers
             {
                 NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role)).ToList();
                 NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
+
+                // admin khu vuc
+                var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+                foreach (var item in vanPhongs)
+                {
+                    NhanVienVM.KhuVucs = new List<KhuVuc>();
+                    NhanVienVM.KhuVucs.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == item.Id).ToList());
+                }
+            }
+            else
+            {
+                //NhanVienVM.KhuVucs = new List<KhuVuc>();
             }
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
-
+           
+            //else
+            //{
+            //    NhanVienVM.KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList();
+            //}
             if (NhanVienVM.NhanVien == null)
             {
                 ViewBag.ErrorMessage = "Nhân viên này không tồn tại";
@@ -392,7 +409,7 @@ namespace QLNhaHang.Controllers
             {
                 new GioiTinhViewModel() { Id = "None", Name = "--None--" },
                 new GioiTinhViewModel() { Id = "Nam", Name = "Nam" },
-                new GioiTinhViewModel() { Id = "Nử", Name = "Nử" }
+                new GioiTinhViewModel() { Id = "Nữ", Name = "Nữ" }
             };
         }
 

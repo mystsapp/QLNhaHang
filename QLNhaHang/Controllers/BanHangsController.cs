@@ -101,7 +101,7 @@ namespace QLNhaHang.Controllers
             {
                 BanHangVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
                 BanHangVM.MonDaGois = _unitOfWork.monDaGoiRepository
-                                                  .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan.Equals(maBan))
+                                                  .FindIncludeTwo(x => x.Ban, y => y.ThucDon, z => z.MaBan == maBan)
                                                   .OrderBy(x => x.LanGui)
                                                   .ToList();
 
@@ -231,7 +231,7 @@ namespace QLNhaHang.Controllers
 
         public JsonResult MonInBan(string maBan)
         {
-            var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan.Equals(maBan)).ToList();
+            var mons = _unitOfWork.monDaGoiRepository.Find(x => x.MaBan == maBan).ToList();
 
             if (mons.Count() > 0)
             {
@@ -250,16 +250,7 @@ namespace QLNhaHang.Controllers
             }
         }
 
-        public ActionResult creat()
-        {
-            return View();
-        }
-
-        public ActionResult edit()
-        {
-            return View();
-        }
-
+        
         public ActionResult DetailsRedirect(string strUrl)
         {
             return Redirect(strUrl);

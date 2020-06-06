@@ -484,6 +484,10 @@
     <Compile Include="Migrations\202005270433410_fixVPToMenu.designer.cs">
       <DependentUpon>202005270433410_fixVPToMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006030731594_addVPNameToMon.cs" />
+    <Compile Include="Migrations\202006030731594_addVPNameToMon.designer.cs">
+      <DependentUpon>202006030731594_addVPNameToMon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
@@ -578,6 +582,7 @@
     <Content Include="Assets\js\LoaiThucDon\createController.js" />
     <Content Include="Assets\js\LoaiThucDon\editController.js" />
     <Content Include="Assets\js\LoaiThucDon\indexController.js" />
+    <Content Include="Assets\js\MonDaChon\tiecBuffetController.js" />
     <Content Include="Assets\js\NhanVien\createController.js" />
     <Content Include="Assets\js\NhanVien\editController.js" />
     <Content Include="Assets\js\NhanVien\indexController.js" />
@@ -586,6 +591,7 @@
     <Content Include="Assets\js\Role\createController.js" />
     <Content Include="Assets\js\Role\editController.js" />
     <Content Include="Assets\js\Role\indexController.js" />
+    <Content Include="Assets\js\ThongKe\baoCaoTheoNVController.js" />
     <Content Include="Assets\js\ThongKe\theoMonController.js" />
     <Content Include="Assets\js\ThongKe\theoNgayController.js" />
     <Content Include="Assets\js\KhuVuc\createController.js" />
@@ -2211,6 +2217,9 @@
     <Content Include="Views\Beps\Index.cshtml" />
     <Content Include="Views\Beps\PrintListMon.cshtml" />
     <Content Include="Views\ThongKes\TheoMon.cshtml" />
+    <Content Include="Views\ThongKes\BaoCaoTheoNhanVien.cshtml" />
+    <Content Include="Views\MonDaGois\TiecBuffet.cshtml" />
+    <Content Include="Views\MonDaGois\TinhTienBuffet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2289,6 +2298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005270433410_fixVPToMenu.resx">
       <DependentUpon>202005270433410_fixVPToMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006030731594_addVPNameToMon.resx">
+      <DependentUpon>202006030731594_addVPNameToMon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

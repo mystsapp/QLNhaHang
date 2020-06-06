@@ -85,7 +85,7 @@ namespace QLNhaHang.Data.Models
 
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
-        [DisplayName("VP làng")]
+        [DisplayName("Tổ")]
         public string PhongBan { get; set; }
 
 
