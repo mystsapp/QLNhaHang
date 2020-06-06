@@ -43,7 +43,7 @@ namespace QLNhaHang.Controllers
             {
                 if (user.Role == "Users")
                 {
-                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name).ToList();
+                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name && !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet")).ToList();
                     if (MonDaGoiVM.ThucDons.Count == 0)
                     {
                         MonDaGoiVM.ThucDons.Add(new ThucDon { Id = 0, TenMon = "Chưa có món nào." });

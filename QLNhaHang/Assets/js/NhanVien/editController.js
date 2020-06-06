@@ -16,16 +16,16 @@ var editController = {
     registerEvent: function () {
         $('.ddlRole').off('change').on('change', function () {
             var roleId = $(this).val();
-            editController.loadKVByRole(roleId);
+            // editController.loadKVByRole(roleId);
             editController.onOffDdlNoiLamViec(roleId);
             
         });
         
-        $('.ddlKV').off('change').on('change', function () {
-            var optionValue = $(this).val();
-            //$('#hidMaTD').val(optionValue);
-            editController.loadMaNV(optionValue);
-        });
+        //$('.ddlKV').off('change').on('change', function () {
+        //    var optionValue = $(this).val();
+        //    //$('#hidMaTD').val(optionValue);
+        //    editController.loadMaNV(optionValue);
+        //});
 
         //var inputNumberVal = $('input.numbers').val();
         $('input.numbers').val(function (index, value) {
@@ -62,9 +62,9 @@ var editController = {
 
                 });
                 $('.ddlKV').html(option);
-                //// load MaNV again
-                var optionValue = $('.ddlKV').val();
-                editController.loadMaNV(optionValue);
+                ////// load MaNV again
+                //var optionValue = $('.ddlKV').val();
+                //editController.loadMaNV(optionValue);
             }
         });
     },

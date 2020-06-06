@@ -138,11 +138,13 @@ namespace QLNhaHang.Controllers
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            if (user.Role != "Admins")
-            {
-                BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role)).ToList();
-            }
+            //if (user.Role != "Admins")
+            //{
+            //    BanVM.VanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role.Equals(user.Role)).ToList();
+            //}
             BanVM.Ban = _unitOfWork.banRepository.GetByStringId(maBan);
+            BanVM.VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList().Where(x => x.Id == BanVM.Ban.KhuVuc.VanPhongId).ToList();
+            BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhong.Name == BanVM.VanPhongs.FirstOrDefault().Name);
             if (BanVM.Ban == null)
             {
                 ViewBag.ErrorMessage = "Bàn này không tồn tại";
@@ -162,7 +164,7 @@ namespace QLNhaHang.Controllers
 
             // moi load vao
 
-            BanVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhong.Name.Equals(BanVM.Ban.TenVP));
+            
 
             return View(BanVM);
         }
@@ -196,8 +198,9 @@ namespace QLNhaHang.Controllers
                 _unitOfWork.banRepository.Delete(ban);
                 _unitOfWork.Complete();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                //throw ex;
                 SetAlert("Xóa không thành công.", "error");
                 return Redirect(strUrl);
             }

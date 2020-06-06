@@ -197,10 +197,14 @@ namespace QLNhaHang.Controllers
             ////////////get TTHD - So HD tu dong tang 1 //////////////////////
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
-            hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+
             if (string.IsNullOrEmpty(HoaDonVM.VanPhong.So))
             {
                 hoaDon.So = GetNextId.NextSoHD("", "");
+            }
+            else
+            {
+                hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
             }
 
             //////////// update - So HD tu dong tang 1 //////////////////////
@@ -416,10 +420,14 @@ namespace QLNhaHang.Controllers
             ////////////get TTHD - So HD tu dong tang 1 //////////////////////
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
-            hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
+            
             if (string.IsNullOrEmpty(HoaDonVM.VanPhong.So))
             {
                 hoaDon.So = GetNextId.NextSoHD("", "");
+            }
+            else
+            {
+                hoaDon.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
             }
 
             //////////// update - So HD tu dong tang 1 //////////////////////

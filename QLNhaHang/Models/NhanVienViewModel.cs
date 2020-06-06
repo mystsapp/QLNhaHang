@@ -18,6 +18,8 @@ namespace QLNhaHang.Models
         public List<KhuVuc> KhuVucs { get; set; }
         public List<GioiTinhViewModel> GioiTinhs { get; set; }
         public List<NoiLamViecViewModel> NoiLamViecs { get; set; }
+        public List<NoiLamViecViewModel> PhongBans { get; set; }
+        public List<NoiLamViecViewModel> ChucVus { get; set; }
         public string StrUrl { get; set; }
         [Remote("IsStringNameAvailable", "Accounts", ErrorMessage = "Username đã tồn tại")]
         public string UsernameCreate { get; set; }

@@ -25,6 +25,8 @@ namespace QLNhaHang.Controllers
                 Roles = _unitOfWork.roleRepository.GetAll().ToList(),
                 GioiTinhs = ListGioiTinh(),
                 NoiLamViecs = ListNoiLamViec(),
+                PhongBans = ListPhongBan(),
+                ChucVus = ListChucVu(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
                 KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList(),
                 //LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
@@ -206,25 +208,31 @@ namespace QLNhaHang.Controllers
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
             }
-            if (user.Role != "Admins")
-            {
-                NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role)).ToList();
-                NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
 
-                // admin khu vuc
-                var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
-                foreach (var item in vanPhongs)
-                {
-                    NhanVienVM.KhuVucs = new List<KhuVuc>();
-                    NhanVienVM.KhuVucs.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == item.Id).ToList());
-                }
-            }
-            else
-            {
-                //NhanVienVM.KhuVucs = new List<KhuVuc>();
-            }
             NhanVienVM.NhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
-           
+            NhanVienVM.KhuVucs = _unitOfWork.khuVucRepository.Find(x => x.VanPhongId == NhanVienVM.NhanVien.KhuVuc.VanPhongId).ToList();
+            NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name == NhanVienVM.NhanVien.KhuVuc.VanPhong.Role).ToList();
+            NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
+            //if (user.Role != "Admins")
+            //{
+            //    NhanVienVM.Roles = _unitOfWork.roleRepository.Find(x => x.Name.Equals(user.Role)).ToList();
+            //    NhanVienVM.Roles.Add(_unitOfWork.roleRepository.Find(x => x.Name.Equals("Users")).FirstOrDefault());
+
+            //    // admin khu vuc
+
+            //    //var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+            //    //foreach (var item in vanPhongs)
+            //    //{
+            //    //    NhanVienVM.KhuVucs = new List<KhuVuc>();
+            //    //    NhanVienVM.KhuVucs.AddRange(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == item.Id).ToList());
+            //    //}
+            //}
+            //else
+            //{
+            //    //NhanVienVM.KhuVucs = new List<KhuVuc>();
+            //}
+
+
             //else
             //{
             //    NhanVienVM.KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList();
@@ -281,8 +289,17 @@ namespace QLNhaHang.Controllers
         public ActionResult DeletePost(string strUrl, string maNV)
         {
             var nhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
-            _unitOfWork.nhanVienRepository.Delete(nhanVien);
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.nhanVienRepository.Delete(nhanVien);
+                _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+                SetAlert("Xóa không thành công.", "error");
+                return Redirect(strUrl);
+            }
+            
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
@@ -409,7 +426,16 @@ namespace QLNhaHang.Controllers
             {
                 new GioiTinhViewModel() { Id = "None", Name = "--None--" },
                 new GioiTinhViewModel() { Id = "Nam", Name = "Nam" },
-                new GioiTinhViewModel() { Id = "Nữ", Name = "Nữ" }
+                new GioiTinhViewModel() { Id = "Nử", Name = "Nử" }
+            };
+        }
+        
+        private List<NoiLamViecViewModel> ListPhongBan()
+        {
+            return new List<NoiLamViecViewModel>()
+            {
+                new NoiLamViecViewModel() { Id = 1, Name = "Bàn" },
+                new NoiLamViecViewModel() { Id = 2, Name = "Quản Lý" }
             };
         }
 
@@ -420,6 +446,15 @@ namespace QLNhaHang.Controllers
                 new NoiLamViecViewModel() { Id = 0, Name = "--None--" },
                 new NoiLamViecViewModel() { Id = 1, Name = "Bếp" },
                 new NoiLamViecViewModel() { Id = 2, Name = "Pha chế" }
+            };
+        }
+        private List<NoiLamViecViewModel> ListChucVu()
+        {
+            return new List<NoiLamViecViewModel>()
+            {
+                new NoiLamViecViewModel() { Id = 0, Name = "Thu Ngân" },
+                new NoiLamViecViewModel() { Id = 1, Name = "Tiếp Tân" },
+                new NoiLamViecViewModel() { Id = 2, Name = "Quản Lý" }
             };
         }
 
