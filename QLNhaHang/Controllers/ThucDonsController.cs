@@ -170,8 +170,17 @@ namespace QLNhaHang.Controllers
         public ActionResult DeletePost(string strUrl, int id)
         {
             var thucDon = _unitOfWork.thucDonRepository.GetById(id);
-            _unitOfWork.thucDonRepository.Delete(thucDon);
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.thucDonRepository.Delete(thucDon);
+                _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+                SetAlert("Xóa không thành công.", "error");
+                return Redirect(strUrl);
+            }
+           
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }

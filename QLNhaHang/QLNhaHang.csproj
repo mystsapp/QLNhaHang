@@ -374,6 +374,7 @@
     <Compile Include="Controllers\VanPhongsController.cs" />
     <Compile Include="Data\Interfaces\IRepository.cs" />
     <Compile Include="Data\Models\Ban.cs" />
+    <Compile Include="Data\Models\Bep.cs" />
     <Compile Include="Data\Models\ChiTietHD.cs" />
     <Compile Include="Data\Models\HoaDon.cs" />
     <Compile Include="Data\Models\KhachHang.cs" />
@@ -381,6 +382,7 @@
     <Compile Include="Data\Models\LoaiThucDon.cs" />
     <Compile Include="Data\Models\MonDaGoi.cs" />
     <Compile Include="Data\Models\NhanVien.cs" />
+    <Compile Include="Data\Models\PhaChe.cs" />
     <Compile Include="Data\Models\Role.cs" />
     <Compile Include="Data\Models\ThongTinHD.cs" />
     <Compile Include="Data\Models\ThucDon.cs" />
@@ -394,6 +396,7 @@
     <Compile Include="Data\Repositories\LoaiThucDonRepository.cs" />
     <Compile Include="Data\Repositories\MonDaGoiRepository.cs" />
     <Compile Include="Data\Repositories\NhanVienRepository.cs" />
+    <Compile Include="Data\Repositories\PhaCheRepository.cs" />
     <Compile Include="Data\Repositories\Repository.cs" />
     <Compile Include="Data\Repositories\RoleRepository.cs" />
     <Compile Include="Data\Repositories\ThongKeRepository.cs" />
@@ -488,11 +491,17 @@
     <Compile Include="Migrations\202006030731594_addVPNameToMon.designer.cs">
       <DependentUpon>202006030731594_addVPNameToMon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006061533436_addPCAndBTbl.cs" />
+    <Compile Include="Migrations\202006061533436_addPCAndBTbl.designer.cs">
+      <DependentUpon>202006061533436_addPCAndBTbl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
     <Compile Include="Models\ChangePassModel.cs" />
     <Compile Include="Models\ChartPieModel.cs" />
+    <Compile Include="Models\ChiTietHDGroupByResultViewModel.cs" />
+    <Compile Include="Models\ChiTietHdViewModel.cs" />
     <Compile Include="Models\DaInModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
@@ -2301,6 +2310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006030731594_addVPNameToMon.resx">
       <DependentUpon>202006030731594_addVPNameToMon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006061533436_addPCAndBTbl.resx">
+      <DependentUpon>202006061533436_addPCAndBTbl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
