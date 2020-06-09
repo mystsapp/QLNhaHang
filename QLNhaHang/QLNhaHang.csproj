@@ -389,6 +389,7 @@
     <Compile Include="Data\Models\VanPhong.cs" />
     <Compile Include="Data\QLNhaHangDbContext.cs" />
     <Compile Include="Data\Repositories\BanRepository.cs" />
+    <Compile Include="Data\Repositories\BepRepository.cs" />
     <Compile Include="Data\Repositories\ChiTietHDRepository.cs" />
     <Compile Include="Data\Repositories\HoaDonRepository.cs" />
     <Compile Include="Data\Repositories\KhachHangRepository.cs" />
@@ -494,6 +495,10 @@
     <Compile Include="Migrations\202006061533436_addPCAndBTbl.cs" />
     <Compile Include="Migrations\202006061533436_addPCAndBTbl.designer.cs">
       <DependentUpon>202006061533436_addPCAndBTbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006090651302_addLogFile.cs" />
+    <Compile Include="Migrations\202006090651302_addLogFile.designer.cs">
+      <DependentUpon>202006090651302_addLogFile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
@@ -2313,6 +2318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006061533436_addPCAndBTbl.resx">
       <DependentUpon>202006061533436_addPCAndBTbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006090651302_addLogFile.resx">
+      <DependentUpon>202006090651302_addLogFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

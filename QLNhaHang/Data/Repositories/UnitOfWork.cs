@@ -22,6 +22,8 @@ namespace QLNhaHang.Data.Repositories
         INhanVienRepository nhanVienRepository { get; }
         IThongKeRepository thongKeRepository { get; }
         IKhuVucRepository khuVucRepository { get; }
+        IBepRepository bepRepository { get; }
+        IPhaCheRepository phaCheRepository { get; }
         int Complete();
     }
     public class UnitOfWork : IUnitOfWork
@@ -44,6 +46,8 @@ namespace QLNhaHang.Data.Repositories
             nhanVienRepository = new NhanVienRepository(_context);
             thongKeRepository = new ThongKeRepository(_context);
             khuVucRepository = new KhuVucRepository(_context);
+            bepRepository = new BepRepository(_context);
+            phaCheRepository = new PhaCheRepository(_context);
         }
 
         public IBanRepository banRepository { get; }
@@ -71,6 +75,10 @@ namespace QLNhaHang.Data.Repositories
         public IThongKeRepository thongKeRepository { get; }
 
         public IKhuVucRepository khuVucRepository { get; }
+
+        public IBepRepository bepRepository { get; }
+
+        public IPhaCheRepository phaCheRepository { get; }
 
         public int Complete()
         {

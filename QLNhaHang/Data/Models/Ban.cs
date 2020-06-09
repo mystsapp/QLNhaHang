@@ -65,5 +65,7 @@ namespace QLNhaHang.Data.Models
         [ForeignKey("KhuVucId")]
         public virtual KhuVuc KhuVuc { get; set; }
 
+        public bool? Xoa { get; set; }
+
     }
 }

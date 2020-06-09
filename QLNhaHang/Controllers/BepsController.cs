@@ -65,6 +65,23 @@ namespace QLNhaHang.Controllers
             var thucdon = _unitOfWork.thucDonRepository.Find(x => x.Id == mon.ThucDonId).FirstOrDefault().TenMon;
             mon.DaLam = true;
             _unitOfWork.monDaGoiRepository.Update(mon);
+            ///////////////////// save to bep tbl //////////////////
+            Bep bep = new Bep
+            {
+                SoLuong = mon.SoLuong,
+                ThanhTien = mon.ThanhTien,
+                GiaTien = mon.GiaTien,
+                PhuPhi = mon.PhuPhi,
+                PhiPhucVu = mon.PhiPhucVu,
+                MaBan = mon.MaBan,
+                ThucDonId = mon.ThucDonId,
+                LanGui = mon.LanGui,
+                DaGui = mon.DaGui,
+                DaLam = mon.DaLam,
+                VanPhong = mon.VanPhong
+            };
+            _unitOfWork.bepRepository.Create(bep);
+            ///////////////////// save to bep tbl //////////////////
             _unitOfWork.Complete();
             return View(nameof(Index));
         }

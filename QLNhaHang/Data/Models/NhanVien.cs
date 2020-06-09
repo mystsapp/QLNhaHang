@@ -108,5 +108,7 @@ namespace QLNhaHang.Data.Models
         [StringLength(50)]
         public string NoiLamViec { get; set; }
 
+        public bool? Xoa { get; set; }
+
     }
 }

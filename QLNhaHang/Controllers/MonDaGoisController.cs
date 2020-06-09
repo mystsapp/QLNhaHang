@@ -24,7 +24,7 @@ namespace QLNhaHang.Controllers
             {
                 Ban = new Data.Models.Ban(),
                 MonDaGoi = new Data.Models.MonDaGoi(),
-                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll(),
+                LoaiThucDons = _unitOfWork.loaiThucDonRepository.GetAll().OrderBy(x => x.Id),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
                 MonDaGois = new List<MonDaGoi>(),
                 HoaDon = new HoaDon(),
@@ -38,12 +38,15 @@ namespace QLNhaHang.Controllers
         {
             var user = (NhanVien)Session["UserSession"];
             MonDaGoiVM.ThucDons = _unitOfWork.thucDonRepository.GetAll().OrderBy(x => x.Id).ToList();
+            
             ////////////// theo Role ////////////////
             if (user.Role != "Admins")
             {
                 if (user.Role == "Users")
                 {
-                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name && !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet")).ToList();
+                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name && 
+                                                                    !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet") && 
+                                                                    x.MaLoaiId == MonDaGoiVM.LoaiThucDons.FirstOrDefault().Id).ToList();
                     if (MonDaGoiVM.ThucDons.Count == 0)
                     {
                         MonDaGoiVM.ThucDons.Add(new ThucDon { Id = 0, TenMon = "Chưa có món nào." });
@@ -69,7 +72,7 @@ namespace QLNhaHang.Controllers
             if (ddlLoai != 0)
             {
                 ViewBag.idLoai = ddlLoai;
-                var listTD = MonDaGoiVM.ThucDons.Where(x => x.MaLoaiId == ddlLoai).ToList();
+                var listTD = _unitOfWork.thucDonRepository.Find(x => x.MaLoaiId == ddlLoai && x.VanPhong == user.KhuVuc.VanPhong.Name).ToList();
                 if (listTD.Count != 0)
                 {
                     MonDaGoiVM.ThucDons = listTD;

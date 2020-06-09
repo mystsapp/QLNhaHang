@@ -31,7 +31,7 @@ namespace QLNhaHang.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _unitOfWork.nhanVienRepository.Login(model.Username, model.Password);
+                var result = _unitOfWork.nhanVienRepository.Login(model.Username.Trim(), model.Password);
                 if (result == 0)
                 {
                     ModelState.AddModelError("", "Tài khoản này không tồn tại");
@@ -41,7 +41,7 @@ namespace QLNhaHang.Controllers
                     var userInfo = _unitOfWork.nhanVienRepository
                                               .FindIncludeOne(a => a.KhuVuc,
                                                               x => x.Username.ToLower()
-                                                              .Equals(model.Username.ToLower()))
+                                                              .Equals(model.Username.Trim().ToLower()))
                                               .FirstOrDefault();
 
                     Session["UserSession"] = userInfo;

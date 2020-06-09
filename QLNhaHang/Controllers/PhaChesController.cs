@@ -62,6 +62,23 @@ namespace QLNhaHang.Controllers
             var mon = _unitOfWork.monDaGoiRepository.GetById(idMon);
             mon.DaLam = true;
             _unitOfWork.monDaGoiRepository.Update(mon);
+            ///////////////////// save to phaChe tbl //////////////////
+            PhaChe phaChe = new PhaChe
+            {
+                SoLuong = mon.SoLuong,
+                ThanhTien = mon.ThanhTien,
+                GiaTien = mon.GiaTien,
+                PhuPhi = mon.PhuPhi,
+                PhiPhucVu = mon.PhiPhucVu,
+                MaBan = mon.MaBan,
+                ThucDonId = mon.ThucDonId,
+                LanGui = mon.LanGui,
+                DaGui = mon.DaGui,
+                DaLam = mon.DaLam,
+                VanPhong = mon.VanPhong
+            };
+            _unitOfWork.phaCheRepository.Create(phaChe);
+            ///////////////////// save to phaChe tbl //////////////////
             _unitOfWork.Complete();
             return View(nameof(Index));
         }

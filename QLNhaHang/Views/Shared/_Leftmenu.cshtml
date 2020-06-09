@@ -41,21 +41,21 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                 @*@if (user.Nhom == "Admins")
-                    {*@
+        {*@
                 @*<li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Tài khoản
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Tài khoản
 
-                            </p>
-                        </a>
+                </p>
+            </a>
 
-                    </li>*@
+        </li>*@
 
-                <li class="nav-item has-treeview">
+                @*<li class="nav-item has-treeview">
                     <a href="/HoaDons/Index" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -64,8 +64,19 @@
                         </p>
                     </a>
 
-                </li>
+                </li>*@
                 
+                <li class="nav-item has-treeview">
+                    <a href="/BanHangs/Index" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Bán Hàng
+
+                        </p>
+                    </a>
+
+                </li>
+
                 <li class="nav-item has-treeview">
                     <a href="/MonDaGois/TiecBuffet" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -77,8 +88,8 @@
 
                 </li>
                 @*}
-                    @if (user.Nhom != "KDO")
-                    {*@
+        @if (user.Nhom != "KDO")
+        {*@
                 @* Danh muc báo cáo *@
                 @if (Session["Role"].ToString() != "Users")
                 {
@@ -218,7 +229,7 @@
                                     <p>Theo ngày xuất HD</p>
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a href="/ThongKes/TheoMon" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -229,6 +240,37 @@
                         </ul>
                     </li>
                 }
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Báo cáo ngày
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/ThongKes/BaoCaoTheoNhanVien" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Theo nhân viên sale</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/ThongKes/BaoCaoTheoNVBep" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bếp</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="/ThongKes/BaoCaoTheoNVPhaChe" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Pha chế</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

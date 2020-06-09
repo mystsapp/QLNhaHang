@@ -144,5 +144,10 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Số tiền")]
         public decimal? SoTien { get; set; }
+
+        public bool? Xoa { get; set; }
+
+        [Column(TypeName = "nvarchar")]
+        public string LogFile { get; set; }
     }
 }

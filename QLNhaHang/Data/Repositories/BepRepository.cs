@@ -7,13 +7,13 @@ using System.Web;
 
 namespace QLNhaHang.Data.Repositories
 {
-    public interface IPhaCheRepository : IRepository<PhaChe>
+    public interface IBepRepository : IRepository<Bep>
     {
 
     }
-    public class PhaCheRepository : Repository<PhaChe>, IPhaCheRepository
+    public class BepRepository : Repository<Bep>, IBepRepository
     {
-        public PhaCheRepository(QLNhaHangDbContext context) : base(context)
+        public BepRepository(QLNhaHangDbContext context) : base(context)
         {
         }
     }

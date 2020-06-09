@@ -454,7 +454,9 @@ namespace QLNhaHang.Controllers
             {
                 new NoiLamViecViewModel() { Id = 0, Name = "Thu Ngân" },
                 new NoiLamViecViewModel() { Id = 1, Name = "Tiếp Tân" },
-                new NoiLamViecViewModel() { Id = 2, Name = "Quản Lý" }
+                new NoiLamViecViewModel() { Id = 2, Name = "Quản Lý" },
+                new NoiLamViecViewModel() { Id = 3, Name = "Pha Chế" },
+                new NoiLamViecViewModel() { Id = 4, Name = "Tảo Hổ" }
             };
         }
 

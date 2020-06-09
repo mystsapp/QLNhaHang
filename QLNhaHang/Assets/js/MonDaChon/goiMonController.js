@@ -28,6 +28,7 @@ var goiMonController = {
             
             var optionValue = $(this).val();
             $('#hidMaTD').val(optionValue);
+            $('#hidMaLoai').val($('.ddlLoai').val());
             $('#hidSubmit').click();
         });
 
