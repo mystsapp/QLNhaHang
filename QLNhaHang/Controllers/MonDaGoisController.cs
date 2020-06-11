@@ -359,6 +359,9 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.HoaDon.VanPhongId = MonDaGoiVM.Ban.KhuVuc.VanPhongId;
             MonDaGoiVM.HoaDon.ThanhTienHD = MonDaGoiVM.MonDaGois.Select(x => x.ThanhTien).Sum();
 
+            // ghi log
+            MonDaGoiVM.HoaDon.LogFile = MonDaGoiVM.HoaDon.LogFile + "-User tạo: " + user.Username + " vào lúc: " + System.DateTime.Now.ToString();
+
             _unitOfWork.hoaDonRepository.Create(MonDaGoiVM.HoaDon);
             _unitOfWork.Complete();
             /////maHD

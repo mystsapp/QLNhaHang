@@ -66,6 +66,8 @@ namespace QLNhaHang.Data.Models
         public virtual KhuVuc KhuVuc { get; set; }
 
         public bool? Xoa { get; set; }
+        [Column(TypeName = "nvarchar(MAX)")]
+        public string LogFile { get; set; }
 
     }
 }

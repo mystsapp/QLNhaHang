@@ -59,6 +59,7 @@ namespace QLNhaHang.Controllers
 
         public ActionResult Confirm(int idMon)
         {
+            var user = (NhanVien)Session["UserSession"];
             var mon = _unitOfWork.monDaGoiRepository.GetById(idMon);
             mon.DaLam = true;
             _unitOfWork.monDaGoiRepository.Update(mon);
@@ -75,7 +76,8 @@ namespace QLNhaHang.Controllers
                 LanGui = mon.LanGui,
                 DaGui = mon.DaGui,
                 DaLam = mon.DaLam,
-                VanPhong = mon.VanPhong
+                VanPhong = mon.VanPhong,
+                Username = user.Username
             };
             _unitOfWork.phaCheRepository.Create(phaChe);
             ///////////////////// save to phaChe tbl //////////////////

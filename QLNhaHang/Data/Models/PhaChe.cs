@@ -60,5 +60,9 @@ namespace QLNhaHang.Data.Models
         [DisplayName("Cơ sở")]
         public string VanPhong { get; set; }
 
+        [MaxLength(50, ErrorMessage = "Không vượt qua 50 ký tự."), Column(TypeName = "varchar")]
+        [StringLength(50)]
+        public string Username { get; set; }
+
     }
 }

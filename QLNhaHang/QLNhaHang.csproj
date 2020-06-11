@@ -500,6 +500,14 @@
     <Compile Include="Migrations\202006090651302_addLogFile.designer.cs">
       <DependentUpon>202006090651302_addLogFile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006100130189_addUsernameHauCan.cs" />
+    <Compile Include="Migrations\202006100130189_addUsernameHauCan.designer.cs">
+      <DependentUpon>202006100130189_addUsernameHauCan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006110058319_addLogfileCol.cs" />
+    <Compile Include="Migrations\202006110058319_addLogfileCol.designer.cs">
+      <DependentUpon>202006110058319_addLogfileCol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
@@ -605,6 +613,7 @@
     <Content Include="Assets\js\Role\createController.js" />
     <Content Include="Assets\js\Role\editController.js" />
     <Content Include="Assets\js\Role\indexController.js" />
+    <Content Include="Assets\js\ThongKe\baoCaoTheoNoiLamViecController.js" />
     <Content Include="Assets\js\ThongKe\baoCaoTheoNVController.js" />
     <Content Include="Assets\js\ThongKe\theoMonController.js" />
     <Content Include="Assets\js\ThongKe\theoNgayController.js" />
@@ -2234,6 +2243,7 @@
     <Content Include="Views\ThongKes\BaoCaoTheoNhanVien.cshtml" />
     <Content Include="Views\MonDaGois\TiecBuffet.cshtml" />
     <Content Include="Views\MonDaGois\TinhTienBuffet.cshtml" />
+    <Content Include="Views\ThongKes\BaoCaoTheoNoiLamViec.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2321,6 +2331,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006090651302_addLogFile.resx">
       <DependentUpon>202006090651302_addLogFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006100130189_addUsernameHauCan.resx">
+      <DependentUpon>202006100130189_addUsernameHauCan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006110058319_addLogfileCol.resx">
+      <DependentUpon>202006110058319_addLogfileCol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -841,7 +841,7 @@ namespace QLNhaHang.Controllers
 
         }
 
-        public ActionResult BaoCaoTheoNVBep(string tuNgay = null, string denNgay = null, int khuVucId = 0)
+        public ActionResult BaoCaoTheoNoiLamViec(string tuNgay = null, string denNgay = null, int khuVucId = 0)
         {
             var user = (NhanVien)Session["UserSession"];
 

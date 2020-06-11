@@ -80,10 +80,23 @@ namespace QLNhaHang.Controllers
         [HttpPost]
         public ActionResult Delete(string id, string strUrl)
         {
+            var user = (NhanVien)Session["UserSession"];
             var hoaDon = _unitOfWork.hoaDonRepository.GetByStringId(id);
-            _unitOfWork.hoaDonRepository.Delete(hoaDon);
+            // hide for delete
+            try
+            {
+                _unitOfWork.hoaDonRepository.Delete(hoaDon);
 
-            _unitOfWork.Complete();
+                _unitOfWork.Complete();
+            }
+            catch (Exception)
+            {
+                hoaDon.Xoa = true;
+                hoaDon.LogFile = hoaDon.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá HD: " + hoaDon.MaHD + " vào lúc: " + System.DateTime.Now.ToString();
+                _unitOfWork.hoaDonRepository.Update(hoaDon);
+                _unitOfWork.Complete();
+            }
+            
             SetAlert("Xóa thành công!", "success");
             return Redirect(strUrl);
         }

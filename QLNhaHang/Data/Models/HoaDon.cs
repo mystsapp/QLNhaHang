@@ -147,7 +147,7 @@ namespace QLNhaHang.Data.Models
 
         public bool? Xoa { get; set; }
 
-        [Column(TypeName = "nvarchar")]
+        [Column(TypeName = "nvarchar(MAX)")]
         public string LogFile { get; set; }
     }
 }

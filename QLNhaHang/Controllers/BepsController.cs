@@ -61,6 +61,7 @@ namespace QLNhaHang.Controllers
         [HttpPost]
         public ActionResult Confirm(int idMon)
         {
+            var user = (NhanVien)Session["UserSession"];
             var mon = _unitOfWork.monDaGoiRepository.GetById(idMon);
             var thucdon = _unitOfWork.thucDonRepository.Find(x => x.Id == mon.ThucDonId).FirstOrDefault().TenMon;
             mon.DaLam = true;
@@ -78,7 +79,8 @@ namespace QLNhaHang.Controllers
                 LanGui = mon.LanGui,
                 DaGui = mon.DaGui,
                 DaLam = mon.DaLam,
-                VanPhong = mon.VanPhong
+                VanPhong = mon.VanPhong,
+                Username = user.Username
             };
             _unitOfWork.bepRepository.Create(bep);
             ///////////////////// save to bep tbl //////////////////

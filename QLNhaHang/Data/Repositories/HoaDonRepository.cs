@@ -30,7 +30,7 @@ namespace QLNhaHang.Data.Repositories
 
             // retrieve list from database/whereverand
 
-            var list = GetAllInclude(x => x.Ban, y => y.NhanVien).AsQueryable();
+            var list = GetAllInclude(x => x.Ban, y => y.NhanVien).Where(x => x.Xoa != true).AsQueryable();
             if (role != "Admins")
             {
                 list = list.Where(x => x.VanPhong.Role.Equals(role) || x.VanPhong.Name.Equals(roleVP));

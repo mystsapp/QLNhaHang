@@ -30,12 +30,12 @@ namespace QLNhaHang.Data.Models
         [MaxLength(5), Column(TypeName = "nvarchar")]
         [StringLength(5)]
         public string GioiTinh { get; set; }
-        
+
         [DisplayName("Địa chỉ")]
         [MaxLength(100), Column(TypeName = "nvarchar")]
         [StringLength(100)]
         public string DiaChi { get; set; }
-        
+
         [DisplayName("Điện thoại")]
         [MaxLength(15), Column(TypeName = "varchar")]
         [StringLength(15)]
@@ -60,7 +60,7 @@ namespace QLNhaHang.Data.Models
 
         [DisplayName("Tình trạng")]
         public bool TrangThai { get; set; }
-        
+
         [DisplayName("Người tạo")]
         [MaxLength(50), Column(TypeName = "nvarchar")]
         [StringLength(50)]
@@ -109,6 +109,8 @@ namespace QLNhaHang.Data.Models
         public string NoiLamViec { get; set; }
 
         public bool? Xoa { get; set; }
+        [Column(TypeName = "nvarchar(MAX)")]
+        public string LogFile { get; set; }
 
     }
 }

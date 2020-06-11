@@ -296,7 +296,8 @@ namespace QLNhaHang.Controllers
             }
             catch (Exception)
             {
-                SetAlert("Xóa không thành công.", "error");
+                nhanVien.Xoa = true;
+                //nhanVien.LogFile = hoaDon.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá HD: " + hoaDon.MaHD + " vào lúc: " + System.DateTime.Now.ToString();
                 return Redirect(strUrl);
             }
             
