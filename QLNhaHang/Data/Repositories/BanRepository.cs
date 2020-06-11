@@ -28,7 +28,7 @@ namespace QLNhaHang.Data.Repositories
 
             // retrieve list from database/whereverand
 
-            var list = GetAll().AsQueryable();
+            var list = GetAll().Where(x => x.Xoa != true).AsQueryable();
             
             if (role != "Admins")
             {

@@ -48,5 +48,9 @@ namespace QLNhaHang.Data.Models
         [StringLength(100)]
         [DisplayName("Cơ sở")]
         public string VanPhong { get; set; }
+
+        public bool? Xoa { get; set; }
+        [Column(TypeName = "nvarchar(MAX)")]
+        public string LogFile { get; set; }
     }
 }

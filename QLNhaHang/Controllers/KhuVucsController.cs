@@ -48,10 +48,10 @@ namespace QLNhaHang.Controllers
 
             KhuVucVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
-            if (ddlVP != 0)
-            {
-                ViewBag.idVP = ddlVP;
-            }
+            //if (ddlVP != 0)
+            //{
+            //    ViewBag.idVP = ddlVP;
+            //}
 
             if (user.Role != "Admins")
             {

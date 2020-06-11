@@ -25,34 +25,27 @@ namespace QLNhaHang.Controllers
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList()
             };
         }
+
         // GET: KhachHangs
         public ActionResult Index(/*int id = 0, */string searchString = null, int page = 1, int ddlLoai = 0)
         {
             var user = (NhanVien)Session["UserSession"];
             ////// moi load vao
-            if (ddlLoai == 0)
-            {
-                ViewBag.idLoai = 0;
-            }
-            else
-            {
-                ViewBag.idLoai = ddlLoai;
-            }
-            
+
+            ViewBag.idLoai = ddlLoai;
+
             foreach (var loaiTD in ThucDonVM.LoaiThucDons)
             {
                 ThucDonVM.LoaiThucDonListViewModels.Add(new LoaiThucDonListViewModel() { Id = loaiTD.Id, Name = loaiTD.TenLoai });
             }
-            
+
             //ViewBag.idLoai = ThucDonVM.LoaiThucDons.FirstOrDefault().Id;
 
             ThucDonVM.StrUrl = Request.Url.AbsoluteUri.ToString();
             ViewBag.searchString = searchString;
 
-
             //if (id != 0)
             //{
-
             //    var thucDon = _unitOfWork.thucDonRepository.GetById(id);
             //    if (thucDon == null)
             //    {
@@ -104,19 +97,18 @@ namespace QLNhaHang.Controllers
             return Redirect(model.StrUrl);
         }
 
-        public JsonResult IsStringNameAvailable(string TenMonCreate)
-        {
-            var boolName = _unitOfWork.thucDonRepository.Find(x => x.TenMon.Trim().ToLower() == TenMonCreate.Trim().ToLower()).FirstOrDefault();
-            if (boolName == null)
-            {
-                return Json(true, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(false, JsonRequestBehavior.AllowGet);
-            }
-        }
-
+        //public JsonResult IsStringNameAvailable(string TenMonCreate)
+        //{
+        //    var boolName = _unitOfWork.thucDonRepository.Find(x => x.TenMon.Trim().ToLower() == TenMonCreate.Trim().ToLower()).FirstOrDefault();
+        //    if (boolName == null)
+        //    {
+        //        return Json(true, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        return Json(false, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         public ActionResult Edit(string strUrl, int id)
         {
@@ -146,7 +138,6 @@ namespace QLNhaHang.Controllers
             ThucDonVM.StrUrl = strUrl;
             ThucDonVM.GiaTien = ThucDonVM.ThucDon.GiaTien.ToString().Split('.')[0];
 
-
             return View(ThucDonVM);
         }
 
@@ -169,6 +160,7 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeletePost(string strUrl, int id)
         {
+            var user = (NhanVien)Session["UserSession"];
             var thucDon = _unitOfWork.thucDonRepository.GetById(id);
             try
             {
@@ -177,13 +169,14 @@ namespace QLNhaHang.Controllers
             }
             catch (Exception)
             {
-                SetAlert("Xóa không thành công.", "error");
-                return Redirect(strUrl);
+                thucDon.Xoa = true;
+                thucDon.LogFile = thucDon.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá TD: " + thucDon.TenMon + " vào lúc: " + System.DateTime.Now.ToString();
+                _unitOfWork.thucDonRepository.Update(thucDon);
+                _unitOfWork.Complete();
             }
-           
+
             SetAlert("Xóa thành công.", "success");
             return Redirect(strUrl);
         }
-
     }
 }

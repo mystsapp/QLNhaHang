@@ -135,10 +135,11 @@
                 }
                 @Html.PagedListPager(Model.KhuVucs, page => Url.Action("Index",
                                 new
-                                     {
-                                         page,
-                                         @searchString = @ViewBag.searchString
-                                     }))
+                                {
+                                    page,
+                                    ddlVP = ViewBag.ddlVP,
+                                    @searchString = @ViewBag.searchString
+                                }))
             </div>
 
         </div>

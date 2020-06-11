@@ -29,8 +29,8 @@ namespace QLNhaHang.Controllers
                 ChucVus = ListChucVu(),
                 VanPhongs = _unitOfWork.vanPhongRepository.GetAll().ToList(),
                 KhuVucs = _unitOfWork.khuVucRepository.GetAll().ToList(),
-                //LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
-                LoaiViewModels = new List<LoaiThucDonListViewModel>()
+                LoaiViewModels = new List<LoaiThucDonListViewModel>() { new LoaiThucDonListViewModel() { Id = 0, Name = "-- select --" } }
+                //LoaiViewModels = new List<LoaiThucDonListViewModel>()
             };
         }
         // GET: Accounts
@@ -43,6 +43,25 @@ namespace QLNhaHang.Controllers
             if (user.Role.Equals("Users"))
             {
                 return View("~/Views/Shared/AccessDeny.cshtml");
+            }
+            if (idVP != 0)
+            {
+                ViewBag.idVP = idVP;
+            }
+            if(user.Role != "Admins")
+            {
+                var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+                foreach(var item in vanPhongs)
+                {
+                    NhanVienVM.LoaiViewModels.Add(new LoaiThucDonListViewModel { Id = item.Id, Name = item.Name });
+                }
+            }
+            else
+            {
+                foreach (var item in _unitOfWork.vanPhongRepository.GetAll())
+                {
+                    NhanVienVM.LoaiViewModels.Add(new LoaiThucDonListViewModel { Id = item.Id, Name = item.Name });
+                }
             }
             /////// for delete //////
             if (!string.IsNullOrEmpty(maNV))
@@ -188,7 +207,7 @@ namespace QLNhaHang.Controllers
 
         public JsonResult IsStringNameAvailable(string UsernameCreate)
         {
-            var boolName = _unitOfWork.nhanVienRepository.Find(x => x.Username.Trim().ToLower() == UsernameCreate.Trim().ToLower()).FirstOrDefault();
+            var boolName = _unitOfWork.nhanVienRepository.Find(x => x.Username.Trim().ToLower() == UsernameCreate.Trim().ToLower() && x.Xoa != true).FirstOrDefault();
             if (boolName == null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
@@ -288,6 +307,7 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeletePost(string strUrl, string maNV)
         {
+            var user = (NhanVien)Session["UserSession"];
             var nhanVien = _unitOfWork.nhanVienRepository.GetByStringId(maNV);
             try
             {
@@ -297,8 +317,10 @@ namespace QLNhaHang.Controllers
             catch (Exception)
             {
                 nhanVien.Xoa = true;
-                //nhanVien.LogFile = hoaDon.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá HD: " + hoaDon.MaHD + " vào lúc: " + System.DateTime.Now.ToString();
-                return Redirect(strUrl);
+                nhanVien.LogFile = nhanVien.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá NV: " + nhanVien.MaNV + " vào lúc: " + System.DateTime.Now.ToString();
+                _unitOfWork.nhanVienRepository.Update(nhanVien);
+                _unitOfWork.Complete();
+                
             }
             
             SetAlert("Xóa thành công.", "success");

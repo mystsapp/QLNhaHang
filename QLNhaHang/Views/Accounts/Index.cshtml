@@ -61,7 +61,7 @@
                             <div class="col-md-3">
                                 Cơ sở
                                 @Html.DropDownList("idVP",
-                                        new SelectList(Model.VanPhongs, "Id", "Name", ViewBag.idVP),
+                                        new SelectList(Model.LoaiViewModels, "Id", "Name", ViewBag.idVP),
                                         htmlAttributes: new { @class = "form-control border-input ddlVP" })
                             </div>
 
@@ -217,6 +217,7 @@
                                 new
                                      {
                                          page,
+                                         @idVP = ViewBag.idVP,
                                          @searchString = @ViewBag.searchString
                                      }))
             </div>

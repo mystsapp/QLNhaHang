@@ -77,7 +77,8 @@ namespace QLNhaHang.Controllers
                 DaGui = mon.DaGui,
                 DaLam = mon.DaLam,
                 VanPhong = mon.VanPhong,
-                Username = user.Username
+                Username = user.Username,
+                NgayTao = DateTime.Now
             };
             _unitOfWork.phaCheRepository.Create(phaChe);
             ///////////////////// save to phaChe tbl //////////////////

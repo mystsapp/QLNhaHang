@@ -80,7 +80,8 @@ namespace QLNhaHang.Controllers
                 DaGui = mon.DaGui,
                 DaLam = mon.DaLam,
                 VanPhong = mon.VanPhong,
-                Username = user.Username
+                Username = user.Username,
+                NgayTao = DateTime.Now
             };
             _unitOfWork.bepRepository.Create(bep);
             ///////////////////// save to bep tbl //////////////////

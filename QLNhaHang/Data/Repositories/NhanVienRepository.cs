@@ -29,7 +29,7 @@ namespace QLNhaHang.Data.Repositories
                 return null;
 
             // retrieve list from database/whereverand
-            var list = GetAllIncludeOne( y => y.KhuVuc).AsQueryable();
+            var list = GetAllIncludeOne( y => y.KhuVuc).Where(x => x.Xoa != true).AsQueryable();
             if (role != "Admins")
             {
                 list = list.Where(x => x.Role.Equals(role) || x.KhuVuc.VanPhong.Name.Equals(roleVP));

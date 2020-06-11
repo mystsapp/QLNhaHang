@@ -508,6 +508,14 @@
     <Compile Include="Migrations\202006110058319_addLogfileCol.designer.cs">
       <DependentUpon>202006110058319_addLogfileCol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006110130427_addLogFileTD.cs" />
+    <Compile Include="Migrations\202006110130427_addLogFileTD.designer.cs">
+      <DependentUpon>202006110130427_addLogFileTD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006110337292_addDateBepPhaChe.cs" />
+    <Compile Include="Migrations\202006110337292_addDateBepPhaChe.designer.cs">
+      <DependentUpon>202006110337292_addDateBepPhaChe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BanHangViewModel.cs" />
     <Compile Include="Models\BepViewModel.cs" />
@@ -2337,6 +2345,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006110058319_addLogfileCol.resx">
       <DependentUpon>202006110058319_addLogfileCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006110130427_addLogFileTD.resx">
+      <DependentUpon>202006110130427_addLogFileTD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006110337292_addDateBepPhaChe.resx">
+      <DependentUpon>202006110337292_addDateBepPhaChe.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\DS_HoaDonTay_Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

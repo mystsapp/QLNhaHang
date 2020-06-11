@@ -146,10 +146,11 @@
                 }
                 @Html.PagedListPager(Model.ThucDons, page => Url.Action("Index",
                                 new
-                                     {
-                                         page,
-                                         @searchString = @ViewBag.searchString
-                                     }))
+                                {
+                                    page,
+                                    @ddlLoai = @ViewBag.idLoai,
+                                    @searchString = @ViewBag.searchString
+                                }))
             </div>
 
         </div>

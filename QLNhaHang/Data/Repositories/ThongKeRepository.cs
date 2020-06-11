@@ -15,6 +15,9 @@ namespace QLNhaHang.Data.Repositories
         IEnumerable<HoaDon> ListSevenDay();
         IEnumerable<HoaDon> ListHoaDonTheoTiecBuffet(int vanPhongId, int khuVucId, int thucDonId, string tuNgay, string denNgay);
         IEnumerable<HoaDon> ListHoaDonTheoNhanVien(string nhanVienId, string tuNgay, string denNgay);
+
+        IEnumerable<PhaChe> ListHoaDonTheoPhaChe(string nhanVienId, string searchFromDate, string searchToDate);
+        IEnumerable<Bep> ListHoaDonTheoBep(string nhanVienId, string searchFromDate, string searchToDate);
     }
     public class ThongKeRepository : Repository<HoaDon>, IThongKeRepository
     {
@@ -99,7 +102,7 @@ namespace QLNhaHang.Data.Repositories
             }
             return list;
         }
-        
+
         public IEnumerable<HoaDon> ListHoaDonTheoNgayIn(int vanPhongId, string searchFromDate, string searchToDate)
         {
 
@@ -209,7 +212,7 @@ namespace QLNhaHang.Data.Repositories
                         list = list.Where(x => x.NgayTao >= fromDate &&
                                        x.NgayTao < toDate.AddDays(1)).ToList();
                     }
-                    
+
                 }
                 catch (Exception)
                 {
@@ -248,15 +251,15 @@ namespace QLNhaHang.Data.Repositories
                 }
             }
             /////////// thuc don ////////////
-            if(khuVucId != 0 && thucDonId != 0)
+            if (khuVucId != 0 && thucDonId != 0)
             {
                 List<HoaDon> hoaDons = new List<HoaDon>();
                 foreach (var hd in list)
                 {
                     List<ChiTietHD> chiTietHDs = _context.ChiTietHDs.Where(x => x.MaHD == hd.MaHD).ToList();
-                    foreach(var chiTiet in chiTietHDs)
+                    foreach (var chiTiet in chiTietHDs)
                     {
-                        if(chiTiet.MaThucDon == thucDonId)
+                        if (chiTiet.MaThucDon == thucDonId)
                         {
                             hoaDons.Add(hd);
                         }
@@ -266,7 +269,7 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if(count == 0)
+            if (count == 0)
             {
                 return null;
             }
@@ -345,7 +348,7 @@ namespace QLNhaHang.Data.Repositories
 
                 }
             }
-            
+
             count = list.Count();
             if (count == 0)
             {
@@ -353,5 +356,179 @@ namespace QLNhaHang.Data.Repositories
             }
             return list;
         }
+
+        public IEnumerable<Bep> ListHoaDonTheoBep(string nhanVienId, string searchFromDate, string searchToDate)
+        {
+
+            var nhanVien = _context.NhanViens.Find(nhanVienId);
+            //var list = GetAllIncludeThree(x => x.Ban, y => y.NhanVien, z => z.VanPhong).ToList();
+            var list = _context.Beps.ToList();
+
+            // search VP
+            if (!string.IsNullOrEmpty(nhanVienId))
+            {
+
+                list = list.Where(x => x.Username == nhanVien.Username).ToList();
+
+            }
+
+            var count = list.Count();
+
+            // search Date
+            DateTime fromDate, toDate;
+            if (!string.IsNullOrEmpty(searchFromDate) && !string.IsNullOrEmpty(searchToDate))
+            {
+
+                try
+                {
+                    fromDate = DateTime.Parse(searchFromDate);
+                    toDate = DateTime.Parse(searchToDate);
+
+                    if (fromDate > toDate)
+                    {
+                        return null;
+                    }
+                    if (fromDate == toDate)
+                    {
+                        list = list.Where(x => x.NgayTao.Value.ToShortDateString() == fromDate.ToShortDateString()).ToList();
+                    }
+                    else
+                    {
+                        list = list.Where(x => x.NgayTao >= fromDate &&
+                                       x.NgayTao < toDate.AddDays(1)).ToList();
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchFromDate))
+                {
+                    try
+                    {
+                        fromDate = DateTime.Parse(searchFromDate);
+                        list = list.Where(x => x.NgayTao >= fromDate).ToList();
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
+                }
+                if (!string.IsNullOrEmpty(searchToDate))
+                {
+                    try
+                    {
+                        toDate = DateTime.Parse(searchToDate);
+                        list = list.Where(x => x.NgayTao < toDate.AddDays(1)).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
+                }
+            }
+
+            count = list.Count();
+            if (count == 0)
+            {
+                return null;
+            }
+            return list;
+        }
+        public IEnumerable<PhaChe> ListHoaDonTheoPhaChe(string nhanVienId, string searchFromDate, string searchToDate)
+        {
+
+            var nhanVien = _context.NhanViens.Find(nhanVienId);
+            //var list = GetAllIncludeThree(x => x.Ban, y => y.NhanVien, z => z.VanPhong).ToList();
+            var list = _context.PhaChes.ToList();
+
+            // search VP
+            if (!string.IsNullOrEmpty(nhanVienId))
+            {
+
+                list = list.Where(x => x.Username == nhanVien.Username).ToList();
+
+            }
+
+            var count = list.Count();
+
+            // search Date
+            DateTime fromDate, toDate;
+            if (!string.IsNullOrEmpty(searchFromDate) && !string.IsNullOrEmpty(searchToDate))
+            {
+
+                try
+                {
+                    fromDate = DateTime.Parse(searchFromDate);
+                    toDate = DateTime.Parse(searchToDate);
+
+                    if (fromDate > toDate)
+                    {
+                        return null;
+                    }
+                    if (fromDate == toDate)
+                    {
+                        list = list.Where(x => x.NgayTao.Value.ToShortDateString() == fromDate.ToShortDateString()).ToList();
+                    }
+                    else
+                    {
+                        list = list.Where(x => x.NgayTao >= fromDate &&
+                                       x.NgayTao < toDate.AddDays(1)).ToList();
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    return null;
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(searchFromDate))
+                {
+                    try
+                    {
+                        fromDate = DateTime.Parse(searchFromDate);
+                        list = list.Where(x => x.NgayTao >= fromDate).ToList();
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
+                }
+                if (!string.IsNullOrEmpty(searchToDate))
+                {
+                    try
+                    {
+                        toDate = DateTime.Parse(searchToDate);
+                        list = list.Where(x => x.NgayTao < toDate.AddDays(1)).ToList();
+
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
+
+                }
+            }
+
+            count = list.Count();
+            if (count == 0)
+            {
+                return null;
+            }
+            return list;
+        }
+
     }
 }

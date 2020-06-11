@@ -64,5 +64,7 @@ namespace QLNhaHang.Data.Models
         [StringLength(50)]
         public string Username { get; set; }
 
+        public DateTime? NgayTao { get; set; }
+
     }
 }

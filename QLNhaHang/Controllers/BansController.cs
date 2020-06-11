@@ -200,8 +200,10 @@ namespace QLNhaHang.Controllers
             }
             catch (Exception ex)
             {
-                //throw ex;
-                SetAlert("Xóa không thành công.", "error");
+                ban.Xoa = true;
+                ban.LogFile = ban.LogFile + System.Environment.NewLine + "===================" + System.Environment.NewLine + "-User: " + user.Username + " xoá ban: " + ban.MaBan + " vào lúc: " + System.DateTime.Now.ToString();
+                _unitOfWork.banRepository.Update(ban);
+                _unitOfWork.Complete();
                 return Redirect(strUrl);
             }
 
