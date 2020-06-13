@@ -88,7 +88,7 @@ namespace QLNhaHang.Controllers
             MonDaGoiVM.StrUrl = strUrl;
             MonDaGoiVM.MonDaGois = _unitOfWork.monDaGoiRepository
                                               .GetAllInclude(x => x.Ban, y => y.ThucDon)
-                                              .Where(x => x.MaBan.Equals(maBan))
+                                              .Where(x => x.MaBan == maBan)
                                               .OrderBy(x => x.LanGui)
                                               .ToList();
 
@@ -768,7 +768,7 @@ namespace QLNhaHang.Controllers
             /// clear MonDaGois
             _unitOfWork.monDaGoiRepository.DeleteRange(MonDaGoiVM.MonDaGois);
             _unitOfWork.Complete();
-            /// /// clear MonDaChons <-> Ban Flag
+            /// /// clear MonDaChons
             return RedirectToAction(nameof(TiecBuffet), new { vanPhongName = vanPhongName });
         }
 

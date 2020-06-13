@@ -28,7 +28,15 @@ namespace QLNhaHang.Controllers
             var user = (NhanVien)Session["UserSession"];
             if (user.NoiLamViec == "Bếp" || user.NoiLamViec == "Pha chế")
             {
-                return View("~/Views/Shared/AccessDeny.cshtml");
+                //return View("~/Views/Shared/AccessDeny.cshtml");
+                if (user.NoiLamViec == "Pha chế")
+                {
+                    return RedirectToAction("Index", "PhaChes");
+                }
+                if (user.NoiLamViec == "Bếp")
+                {
+                    return RedirectToAction("Index", "Beps");
+                }
             }
             ListSevenDays();
             return View(HomeVM);

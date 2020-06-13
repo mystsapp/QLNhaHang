@@ -369,7 +369,7 @@ namespace QLNhaHang.Data.Repositories
             {
 
                 list = list.Where(x => x.Username == nhanVien.Username).ToList();
-
+                
             }
 
             var count = list.Count();
@@ -391,11 +391,13 @@ namespace QLNhaHang.Data.Repositories
                     if (fromDate == toDate)
                     {
                         list = list.Where(x => x.NgayTao.Value.ToShortDateString() == fromDate.ToShortDateString()).ToList();
+                        
                     }
                     else
                     {
                         list = list.Where(x => x.NgayTao >= fromDate &&
                                        x.NgayTao < toDate.AddDays(1)).ToList();
+                        
                     }
 
                 }
@@ -413,6 +415,7 @@ namespace QLNhaHang.Data.Repositories
                     {
                         fromDate = DateTime.Parse(searchFromDate);
                         list = list.Where(x => x.NgayTao >= fromDate).ToList();
+                        
                     }
                     catch (Exception)
                     {
@@ -437,10 +440,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return list;
+            //}
             return list;
         }
         public IEnumerable<PhaChe> ListHoaDonTheoPhaChe(string nhanVienId, string searchFromDate, string searchToDate)
