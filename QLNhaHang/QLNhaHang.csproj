@@ -359,6 +359,7 @@
     <Compile Include="Controllers\BansController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BepsController.cs" />
+    <Compile Include="Controllers\ChiTietHDsController.cs" />
     <Compile Include="Controllers\HoaDonsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhuVucsController.cs" />
@@ -523,6 +524,7 @@
     <Compile Include="Models\ChartPieModel.cs" />
     <Compile Include="Models\ChiTietHDGroupByResultViewModel.cs" />
     <Compile Include="Models\ChiTietHdViewModel.cs" />
+    <Compile Include="Models\ChiTietHoaDonViewModel.cs" />
     <Compile Include="Models\DaInModel.cs" />
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
@@ -2252,6 +2254,7 @@
     <Content Include="Views\MonDaGois\TiecBuffet.cshtml" />
     <Content Include="Views\MonDaGois\TinhTienBuffet.cshtml" />
     <Content Include="Views\ThongKes\BaoCaoTheoNoiLamViec.cshtml" />
+    <Content Include="Views\ChiTietHDs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,7 +13,7 @@ namespace QLNhaHang.Data.Repositories
         IEnumerable<HoaDon> ListHoaDonTheoNgayIn(int vanPhongId, string searchFromDate, string searchToDate);
         IEnumerable<HoaDon> ListHoaDonTheoNgayTao(int vanPhongId, string tinhTrang, string searchFromDate, string searchToDate);
         IEnumerable<HoaDon> ListSevenDay();
-        IEnumerable<HoaDon> ListHoaDonTheoTiecBuffet(int vanPhongId, int khuVucId, int thucDonId, string tuNgay, string denNgay);
+        IEnumerable<HoaDon> ListHoaDonTheoTiecBuffet(int vanPhongId, int thucDonId, string tuNgay, string denNgay);
         IEnumerable<HoaDon> ListHoaDonTheoNhanVien(string nhanVienId, string tuNgay, string denNgay);
 
         IEnumerable<PhaChe> ListHoaDonTheoPhaChe(string nhanVienId, string searchFromDate, string searchToDate);
@@ -29,7 +29,7 @@ namespace QLNhaHang.Data.Repositories
         {
 
             var list = GetAllIncludeThree(x => x.Ban, y => y.NhanVien, z => z.VanPhong);
-
+            var hdList = list.ToList();
             // search VP
             if (vanPhongId != 0)
             {
@@ -38,10 +38,18 @@ namespace QLNhaHang.Data.Repositories
 
             if (!tinhTrang.IsEmpty())
             {
-                list = list.Where(x => x.DaIn == bool.Parse(tinhTrang));
+                bool inStatus = bool.Parse(tinhTrang);
+                if (inStatus)
+                {
+                    list = list.Where(x => x.DaIn == true);
+                }
+                else
+                {
+                    list = list.Where(x => x.DaIn != true);
+                }
             }
 
-            var count = list.Count();
+            var count = list.Count();     ////////////////////////////////////////////////////////////
             DateTime fromDate, toDate;
             if (!string.IsNullOrEmpty(searchFromDate) && !string.IsNullOrEmpty(searchToDate))
             {
@@ -96,10 +104,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return null;
+            //}
             return list;
         }
 
@@ -168,10 +176,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return null;
+            //}
             return list;
         }
 
@@ -180,7 +188,7 @@ namespace QLNhaHang.Data.Repositories
             return GetAll().OrderByDescending(x => x.NgayTao);
         }
 
-        public IEnumerable<HoaDon> ListHoaDonTheoTiecBuffet(int vanPhongId, int khuVucId, int thucDonId, string searchFromDate, string searchToDate)
+        public IEnumerable<HoaDon> ListHoaDonTheoTiecBuffet(int vanPhongId, int thucDonId, string searchFromDate, string searchToDate)
         {
             var list = GetAllIncludeThree(x => x.Ban, y => y.NhanVien, z => z.VanPhong).ToList();
             // search VP
@@ -251,12 +259,12 @@ namespace QLNhaHang.Data.Repositories
                 }
             }
             /////////// thuc don ////////////
-            if (khuVucId != 0 && thucDonId != 0)
+            if (thucDonId != 0)
             {
                 List<HoaDon> hoaDons = new List<HoaDon>();
                 foreach (var hd in list)
                 {
-                    List<ChiTietHD> chiTietHDs = _context.ChiTietHDs.Where(x => x.MaHD == hd.MaHD).ToList();
+                    List<ChiTietHD> chiTietHDs = _context.ChiTietHDs.Where(x => x.MaHD == hd.MaHD && x.ThucDon.LoaiThucDon.TenLoai.ToLower().Contains("buffet")).ToList();
                     foreach (var chiTiet in chiTietHDs)
                     {
                         if (chiTiet.MaThucDon == thucDonId)
@@ -269,10 +277,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return null;
+            //}
             return list;
         }
 
@@ -350,10 +358,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return null;
+            //}
             return list;
         }
 
@@ -526,10 +534,10 @@ namespace QLNhaHang.Data.Repositories
             }
 
             count = list.Count();
-            if (count == 0)
-            {
-                return null;
-            }
+            //if (count == 0)
+            //{
+            //    return null;
+            //}
             return list;
         }
 

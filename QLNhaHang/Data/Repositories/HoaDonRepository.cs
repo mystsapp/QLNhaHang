@@ -41,6 +41,7 @@ namespace QLNhaHang.Data.Repositories
                 list = list.Where(x => x.MaHD.ToLower().Contains(searchString.ToLower()) ||
                                        x.NhanVien.HoTen.ToLower().Contains(searchString.ToLower()) ||
                                        x.TenKH.ToLower().Contains(searchString.ToLower()));
+                var hdList = list.ToList();
             }
 
             var count = list.Count();

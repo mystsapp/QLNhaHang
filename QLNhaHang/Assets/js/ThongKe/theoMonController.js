@@ -15,11 +15,11 @@ var theoMonController = {
             $('#hidTuNgay').val($('.txtTuNgay').val());
             $('#hidDenNgay').val($('.txtDenNgay').val());
             $('#hidVanPhongId').val($('.ddlVanPhong').val());
-            $('#hidKhuVucId').val($('.ddlKhuVuc').val());
+            //$('#hidKhuVucId').val($('.ddlKhuVuc').val());
 
             $('#frmTheoMon').submit();
         })
-        
+
         //$('input.numbers').val(function (index, value) {
         //    return addCommas(value);
         //});
