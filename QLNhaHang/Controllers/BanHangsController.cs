@@ -38,7 +38,7 @@ namespace QLNhaHang.Controllers
             //{
             ViewBag.idKhuVuc = idKhuVuc;
             //}
-
+            var abc = Session["noiLamViec"].ToString();
             var user = (NhanVien)Session["UserSession"];
             if (user.NoiLamViec == "Bếp" || user.NoiLamViec == "Pha chế")
             {

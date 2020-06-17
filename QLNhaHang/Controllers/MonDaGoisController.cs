@@ -38,35 +38,40 @@ namespace QLNhaHang.Controllers
         {
             var user = (NhanVien)Session["UserSession"];
             MonDaGoiVM.ThucDons = _unitOfWork.thucDonRepository.GetAll().OrderBy(x => x.Id).ToList();
-            
-            ////////////// theo Role ////////////////
-            if (user.Role != "Admins")
-            {
-                if (user.Role == "Users")
-                {
-                    MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name && 
-                                                                    !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet") && 
+
+            ///// load vao /////////////// --> chi ban dung thucdon cua chinh nhanh chinh minh
+            MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name &&
+                                                                    !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet") &&
                                                                     x.MaLoaiId == MonDaGoiVM.LoaiThucDons.FirstOrDefault().Id).ToList();
-                    if (MonDaGoiVM.ThucDons.Count == 0)
-                    {
-                        MonDaGoiVM.ThucDons.Add(new ThucDon { Id = 0, TenMon = "Chưa có món nào." });
-                    }
-                }
-                else
-                {
-                    var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
-                    List<ThucDon> thucDons = new List<ThucDon>();
-                    foreach (var item in vanPhongs)
-                    {
-                        thucDons.AddRange(_unitOfWork.thucDonRepository.Find(x => x.VanPhong == item.Name));
-                    }
-                    MonDaGoiVM.ThucDons = thucDons;
-                    if (MonDaGoiVM.ThucDons.Count == 0)
-                    {
-                        MonDaGoiVM.ThucDons = new List<ThucDon>();
-                    }
-                }
-            }
+            ///// load vao ///////////////
+            ////////////// theo Role ////////////////
+            //if (user.Role != "Admins")
+            //{
+            //    if (user.Role == "Users")
+            //    {
+            //        MonDaGoiVM.ThucDons = MonDaGoiVM.ThucDons.Where(x => x.VanPhong == user.KhuVuc.VanPhong.Name && 
+            //                                                        !x.LoaiThucDon.TenLoai.ToLower().Contains("buffet") && 
+            //                                                        x.MaLoaiId == MonDaGoiVM.LoaiThucDons.FirstOrDefault().Id).ToList();
+            //        if (MonDaGoiVM.ThucDons.Count == 0)
+            //        {
+            //            MonDaGoiVM.ThucDons.Add(new ThucDon { Id = 0, TenMon = "Chưa có món nào." });
+            //        }
+            //    }
+            //    else
+            //    {
+            //        var vanPhongs = _unitOfWork.vanPhongRepository.Find(x => x.Role == user.Role).ToList();
+            //        List<ThucDon> thucDons = new List<ThucDon>();
+            //        foreach (var item in vanPhongs)
+            //        {
+            //            thucDons.AddRange(_unitOfWork.thucDonRepository.Find(x => x.VanPhong == item.Name));
+            //        }
+            //        MonDaGoiVM.ThucDons = thucDons;
+            //        if (MonDaGoiVM.ThucDons.Count == 0)
+            //        {
+            //            MonDaGoiVM.ThucDons = new List<ThucDon>();
+            //        }
+            //    }
+            //}
             ////////////// theo Role ////////////////
             ///////////////// theo Loai ////////////////
             if (ddlLoai != 0)

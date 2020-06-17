@@ -51,6 +51,7 @@ namespace QLNhaHang.Controllers
                     Session["TenVP"] = userInfo.KhuVuc.VanPhong.Name;
                     Session["VPId"] = userInfo.KhuVuc.VanPhongId;
                     Session["role"] = userInfo.Role;
+                    Session["noiLamViec"] = userInfo.NoiLamViec;
 
                     Session["listKV"] = JsonConvert.SerializeObject(_unitOfWork.khuVucRepository.Find(x => x.VanPhongId == userInfo.KhuVuc.VanPhongId));
                     if(userInfo.NoiLamViec == "Pha chế")

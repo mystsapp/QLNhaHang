@@ -37,6 +37,7 @@ var goiMonController = {
             $('#hidMaTD').val(optionValue);
             var soLuong = $(this).val();
             $('#hidSoLuong').val(soLuong);
+            $('#hidMaLoai').val($('.ddlLoai').val());
             $('#hidSubmit').click();
         });
 

@@ -1,7 +1,7 @@
 ﻿@model QLNhaHang.Models.BanHangViewModel
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutPage_HauCan.cshtml";
 
 }
 
@@ -40,7 +40,7 @@
         </div>
         <div class="card-body list">
 
-            <form action="/BanHangs/Index" method="get" >
+            <form action="/BanHangs/Index" method="get">
 
                 <div class="container" style="padding-bottom:10px; background-color: aliceblue;">
                     @* we will add search criteria *@
@@ -74,44 +74,77 @@
                 </div>
             </form>
             <br />
-
-            @foreach (var ban in Model.Bans)
+            @if (Model.Bans.Count < 22)
             {
+                <div style="overflow:auto; height: 300px">
+                    @foreach (var ban in Model.Bans)
+                    {
 
-                <div class="card border-warning mb-3 float-left ml-3 cursor-pointer box" style="max-width: 12rem;" data-id="@ban.MaBan">
-                    <div class="card-header">@ban.TenBan</div>
-                    <div class="card-body text-warning " draggable="true">
-                        @*<h5 class="card-title">Warning card title</h5>*@
-                        @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
-                        <p>
-                            @if (ban.Flag)
-                            {
-                                <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="70" src="~/Assets/Images/Desk.jpg" draggable="true" />
-                            }
-                            else
-                            {
-                                <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="70" src="~/Assets/Images/Empty_Desk.jpg" draggable="true" />
-                            }
+                        <div class="card border-warning mb-3 float-left ml-3 cursor-pointer box" style="max-width: 5rem;" data-id="@ban.MaBan">
+                            <div class="card-header">@ban.TenBan</div>
+                            <div class="card-body text-warning " style="max-height: 80px" draggable="true">
+                                @*<h5 class="card-title">Warning card title</h5>*@
+                                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                                <p>
+                                    @if (ban.Flag)
+                                    {
+                                        <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="42" src="~/Assets/Images/Desk.jpg" draggable="true" />
+                                    }
+                                    else
+                                    {
+                                        <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="42" src="~/Assets/Images/Empty_Desk.jpg" draggable="true" />
+                                    }
 
-                        </p>
-                    </div>
+                                </p>
+                            </div>
+                        </div>
+
+                    }
                 </div>
-
             }
-        <form>
-            <input id="hidMaBan" type="hidden" name="maBan" />
-            <input type="hidden" name="idKhuVuc" value="@ViewBag.idKhuVuc" />
-            <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
-        </form>
+            else
+            {
+                <div style="overflow:auto; height: 600px">
+                    @foreach (var ban in Model.Bans)
+                    {
+
+                        <div class="card border-warning mb-3 float-left ml-3 cursor-pointer box" style="max-width: 5rem;" data-id="@ban.MaBan">
+                            <div class="card-header">@ban.TenBan</div>
+                            <div class="card-body text-warning " style="max-height: 80px" draggable="true">
+                                @*<h5 class="card-title">Warning card title</h5>*@
+                                @*<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                                <p>
+                                    @if (ban.Flag)
+                                    {
+                                        <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="42" src="~/Assets/Images/Desk.jpg" draggable="true" />
+                                    }
+                                    else
+                                    {
+                                        <img data-id="@ban.MaBan" name="imgName" class="imgBan task" width="42" src="~/Assets/Images/Empty_Desk.jpg" draggable="true" />
+                                    }
+
+                                </p>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            }
+
+            <form>
+                <input id="hidMaBan" type="hidden" name="maBan" />
+                <input type="hidden" name="idKhuVuc" value="@ViewBag.idKhuVuc" />
+                <input type="submit" hidden formaction="/BanHangs/Index" formmethod="get" id="hidSubmit" />
+            </form>
         </div>
     </div>
     <!-- /.card -->
 </section>
 
 <form id="frmNhapBan" action="/BanHangs/Index">
-    <input type="hidden" name="maBan" value="@Model.Ban.MaBan"/>
-    <input type="hidden" name="maBanFrom" id="hidMaBanFrom"/>
-    <input type="hidden" name="maBanTo" id="hidMaBanTo"/>
+    <input type="hidden" name="maBan" value="@Model.Ban.MaBan" />
+    <input type="hidden" name="maBanFrom" id="hidMaBanFrom" />
+    <input type="hidden" name="maBanTo" id="hidMaBanTo" />
 </form>
 
 <section class="content">
@@ -153,7 +186,7 @@
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaGui)</th>
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().DaLam)</th>
                                 <th>@Html.DisplayNameFor(m => m.MonDaGois.FirstOrDefault().LanGui)</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
@@ -161,35 +194,35 @@
                             @foreach (var item in Model.MonDaGois)
                             {
 
-                            <tr class="cursor-pointerMon" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
+                                <tr class="cursor-pointerMon" @*onclick="location.href = '@(Url.Action("Index", "CapThes", new { maCT = item.MaCapThe }))'"*@>
 
-                                <td>@i</td>
-                                <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
-                                <td>@Html.DisplayFor(m => item.SoLuong)</td>
-                                @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
-                                <td>@Html.DisplayFor(m => item.ThanhTien)</td>
-                                <td>
-                                    @if (item.DaGui)
-                                    {
-                                        <span class="badge badge-success">Đã gửi</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Chưa gửi</span>
-                                    }
-                                </td>
-                                <td>
-                                    @if (item.DaLam)
-                                    {
-                                        <span class="badge badge-success">Đã làm</span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-warning">Chưa làm</span>
-                                    }
-                                </td>
-                                <td>@Html.DisplayFor(m => item.LanGui)</td>
-                            </tr>
+                                    <td>@i</td>
+                                    <td>@Html.DisplayFor(m => item.ThucDon.TenMon)</td>
+                                    <td>@Html.DisplayFor(m => item.SoLuong)</td>
+                                    @*<td>@Html.DisplayFor(m => item.PhuPhi)</td>*@
+                                    <td>@Html.DisplayFor(m => item.ThanhTien)</td>
+                                    <td>
+                                        @if (item.DaGui)
+                                        {
+                                            <span class="badge badge-success">Đã gửi</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning">Chưa gửi</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.DaLam)
+                                        {
+                                            <span class="badge badge-success">Đã làm</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning">Chưa làm</span>
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(m => item.LanGui)</td>
+                                </tr>
                                 i++;
                             }
                         </tbody>
@@ -327,7 +360,7 @@
 
         });
         //$('.cursor-pointerMon').click(function () {
-            
+
         //    if ($(this).hasClass("bg-warning")) {
         //        $(this).removeClass("bg-warning");
 
@@ -356,7 +389,7 @@
             cursor: pointer;
             color: white;
         }
-        
+
         /*#listAll tr :hover {
             background-color: #ffc107 !important;
             cursor: pointer;
@@ -392,11 +425,11 @@
     <script src="~/Assets/js/BanHang/mayTinhController.js"></script>
 
 
-    
-    
-        // Drag and Drop
 
-        <script>
+
+    @*// Drag and Drop*@
+
+    <script>
 
         var dropTarget = document.querySelector(".list");
         var draggables = document.querySelectorAll(".task");
@@ -423,7 +456,7 @@
             let droppable = target.classList.contains('box');
             let srcId = ev.dataTransfer.getData("srcId");
             //console.log(srcId);
-            const desId = target.getAttribute('data-id');            
+            const desId = target.getAttribute('data-id');
 
             $.ajax({
                 url: '/BanHangs/MonInBan',
