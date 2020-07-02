@@ -64,13 +64,14 @@ namespace QLNhaHang.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePost(LoaiThucDonViewModel model)
         {
+            var user = (NhanVien)Session["UserSession"];
             if (!string.IsNullOrEmpty(model.PhuPhi))
             {
                 model.LoaiThucDon.PhuPhi = decimal.Parse(model.PhuPhi);
             }
             
             model.LoaiThucDon.NgayTao = DateTime.Now;
-            model.LoaiThucDon.NguoiTao = "Admin";
+            model.LoaiThucDon.NguoiTao = user.Username;
             model.LoaiThucDon.TenLoai = model.TenLoaiCreate;
             _unitOfWork.loaiThucDonRepository.Create(model.LoaiThucDon);
             _unitOfWork.Complete();

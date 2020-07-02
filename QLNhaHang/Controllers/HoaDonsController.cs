@@ -96,14 +96,14 @@ namespace QLNhaHang.Controllers
                 _unitOfWork.hoaDonRepository.Update(hoaDon);
                 _unitOfWork.Complete();
             }
-            
+
             SetAlert("Xóa thành công!", "success");
             return Redirect(strUrl);
         }
 
         public ActionResult HoaDonTuDong(decimal ppv = 1, decimal vat = 0, string maHD = null, string strUrl = null, /*int maThongTinHDId = 0,*/ string maKH = null)
         {
-            
+
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
 
@@ -111,7 +111,7 @@ namespace QLNhaHang.Controllers
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
             // HoaDonVM.VanPhong.So = GetNextId.NextSoHD(HoaDonVM.VanPhong.So, "");
             /////////////// So HD tu dong tang 1 //////////////////////
-            
+
             if (ppv != 1 && ppv != 0)
             {
                 HoaDonVM.TyLePPV = ppv;
@@ -135,7 +135,7 @@ namespace QLNhaHang.Controllers
                 }
             }
             ///////// moi load vao
-            if(ppv == 1)
+            if (ppv == 1)
             {
                 HoaDonVM.TienPPV = (HoaDonVM.TyLePPV / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                 HoaDonVM.ThanhTienSauPPV = (decimal.Parse(HoaDonVM.TienPPV) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
@@ -157,7 +157,7 @@ namespace QLNhaHang.Controllers
                 }
             }
             /////////// nguoi ta go so 0
-            if(ppv == 0)
+            if (ppv == 0)
             {
                 HoaDonVM.TyLePPV = 0;
                 if (vat == 0)
@@ -166,7 +166,7 @@ namespace QLNhaHang.Controllers
                     HoaDonVM.TienThueVAT = (HoaDonVM.VAT / 100 * HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     HoaDonVM.ThanhTienVAT = (decimal.Parse(HoaDonVM.TienThueVAT) + HoaDonVM.HoaDon.ThanhTienHD).ToString().Split('.')[0];
                     //HoaDonVM.VAT = HoaDonVM.VAT;
-                    
+
                 }
                 else
                 {
@@ -227,7 +227,7 @@ namespace QLNhaHang.Controllers
             _unitOfWork.Complete();
             //////////// update - So HD tu dong tang 1 //////////////////////
             ///////////////get TTHD - So HD tu dong tang 1 //////////////////////
-            
+
             //hoaDon.SoThuTu = model.VanPhong.SoThuTu;
 
             hoaDon.HTThanhToan = model.HoaDon.HTThanhToan;
@@ -270,7 +270,7 @@ namespace QLNhaHang.Controllers
             //_unitOfWork.vanPhongRepository.Update(vanPhong);
             //_unitOfWork.Complete();
             //////////// So HD trong VP tu dong tang 1 //////////////////////
-            
+
             return RedirectToAction(nameof(Export), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 
@@ -331,6 +331,47 @@ namespace QLNhaHang.Controllers
                 ThanhTienHH = x.DonGia * x.SoLuong
 
             });
+            /////////////////////////////////////////
+            HoadonVmTest hoadonvmtest = new HoadonVmTest();
+            hoadonvmtest.MaHD = list.FirstOrDefault().MaHD;
+            foreach (var item in list)
+            {
+                ChiTietHdViewModel chiTietHdViewModel = new ChiTietHdViewModel()
+                {
+                    HoTen = item.HoaDon.NhanVien.HoTen,
+                    VPName = item.HoaDon.VanPhong.Name,
+                    KVName = item.HoaDon.NhanVien.KhuVuc.Name,
+                    TenMon = item.ThucDon.TenMon,
+                    SoLuong = item.SoLuong,
+                    DonGia = item.DonGia,
+                    ThanhTien = item.DonGia * item.SoLuong,
+                    TenBan = item.HoaDon.Ban.TenBan
+                };
+
+                hoadonvmtest.ChiTietHdViewModels.Add(chiTietHdViewModel);
+            }
+            hoadonvmtest.ChiTietHdViewModels.Add(new ChiTietHdViewModel {
+                HoTen = "aa",
+                VPName = "aa",
+                KVName = "aa",
+                TenMon = "aa",
+                SoLuong = 11,
+                DonGia = 11,
+                ThanhTien = 11,
+                TenBan = "aa"
+            });
+            string xml;
+            //Generate a List object for testing
+            //List<Student> list1 = new List<Student>(3);
+
+            //list1.Add(new Student() { Name = "James", Age = 33 });
+            //list1.Add(new Student() { Name = "Kobe", Age = 39 });
+            //serialization
+            var list1 = list.ToList();
+            xml = XmlUtil.Serializer(typeof(HoadonVmTest), hoadonvmtest);
+            System.Diagnostics.Debug.Write(xml);
+            /////////////////////////////////////////
+
             var dt = EntityToTable.ToDataTable(items);
             ReportDocument rd = new ReportDocument();
             string reportPath = Path.Combine(Server.MapPath("~/Report"), "DS_HoaDon_Report.rpt");
@@ -339,8 +380,8 @@ namespace QLNhaHang.Controllers
 
         public ActionResult HoaDonTay(string soTien, decimal ppv = 0, decimal vat = 0, string maHD = null, string strUrl = null, /*int maThongTinHDId = 0,*/ string maKH = null)
         {
-           
-            
+
+
             HoaDonVM.StrUrl = strUrl;
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
 
@@ -433,7 +474,7 @@ namespace QLNhaHang.Controllers
             ////////////get TTHD - So HD tu dong tang 1 //////////////////////
             HoaDonVM.HoaDon = _unitOfWork.hoaDonRepository.GetByStringId(maHD);
             HoaDonVM.VanPhong = _unitOfWork.vanPhongRepository.GetById(HoaDonVM.HoaDon.VanPhongId);
-            
+
             if (string.IsNullOrEmpty(HoaDonVM.VanPhong.So))
             {
                 hoaDon.So = GetNextId.NextSoHD("", "");
@@ -497,7 +538,7 @@ namespace QLNhaHang.Controllers
             //_unitOfWork.vanPhongRepository.Update(vanPhong);
             //_unitOfWork.Complete();
             //////////// So HD tu dong tang 1 //////////////////////
-            
+
             return RedirectToAction(nameof(ExportHDTay), new { id = hoaDon.MaHD, strUrl = model.StrUrl });
         }
 

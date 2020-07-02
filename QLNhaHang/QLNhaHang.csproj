@@ -529,6 +529,7 @@
     <Compile Include="Models\GioiTinhViewModel.cs" />
     <Compile Include="Models\HoaDonViewModel.cs" />
     <Compile Include="Models\BanViewModel.cs" />
+    <Compile Include="Models\HoadonVmTest.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\KhachHangViewModel.cs" />
     <Compile Include="Models\KhuVucViewModel.cs" />
