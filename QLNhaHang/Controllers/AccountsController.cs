@@ -194,6 +194,10 @@ namespace QLNhaHang.Controllers
             model.NhanVien.Username = model.UsernameCreate;
             //model.NhanVien.NguoiTao = user.Username;            
             model.NhanVien.NguoiTao = "Admin";
+            if (!string.IsNullOrEmpty(model.NhanVien.NoiLamViec))
+            {
+                model.NhanVien.NoiLamViec = "--None--";
+            }
             if (!string.IsNullOrEmpty(model.NgaySinh))
             {
                 model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);
@@ -293,6 +297,10 @@ namespace QLNhaHang.Controllers
             }
             model.NhanVien.NgayCapNhat = DateTime.Now;
             model.NhanVien.NguoiCapNhat = "Admin";
+            if (string.IsNullOrEmpty(model.NhanVien.NoiLamViec))
+            {
+                model.NhanVien.NoiLamViec = "--None--";
+            }
             if (!string.IsNullOrEmpty(model.NgaySinh))
             {
                 model.NhanVien.NgaySinh = DateTime.Parse(model.NgaySinh);

@@ -7,13 +7,13 @@ namespace QLNhaHang.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class addLogFileTD : IMigrationMetadata
+    public sealed partial class initialDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addLogFileTD));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initialDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "202006110130427_addLogFileTD"; }
+            get { return "202009041205428_initialDb"; }
         }
         
         string IMigrationMetadata.Source
